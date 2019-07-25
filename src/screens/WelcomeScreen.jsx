@@ -12,11 +12,10 @@ class WelcomeScreen extends React.Component {
     }
     render() {
         return (
-            <h1 className="welcome-screen-container">
-                Hello from WelcomeScreen Component
-                <SignInWrapper />
+            <div className="welcome-screen-container d-flex justify-content-center align-items-center">
+                {/* <SignInWrapper /> */}
                 <Rules />
-            </h1>
+            </div>
         )
     }
 }

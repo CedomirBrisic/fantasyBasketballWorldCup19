@@ -1,7 +1,6 @@
 import React from 'react';
 import LogIn from './screens/common/LogIn';
 import Register from './screens/common/Register';
-import Rules from './screens/common/Rules';
 import SignInWrapper from './screens/common/SignInWrapper';
 import F1WCPointsByDay from './screens/common/F1WCPointsByDay';
 import TotalPointsByDay from './screens/common/TotalPointsByDay';
@@ -41,9 +40,8 @@ function App() {
     <div className="app-screen-container">
       {/* <LogIn /> */}
       {/* <Register /> */}
-      <Rules />
       {/* <SignInWrapper /> */}
-      {/* <WelcomeScreen /> */}
+      <WelcomeScreen />
       {/* <F1WCPointsByDay /> */}
       {/* <TotalPointsByDay /> */}
       {/* <Header /> */}
