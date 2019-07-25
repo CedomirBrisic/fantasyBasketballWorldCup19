@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&display=swap&subset=cyrillic,cyrillic-ext,latin-ext');
+@import url('./style/logIn.scss');
+@import url('./style/register.scss');
+@import url('./style/rules.scss');
+@import url('./style/signInWrapper.scss');
+@import url('./style/screenWelcome.scss');
+@import url('./style/f1wcPointsByDay.scss');
+@import url('./style/totalPointsByDay.scss');
+@import url('./style/header.scss');
+@import url('./style/dashboardSelectDay.scss');
+@import url('./style/singleMatchSet.scss');
+@import url('./style/dashboardSelectTeam.scss');
+@import url('./style/screenAdmin.scss');
+@import url('./style/showPlayersOnField.scss');
+@import url('./style/selectPlayer.scss');
+@import url('./style/playerCardModal.scss');
+@import url('./style/screenUser.scss');
+@import url('./style/hallOfFameF1WCList.scss');
+@import url('./style/hallOfFameTotalPointsList.scss');
+@import url('./style/hallOfFameUserStatsF1WC.scss');
+@import url('./style/hallOfFameUserStatsTotalPoints.scss');
+@import url('./style/hallOfFameLists.scss');
+@import url('./style/hallOfFameUserStats.scss');
+@import url('./style/screenHallOfFame.scss');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
