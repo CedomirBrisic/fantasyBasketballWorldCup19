@@ -1,3 +1,11 @@
 .sign-in-container{
-color: steelblue;
+    .nav-wrapper{
+        background-color: rgba(0, 0, 0, 0.4);
+        min-height: 12vw;
+
+    }
+    .nav-link {
+        padding: 0.5vw 3vw;
+        font-size: 1vw;
+    }
 }

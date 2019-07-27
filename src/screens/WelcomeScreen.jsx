@@ -12,8 +12,8 @@ class WelcomeScreen extends React.Component {
     }
     render() {
         return (
-            <div className="welcome-screen-container d-flex justify-content-center align-items-center">
-                {/* <SignInWrapper /> */}
+            <div className="w-100 welcome-screen-container d-flex justify-content-between">
+                <SignInWrapper />
                 <Rules />
             </div>
         )
