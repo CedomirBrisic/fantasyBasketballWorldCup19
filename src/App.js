@@ -1,7 +1,5 @@
 import React from 'react';
-import LogIn from './screens/common/LogIn';
-import Register from './screens/common/Register';
-import SignInWrapper from './screens/common/SignInWrapper';
+import { Route, Switch } from 'react-router-dom'
 import F1WCPointsByDay from './screens/common/F1WCPointsByDay';
 import TotalPointsByDay from './screens/common/TotalPointsByDay';
 import Header from './screens/common/Header';
@@ -26,40 +24,34 @@ import UserScreen from './screens/UserScreen';
 import HallOfFameScreen from './screens/HallOfFameScreen';
 
 
-
-
-
-
-
-
-
 import './App.scss';
 
 function App() {
   return (
     <div className="app-screen-container">
-      {/* <LogIn /> */}
-      {/* <Register /> */}
-      {/* <SignInWrapper /> */}
-      <WelcomeScreen />
-      {/* <F1WCPointsByDay /> */}
-      {/* <TotalPointsByDay /> */}
-      {/* <Header /> */}
-      {/* <DashboardSelectDay /> */}
-      {/* <SingleMatchSet /> */}
-      {/* <DashboardSelectTeam /> */}
-      {/* <AdminScreen /> */}
-      {/* <ShowPlayersOnField /> */}
-      {/* <SelectPlayer /> */}
-      {/* <PlayerCardModal /> */}
-      {/* <UserScreen /> */}
-      {/* <HallOfFameF1WCList /> */}
-      {/* <HallOfFameTotalPointsList /> */}
-      {/* <HallOfFameUserStatsF1WC /> */}
-      {/* <HallOfFameUserStatsTotalPoints /> */}
-      {/* <HallOfFameLists /> */}
-      {/* <HallOfFameUserStats /> */}
-      {/* <HallOfFameScreen /> */}
+      <Switch>
+        <Route exact path='/' component={WelcomeScreen} />
+        {/* <Route exact path='/' component={} /> */}
+
+        {/* <F1WCPointsByDay /> */} 
+        {/* <TotalPointsByDay /> */}
+        {/* <Header /> */}
+        {/* <DashboardSelectDay /> */}
+        {/* <SingleMatchSet /> */}
+        {/* <DashboardSelectTeam /> */}
+        {/* <AdminScreen /> */}
+        {/* <ShowPlayersOnField /> */}
+        {/* <SelectPlayer /> */}
+        {/* <PlayerCardModal /> */}
+        {/* <UserScreen /> */}
+        {/* <HallOfFameF1WCList /> */}
+        {/* <HallOfFameTotalPointsList /> */}
+        {/* <HallOfFameUserStatsF1WC /> */}
+        {/* <HallOfFameUserStatsTotalPoints /> */}
+        {/* <HallOfFameLists /> */}
+        {/* <HallOfFameUserStats /> */}
+        {/* <HallOfFameScreen /> */}
+      </Switch>
     </div>
   );
 }

@@ -1,42 +1,50 @@
 .register-container {
     padding: 2vw 4vw;
+    // height: 40vw;
+    // width: 40vw;
 
-    form {
-        .form-group {
-            -webkit-box-shadow: 0px 0px 0.5vw 0px rgba(0, 0, 0, 0.1);
-            -moz-box-shadow: 0px 0px 0.5vw 0px rgba(0, 0, 0, 0.1);
-            box-shadow: 0px 0px 0.5vw 0px rgba(0, 0, 0, 0.1);
+    .form-group {
+        -webkit-box-shadow: 0px 0px 0.5vw 0px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0px 0px 0.5vw 0px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 0.5vw 0px rgba(0, 0, 0, 0.1);
+        padding: 0.5vw 1vw;
+        transition: transform 0.5s;
+        margin-bottom: 0;
+        .form-control{
+            height: auto;
             padding: 0.5vw 1vw;
-            transition: transform 0.5s;
-
-            small {
-                color: #ffffff !important;
-                font-size: 0.79vw;
-            }
-
-            label {
-                color: #ffffff;
-                font-size: 1.1vw;
-            }
-
-            input {
-                outline: none !important;
-                font-size: 1.2vw;
-            }
-
-            &:hover {
-                transform: scale(1.05);
-                -webkit-box-shadow: 0px 0px 0.5vw 0px rgba(255, 255, 255, 0.2);
-                -moz-box-shadow: 0px 0px 0.5vw 0px rgba(255, 255, 255, 0.2);
-                box-shadow: 0px 0px 0.5vw 0px rgba(255, 255, 255, 0.2);
-            }
         }
 
-        .btn-outline-secondary {
+        small {
+            color: #ffffff !important;
+            font-size: 0.79vw;
+        }
+
+        label {
             color: #ffffff;
-            border-color: #ffffff;
-            font-size: 1.2vw;
-            padding: 0.2vw 1vw;
+            font-size: 1.1vw;
+            margin-bottom: 0.5vw;
         }
+
+        input {
+            outline: none !important;
+            font-size: 1.2vw;
+        }
+
+        &:hover {
+            -webkit-box-shadow: 0px 0px 0.5vw 0px rgba(255, 255, 255, 0.2);
+            -moz-box-shadow: 0px 0px 0.5vw 0px rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 0px 0.5vw 0px rgba(255, 255, 255, 0.2);
+        }
+        .red-letters{
+            color: rgb(255, 230, 0);
+        }
+    }
+
+    .btn-outline-secondary {
+        color: #ffffff;
+        border-color: #ffffff;
+        font-size: 1.2vw;
+        padding: 0.2vw 1vw;
     }
 }
