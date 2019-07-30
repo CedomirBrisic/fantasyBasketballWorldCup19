@@ -45,7 +45,6 @@ class LogIn extends React.Component {
             password: this.state.password
         }
         putCheckUsernameAndPassword(data, "nekArendomSifrAOdDostaKArakTerA123").then((response) => {
-            console.log(response)
             if (response.length === 0){
                 this.setState({
                     badUsernameOrPassword: true

@@ -1,6 +1,9 @@
 .rules-container {
-    background-color: rgba(255, 255, 255, 0.9);
+    // background-color: rgba(255, 255, 255, 0.9);
+    background: url("../images/paper-1990111_1280.jpg");
+    background-size: 100% 100%;
     color: #000000;
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 1);
     padding: 2vw 1vw;
     text-align: justify;
     width: 32vw;
@@ -14,7 +17,7 @@
     }
     h3 {
         font-size: 1.8vw;
-        font-weight: 600;
+        font-weight: 800;
         margin-bottom: 0;
     }
 
@@ -27,6 +30,8 @@
     h6 {
         font-size: 0.9vw;
         margin-bottom: 0;
+        padding-left: 1vw;
+        padding-right: 1vw;
     }
 
     .rule-numer-order {
@@ -36,11 +41,13 @@
     .first-do-not-talk {
         font-weight: 600;
         color: rgba(255, 0, 0, 0.7);
+        text-shadow: 0px 0px 2px rgba(255, 0, 0, 1);
     }
 
     .second-do-not-talk {
         font-weight: 800;
         color: red;
+        text-shadow: 0px 0px 1px rgba(255, 0, 0, 1);
     }
 
     .buttons-container{

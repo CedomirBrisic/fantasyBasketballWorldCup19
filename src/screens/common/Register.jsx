@@ -135,7 +135,7 @@ class Register extends React.Component {
 
     checkEmailValidationMessage = () => {
         if (this.state.validateEmailAlert) {
-            return `At least put "@" sign mark so it looks like an email`
+            return `At least put "@" sign so it looks like an email`
         }
     }
 
