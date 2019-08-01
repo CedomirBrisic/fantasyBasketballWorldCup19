@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom'
+import AppStore from "./AppStore";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <HashRouter>
-        <App />
+        <AppStore>
+            <App />
+        </AppStore>
     </HashRouter>
     , document.getElementById('root'));
 

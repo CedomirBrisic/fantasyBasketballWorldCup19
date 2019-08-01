@@ -1,5 +1,6 @@
 import React from 'react';
 import postRegisterNewUser from '../../webhooks/postRegisterNewUser';
+import postRegisterNewFantasyUser from "../../webhooks/postRegisterNewFantasyUser";
 import putCheckIsUsername from '../../webhooks/putCheckIsUsername';
 
 
@@ -99,8 +100,10 @@ class Register extends React.Component {
             }
             putCheckIsUsername(data, "nekaRendomSiFRaOdDostaKARAkterA123").then((response) => {
                 if (response.length === 0) {
-                    postRegisterNewUser(data, "nekaRendomSiFRaOdDostaKARAkterA123").then((response) => {
-                        this.props.successfullyRegistered();
+                    postRegisterNewUser(data, "nekaRenDomSiFRaOdDostaKARAkterA123").then(() => {
+                        postRegisterNewFantasyUser(data.username, "nekaRendOMSiFRaOdDostaKARAkterA123").then(() => {
+                            this.props.successfullyRegistered();
+                        })
                     })
                 } else {
                     this.setState({

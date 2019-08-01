@@ -11,9 +11,9 @@ class TotalPointsByDay extends React.Component {
     }
     render() {
         return (
-            <h1 className="total-points-by-day-container">
-                Hello from TotalPointsByDay Component
-            </h1>
+            <div className="total-points-by-day-container">
+                Total Points by Day
+            </div>
         )
     }
 }

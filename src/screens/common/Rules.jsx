@@ -56,8 +56,8 @@ class Rules extends React.Component {
                     <h6><i>#8-a If you want 5 players to be from one national team and all of them to be players who plays on center position - nobody can forbid you!</i></h6>
                     <h5><span className="rule-numer-order">#9 -</span>At the end of each day (each round),<br />F1WC points are awarded based on points earned at that round</h5>
                     <div className="d-flex justify-content-between buttons-container">
-                        <button type="button" className="btn btn-outline-dark" onClick={this.openF1WCPointsCalcModal}>F1WC points calc</button>
-                        <button type="button" className="btn btn-outline-dark" onClick={this.openRoundPointsCalcModal}>Round points calc</button>
+                        <button type="button" className="btn btn-outline-light" onClick={this.openF1WCPointsCalcModal}>F1WC points calc</button>
+                        <button type="button" className="btn btn-outline-light" onClick={this.openRoundPointsCalcModal}>Round points calc</button>
                     </div>
                 </section>
                 <Portal>

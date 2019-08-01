@@ -13,11 +13,11 @@ class Header extends React.Component {
     }
     render() {
         return (
-            <h1 className="header-container">
-                Hello from Header Component
+            <div className="header-container d-flex justify-content-around">
+                USERNAME
                 <F1WCPointsByDay />
                 <TotalWCPointsByDay />
-            </h1>
+            </div>
         )
     }
 }

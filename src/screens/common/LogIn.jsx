@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom'
 import putCheckUsernameAndPassword from "../../webhooks/putCheckUsernameAndPassword";
 
 
@@ -9,7 +10,8 @@ class LogIn extends React.Component {
         this.state = {
             username: "",
             password: "",
-            badUsernameOrPassword: false
+            badUsernameOrPassword: false,
+            goToUserScreen: "",
         }
     }
 
@@ -39,12 +41,20 @@ class LogIn extends React.Component {
         })
     }
 
+    proceedToUserScreen = (userData) => {
+        sessionStorage.setItem('maRSiCnemAPojmAhehehe', userData[0]._id.$oid);
+        this.setState({
+            goToUserScreen: "nekAReNDOMSifraOdBAsdostAkarakTERA"
+        })
+    }
+
     sendLogIn = () => {
         const data = {
             username: this.state.username,
             password: this.state.password
         }
         putCheckUsernameAndPassword(data, "nekArendomSifrAOdDostaKArakTerA123").then((response) => {
+            
             if (response.length === 0){
                 this.setState({
                     badUsernameOrPassword: true
@@ -53,10 +63,14 @@ class LogIn extends React.Component {
                 this.setState({
                     badUsernameOrPassword: false
                 })
+                this.proceedToUserScreen(response)
             }
         })
     }
     render() {
+        if (this.state.goToUserScreen === "nekAReNDOMSifraOdBAsdostAkarakTERA"){
+            return <Redirect to='/user-screen' />
+        }
         return (
             // Forgot your username or password?
             <section className="log-in-container">

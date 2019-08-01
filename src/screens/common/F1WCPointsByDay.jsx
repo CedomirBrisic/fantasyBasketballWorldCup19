@@ -11,9 +11,9 @@ class F1WCPointsByDay extends React.Component {
     }
     render() {
         return (
-            <h1 className="f1wc-points-by-day-container">
-                Hello from F1WCPointsByDay Component
-            </h1>
+            <div className="f1wc-points-by-day-container">
+                F1WC Points by Day
+            </div>
         )
     }
 }

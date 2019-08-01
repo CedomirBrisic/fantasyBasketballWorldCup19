@@ -10,7 +10,7 @@ class F1WCPointsCalc extends React.Component {
     }
     render() {
         return (
-            <Modal visible={this.props.showF1WCPointsCalc} onClickBackdrop={this.props.closeF1WCPointsCalcModal}>
+            <Modal className="f1wc-points-calc-modal" visible={this.props.showF1WCPointsCalc} onClickBackdrop={this.props.closeF1WCPointsCalcModal}>
                 <div className="f1wc-points-calc-modal-container">
                     <h3>F1WC is main cometition of TD Fantasy</h3>
                     <div className="label-wrapper">

@@ -1,6 +1,6 @@
-const postRegisterNewUser = (data, qwe) => {
-    // nekaRenDomSiFRaOdDostaKARAkterA123
-    return fetch(`https://webhooks.mongodb-stitch.com/api/client/v2.0/app/basketball-fantasy-gpizn/service/http/incoming_webhook/POSTregisterNewUser?secret=${qwe}`, {
+const postRegisterNewFantasyUser = (data, qwe) => {
+    // nekaRendOMSiFRaOdDostaKARAkterA123
+    return fetch(`https://webhooks.mongodb-stitch.com/api/client/v2.0/app/basketball-fantasy-gpizn/service/http/incoming_webhook/POSTregisterNewFantasyUser?secret=${qwe}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -9,8 +9,9 @@ const postRegisterNewUser = (data, qwe) => {
             data
         })
     }).then((response) => {
+        const result = response.json()
         if (response.ok) {
-            return response
+            return result
         } else {
             // alert(`ACHTUNG !!!
             // Došlo je do neke greške pri povezivanju sa serverom...
@@ -22,4 +23,4 @@ const postRegisterNewUser = (data, qwe) => {
     })
 }
 
-export default postRegisterNewUser;
+export default postRegisterNewFantasyUser;

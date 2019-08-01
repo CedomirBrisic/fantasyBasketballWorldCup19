@@ -31,7 +31,8 @@ function App() {
     <div className="app-screen-container">
       <Switch>
         <Route exact path='/' component={WelcomeScreen} />
-        {/* <Route exact path='/' component={} /> */}
+        {/* <Route exact path='/' component={WelcomeScreen} /> */}
+        <Route exact path='/user-screen' component={UserScreen} />
 
         {/* <F1WCPointsByDay /> */} 
         {/* <TotalPointsByDay /> */}
