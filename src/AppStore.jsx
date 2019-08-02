@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppContext } from "./screens/_context/AppContext";
 import getFantasyData from "./webhooks/getFantasyData";
+import humanReadDateAndTime from "./services/humanReadDateAndTime";
 
 export default class AppStore extends Component {
     state = {
@@ -16,6 +17,7 @@ export default class AppStore extends Component {
 
 
         isInitialLoading: true,
+        nowTime: null,
     }
 
     changeSelectedDay = (data) => {
@@ -52,6 +54,25 @@ export default class AppStore extends Component {
         })
     }
 
+    depositTime = (time) => {
+        // this.setState({
+        //     nowTime: time
+            console.log(time)
+            // })
+    }
+    clockify() {
+        setInterval(function () {
+            const dateAndTime = humanReadDateAndTime()
+            // this.setState({
+            //     nowTime: dateAndTime.humanTime
+            // })
+            this.depositTime(dateAndTime)
+        }, 1000);
+    }
+    componentDidMount() {
+        this.clockify()
+    }
+
     render() {
         return (
             <AppContext.Provider value={{
@@ -59,7 +80,7 @@ export default class AppStore extends Component {
                 getFantasyDataContext: this.getFantasyDataContext,
                 toggleShowSelectDayDashboard: this.toggleShowSelectDayDashboard,
                 toggleShowSelectTeamDashboard: this.toggleShowSelectTeamDashboard,
-                changeSelectedDay:this.changeSelectedDay,
+                changeSelectedDay: this.changeSelectedDay,
                 changeSelectedTeam: this.changeSelectedTeam
             }}>
 

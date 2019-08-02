@@ -22,6 +22,17 @@ class UserScreen extends React.Component {
     toggleShowSelectTeamDashboard = () => {
         this.context.toggleShowSelectTeamDashboard()
     }
+
+    checkMainContainerWidth = () => {
+        if (!this.context.showSelectDayDashboard && !this.context.showSelectTeamDashboard){
+            return "dashboard-none"
+        } else if ((this.context.showSelectDayDashboard && !this.context.showSelectTeamDashboard) ||
+                    (!this.context.showSelectDayDashboard && this.context.showSelectTeamDashboard)) {
+                        return "dashboard-one"
+        } else {
+            return "dashboard-two"
+        }
+    }
     render() {
         return (
             <>
@@ -32,10 +43,10 @@ class UserScreen extends React.Component {
                         <Header />
                         <div className="d-flex justify-content-between">
                             <DashboardSelectDay />
-                            <div className="main-screen-container">
+                            <div className={`main-screen-container ${this.checkMainContainerWidth()}`}>
                                 {/* <ShowPlayersOnField /> */}
                                 {/* vs */}
-                                {/* <SelectPlayer /> */}
+                                <SelectPlayer />
                                 {/* <PlayerCardModal /> */}
                             </div>
                             <DashboardSelectTeam />
