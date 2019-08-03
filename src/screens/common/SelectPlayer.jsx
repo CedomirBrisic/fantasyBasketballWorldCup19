@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppContext } from '../../screens/_context/AppContext';
 import humanReadDateAndTime from "../../services/humanReadDateAndTime";
+import eligibleDays from "../../services/eligibleDays";
 
 class SelectPlayer extends React.Component {
     static contextType = AppContext;
@@ -32,64 +33,78 @@ class SelectPlayer extends React.Component {
         const selectedTeam = this.context.selectedTeam
         const selectedDay = this.context.selectedDay
         const players = this.context.basketballPlayers
+        const eligibleTeams = this.context.dropdowns[0].teamsByDay
         const outputPlayers = []
-        // if (selectedTeam === null) {
-        //     return <div className="team-not-selected">
-        //         Be smart... Choose team first (it's on right side ->)
-        //     </div>
-        // } else
-        // if (selectedTeam === "all-eligible-teams") {
-            if (selectedDay === "4th-September")
-        players.forEach((player, index) => {
-            const outputPlayer =
-                <tr key={player.name + index} className="single-player-item">
-                    <td>{`# ${player.shirtNumber}`}</td>
-                    <td>{`${player.name}`}</td>
-                    <td>{`${player.team}`}</td>
-                    <td>{`${player[selectedDay].teamWin}`}</td>
-                    <td>{`${player[selectedDay].assists}`}</td>
-                    <td>{`${player[selectedDay].rebounds}`}</td>
-                    <td>{`${player[selectedDay].blocks}`}</td>
-                    <td>{`${player[selectedDay].steals}`}</td>
-                    <td>{`${player[selectedDay].turnovers}`}</td>
-                    <td>Free throws</td>
-                    <td>Field goals</td>
-                    <td>Three points</td>
-                </tr>
-            outputPlayers.push(outputPlayer)
-        })
-        // } 
-        // else {
+        console.log()
 
-        // const outputPlayers = []
-        // return players.map((player) => {
-        //     if (player.team === selectedTeam) {
-        //         const outputPlayer =
-        //             <div className="single-player-item d-flex justify-content-between">
-
-        //             </div>
-        //     }
-        // })
-        // }
-        console.log(outputPlayers)
+        if (selectedTeam === "all-eligible-teams" && eligibleDays.indexOf(selectedDay) !== -1) {
+            if (Array.isArray(eligibleTeams[selectedDay])) {
+                eligibleTeams[selectedDay].forEach((team) => {
+                    players.forEach((player, index) => {
+                        if (team === player.team) {
+                            const outputPlayer =
+                                <tr key={player.name + index} className="single-player-item">
+                                    <td>{`# ${player.shirtNumber}`}</td>
+                                    <td>{`${player.name}`}</td>
+                                    <td>{`${player.team}`}</td>
+                                    <td>{`${player[selectedDay].teamWin}`}</td>
+                                    <td>{`${player[selectedDay].assists}`}</td>
+                                    <td>{`${player[selectedDay].rebounds}`}</td>
+                                    <td>{`${player[selectedDay].blocks}`}</td>
+                                    <td>{`${player[selectedDay].steals}`}</td>
+                                    <td>{`${player[selectedDay].turnovers}`}</td>
+                                    <td>{`${player[selectedDay].freeThrowScored}/${player[selectedDay].freeThrowAttempts}`}</td>
+                                    <td>{`${player[selectedDay].fieldGoalsScored}/${player[selectedDay].fieldGoalsAttempts}`}</td>
+                                    <td>{`${player[selectedDay].threePointsScored}/${player[selectedDay].threePointsAttempts}`}</td>
+                                </tr>
+                            outputPlayers.push(outputPlayer)
+                        }
+                    })
+                })
+            }
+        } else if (eligibleDays.indexOf(selectedDay) !== -1) {
+            players.forEach((player, index) => {
+                if (selectedTeam === player.team) {
+                    const outputPlayer =
+                        <tr key={player.name + index} className="single-player-item">
+                            <td>{`# ${player.shirtNumber}`}</td>
+                            <td>{`${player.name}`}</td>
+                            <td>{`${player.team}`}</td>
+                            <td>{`${player[selectedDay].teamWin}`}</td>
+                            <td>{`${player[selectedDay].assists}`}</td>
+                            <td>{`${player[selectedDay].rebounds}`}</td>
+                            <td>{`${player[selectedDay].blocks}`}</td>
+                            <td>{`${player[selectedDay].steals}`}</td>
+                            <td>{`${player[selectedDay].turnovers}`}</td>
+                            <td>{`${player[selectedDay].freeThrowScored}/${player[selectedDay].freeThrowAttempts}`}</td>
+                            <td>{`${player[selectedDay].fieldGoalsScored}/${player[selectedDay].fieldGoalsAttempts}`}</td>
+                            <td>{`${player[selectedDay].threePointsScored}/${player[selectedDay].threePointsAttempts}`}</td>
+                        </tr>
+                    outputPlayers.push(outputPlayer)
+                }
+            })
+        }
         return outputPlayers
     }
     render() {
         return (
             <section className="select-player-container d-flex flex-column">
-                <div className="d-flex justify-content-between w-100 select-player-label-wrapper">
+                <div className="d-flex justify-content-between align-items-center w-100 select-player-label-wrapper">
                     <div>
                         {this.context.selectedTeam &&
                             this.context.selectedTeam === "Cote d'Ivoire" &&
-                            <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/Cote-d-Ivoire`} target="_blank" ><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
+                            <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/Cote-d-Ivoire`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
                         }
                         {this.context.selectedTeam &&
                             this.context.selectedTeam !== "all-eligible-teams" &&
                             this.context.selectedTeam !== "Cote d'Ivoire" &&
-                            <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/${this.checkSelectedTeamString()}`} target="_blank"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
+                            <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/${this.checkSelectedTeamString()}`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
+                        }
+                        {this.context.selectedTeam === "all-eligible-teams" &&
+                            <a href={`http://www.fiba.basketball/basketballworldcup/2019`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">Find out more about World Cup</button></a>
                         }
                     </div>
-                    <div className="label-and-clock-wrapper d-flex justify-content-between">
+                    <div className="label-and-clock-wrapper d-flex justify-content-between align-items-center">
                         <div className="table-label">
                             <i>Table below is showing game stats</i>
                         </div>
@@ -122,7 +137,7 @@ class SelectPlayer extends React.Component {
                                 <th>Steals</th>
                                 <th>Turnovers</th>
                                 <th>Free throws</th>
-                                <th>Field goals</th>
+                                <th>Two points</th>
                                 <th>Three points</th>
                             </tr>
                         </thead>
