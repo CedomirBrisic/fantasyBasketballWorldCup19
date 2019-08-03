@@ -13,16 +13,17 @@ export default class AppStore extends Component {
         showSelectTeamDashboard: false,
 
         selectedDay: null,
-        selectedTeam: null,
+        selectedTeam: "all-eligible-teams",
 
 
         isInitialLoading: true,
-        nowTime: null,
+        
     }
 
     changeSelectedDay = (data) => {
         this.setState({
-            selectedDay: data
+            selectedDay: data,
+            selectedTeam: "all-eligible-teams"
         })
     }
     changeSelectedTeam = (data) => {
@@ -37,7 +38,7 @@ export default class AppStore extends Component {
                 dropdowns: response.dropdowns,
                 basketballPlayers: response.basketballPlayers,
                 fantasyUsers: response.fantasyUsers,
-                selectedDay: response.dropdowns[0].todayDay,
+                selectedDay: humanReadDateAndTime().humanDate,
                 isInitialLoading: false,
             })
         })
@@ -54,24 +55,7 @@ export default class AppStore extends Component {
         })
     }
 
-    depositTime = (time) => {
-        // this.setState({
-        //     nowTime: time
-            console.log(time)
-            // })
-    }
-    clockify() {
-        setInterval(function () {
-            const dateAndTime = humanReadDateAndTime()
-            // this.setState({
-            //     nowTime: dateAndTime.humanTime
-            // })
-            this.depositTime(dateAndTime)
-        }, 1000);
-    }
-    componentDidMount() {
-        this.clockify()
-    }
+
 
     render() {
         return (

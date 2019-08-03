@@ -65,7 +65,7 @@ class F1WCPointsCalc extends React.Component {
                             <img className="img-fluid" src={require("../../images/wreath-304896_640.png")} alt="winner"/>
                         </div>
                         <div className="winner-label d-flex flex-column">
-                        <span className="winner-label-1">Winner of All Winners, Fantasy Grand Master, Ruler of Ignorants and Slayer of Newbies...</span><span>You can become one, if on evening of 15th September 2019 you have most points at the Hall of Fame - F1WC Competition section</span>
+                        <span className="winner-label-1">Winner of All Winners, Fantasy Grand Master, Ruler of Ignorants and Slayer of Noobs...</span><span>You can become one, if on evening of 15th September 2019 you have most points at the Hall of Fame - F1WC Competition section</span>
                         </div>
                         </div>
                     </div>

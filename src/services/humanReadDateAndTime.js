@@ -20,10 +20,29 @@ const humanReadDateAndTime = () => {
         }
     })();
 
+    const sec00 = (function () {
+        const secStringify = sec.toString()
+        if (secStringify.length === 1) {
+            return "0"+secStringify
+        } else {
+            return secStringify
+        }
+    })();
+
+    const min00 = (function () {
+        const minStringify = min.toString()
+        if (minStringify.length === 1) {
+            return "0"+minStringify
+        } else {
+            return minStringify
+        }
+    })();
+
 
     const outputDate = `${dd}${ddth}-${mm}`
-    const outputTime = `${hh}:${min}:${sec}`
+    const outputTime = `${hh}:${min00}:${sec00}`
     const humanDateAndTime = {
+        // humanDate: "4th-September",
         humanDate: outputDate,
         humanTime: outputTime
     }
