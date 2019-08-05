@@ -14,10 +14,10 @@ export default class AppStore extends Component {
 
         selectedDay: null,
         selectedTeam: "all-eligible-teams",
-
+        nowDateAndTime: humanReadDateAndTime(),
 
         isInitialLoading: true,
-        
+
     }
 
     changeSelectedDay = (data) => {
@@ -53,6 +53,18 @@ export default class AppStore extends Component {
         this.setState({
             showSelectTeamDashboard: !this.state.showSelectTeamDashboard,
         })
+    }
+    componentDidMount() {
+        this.interval = setInterval(
+            () => this.clocify(),
+            1000
+        );
+    }
+
+    clocify() {
+        this.setState({
+            nowDateAndTime: humanReadDateAndTime()
+        });
     }
 
 

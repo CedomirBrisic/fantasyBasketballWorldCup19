@@ -1,24 +1,10 @@
 import React from 'react';
 import { AppContext } from '../../screens/_context/AppContext';
-import humanReadDateAndTime from "../../services/humanReadDateAndTime";
 import eligibleDays from "../../services/eligibleDays";
 
 class SelectPlayer extends React.Component {
     static contextType = AppContext;
     state = {
-        nowDateAndTime: humanReadDateAndTime(),
-    }
-    // componentDidMount() {
-    //     this.interval = setInterval(
-    //         () => this.clocify(),
-    //         1000
-    //     );
-    // }
-
-    clocify() {
-        this.setState({
-            nowDateAndTime: humanReadDateAndTime()
-        });
     }
 
     checkSelectedTeamString = () => {
@@ -35,50 +21,124 @@ class SelectPlayer extends React.Component {
         const players = this.context.basketballPlayers
         const eligibleTeams = this.context.dropdowns[0].teamsByDay
         const outputPlayers = []
-        console.log()
 
         if (selectedTeam === "all-eligible-teams" && eligibleDays.indexOf(selectedDay) !== -1) {
             if (Array.isArray(eligibleTeams[selectedDay])) {
                 eligibleTeams[selectedDay].forEach((team) => {
-                    players.forEach((player, index) => {
-                        if (team === player.team) {
-                            const outputPlayer =
-                                <tr key={player.name + index} className="single-player-item">
-                                    <td>{`# ${player.shirtNumber}`}</td>
-                                    <td>{`${player.name}`}</td>
-                                    <td>{`${player.team}`}</td>
-                                    <td>{`${player[selectedDay].teamWin}`}</td>
-                                    <td>{`${player[selectedDay].assists}`}</td>
-                                    <td>{`${player[selectedDay].rebounds}`}</td>
-                                    <td>{`${player[selectedDay].blocks}`}</td>
-                                    <td>{`${player[selectedDay].steals}`}</td>
-                                    <td>{`${player[selectedDay].turnovers}`}</td>
-                                    <td>{`${player[selectedDay].freeThrowScored}/${player[selectedDay].freeThrowAttempts}`}</td>
-                                    <td>{`${player[selectedDay].fieldGoalsScored}/${player[selectedDay].fieldGoalsAttempts}`}</td>
-                                    <td>{`${player[selectedDay].threePointsScored}/${player[selectedDay].threePointsAttempts}`}</td>
-                                </tr>
-                            outputPlayers.push(outputPlayer)
+                    let isEligible = true
+                    if (selectedDay === this.context.nowDateAndTime.humanDate) {
+                        const teamHour = parseInt(team.gameStart.split(":")[0])
+                        const teamMinutes = parseInt(team.gameStart.split(":")[1])
+                        const nowHour = parseInt(this.context.nowDateAndTime.humanTime.split(":")[0])
+                        const nowMinutes = parseInt(this.context.nowDateAndTime.humanTime.split(":")[1])
+                        if (nowHour > teamHour) {
+                            isEligible = false
+                        } else if (nowHour === teamHour) {
+                            if (nowMinutes > teamMinutes) {
+                                isEligible = false
+                            }
                         }
-                    })
+                    } else if (selectedDay < this.context.nowDateAndTime.humanDate) {
+                        isEligible = false
+                    }
+                    if (isEligible) {
+                        players.forEach((player, index) => {
+                            if (team.name === player.team) {
+                                let assistsSum = 0;
+                                let reboundsSum = 0;
+                                let blocksSum = 0;
+                                let stealsSum = 0;
+                                let turnoversSum = 0;
+                                let freeThrowsScoredSum = 0;
+                                let freeThrowsAttemptsSum = 0;
+                                let fieldGoalsScoredSum = 0;
+                                let fieldGoalsAttemptsSum = 0;
+                                let threePointsScoredSum = 0;
+                                let threePointsAttemptsSum = 0;
+                                let gamesPlayed = 0;
+                                eligibleDays.forEach((day) => {
+                                    if (player[day].assists !== "n/a") {
+                                        gamesPlayed++
+                                        assistsSum = assistsSum + parseInt(player[day].assists)
+                                        reboundsSum = reboundsSum + parseInt(player[day].rebounds)
+                                        blocksSum = blocksSum + parseInt(player[day].blocks, 10)
+                                        stealsSum = stealsSum + parseInt(player[day].steals, 10)
+                                        turnoversSum = turnoversSum + parseInt(player[day].turnovers, 10)
+                                        freeThrowsScoredSum = freeThrowsScoredSum + parseInt(player[day].freeThrowScored, 10)
+                                        freeThrowsAttemptsSum = freeThrowsAttemptsSum + parseInt(player[day].freeThrowAttempts, 10)
+                                        fieldGoalsScoredSum = fieldGoalsScoredSum + parseInt(player[day].fieldGoalsScored, 10)
+                                        fieldGoalsAttemptsSum = fieldGoalsAttemptsSum + parseInt(player[day].fieldGoalsAttempts, 10)
+                                        threePointsScoredSum = threePointsScoredSum + parseInt(player[day].threePointsScored, 10)
+                                        threePointsAttemptsSum = threePointsAttemptsSum + parseInt(player[day].threePointsAttempts, 10)
+                                    }
+                                })
+
+                                const outputPlayer =
+                                    <tr key={player.name + index} className="single-player-item">
+                                        <td>{`# ${player.shirtNumber}`}</td>
+                                        <td>{`${player.name}`}</td>
+                                        <td>{`${player.team}`}</td>
+                                        <td>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td>{`${(reboundsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (reboundsSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td>{`${(blocksSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (blocksSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td>{`${(stealsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (stealsSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td>{`${(turnoversSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (turnoversSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td>{`${(freeThrowsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (freeThrowsScoredSum / gamesPlayed).toFixed(2)}/${(freeThrowsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (freeThrowsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td>{`${(fieldGoalsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (fieldGoalsScoredSum / gamesPlayed).toFixed(2)}/${(fieldGoalsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (fieldGoalsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td>{`${(threePointsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (threePointsScoredSum / gamesPlayed).toFixed(2)}/${(threePointsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (threePointsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                                    </tr>
+                                outputPlayers.push(outputPlayer)
+                            }
+                        })
+                    }
                 })
             }
-        } else if (eligibleDays.indexOf(selectedDay) !== -1) {
+        }
+        else if (eligibleDays.indexOf(selectedDay) !== -1) {
             players.forEach((player, index) => {
                 if (selectedTeam === player.team) {
+                    let assistsSum = 0;
+                    let reboundsSum = 0;
+                    let blocksSum = 0;
+                    let stealsSum = 0;
+                    let turnoversSum = 0;
+                    let freeThrowsScoredSum = 0;
+                    let freeThrowsAttemptsSum = 0;
+                    let fieldGoalsScoredSum = 0;
+                    let fieldGoalsAttemptsSum = 0;
+                    let threePointsScoredSum = 0;
+                    let threePointsAttemptsSum = 0;
+                    let gamesPlayed = 0;
+                    eligibleDays.forEach((day) => {
+                        if (player[day].assists !== "n/a") {
+                            gamesPlayed++
+                            assistsSum = assistsSum + parseInt(player[day].assists)
+                            reboundsSum = reboundsSum + parseInt(player[day].rebounds)
+                            blocksSum = blocksSum + parseInt(player[day].blocks, 10)
+                            stealsSum = stealsSum + parseInt(player[day].steals, 10)
+                            turnoversSum = turnoversSum + parseInt(player[day].turnovers, 10)
+                            freeThrowsScoredSum = freeThrowsScoredSum + parseInt(player[day].freeThrowScored, 10)
+                            freeThrowsAttemptsSum = freeThrowsAttemptsSum + parseInt(player[day].freeThrowAttempts, 10)
+                            fieldGoalsScoredSum = fieldGoalsScoredSum + parseInt(player[day].fieldGoalsScored, 10)
+                            fieldGoalsAttemptsSum = fieldGoalsAttemptsSum + parseInt(player[day].fieldGoalsAttempts, 10)
+                            threePointsScoredSum = threePointsScoredSum + parseInt(player[day].threePointsScored, 10)
+                            threePointsAttemptsSum = threePointsAttemptsSum + parseInt(player[day].threePointsAttempts, 10)
+                        }
+                    })
+
                     const outputPlayer =
                         <tr key={player.name + index} className="single-player-item">
                             <td>{`# ${player.shirtNumber}`}</td>
                             <td>{`${player.name}`}</td>
                             <td>{`${player.team}`}</td>
-                            <td>{`${player[selectedDay].teamWin}`}</td>
-                            <td>{`${player[selectedDay].assists}`}</td>
-                            <td>{`${player[selectedDay].rebounds}`}</td>
-                            <td>{`${player[selectedDay].blocks}`}</td>
-                            <td>{`${player[selectedDay].steals}`}</td>
-                            <td>{`${player[selectedDay].turnovers}`}</td>
-                            <td>{`${player[selectedDay].freeThrowScored}/${player[selectedDay].freeThrowAttempts}`}</td>
-                            <td>{`${player[selectedDay].fieldGoalsScored}/${player[selectedDay].fieldGoalsAttempts}`}</td>
-                            <td>{`${player[selectedDay].threePointsScored}/${player[selectedDay].threePointsAttempts}`}</td>
+                            <td>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td>{`${(reboundsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (reboundsSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td>{`${(blocksSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (blocksSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td>{`${(stealsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (stealsSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td>{`${(turnoversSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (turnoversSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td>{`${(freeThrowsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (freeThrowsScoredSum / gamesPlayed).toFixed(2)}/${(freeThrowsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (freeThrowsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td>{`${(fieldGoalsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (fieldGoalsScoredSum / gamesPlayed).toFixed(2)}/${(fieldGoalsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (fieldGoalsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td>{`${(threePointsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (threePointsScoredSum / gamesPlayed).toFixed(2)}/${(threePointsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (threePointsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
                         </tr>
                     outputPlayers.push(outputPlayer)
                 }
@@ -106,17 +166,17 @@ class SelectPlayer extends React.Component {
                     </div>
                     <div className="label-and-clock-wrapper d-flex justify-content-between align-items-center">
                         <div className="table-label">
-                            <i>Table below is showing game stats</i>
+                            <i>Table of average per game stats</i>
                         </div>
                         <div className="clockify-wrapper d-flex justify-content-between">
                             <span>
                                 Zulu time:
                         </span>
                             <span>
-                                {this.state.nowDateAndTime.humanDate}
+                                {this.context.nowDateAndTime.humanDate}
                             </span>
                             <span>
-                                {this.state.nowDateAndTime.humanTime}
+                                {this.context.nowDateAndTime.humanTime}
                             </span>
                         </div>
                     </div>
@@ -130,7 +190,6 @@ class SelectPlayer extends React.Component {
                                 <th>No</th>
                                 <th>Player name</th>
                                 <th>Team</th>
-                                <th>Game won</th>
                                 <th>Assists</th>
                                 <th>Rebounds</th>
                                 <th>Blocks</th>

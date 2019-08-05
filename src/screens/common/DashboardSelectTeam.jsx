@@ -7,8 +7,12 @@ class DashboardSelectTeam extends React.Component {
     }
 
     depositSelectedTeam = (event) => {
-        const selectedTeam = event.target.getAttribute("data-selected-team")
-        this.context.changeSelectedTeam(selectedTeam)
+
+        const isClickable = event.target.getAttribute("data-is-clickable")
+        if (isClickable === "true") {
+            const selectedTeam = event.target.getAttribute("data-selected-team")
+            this.context.changeSelectedTeam(selectedTeam)
+        }
     }
 
     mapEligibleTeams = () => {
@@ -16,12 +20,29 @@ class DashboardSelectTeam extends React.Component {
 
         if (Array.isArray(this.context.dropdowns[0].teamsByDay[selectedDay])) {
             return this.context.dropdowns[0].teamsByDay[selectedDay].map((team, index) => {
-                return <button key={team + index} type="button" className={`btn d-flex align-items-center btn-outline-light ${this.context.selectedTeam === `${team}` ? "is-selected" : ""}`} data-selected-team={`${team}`} onClick={this.depositSelectedTeam}>
-                    <span className="team-image-wrapper" data-selected-team={`${team}`}>
-                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${team}.png`)} alt={`${team}`} data-selected-team={`${team}`} />
+                let isEligible = true
+                if (selectedDay === this.context.nowDateAndTime.humanDate) {
+                    const teamHour = parseInt(team.gameStart.split(":")[0])
+                    const teamMinutes = parseInt(team.gameStart.split(":")[1])
+                    const nowHour = parseInt(this.context.nowDateAndTime.humanTime.split(":")[0])
+                    const nowMinutes = parseInt(this.context.nowDateAndTime.humanTime.split(":")[1])
+                    if (nowHour > teamHour) {
+                        isEligible = false
+                    } else if (nowHour === teamHour) {
+                        if (nowMinutes > teamMinutes) {
+                            isEligible = false
+                        }
+                    }
+                } else if (selectedDay < this.context.nowDateAndTime.humanDate) {
+                    isEligible = false
+                }
+
+                return <button key={team.name + index} type="button" className={`btn d-flex align-items-center ${isEligible ? "btn-outline-light" : "btn-outline-dark"} ${this.context.selectedTeam === `${team.name}` ? "is-selected" : ""}`} data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`} onClick={this.depositSelectedTeam}>
+                    <span className="team-image-wrapper" data-selected-team={`${team.name}`}>
+                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${team.name}.png`)} alt={`${team.name}`} data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`}/>
                     </span>
-                    <span className="team-title" data-selected-team={`${team}`}>
-                        {team}
+                    <span className="team-title" data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`}>
+                        {team.name}
                     </span>
                 </button>
             })
@@ -34,7 +55,7 @@ class DashboardSelectTeam extends React.Component {
     render() {
         return (
             <section className={`dashboard-select-team-container d-flex flex-column justify align-items-center ${this.context.showSelectTeamDashboard ? "show-selected-team" : ""}`}>
-                <i><button type="button" className={`btn btn-outline-light select-all ${this.context.selectedTeam === "all-eligible-teams" ? "is-selected" : ""}`} data-selected-team="all-eligible-teams" onClick={this.depositSelectedTeam}>Show all eligible players</button></i>
+                <i><button type="button" className={`btn btn-outline-light select-all ${this.context.selectedTeam === "all-eligible-teams" ? "is-selected" : ""}`} data-selected-team="all-eligible-teams" data-is-clickable="true" onClick={this.depositSelectedTeam}>Show all eligible players</button></i>
                 <div className="dashboard-select-team-list-wrapper d-flex flex-column justify-content-between ">
                     {this.mapEligibleTeams()}
                 </div>
