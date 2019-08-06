@@ -49,7 +49,7 @@ class Rules extends React.Component {
                     <h5><span className="rule-numer-order">#4 -</span> You need to choose players for each round separately</h5>
                     <h6><i>#4-a Choose them wisely</i></h6>
                     <h5><span className="rule-numer-order">#5 -</span> Eligible players for choosing are only those who's teams have match on same day as TD-Fantasy round</h5>
-                    <h5><span className="rule-numer-order">#6 -</span> Only stats from <a href="http://www.fiba.basketball/basketballworldcup/2019" target="_blank">FIBA website</a> are relevant</h5>
+                    <h5><span className="rule-numer-order">#6 -</span> Only stats from <a href="http://www.fiba.basketball/basketballworldcup/2019" target="_blank" rel="noopener noreferrer">FIBA website</a> are relevant</h5>
                     <h5><span className="rule-numer-order">#7 -</span> You can choose 7 players for each round, but only 5 of them (best ranked picks) counts for score</h5>
                     <h6><i>#7-a If someone is injured and you picked him, or he didn't play and you picked him... it's not our fault- you need to learn how to live with that</i></h6>
                     <h5><span className="rule-numer-order">#8 -</span> There are no restrictions in terms of choosing players<br/>(except rule #5)</h5>

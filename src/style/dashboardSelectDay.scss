@@ -49,11 +49,16 @@
             font-size: 1vw;
             padding: 0;
             width: 100%;
+            transition: transform 0.2s;
+            &:hover{
+                transform: scale(1.1);
+            }
         }
 
         .is-selected {
             background: #ffffff;
             color: black;
+            transform: scale(1.05);
         }
     }
 

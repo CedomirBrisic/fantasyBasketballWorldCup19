@@ -1,6 +1,8 @@
 import React from 'react';
 import { AppContext } from '../../screens/_context/AppContext';
+import { Portal } from 'react-portal';
 import eligibleDays from "../../services/eligibleDays";
+import PlayerCardModal from "../modals/PlayerCardModal"
 
 class SelectPlayer extends React.Component {
     static contextType = AppContext;
@@ -38,8 +40,25 @@ class SelectPlayer extends React.Component {
                                 isEligible = false
                             }
                         }
-                    } else if (selectedDay < this.context.nowDateAndTime.humanDate) {
-                        isEligible = false
+                    } else {
+                        const possibleMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                        if (possibleMonths.indexOf(selectedDay.split("-")[1]) < possibleMonths.indexOf(this.context.nowDateAndTime.humanDate.split("-")[1])) {
+                            isEligible = false
+                        } else if (possibleMonths.indexOf(selectedDay.split("-")[1]) === possibleMonths.indexOf(this.context.nowDateAndTime.humanDate.split("-")[1])) {
+                            if (selectedDay.split("-")[0].length < this.context.nowDateAndTime.humanDate.split("-")[0].length) {
+                                isEligible = false
+                            } else if (selectedDay.split("-")[0].length === this.context.nowDateAndTime.humanDate.split("-")[0].length && selectedDay.split("-")[0].length === 3) {
+                                if (selectedDay.split("-")[0][0] < this.context.nowDateAndTime.humanDate.split("-")[0][0]) {
+                                    isEligible = false
+                                }
+                            } else if (selectedDay.split("-")[0].length === this.context.nowDateAndTime.humanDate.split("-")[0].length && selectedDay.split("-")[0].length === 4) {
+                                let selectedDayNumber = parseInt(selectedDay.split("-")[0][0] + selectedDay.split("-")[0][1], 10)
+                                let nowDateNumber = parseInt(this.context.nowDateAndTime.humanDate.split("-")[0][0] + this.context.nowDateAndTime.humanDate.split("-")[0][1], 10)
+                                if (selectedDayNumber < nowDateNumber) {
+                                    isEligible = false
+                                }
+                            }
+                        }
                     }
                     if (isEligible) {
                         players.forEach((player, index) => {
@@ -74,18 +93,18 @@ class SelectPlayer extends React.Component {
                                 })
 
                                 const outputPlayer =
-                                    <tr key={player.name + index} className="single-player-item">
-                                        <td>{`# ${player.shirtNumber}`}</td>
-                                        <td>{`${player.name}`}</td>
-                                        <td>{`${player.team}`}</td>
-                                        <td>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
-                                        <td>{`${(reboundsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (reboundsSum / gamesPlayed).toFixed(2)}`}</td>
-                                        <td>{`${(blocksSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (blocksSum / gamesPlayed).toFixed(2)}`}</td>
-                                        <td>{`${(stealsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (stealsSum / gamesPlayed).toFixed(2)}`}</td>
-                                        <td>{`${(turnoversSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (turnoversSum / gamesPlayed).toFixed(2)}`}</td>
-                                        <td>{`${(freeThrowsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (freeThrowsScoredSum / gamesPlayed).toFixed(2)}/${(freeThrowsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (freeThrowsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
-                                        <td>{`${(fieldGoalsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (fieldGoalsScoredSum / gamesPlayed).toFixed(2)}/${(fieldGoalsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (fieldGoalsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
-                                        <td>{`${(threePointsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (threePointsScoredSum / gamesPlayed).toFixed(2)}/${(threePointsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (threePointsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                                    <tr key={player.name + index} className="single-player-item" data-player-name={player.name} data-player-team={player.team} onClick={this.context.showSinglePlayerModal}>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`# ${player.shirtNumber}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`${player.team}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`${(reboundsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (reboundsSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`${(blocksSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (blocksSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`${(stealsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (stealsSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`${(turnoversSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (turnoversSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`${(freeThrowsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (freeThrowsScoredSum / gamesPlayed).toFixed(2)}/${(freeThrowsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (freeThrowsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`${(fieldGoalsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (fieldGoalsScoredSum / gamesPlayed).toFixed(2)}/${(fieldGoalsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (fieldGoalsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`${(threePointsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (threePointsScoredSum / gamesPlayed).toFixed(2)}/${(threePointsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (threePointsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
                                     </tr>
                                 outputPlayers.push(outputPlayer)
                             }
@@ -127,18 +146,18 @@ class SelectPlayer extends React.Component {
                     })
 
                     const outputPlayer =
-                        <tr key={player.name + index} className="single-player-item">
-                            <td>{`# ${player.shirtNumber}`}</td>
-                            <td>{`${player.name}`}</td>
-                            <td>{`${player.team}`}</td>
-                            <td>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
-                            <td>{`${(reboundsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (reboundsSum / gamesPlayed).toFixed(2)}`}</td>
-                            <td>{`${(blocksSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (blocksSum / gamesPlayed).toFixed(2)}`}</td>
-                            <td>{`${(stealsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (stealsSum / gamesPlayed).toFixed(2)}`}</td>
-                            <td>{`${(turnoversSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (turnoversSum / gamesPlayed).toFixed(2)}`}</td>
-                            <td>{`${(freeThrowsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (freeThrowsScoredSum / gamesPlayed).toFixed(2)}/${(freeThrowsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (freeThrowsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
-                            <td>{`${(fieldGoalsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (fieldGoalsScoredSum / gamesPlayed).toFixed(2)}/${(fieldGoalsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (fieldGoalsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
-                            <td>{`${(threePointsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (threePointsScoredSum / gamesPlayed).toFixed(2)}/${(threePointsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (threePointsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                        <tr key={player.name + index} className="single-player-item" data-player-name={player.name} data-player-team={player.team} onClick={this.context.showSinglePlayerModal}>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`# ${player.shirtNumber}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`${player.team}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`${(reboundsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (reboundsSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`${(blocksSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (blocksSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`${(stealsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (stealsSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`${(turnoversSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (turnoversSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`${(freeThrowsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (freeThrowsScoredSum / gamesPlayed).toFixed(2)}/${(freeThrowsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (freeThrowsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`${(fieldGoalsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (fieldGoalsScoredSum / gamesPlayed).toFixed(2)}/${(fieldGoalsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (fieldGoalsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`${(threePointsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (threePointsScoredSum / gamesPlayed).toFixed(2)}/${(threePointsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (threePointsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
                         </tr>
                     outputPlayers.push(outputPlayer)
                 }
@@ -148,64 +167,71 @@ class SelectPlayer extends React.Component {
     }
     render() {
         return (
-            <section className="select-player-container d-flex flex-column">
-                <div className="d-flex justify-content-between align-items-center w-100 select-player-label-wrapper">
-                    <div>
-                        {this.context.selectedTeam &&
-                            this.context.selectedTeam === "Cote d'Ivoire" &&
-                            <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/Cote-d-Ivoire`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
-                        }
-                        {this.context.selectedTeam &&
-                            this.context.selectedTeam !== "all-eligible-teams" &&
-                            this.context.selectedTeam !== "Cote d'Ivoire" &&
-                            <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/${this.checkSelectedTeamString()}`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
-                        }
-                        {this.context.selectedTeam === "all-eligible-teams" &&
-                            <a href={`http://www.fiba.basketball/basketballworldcup/2019`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">Find out more about World Cup</button></a>
-                        }
-                    </div>
-                    <div className="label-and-clock-wrapper d-flex justify-content-between align-items-center">
-                        <div className="table-label">
-                            <i>Table of average per game stats</i>
+            <>
+                <section className="select-player-container d-flex flex-column">
+                    <div className="d-flex justify-content-between align-items-center w-100 select-player-label-wrapper">
+                        <div>
+                            {this.context.selectedTeam &&
+                                this.context.selectedTeam === "Cote d'Ivoire" &&
+                                <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/Cote-d-Ivoire`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
+                            }
+                            {this.context.selectedTeam &&
+                                this.context.selectedTeam !== "all-eligible-teams" &&
+                                this.context.selectedTeam !== "Cote d'Ivoire" &&
+                                <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/${this.checkSelectedTeamString()}`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
+                            }
+                            {this.context.selectedTeam === "all-eligible-teams" &&
+                                <a href={`http://www.fiba.basketball/basketballworldcup/2019`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">Find out more about World Cup</button></a>
+                            }
                         </div>
-                        <div className="clockify-wrapper d-flex justify-content-between">
-                            <span>
-                                Zulu time:
+                        <div className="label-and-clock-wrapper d-flex justify-content-between align-items-center">
+                            <div className="table-label">
+                                <i>Table of average stats (per game)</i>
+                            </div>
+                            <div className="clockify-wrapper d-flex justify-content-between">
+                                <span>
+                                    Zulu time:
                         </span>
-                            <span>
-                                {this.context.nowDateAndTime.humanDate}
-                            </span>
-                            <span>
-                                {this.context.nowDateAndTime.humanTime}
-                            </span>
+                                <span>
+                                    {this.context.nowDateAndTime.humanDate}
+                                </span>
+                                <span>
+                                    {this.context.nowDateAndTime.humanTime}
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
 
-                <div className="players-table-container">
-                    <table>
-                        <thead>
-                            <tr className="">
-                                <th>No</th>
-                                <th>Player name</th>
-                                <th>Team</th>
-                                <th>Assists</th>
-                                <th>Rebounds</th>
-                                <th>Blocks</th>
-                                <th>Steals</th>
-                                <th>Turnovers</th>
-                                <th>Free throws</th>
-                                <th>Two points</th>
-                                <th>Three points</th>
-                            </tr>
-                        </thead>
-                        <tbody className="players-data-container">
-                            {this.mapEligiblePlayers()}
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+                    <div className="players-table-container">
+                        <table>
+                            <thead>
+                                <tr className="">
+                                    <th>No</th>
+                                    <th>Player name</th>
+                                    <th>Team</th>
+                                    <th>Assists</th>
+                                    <th>Rebounds</th>
+                                    <th>Blocks</th>
+                                    <th>Steals</th>
+                                    <th>Turnovers</th>
+                                    <th>Free throws</th>
+                                    <th>Two points</th>
+                                    <th>Three points</th>
+                                </tr>
+                            </thead>
+                            <tbody className="players-data-container">
+                                {this.mapEligiblePlayers()}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                {this.context.selectedPlayerForPlayerCardModal &&
+                    <Portal>
+                        <PlayerCardModal />
+                    </Portal>
+                }
+            </>
         )
     }
 }

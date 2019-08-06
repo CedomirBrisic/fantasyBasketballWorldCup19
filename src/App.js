@@ -8,7 +8,7 @@ import SingleMatchSet from './screens/common/SingleMatchSet';
 import DashboardSelectTeam from './screens/common/DashboardSelectTeam';
 import ShowPlayersOnField from './screens/common/ShowPlayersOnField';
 import SelectPlayer from './screens/common/SelectPlayer';
-import PlayerCardModal from './screens/common/PlayerCardModal';
+// import PlayerCardModal from './screens/common/PlayerCardModal';
 import HallOfFameF1WCList from './screens/common/HallOfFameF1WCList';
 import HallOfFameTotalPointsList from './screens/common/HallOfFameTotalPointsList';
 import HallOfFameUserStatsF1WC from './screens/common/HallOfFameUserStatsF1WC';

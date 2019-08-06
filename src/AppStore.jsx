@@ -16,6 +16,9 @@ export default class AppStore extends Component {
         selectedTeam: "all-eligible-teams",
         nowDateAndTime: humanReadDateAndTime(),
 
+        selectedPlayerForPlayerCardModal:null,
+        showPlayerCardModal:false,
+
         isInitialLoading: true,
 
     }
@@ -67,7 +70,25 @@ export default class AppStore extends Component {
         });
     }
 
-
+    showSinglePlayerModal = (event) => {
+        const playerName = event.target.getAttribute("data-player-name")
+        const playerTeam = event.target.getAttribute("data-player-team")
+        const selectedPlayer = this.state.basketballPlayers.filter((player) =>{
+            if (player.name === playerName && player.team === playerTeam){
+                return player
+            }
+        })
+        this.setState({
+            selectedPlayerForPlayerCardModal:selectedPlayer[0],
+            showPlayerCardModal: true
+        })
+    }
+    closeSinglePlayerModal = () => {
+        this.setState({
+            selectedPlayerForPlayerCardModal:null,
+            showPlayerCardModal: false
+        })
+    }
 
     render() {
         return (
@@ -77,7 +98,9 @@ export default class AppStore extends Component {
                 toggleShowSelectDayDashboard: this.toggleShowSelectDayDashboard,
                 toggleShowSelectTeamDashboard: this.toggleShowSelectTeamDashboard,
                 changeSelectedDay: this.changeSelectedDay,
-                changeSelectedTeam: this.changeSelectedTeam
+                changeSelectedTeam: this.changeSelectedTeam,
+                showSinglePlayerModal:this.showSinglePlayerModal,
+                closeSinglePlayerModal: this.closeSinglePlayerModal
             }}>
 
                 {this.props.children}

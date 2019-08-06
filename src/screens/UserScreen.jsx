@@ -4,7 +4,6 @@ import Header from './common/Header';
 import DashboardSelectDay from './common/DashboardSelectDay';
 import ShowPlayersOnField from './common/ShowPlayersOnField';
 import SelectPlayer from './common/SelectPlayer';
-import PlayerCardModal from './common/PlayerCardModal';
 import DashboardSelectTeam from './common/DashboardSelectTeam';
 
 
@@ -47,7 +46,6 @@ class UserScreen extends React.Component {
                                 {/* <ShowPlayersOnField /> */}
                                 {/* vs */}
                                 <SelectPlayer />
-                                {/* <PlayerCardModal /> */}
                             </div>
                             <DashboardSelectTeam />
                         </div>

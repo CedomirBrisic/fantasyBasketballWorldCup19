@@ -33,13 +33,30 @@ class DashboardSelectTeam extends React.Component {
                             isEligible = false
                         }
                     }
-                } else if (selectedDay < this.context.nowDateAndTime.humanDate) {
-                    isEligible = false
+                } else {
+                    const possibleMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                    if (possibleMonths.indexOf(selectedDay.split("-")[1]) < possibleMonths.indexOf(this.context.nowDateAndTime.humanDate.split("-")[1])) {
+                        isEligible = false
+                    } else if (possibleMonths.indexOf(selectedDay.split("-")[1]) === possibleMonths.indexOf(this.context.nowDateAndTime.humanDate.split("-")[1])) {
+                        if (selectedDay.split("-")[0].length < this.context.nowDateAndTime.humanDate.split("-")[0].length) {
+                            isEligible = false
+                        } else if (selectedDay.split("-")[0].length === this.context.nowDateAndTime.humanDate.split("-")[0].length && selectedDay.split("-")[0].length === 3) {
+                            if (selectedDay.split("-")[0][0] < this.context.nowDateAndTime.humanDate.split("-")[0][0]) {
+                                isEligible = false
+                            }
+                        } else if (selectedDay.split("-")[0].length === this.context.nowDateAndTime.humanDate.split("-")[0].length && selectedDay.split("-")[0].length === 4) {
+                            let selectedDayNumber = parseInt(selectedDay.split("-")[0][0] + selectedDay.split("-")[0][1], 10)
+                            let nowDateNumber = parseInt(this.context.nowDateAndTime.humanDate.split("-")[0][0] + this.context.nowDateAndTime.humanDate.split("-")[0][1], 10)
+                            if (selectedDayNumber < nowDateNumber) {
+                                isEligible = false
+                            }
+                        }
+                    }
                 }
 
                 return <button key={team.name + index} type="button" className={`btn d-flex align-items-center ${isEligible ? "btn-outline-light" : "btn-outline-dark"} ${this.context.selectedTeam === `${team.name}` ? "is-selected" : ""}`} data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`} onClick={this.depositSelectedTeam}>
                     <span className="team-image-wrapper" data-selected-team={`${team.name}`}>
-                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${team.name}.png`)} alt={`${team.name}`} data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`}/>
+                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${team.name}.png`)} alt={`${team.name}`} data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`} />
                     </span>
                     <span className="team-title" data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`}>
                         {team.name}
