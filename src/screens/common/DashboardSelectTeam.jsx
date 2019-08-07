@@ -72,7 +72,7 @@ class DashboardSelectTeam extends React.Component {
     render() {
         return (
             <section className={`dashboard-select-team-container d-flex flex-column justify align-items-center ${this.context.showSelectTeamDashboard ? "show-selected-team" : ""}`}>
-                <i><button type="button" className={`btn btn-outline-light select-all ${this.context.selectedTeam === "all-eligible-teams" ? "is-selected" : ""}`} data-selected-team="all-eligible-teams" data-is-clickable="true" onClick={this.depositSelectedTeam}>Show all eligible players</button></i>
+                <button type="button" className={`btn btn-outline-light select-all ${this.context.selectedTeam === "all-eligible-teams" ? "is-selected" : ""}`} data-selected-team="all-eligible-teams" data-is-clickable="true" onClick={this.depositSelectedTeam}><i>Show all eligible players</i></button>
                 <div className="dashboard-select-team-list-wrapper d-flex flex-column justify-content-between ">
                     {this.mapEligibleTeams()}
                 </div>

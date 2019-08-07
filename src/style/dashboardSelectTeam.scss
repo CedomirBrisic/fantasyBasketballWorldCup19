@@ -38,11 +38,11 @@
         border-bottom: 2px solid #ffffff;
         font-size: 1vw;
     }
-    // .is-selected {
-    //     background: #ffffff;
-    //     color: black;
-
-    // }
+    .is-selected {
+        background: #ffffff;
+        color: black;
+        transform: scale(1.05);
+    }
 
     .dashboard-select-team-list-wrapper {
         height: 95%;
@@ -58,11 +58,7 @@
             }
         }
 
-        .is-selected {
-            background: #ffffff;
-            color: black;
-            transform: scale(1.05);
-        }
+
 
 
         .team-image-wrapper{

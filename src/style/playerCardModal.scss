@@ -1,14 +1,16 @@
 .player-card-modal-container {
-    // position: relative;
-    .close{
+
+    .close {
         position: absolute;
         right: 0.4vw;
         top: -0.8vw;
         font-size: 5vw;
-        &:hover{
+
+        &:hover {
             cursor: pointer;
         }
     }
+
     .modal-dialog {
         max-width: 80%;
         // min-height: 42vw;
@@ -16,23 +18,25 @@
 
         .modal-content {
             min-height: 40vw;
-            background-color: rgba(255, 255, 255, 0.94);
-
+            background-color: rgba(255, 255, 255, 0.95);
 
             .player-general-info-container {
                 width: 80%;
-                color: rgba(0, 0, 0, 0.79);
                 font-size: 1.2vw;
                 font-weight: 600;
                 margin: 0.5vw auto;
                 border-bottom: 4px double #010101;
+                color: rgba(0, 0, 0, 0.79);
+                z-index: 2000;
+                // color: rgb(197, 0, 0);
 
                 i {
                     font-size: 1vw;
                     margin-right: 1vw;
                 }
             }
-            .selected-day-info{
+
+            .selected-day-info {
                 font-size: 0.79vw;
                 color: rgb(197, 0, 0);
                 font-weight: 600;
@@ -66,9 +70,13 @@
                     width: 45vw;
                     height: 35vw;
                     margin: 2vw auto;
+
                     // -webkit-box-shadow: 0px 0px 1vw 0px rgba(0, 0, 0, 0.1);
                     // -moz-box-shadow: 0px 0px 1vw 0px rgba(0, 0, 0, 0.1);
                     // box-shadow: 0px 0px 1vw 0px rgba(0, 0, 0, 0.1);
+                    .isHovered {
+                        font-weight: 800;
+                    }
 
                     .real-life-stats-list {
                         width: 45%;
@@ -95,6 +103,7 @@
                                 font-size: 1vw;
                             }
                         }
+
                     }
 
                     .calculated-td-fantasy-stats-list {
@@ -124,6 +133,13 @@
                                 color: rgba(0, 0, 0, 0.89);
                                 font-size: 1vw;
                             }
+                        }
+
+                        .single-item-bonus-wrapper,
+                        .single-item-penalty-wrapper {
+                            padding-left: 1vw;
+                            padding-right: 0.5vw;
+                            font-size: 0.9vw;
                         }
 
                         .summa-summarum-fantasy-points {
@@ -164,13 +180,21 @@
                         line-height: 1.1vw;
                         font-weight: 800;
                     }
+
                 }
-                .btn{
+
+
+                .btn {
                     font-size: 1vw;
                     font-weight: 400;
                     margin-right: 0.5vw;
                     margin-bottom: 0.5vw;
                 }
+            }
+
+            .rounding-notification {
+                font-size: 0.55vw;
+                color: rgba(255, 0, 0, 0.79);
             }
         }
     }

@@ -57,18 +57,18 @@ export default class AppStore extends Component {
             showSelectTeamDashboard: !this.state.showSelectTeamDashboard,
         })
     }
-    componentDidMount() {
-        this.interval = setInterval(
-            () => this.clocify(),
-            1000
-        );
-    }
+    // componentDidMount() {
+    //     this.interval = setInterval(
+    //         () => this.clocify(),
+    //         1000
+    //     );
+    // }
 
-    clocify() {
-        this.setState({
-            nowDateAndTime: humanReadDateAndTime()
-        });
-    }
+    // clocify() {
+    //     this.setState({
+    //         nowDateAndTime: humanReadDateAndTime()
+    //     });
+    // }
 
     showSinglePlayerModal = (event) => {
         const playerName = event.target.getAttribute("data-player-name")

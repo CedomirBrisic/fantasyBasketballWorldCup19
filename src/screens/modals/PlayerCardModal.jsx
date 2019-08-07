@@ -2,12 +2,14 @@ import React from 'react';
 import Modal from 'react-bootstrap4-modal';
 import { AppContext } from '../../screens/_context/AppContext';
 import calculateBasketballPlayerTDFantasyPoints from "../../services/calculateBasketballPlayerTDFantasyPoints";
+import calculateBasketballPlayerTDFantasyGrandTotalPoints from "../../services/calculateBasketballPlayerTDFantasyGrandTotalPoints";
 
 class PlayerCardModal extends React.Component {
     static contextType = AppContext;
     state = {
         selectedDay: this.context.selectedDay,
-        tdFantasyPoints: null
+        tdFantasyPoints: null,
+        hoveredElement: ""
     }
 
 
@@ -16,13 +18,31 @@ class PlayerCardModal extends React.Component {
         this.setState({
             selectedDay
         })
+        this.depositTdFantasyPoints(this.context.selectedPlayerForPlayerCardModal, selectedDay)
     }
-    componentDidMount() {
-        const tdFantasyPoints = calculateBasketballPlayerTDFantasyPoints(this.context.selectedPlayerForPlayerCardModal)
+
+    depositTdFantasyPoints = (playerData, selectedDay) => {
+        const tdFantasyPoints = calculateBasketballPlayerTDFantasyPoints(playerData, selectedDay)
         this.setState({
             tdFantasyPoints
         })
     }
+    depositHoveredElement = (event) => {
+        const hoveredElement = event.target.getAttribute("data-stats-element")
+        this.setState({
+            hoveredElement
+        })
+    }
+    removeHoveredElement = () => {
+        this.setState({
+            hoveredElement: ""
+        })
+    }
+
+    componentDidMount() {
+        this.depositTdFantasyPoints(this.context.selectedPlayerForPlayerCardModal, this.state.selectedDay)
+    }
+
     render() {
         return (
             <Modal className="player-card-modal-container" visible={this.context.showPlayerCardModal} onClickBackdrop={this.context.closeSinglePlayerModal}>
@@ -56,114 +76,253 @@ class PlayerCardModal extends React.Component {
                     <div className="stats-container d-flex justify-content-between">
                         <div className="real-life-stats-list d-flex flex-column justify-content-between">
                             <div className="title"><i>Real life Stats</i></div>
-                            <div className="single-item-wrapper d-flex justify-content-between">
-                                <span className="label">
+                            <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "game-win-wrapper" ? "isHovered" : ""}`} data-stats-element="game-win-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                <span className="label" data-stats-element="game-win-wrapper">
                                     Game win:
                                 </span>
-                                <span className="data">
+                                <span className="data" data-stats-element="game-win-wrapper">
                                     {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].teamWin}
                                 </span>
                             </div>
-                            <div className="single-item-wrapper d-flex justify-content-between">
-                                <span className="label">
+                            <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "assists-wrapper" ? "isHovered" : ""}`} data-stats-element="assists-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                <span className="label" data-stats-element="assists-wrapper">
                                     Assists:
                                 </span>
-                                <span className="data">
+                                <span className="data" data-stats-element="assists-wrapper">
                                     {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].assists}
                                 </span>
                             </div>
-                            <div className="single-item-wrapper d-flex justify-content-between">
-                                <span className="label">
+                            <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "rebounds-wrapper" ? "isHovered" : ""}`} data-stats-element="rebounds-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                <span className="label" data-stats-element="rebounds-wrapper">
                                     Rebounds:
                                 </span>
-                                <span className="data">
+                                <span className="data" data-stats-element="rebounds-wrapper">
                                     {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].rebounds}
                                 </span>
                             </div>
-                            <div className="single-item-wrapper d-flex justify-content-between">
-                                <span className="label">
-                                    Steals:
-                                </span>
-                                <span className="data">
-                                    {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].steals}
-                                </span>
-                            </div>
-                            <div className="single-item-wrapper d-flex justify-content-between">
-                                <span className="label">
+                            <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "blocks-wrapper" ? "isHovered" : ""}`} data-stats-element="blocks-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                <span className="label" data-stats-element="blocks-wrapper">
                                     Blocks:
                                 </span>
-                                <span className="data">
+                                <span className="data" data-stats-element="blocks-wrapper">
                                     {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].blocks}
                                 </span>
                             </div>
-                            <div className="single-item-wrapper d-flex justify-content-between">
-                                <span className="label">
+                            <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "steals-wrapper" ? "isHovered" : ""}`} data-stats-element="steals-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                <span className="label" data-stats-element="steals-wrapper">
+                                    Steals:
+                                </span>
+                                <span className="data" data-stats-element="steals-wrapper">
+                                    {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].steals}
+                                </span>
+                            </div>
+                            <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "turnovers-wrapper" ? "isHovered" : ""}`} data-stats-element="turnovers-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                <span className="label" data-stats-element="turnovers-wrapper">
                                     Turnovers:
                                 </span>
-                                <span className="data">
+                                <span className="data" data-stats-element="turnovers-wrapper">
                                     {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].turnovers}
                                 </span>
                             </div>
-                            <div className="single-item-wrapper d-flex justify-content-between">
-                                <span className="label">
+                            <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "free-throws-wrapper" ? "isHovered" : ""}`} data-stats-element="free-throws-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                <span className="label" data-stats-element="free-throws-wrapper">
                                     Free throws:
                                 </span>
-                                <span className="data">
+                                <span className="data" data-stats-element="free-throws-wrapper">
                                     {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].freeThrowScored}/{this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].freeThrowAttempts}
                                 </span>
                             </div>
-                            <div className="single-item-wrapper d-flex justify-content-between">
-                                <span className="label">
+                            <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "two-points-wrapper" ? "isHovered" : ""}`} data-stats-element="two-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                <span className="label" data-stats-element="two-points-wrapper">
                                     Two points:
                                 </span>
-                                <span className="data">
+                                <span className="data" data-stats-element="two-points-wrapper">
                                     {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].fieldGoalsScored}/{this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].fieldGoalsAttempts}
                                 </span>
                             </div>
-                            <div className="single-item-wrapper d-flex justify-content-between">
-                                <span className="label">
+                            <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "three-points-wrapper" ? "isHovered" : ""}`} data-stats-element="three-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                <span className="label" data-stats-element="three-points-wrapper">
                                     Three points:
                                 </span>
-                                <span className="data">
+                                <span className="data" data-stats-element="three-points-wrapper">
                                     {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].threePointsScored}/{this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].threePointsAttempts}
                                 </span>
                             </div>
                         </div>
+
+
+
+
+
+                        {/*--------------------------------------- FANTASY POINTS --------------------- */}
                         {this.state.tdFantasyPoints !== null &&
                             <div className="calculated-td-fantasy-stats-list d-flex flex-column justify-content-between">
                                 <div className="title"><i>TD-Fantasy points</i></div>
-                                <div className="single-item-wrapper d-flex justify-content-between">
-                                    <span className="label">
+                                <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "game-win-wrapper" ? "isHovered" : ""}`} data-stats-element="game-win-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <span className="label" data-stats-element="game-win-wrapper">
+                                        Game win:
+                                </span>
+                                    <span className="data" data-stats-element="game-win-wrapper">
+                                        {this.state.tdFantasyPoints.gameWin}
+                                    </span>
+                                </div>
+                                <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "assists-wrapper" ? "isHovered" : ""}`} data-stats-element="assists-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <span className="label" data-stats-element="assists-wrapper">
                                         Assists:
                                 </span>
-                                    <span className="data">
+                                    <span className="data" data-stats-element="assists-wrapper">
                                         {this.state.tdFantasyPoints.assists}
                                     </span>
                                 </div>
+                                <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "rebounds-wrapper" ? "isHovered" : ""}`} data-stats-element="rebounds-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <span className="label" data-stats-element="rebounds-wrapper">
+                                        Rebounds:
+                                </span>
+                                    <span className="data" data-stats-element="rebounds-wrapper">
+                                        {this.state.tdFantasyPoints.rebounds}
+                                    </span>
+                                </div>
+                                <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "blocks-wrapper" ? "isHovered" : ""}`} data-stats-element="blocks-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <span className="label" data-stats-element="blocks-wrapper">
+                                        Blocks:
+                                </span>
+                                    <span className="data" data-stats-element="blocks-wrapper">
+                                        {this.state.tdFantasyPoints.blocks}
+                                    </span>
+                                </div>
+                                <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "steals-wrapper" ? "isHovered" : ""}`} data-stats-element="steals-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <span className="label" data-stats-element="steals-wrapper">
+                                        Steals:
+                                </span>
+                                    <span className="data" data-stats-element="steals-wrapper">
+                                        {this.state.tdFantasyPoints.steals}
+                                    </span>
+                                </div>
+                                <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "turnovers-wrapper" ? "isHovered" : ""}`} data-stats-element="turnovers-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <span className="label" data-stats-element="turnovers-wrapper">
+                                        Turnovers:
+                                </span>
+                                    <span className="data" data-stats-element="turnovers-wrapper">
+                                        {this.state.tdFantasyPoints.turnovers}
+                                    </span>
+                                </div>
+
+
+                                <div>
+                                    <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "free-throws-wrapper" ? "isHovered" : ""}`} data-stats-element="free-throws-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                        <span className="label" data-stats-element="free-throws-wrapper">
+                                            Free throws:
+                                        </span>
+                                        <span className="data" data-stats-element="free-throws-wrapper">
+                                            {this.state.tdFantasyPoints.freeThrowsPoints}
+                                        </span>
+                                    </div>
+                                    <div className={`single-item-bonus-wrapper d-flex justify-content-between ${this.state.hoveredElement === "free-throws-wrapper" ? "isHovered" : ""}`} data-stats-element="free-throws-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                        <span className="label" data-stats-element="free-throws-wrapper">
+                                            Free throws - bonus:
+                                        </span>
+                                        <span className="data" data-stats-element="free-throws-wrapper">
+                                            {this.state.tdFantasyPoints.freeThrowsPointsBonus}
+                                        </span>
+                                    </div>
+                                    <div className={`single-item-penalty-wrapper d-flex justify-content-between ${this.state.hoveredElement === "free-throws-wrapper" ? "isHovered" : ""}`} data-stats-element="free-throws-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                        <span className="label" data-stats-element="free-throws-wrapper">
+                                            Free throws - penalty:
+                                        </span>
+                                        <span className="data" data-stats-element="free-throws-wrapper">
+                                            {this.state.tdFantasyPoints.freeThrowsPointsPenalty}
+                                        </span>
+                                    </div>
+                                </div>
+
+
+
+                                <div>
+                                    <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "two-points-wrapper" ? "isHovered" : ""}`} data-stats-element="two-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                        <span className="label" data-stats-element="two-points-wrapper">
+                                            Two points:
+                                    </span>
+                                        <span className="data" data-stats-element="two-points-wrapper">
+                                            {this.state.tdFantasyPoints.twoPoints}
+                                        </span>
+                                    </div>
+                                    <div className={`single-item-bonus-wrapper d-flex justify-content-between ${this.state.hoveredElement === "two-points-wrapper" ? "isHovered" : ""}`} data-stats-element="two-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                        <span className="label" data-stats-element="two-points-wrapper">
+                                            Two points - bonus:
+                                    </span>
+                                        <span className="data" data-stats-element="two-points-wrapper">
+                                            {this.state.tdFantasyPoints.twoPointsBonus}
+                                        </span>
+                                    </div>
+                                    <div className={`single-item-penalty-wrapper d-flex justify-content-between ${this.state.hoveredElement === "two-points-wrapper" ? "isHovered" : ""}`} data-stats-element="two-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                        <span className="label" data-stats-element="two-points-wrapper">
+                                            Two points - penalty:
+                                    </span>
+                                        <span className="data" data-stats-element="two-points-wrapper">
+                                            {this.state.tdFantasyPoints.twoPointsPenalty}
+                                        </span>
+                                    </div>
+                                </div>
+
+
+
+                                <div>
+                                    <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "three-points-wrapper" ? "isHovered" : ""}`} data-stats-element="three-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                        <span className="label" data-stats-element="three-points-wrapper">
+                                            Three points:
+                                        </span>
+                                        <span className="data" data-stats-element="three-points-wrapper">
+                                            {this.state.tdFantasyPoints.threePoints}
+                                        </span>
+                                    </div>
+                                    <div className={`single-item-bonus-wrapper d-flex justify-content-between ${this.state.hoveredElement === "three-points-wrapper" ? "isHovered" : ""}`} data-stats-element="three-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                        <span className="label" data-stats-element="three-points-wrapper">
+                                            Three points - bonus:
+                                        </span>
+                                        <span className="data" data-stats-element="three-points-wrapper">
+                                            {this.state.tdFantasyPoints.threePointsBonus}
+                                        </span>
+                                    </div>
+                                    <div className={`single-item-penalty-wrapper d-flex justify-content-between ${this.state.hoveredElement === "three-points-wrapper" ? "isHovered" : ""}`} data-stats-element="three-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                        <span className="label" data-stats-element="three-points-wrapper">
+                                            Three points - penalty:
+                                        </span>
+                                        <span className="data" data-stats-element="three-points-wrapper">
+                                            {this.state.tdFantasyPoints.threePointsPenalty}
+                                        </span>
+                                    </div>
+                                </div>
+
+
+
                                 <div className="summa-summarum-fantasy-points d-flex justify-content-between">
                                     <span className="label">
                                         Summa Summarum:
-                                </span>
+                                    </span>
                                     <span className="data">
-                                        12
-                                </span>
+                                        {this.state.tdFantasyPoints.summaSummarum}
+                                    </span>
                                 </div>
                             </div>
                         }
                     </div>
                 </div>
-                <div className="bottom-container d-flex justify-content-between">
-                    <div className="grand-total-wrapper d-flex justify-content-between align-items-center">
-                        <div className="label">
-                            Grand Total TD Fantasy points so far:
-                            </div>
-                        <div className="data">
-                            XXX Valubale Points
-                            </div>
+                <div className="d-flex flex-column">
+                    <div className="bottom-container d-flex justify-content-between">
+                        <div className="grand-total-wrapper d-flex justify-content-between align-items-center">
+                            <div className="label">
+                                Grand Total TD Fantasy points so far:
+                        </div>
+                            <div className="data">
+                                {calculateBasketballPlayerTDFantasyGrandTotalPoints(this.context.selectedPlayerForPlayerCardModal).toFixed(2)} Points
+                        </div>
+                        </div>
+                        <button type="button" className="btn btn-success">I want this guy in my team for {this.context.selectedDay}</button>
                     </div>
-                    <button type="button" className="btn btn-success">Include in your team for {this.context.selectedDay}</button>
+                    <span className="rounding-notification">
+                        *Due to rounding Grand Total can differentiate for decimal or two
+                            </span>
                 </div>
-
             </Modal>
         )
     }
