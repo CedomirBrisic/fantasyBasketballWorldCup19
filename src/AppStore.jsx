@@ -8,7 +8,7 @@ export default class AppStore extends Component {
         basketballPlayers: null,
         dropdowns: null,
         fantasyUsers: null,
-        mArsicnemapojma: null,
+        bitrulez: null,
 
         showSelectDayDashboard: true,
         showSelectTeamDashboard: false,
@@ -74,9 +74,20 @@ export default class AppStore extends Component {
     }
     depositUserKey = (data) => {
         this.setState({
-            mArsicnemapojma: data
+            bitrulez: data
         })
-        sessionStorage.setItem("mArsicnemapojma", data)
+        let data2 = ""
+        const qwerty = ["qwe","#r4fwf","FWwef","wef3r","Frbb3","afV","wefV","Vbevg","wfwv","vsvF","sdfv1","bit"]
+        let counter = 0;
+        for (let i = 0; i < data.length; i++){
+            data2+=data[i]+qwerty[counter]
+            if(counter === 12){
+                counter = 0
+            } else {
+                counter++
+            }
+        }
+        sessionStorage.setItem("bitrulez", data2)
     }
 
     getFantasyDataContext = () => {
@@ -138,9 +149,17 @@ export default class AppStore extends Component {
         })
     }
     componentDidMount() {
-        const data = sessionStorage.getItem("mArsicnemapojma")
+        const qwerty = ["qwe","#r4fwf","FWwef","wef3r","Frbb3","afV","wefV","Vbevg","wfwv","vsvF","sdfv1","bit"]
+        let data = sessionStorage.getItem("bitrulez")
+        let data2=""
+        if(data !== null){
+            qwerty.forEach((qwe,index) => {
+                const xxx = data.split(qwe)
+                data2 = xxx
+            })
+        }
         this.setState({
-            mArsicnemapojma: data
+            bitrulez: data2
         })
         // this.interval = setInterval(
         //     () => this.clocify(),

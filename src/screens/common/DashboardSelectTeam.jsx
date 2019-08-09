@@ -11,7 +11,6 @@ class DashboardSelectTeam extends React.Component {
         const isClickable = event.target.getAttribute("data-is-clickable")
         if (isClickable === "true") {
             const selectedTeam = event.target.getAttribute("data-selected-team")
-            console.log("selected team", selectedTeam)
             this.context.changeSelectedTeam(selectedTeam)
         }
     }

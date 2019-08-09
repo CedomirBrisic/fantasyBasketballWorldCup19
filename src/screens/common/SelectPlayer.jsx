@@ -24,7 +24,6 @@ class SelectPlayer extends React.Component {
         const players = this.context.basketballPlayers
         const eligibleTeams = this.context.dropdowns[0].teamsByDay
         const outputPlayers = []
-        console.log("outputPlayers", outputPlayers)
 
         //DON'T SHOW ALREADY SELECTED PLAYERS//
         const posiblePositions = ["Player1Id", "Player2Id", "Player3Id", "Player4Id", "Player5Id", "Player6Id", "Player7Id"]

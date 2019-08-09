@@ -191,7 +191,7 @@ class PlayersOnField extends React.Component {
         return (
             <div className="show-players-on-field-container d-flex flex-column justify-content-between">
                 <div className="screen-title d-flex justify-content-around">
-                    <span>{this.context.mArsicnemapojma}'s Team for {this.context.selectedDay}</span>
+                    <span>{this.context.bitrulez}'s Team for {this.context.selectedDay}</span>
                     <span>You need to pick all 7 players in order to be able to submit team for round</span>
                 </div>
                 <section className="picked-players-container d-flex flex-column justify-content-between">
