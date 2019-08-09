@@ -7,6 +7,7 @@ import PlayerCardModal from "../modals/PlayerCardModal"
 class SelectPlayer extends React.Component {
     static contextType = AppContext;
     state = {
+        isTooLateMessage: false
     }
 
     checkSelectedTeamString = () => {
@@ -23,6 +24,7 @@ class SelectPlayer extends React.Component {
         const players = this.context.basketballPlayers
         const eligibleTeams = this.context.dropdowns[0].teamsByDay
         const outputPlayers = []
+        console.log("outputPlayers", outputPlayers)
 
         //DON'T SHOW ALREADY SELECTED PLAYERS//
         const posiblePositions = ["Player1Id", "Player2Id", "Player3Id", "Player4Id", "Player5Id", "Player6Id", "Player7Id"]
@@ -181,11 +183,15 @@ class SelectPlayer extends React.Component {
                     if (indx === -1) {
                         outputPlayers.push(outputPlayer)
                     }
-                    outputPlayers.push(outputPlayer)
                 }
             })
         }
 
+        if (outputPlayers.length === 0 && !this.state.isTooLateMessage) {
+            this.setState({
+                isTooLateMessage: true
+            })
+        }
         return outputPlayers
     }
     render() {
@@ -247,6 +253,12 @@ class SelectPlayer extends React.Component {
                                 {this.mapEligiblePlayers()}
                             </tbody>
                         </table>
+                        {this.state.isTooLateMessage &&
+                            <div className="too-late-message d-flex flex-column justify-content-center align-items-center">
+                                <span>All games for {this.context.selectedDay} already started...</span>
+                                <span className="too-late-message-2"><i>pick players for next round... nothing is over till 15th September</i></span>
+                            </div>
+                        }
                     </div>
                 </section>
                 {this.context.selectedPlayerForPlayerCardModal &&

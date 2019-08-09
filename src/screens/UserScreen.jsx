@@ -12,7 +12,6 @@ class UserScreen extends React.Component {
     static contextType = AppContext;
 
     componentDidMount() {
-        const userKey = sessionStorage.getItem('maRSiCnemAPojmAhehehe');
         this.context.getFantasyDataContext()
     }
     toggleShowSelectDayDashboard = () => {

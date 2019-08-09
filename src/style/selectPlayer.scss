@@ -4,7 +4,16 @@
     height: 43vw;
     overflow-y: scroll;
     scroll-behavior: smooth;
-
+.too-late-message{
+    color: #ffffff;
+    font-size: 3vw;
+    height: 36vw;
+    .too-late-message-2{
+        margin-top: 3vw;
+        color: #ffffff;
+        font-size: 2vw;
+    }
+}
 
     .select-player-label-wrapper {
         margin-bottom: 0.5vw;

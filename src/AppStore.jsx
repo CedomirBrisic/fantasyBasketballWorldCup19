@@ -8,6 +8,7 @@ export default class AppStore extends Component {
         basketballPlayers: null,
         dropdowns: null,
         fantasyUsers: null,
+        mArsicnemapojma: null,
 
         showSelectDayDashboard: true,
         showSelectTeamDashboard: false,
@@ -30,6 +31,7 @@ export default class AppStore extends Component {
             Player5Id: null,
             Player6Id: null,
             Player7Id: null,
+            isLocked: false
         },
 
         isInitialLoading: true,
@@ -70,6 +72,12 @@ export default class AppStore extends Component {
             selectedTeam: data
         })
     }
+    depositUserKey = (data) => {
+        this.setState({
+            mArsicnemapojma: data
+        })
+        sessionStorage.setItem("mArsicnemapojma", data)
+    }
 
     getFantasyDataContext = () => {
         getFantasyData("neKaRendOMSiFRaOdbAsaliBasbAsDostaKARAkterA123").then((response) => {
@@ -94,7 +102,8 @@ export default class AppStore extends Component {
             showTeam: true,
             showSelectPlayer: false,
             showSelectDayDashboard: true,
-            showSelectTeamDashboard: false
+            showSelectTeamDashboard: false,
+            selectedTeam: "all-eligible-teams",
         })
     }
     pickPlayerForTeam = (inputPlayerPosition, playerId) => {
@@ -128,12 +137,16 @@ export default class AppStore extends Component {
             showPlayerCardModal: false
         })
     }
-    // componentDidMount() {
-    //     this.interval = setInterval(
-    //         () => this.clocify(),
-    //         1000
-    //     );
-    // }
+    componentDidMount() {
+        const data = sessionStorage.getItem("mArsicnemapojma")
+        this.setState({
+            mArsicnemapojma: data
+        })
+        // this.interval = setInterval(
+        //     () => this.clocify(),
+        //     1000
+        // );
+    }
 
     // clocify() {
     //     this.setState({
@@ -153,7 +166,8 @@ export default class AppStore extends Component {
                 showSinglePlayerModal: this.showSinglePlayerModal,
                 closeSinglePlayerModal: this.closeSinglePlayerModal,
                 choosePlayerForTeam: this.choosePlayerForTeam,
-                pickPlayerForTeam: this.pickPlayerForTeam
+                pickPlayerForTeam: this.pickPlayerForTeam,
+                depositUserKey:this.depositUserKey,
             }}>
 
                 {this.props.children}

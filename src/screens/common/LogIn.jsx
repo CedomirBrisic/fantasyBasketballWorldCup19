@@ -1,18 +1,17 @@
 import React from 'react';
+import { AppContext } from '../../screens/_context/AppContext';
 import { Redirect } from 'react-router-dom'
 import putCheckUsernameAndPassword from "../../webhooks/putCheckUsernameAndPassword";
 
 
 
 class LogIn extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            username: "",
-            password: "",
-            badUsernameOrPassword: false,
-            goToUserScreen: "",
-        }
+    static contextType = AppContext;
+    state = {
+        username: "",
+        password: "",
+        badUsernameOrPassword: false,
+        goToUserScreen: "",
     }
 
     successfullyRegisteredMessage = () => {
@@ -42,7 +41,7 @@ class LogIn extends React.Component {
     }
 
     proceedToUserScreen = (userData) => {
-        sessionStorage.setItem('maRSiCnemAPojmAhehehe', userData[0]._id.$oid);
+        this.context.depositUserKey(userData[0].username)
         this.setState({
             goToUserScreen: "nekAReNDOMSifraOdBAsdostAkarakTERA"
         })
@@ -84,7 +83,7 @@ class LogIn extends React.Component {
                 </div>
                 <h6 className={`${this.state.badUsernameOrPassword ? "d-block" : "d-none"}`}>
                     If you forgot your user name or password, send us an email and we'll help... We are good guys :-) <br/>
-                    But you need to send it from email address you used during registration <br/>
+                    But you need to send it from email address you used for registration <br/>
                 </h6>
                 <button onClick={this.sendLogIn} type="submit" className="w-100 btn btn-outline-secondary">Log In</button>
             </section>
