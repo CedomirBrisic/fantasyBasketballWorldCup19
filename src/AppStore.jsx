@@ -9,18 +9,53 @@ export default class AppStore extends Component {
         dropdowns: null,
         fantasyUsers: null,
 
-        showSelectDayDashboard: false,
+        showSelectDayDashboard: true,
         showSelectTeamDashboard: false,
 
         selectedDay: null,
         selectedTeam: "all-eligible-teams",
         nowDateAndTime: humanReadDateAndTime(),
 
-        selectedPlayerForPlayerCardModal:null,
-        showPlayerCardModal:false,
+        selectedPlayerForPlayerCardModal: null,
+        showPlayerCardModal: false,
+
+        choosePlayerPosition: null,
+        showSelectPlayer: false,
+        showTeam: true,
+        teamPickData: {
+            Player1Id: null,
+            Player2Id: null,
+            Player3Id: null,
+            Player4Id: null,
+            Player5Id: null,
+            Player6Id: null,
+            Player7Id: null,
+        },
 
         isInitialLoading: true,
+    }
 
+    resetTeamPicks = () => {
+        this.setState({
+            teamPickData: {
+                Player1Id: null,
+                Player2Id: null,
+                Player3Id: null,
+                Player4Id: null,
+                Player5Id: null,
+                Player6Id: null,
+                Player7Id: null,
+            },
+        })
+    }
+    choosePlayerForTeam = (position) => {
+        this.setState({
+            choosePlayerPosition: position,
+            showTeam: false,
+            showSelectPlayer: true,
+            showSelectDayDashboard: false,
+            showSelectTeamDashboard: true
+        })
     }
 
     changeSelectedDay = (data) => {
@@ -28,6 +63,7 @@ export default class AppStore extends Component {
             selectedDay: data,
             selectedTeam: "all-eligible-teams"
         })
+        this.resetTeamPicks()
     }
     changeSelectedTeam = (data) => {
         this.setState({
@@ -52,9 +88,44 @@ export default class AppStore extends Component {
             showSelectDayDashboard: !this.state.showSelectDayDashboard,
         })
     }
-    toggleShowSelectTeamDashboard = () => {
+    goBackToTeamView = () => {
         this.setState({
-            showSelectTeamDashboard: !this.state.showSelectTeamDashboard,
+            choosePlayerPosition: null,
+            showTeam: true,
+            showSelectPlayer: false,
+            showSelectDayDashboard: true,
+            showSelectTeamDashboard: false
+        })
+    }
+    pickPlayerForTeam = (inputPlayerPosition, playerId) => {
+        let playerPosition = inputPlayerPosition.split(" ").join("") + "Id"
+        this.setState(prevState => ({
+            teamPickData: {
+                ...prevState.teamPickData,
+                [playerPosition]: playerId
+            }
+        }))
+        this.goBackToTeamView()
+        this.closeSinglePlayerModal()
+    }
+
+    showSinglePlayerModal = (event) => {
+        const playerName = event.target.getAttribute("data-player-name")
+        const playerTeam = event.target.getAttribute("data-player-team")
+        const selectedPlayer = this.state.basketballPlayers.filter((player) => {
+            if (player.name === playerName && player.team === playerTeam) {
+                return player
+            }
+        })
+        this.setState({
+            selectedPlayerForPlayerCardModal: selectedPlayer[0],
+            showPlayerCardModal: true
+        })
+    }
+    closeSinglePlayerModal = () => {
+        this.setState({
+            selectedPlayerForPlayerCardModal: null,
+            showPlayerCardModal: false
         })
     }
     // componentDidMount() {
@@ -70,37 +141,19 @@ export default class AppStore extends Component {
     //     });
     // }
 
-    showSinglePlayerModal = (event) => {
-        const playerName = event.target.getAttribute("data-player-name")
-        const playerTeam = event.target.getAttribute("data-player-team")
-        const selectedPlayer = this.state.basketballPlayers.filter((player) =>{
-            if (player.name === playerName && player.team === playerTeam){
-                return player
-            }
-        })
-        this.setState({
-            selectedPlayerForPlayerCardModal:selectedPlayer[0],
-            showPlayerCardModal: true
-        })
-    }
-    closeSinglePlayerModal = () => {
-        this.setState({
-            selectedPlayerForPlayerCardModal:null,
-            showPlayerCardModal: false
-        })
-    }
-
     render() {
         return (
             <AppContext.Provider value={{
                 ...this.state,
                 getFantasyDataContext: this.getFantasyDataContext,
                 toggleShowSelectDayDashboard: this.toggleShowSelectDayDashboard,
-                toggleShowSelectTeamDashboard: this.toggleShowSelectTeamDashboard,
+                goBackToTeamView: this.goBackToTeamView,
                 changeSelectedDay: this.changeSelectedDay,
                 changeSelectedTeam: this.changeSelectedTeam,
-                showSinglePlayerModal:this.showSinglePlayerModal,
-                closeSinglePlayerModal: this.closeSinglePlayerModal
+                showSinglePlayerModal: this.showSinglePlayerModal,
+                closeSinglePlayerModal: this.closeSinglePlayerModal,
+                choosePlayerForTeam: this.choosePlayerForTeam,
+                pickPlayerForTeam: this.pickPlayerForTeam
             }}>
 
                 {this.props.children}

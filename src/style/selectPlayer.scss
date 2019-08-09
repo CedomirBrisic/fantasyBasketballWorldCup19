@@ -9,7 +9,9 @@
     .select-player-label-wrapper {
         margin-bottom: 0.5vw;
         padding-top: 0.5vw;
-
+        padding-bottom: 0.5vw;
+        padding-left: 0.5vw;
+        background-color: rgba(0, 0, 0, 0.79);
         .btn {
             font-size: 1vw;
             padding: 0.2vw 1vw;
@@ -35,7 +37,7 @@
 
     .players-table-container {
         width: 99%;
-
+        background-color: rgba(0, 0, 0, 0.79);
         table {
             width: 100%;
 

@@ -1,0 +1,173 @@
+.show-players-on-field-container {
+    width: 100%;
+    height: 100%;
+    padding: 0.5vw 0.5vw 0.5vw 0;
+
+    .screen-title {
+        color: #ffffff;
+        font-size: 1vw;
+        background-color: rgba(0, 0, 0, 0.79);
+        padding: 0.5vw 1vw;
+        margin-bottom: 0.2vw;
+    }
+
+    .picked-players-container {
+        position: relative;
+        height: 80%;
+        padding-top: 0.5vw;
+        padding-bottom: 10vw;
+        background-color: rgba(0, 0, 0, 0.79);
+
+        .three-players-container {
+            height: 12vw;
+        }
+
+        .two-players-container {
+            margin: 0 auto;
+            width: 75%;
+            height: 12vw;
+        }
+
+        .first-five-player-wrapper {
+            height: 12vw;
+            width: 8vw;
+
+            &:nth-of-type(1) {
+                // background-image: url("../images/basketballPlayers/1.svg");
+            }
+
+            &:nth-of-type(2) {
+                // background-color: #ffffff;
+            }
+
+            &:nth-of-type(3) {
+                // background-color: #ffffff;
+            }
+
+
+            .not-selected-player {
+                width: 100%;
+
+                img {
+                    // width: 12vw;
+                    height: 12vw;
+                    filter: drop-shadow(16px 16px 20px red) invert(75%);
+                }
+
+                .pick-player-title {
+                    font-size: 1vw;
+                    transition: transform 0.2s;
+                    color: rgba(255, 255, 255, 0.79);
+                    position: relative;
+                    // bottom: 4vw;
+                    left: 1vw;
+                }
+
+                &:hover img {
+                    cursor: pointer;
+                    filter: drop-shadow(16px 16px 20px green) invert(75%);
+                }
+
+                &:hover .pick-player-title {
+                    transform: scale(1.2)
+                }
+            }
+        }
+
+        .bench-players-container {
+            position: absolute;
+            bottom: 0.5vw;
+            left: 0;
+            height: 10vw;
+            width: 100%;
+            padding-right: 0.5vw;
+
+            .bench-player-wrapper {
+                margin-right: 1vw;
+                height: 100%;
+                width: 7.5vw;
+
+                .not-selected-player-b-1 {
+                    position: relative;
+                    bottom: 1vw;
+
+                    img {
+                        width: 5vw;
+                        margin-left: 1vw;
+                        filter: drop-shadow(16px 16px 20px red) invert(75%);
+                    }
+
+                    .pick-player-title {
+                        font-size: 1vw;
+                        color: rgba(255, 255, 255, 0.79);
+                        position: relative;
+                        // bottom: 1vw;
+                        left: 1vw;
+                    }
+
+                    &:hover img {
+                        cursor: pointer;
+                        filter: drop-shadow(16px 16px 20px green) invert(75%);
+                    }
+
+                }
+
+
+                .not-selected-player-b-2 {
+                    position: relative;
+                    top: 2vw;
+
+                    img {
+                        filter: drop-shadow(16px 16px 20px red) invert(75%);
+                    }
+
+                    .pick-player-title {
+                        font-size: 1vw;
+                        color: rgba(255, 255, 255, 0.79);
+                        position: relative;
+                        bottom: -0.25vw;
+                        left: 1vw;
+                    }
+
+                    &:hover img {
+                        cursor: pointer;
+                        filter: drop-shadow(16px 16px 20px green) invert(75%);
+                    }
+                }
+
+
+            }
+
+            .btn {
+                font-size: 1vw;
+                padding: 0 1vw;
+                height: 20%;
+            }
+        }
+    }
+
+
+
+
+
+    .points-container {
+        color: #ffffff;
+        font-size: 0.79vw;
+        background-color: rgba(0, 0, 0, 0.79);
+        margin-top: 0.5vw;
+
+        th {
+            color: #000000;
+            text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+            font-size: 0.79vw;
+            border-bottom: 1px solid #ffffff;
+            height: 2vw;
+            background-color: rgba(255, 255, 255, 0.79);
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+        }
+    }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { AppContext } from '../screens/_context/AppContext';
 import Header from './common/Header';
 import DashboardSelectDay from './common/DashboardSelectDay';
-import ShowPlayersOnField from './common/ShowPlayersOnField';
+import PlayersOnField from './common/PlayersOnField';
 import SelectPlayer from './common/SelectPlayer';
 import DashboardSelectTeam from './common/DashboardSelectTeam';
 
@@ -18,16 +18,16 @@ class UserScreen extends React.Component {
     toggleShowSelectDayDashboard = () => {
         this.context.toggleShowSelectDayDashboard()
     }
-    toggleShowSelectTeamDashboard = () => {
-        this.context.toggleShowSelectTeamDashboard()
+    goBackToTeamView = () => {
+        this.context.goBackToTeamView()
     }
 
     checkMainContainerWidth = () => {
-        if (!this.context.showSelectDayDashboard && !this.context.showSelectTeamDashboard){
+        if (!this.context.showSelectDayDashboard && !this.context.showSelectTeamDashboard) {
             return "dashboard-none"
         } else if ((this.context.showSelectDayDashboard && !this.context.showSelectTeamDashboard) ||
-                    (!this.context.showSelectDayDashboard && this.context.showSelectTeamDashboard)) {
-                        return "dashboard-one"
+            (!this.context.showSelectDayDashboard && this.context.showSelectTeamDashboard)) {
+            return "dashboard-one"
         } else {
             return "dashboard-two"
         }
@@ -43,15 +43,15 @@ class UserScreen extends React.Component {
                         <div className="d-flex justify-content-between">
                             <DashboardSelectDay />
                             <div className={`main-screen-container ${this.checkMainContainerWidth()}`}>
-                                {/* <ShowPlayersOnField /> */}
+                                {this.context.showTeam && <PlayersOnField />}
                                 {/* vs */}
-                                <SelectPlayer />
+                                {this.context.showSelectPlayer && <SelectPlayer />}
                             </div>
                             <DashboardSelectTeam />
                         </div>
-                        <div className="user-screen-dashboard-select-day-wrapper d-flex justify-content-between align-items-center">
-                            <div className="select-round-button" onClick={this.toggleShowSelectDayDashboard}>{this.context.showSelectDayDashboard ? "close Select Round options" : "open Select Round options"}</div>
-                            <div className="select-round-button" onClick={this.toggleShowSelectTeamDashboard}>{this.context.showSelectTeamDashboard ? "close Select Players options" : "open Select Players options"}</div>
+                        <div className="user-screen-dashboard-select-day-wrapper">
+                            {!this.context.showSelectPlayer && <div className="select-round-button" onClick={this.toggleShowSelectDayDashboard}>{this.context.showSelectDayDashboard ? "close Round-picker" : "open Round-picker"}</div>}
+                            {this.context.showSelectPlayer && <div className="select-round-button" onClick={this.goBackToTeamView}>{`close ${this.context.choosePlayerPosition} pick options`}</div>}
                         </div>
                     </div>
                 }

@@ -20,7 +20,6 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
 
 
     let calculatedSummaSummarum = null
-    let calculatedGrandFantasyTotal = null
 
 
     ////////////////////////////////////////////////////////////////////////
@@ -119,14 +118,14 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
             calulatedFreeThrows3Miss = `-${freeThrowsAttempts-2}`
             calculatedSummaSummarum -= (freeThrowsAttempts - 2)
         } else {
-            calulatedFreeThrows3Miss = "n/a"
+            calulatedFreeThrows3Miss = "-"
         }
         ////  ////  ////  ////  ////  ////  ////  ////--- BONUS  ---////  ////  ////  ////  ////  ////  ////  ////  ////  ////
         if (freeThrowPercentage === 1 && freeThrowsAttempts > 2) {
             calulatedFreePoints3ScoredWithoutMiss = `+${(freeThrowsAttempts*0.25).toFixed(2)}`
             calculatedSummaSummarum += (freeThrowsAttempts * 0.25)
         } else {
-            calulatedFreePoints3ScoredWithoutMiss = "n/a"
+            calulatedFreePoints3ScoredWithoutMiss = "-"
         }
     }
 
@@ -164,14 +163,14 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
             calulatedTwoPoints3Miss = `-${twoPointsAttempts-1}`
             calculatedSummaSummarum -= (twoPointsAttempts - 1)
         } else {
-            calulatedTwoPoints3Miss = "n/a"
+            calulatedTwoPoints3Miss = "-"
         }
         ////  ////  ////  ////  ////  ////  ////  ////--- BONUS  ---////  ////  ////  ////  ////  ////  ////  ////  ////  ////
         if (twoPointsPercentage === 1 && twoPointsAttempts > 2) {
             calulatedTwoPoints3ScoredWithoutMiss = `+${(twoPointsAttempts * 2 * 0.5).toFixed(2)}`
             calculatedSummaSummarum += (twoPointsAttempts * 2 * 0.5)
         } else {
-            calulatedTwoPoints3ScoredWithoutMiss = "n/a"
+            calulatedTwoPoints3ScoredWithoutMiss = "-"
         }
     }
 
@@ -210,14 +209,14 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
             calulatedThreePoints3Miss = `-${threePointsAttempts}`
             calculatedSummaSummarum -= (threePointsAttempts)
         } else {
-            calulatedThreePoints3Miss = "n/a"
+            calulatedThreePoints3Miss = "-"
         }
         ////  ////  ////  ////  ////  ////  ////  ////--- BONUS  ---////  ////  ////  ////  ////  ////  ////  ////  ////  ////
         if (threePointsPercentage === 1 && threePointsAttempts > 2) {
             calulatedThreePoints3ScoredWithoutMiss = `+${(threePointsAttempts * 3).toFixed(2)}`
             calculatedSummaSummarum += (threePointsAttempts * 3)
         } else {
-            calulatedThreePoints3ScoredWithoutMiss = "n/a"
+            calulatedThreePoints3ScoredWithoutMiss = "-"
         }
     }
 

@@ -38,6 +38,10 @@ class PlayerCardModal extends React.Component {
             hoveredElement: ""
         })
     }
+    pickThisPlayerForTeam = (event) => {
+        const pickedPlayerId = event.target.getAttribute("data-picked-player-id")
+        this.context.pickPlayerForTeam(this.context.choosePlayerPosition, pickedPlayerId)
+    }
 
     componentDidMount() {
         this.depositTdFantasyPoints(this.context.selectedPlayerForPlayerCardModal, this.state.selectedDay)
@@ -317,11 +321,11 @@ class PlayerCardModal extends React.Component {
                                 {calculateBasketballPlayerTDFantasyGrandTotalPoints(this.context.selectedPlayerForPlayerCardModal).toFixed(2)} Points
                         </div>
                         </div>
-                        <button type="button" className="btn btn-success">I want this guy in my team for {this.context.selectedDay}</button>
+                        <button type="button" className="btn btn-success" data-picked-player-id={`${this.context.selectedPlayerForPlayerCardModal._id.$oid}`} onClick={this.pickThisPlayerForTeam}>I want this guy in my team for {this.context.selectedDay}</button>
                     </div>
                     <span className="rounding-notification">
                         *Due to rounding Grand Total can differentiate for decimal or two
-                            </span>
+                    </span>
                 </div>
             </Modal>
         )

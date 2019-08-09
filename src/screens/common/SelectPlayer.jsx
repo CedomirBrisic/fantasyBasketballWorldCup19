@@ -24,6 +24,17 @@ class SelectPlayer extends React.Component {
         const eligibleTeams = this.context.dropdowns[0].teamsByDay
         const outputPlayers = []
 
+        //DON'T SHOW ALREADY SELECTED PLAYERS//
+        const posiblePositions = ["Player1Id", "Player2Id", "Player3Id", "Player4Id", "Player5Id", "Player6Id", "Player7Id"]
+        const selectedPlayersIds = []
+        posiblePositions.forEach((playerPosition) => {
+            if (this.context.teamPickData[playerPosition] !== null) {
+                selectedPlayersIds.push(this.context.teamPickData[playerPosition])
+            }
+        })
+
+
+
         if (selectedTeam === "all-eligible-teams" && eligibleDays.indexOf(selectedDay) !== -1) {
             if (Array.isArray(eligibleTeams[selectedDay])) {
                 eligibleTeams[selectedDay].forEach((team) => {
@@ -106,7 +117,12 @@ class SelectPlayer extends React.Component {
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${(fieldGoalsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (fieldGoalsScoredSum / gamesPlayed).toFixed(2)}/${(fieldGoalsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (fieldGoalsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${(threePointsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (threePointsScoredSum / gamesPlayed).toFixed(2)}/${(threePointsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (threePointsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
                                     </tr>
-                                outputPlayers.push(outputPlayer)
+
+
+                                const indx = selectedPlayersIds.indexOf(player._id.$oid)
+                                if (indx === -1) {
+                                    outputPlayers.push(outputPlayer)
+                                }
                             }
                         })
                     }
@@ -159,10 +175,17 @@ class SelectPlayer extends React.Component {
                             <td data-player-name={player.name} data-player-team={player.team}>{`${(fieldGoalsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (fieldGoalsScoredSum / gamesPlayed).toFixed(2)}/${(fieldGoalsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (fieldGoalsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
                             <td data-player-name={player.name} data-player-team={player.team}>{`${(threePointsScoredSum / gamesPlayed).toFixed(2) === "NaN" ? "n" : (threePointsScoredSum / gamesPlayed).toFixed(2)}/${(threePointsAttemptsSum / gamesPlayed).toFixed(2) === "NaN" ? "a" : (threePointsAttemptsSum / gamesPlayed).toFixed(2)}`}</td>
                         </tr>
+
+
+                    const indx = selectedPlayersIds.indexOf(player._id.$oid)
+                    if (indx === -1) {
+                        outputPlayers.push(outputPlayer)
+                    }
                     outputPlayers.push(outputPlayer)
                 }
             })
         }
+
         return outputPlayers
     }
     render() {
