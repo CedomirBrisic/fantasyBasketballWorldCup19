@@ -1,5 +1,7 @@
 import React from 'react';
 import { AppContext } from '../_context/AppContext';
+import calculateBasketballPlayerTDFantasyPoints from "../../services/calculateBasketballPlayerTDFantasyPoints";
+import putTeamPickForDay from "../../webhooks/putTeamPickForDay";
 
 class PlayersOnField extends React.Component {
     static contextType = AppContext;
@@ -10,13 +12,18 @@ class PlayersOnField extends React.Component {
         this.context.choosePlayerForTeam(playerPosition)
     }
 
+    calculatePlayerRoundPoints = (inputPlayerData) => {
+        const calculatedPlayerData = calculateBasketballPlayerTDFantasyPoints(inputPlayerData, this.context.selectedDay)
+        return calculatedPlayerData.summaSummarum
+    }
     mapPlayer1OnField = () => {
         if (this.context.teamPickData.Player1Id !== null) {
             const playerId = this.context.teamPickData.Player1Id
             const playerData = this.context.basketballPlayers.filter((player) => playerId === player._id.$oid)
-            return <div key={playerData[0].shirtNumber + playerData[0].team} className="first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center">
-                <div className="shirt-number">
-                    {`# ${playerData[0].shirtNumber}`}
+            return <div key={playerData[0].shirtNumber + playerData[0].team} className={`first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`}>
+                <div className="shirt-number d-flex">
+                    {this.calculatePlayerRoundPoints(playerData[0])}
+                    <span className="pt">pt</span>
                 </div>
                 <div className="player-name">
                     {playerData[0].name}
@@ -29,6 +36,7 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
+                <button type="button" className="btn btn-outline-dark change-player">Change player</button>
             </div>
         }
     }
@@ -37,9 +45,10 @@ class PlayersOnField extends React.Component {
         if (this.context.teamPickData.Player2Id !== null) {
             const playerId = this.context.teamPickData.Player2Id
             const playerData = this.context.basketballPlayers.filter((player) => playerId === player._id.$oid)
-            return <div key={playerData[0].shirtNumber + playerData[0].team} className="first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center">
-                <div className="shirt-number">
-                    {`# ${playerData[0].shirtNumber}`}
+            return <div key={playerData[0].shirtNumber + playerData[0].team} className={`first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`}>
+                <div className="shirt-number d-flex">
+                    {this.calculatePlayerRoundPoints(playerData[0])}
+                    <span className="pt">pt</span>
                 </div>
                 <div className="player-name">
                     {playerData[0].name}
@@ -52,6 +61,7 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
+                <button type="button" className="btn btn-outline-dark change-player">Change player</button>
             </div>
         }
     }
@@ -60,9 +70,10 @@ class PlayersOnField extends React.Component {
         if (this.context.teamPickData.Player3Id !== null) {
             const playerId = this.context.teamPickData.Player3Id
             const playerData = this.context.basketballPlayers.filter((player) => playerId === player._id.$oid)
-            return <div key={playerData[0].shirtNumber + playerData[0].team} className="first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center">
-                <div className="shirt-number">
-                    {`# ${playerData[0].shirtNumber}`}
+            return <div key={playerData[0].shirtNumber + playerData[0].team} className={`first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`}>
+                <div className="shirt-number d-flex">
+                    {this.calculatePlayerRoundPoints(playerData[0])}
+                    <span className="pt">pt</span>
                 </div>
                 <div className="player-name">
                     {playerData[0].name}
@@ -75,6 +86,7 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
+                <button type="button" className="btn btn-outline-dark change-player">Change player</button>
             </div>
         }
     }
@@ -83,9 +95,10 @@ class PlayersOnField extends React.Component {
         if (this.context.teamPickData.Player4Id !== null) {
             const playerId = this.context.teamPickData.Player4Id
             const playerData = this.context.basketballPlayers.filter((player) => playerId === player._id.$oid)
-            return <div key={playerData[0].shirtNumber + playerData[0].team} className="first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center">
-                <div className="shirt-number">
-                    {`# ${playerData[0].shirtNumber}`}
+            return <div key={playerData[0].shirtNumber + playerData[0].team} className={`first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`}>
+                <div className="shirt-number d-flex">
+                    {this.calculatePlayerRoundPoints(playerData[0])}
+                    <span className="pt">pt</span>
                 </div>
                 <div className="player-name">
                     {playerData[0].name}
@@ -98,6 +111,7 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
+                <button type="button" className="btn btn-outline-dark change-player">Change player</button>
             </div>
         }
     }
@@ -106,9 +120,10 @@ class PlayersOnField extends React.Component {
         if (this.context.teamPickData.Player5Id !== null) {
             const playerId = this.context.teamPickData.Player5Id
             const playerData = this.context.basketballPlayers.filter((player) => playerId === player._id.$oid)
-            return <div key={playerData[0].shirtNumber + playerData[0].team} className="first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center">
-                <div className="shirt-number">
-                    {`# ${playerData[0].shirtNumber}`}
+            return <div key={playerData[0].shirtNumber + playerData[0].team} className={`first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`}>
+                <div className="shirt-number d-flex">
+                    {this.calculatePlayerRoundPoints(playerData[0])}
+                    <span className="pt">pt</span>
                 </div>
                 <div className="player-name">
                     {playerData[0].name}
@@ -121,6 +136,7 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
+                <button type="button" className="btn btn-outline-dark change-player">Change player</button>
             </div>
         }
     }
@@ -129,9 +145,10 @@ class PlayersOnField extends React.Component {
         if (this.context.teamPickData.Player6Id !== null) {
             const playerId = this.context.teamPickData.Player6Id
             const playerData = this.context.basketballPlayers.filter((player) => playerId === player._id.$oid)
-            return <div key={playerData[0].shirtNumber + playerData[0].team} className="bench-player-wrapper-selected d-flex flex-column justify-content-between align-items-center">
-                <div className="shirt-number">
-                    {`# ${playerData[0].shirtNumber}`}
+            return <div key={playerData[0].shirtNumber + playerData[0].team} className={`bench-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`}>
+                <div className="shirt-number d-flex">
+                    {this.calculatePlayerRoundPoints(playerData[0])}
+                    <span className="pt">pt</span>
                 </div>
                 <div className="player-name">
                     {playerData[0].name}
@@ -144,6 +161,7 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
+                <button type="button" className="btn btn-outline-dark change-player">Change player</button>
             </div>
         }
     }
@@ -152,9 +170,10 @@ class PlayersOnField extends React.Component {
         if (this.context.teamPickData.Player7Id !== null) {
             const playerId = this.context.teamPickData.Player7Id
             const playerData = this.context.basketballPlayers.filter((player) => playerId === player._id.$oid)
-            return <div key={playerData[0].shirtNumber + playerData[0].team} className="bench-player-wrapper-selected d-flex flex-column justify-content-between align-items-center">
-                <div className="shirt-number">
-                    {`# ${playerData[0].shirtNumber}`}
+            return <div key={playerData[0].shirtNumber + playerData[0].team} className={`bench-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`}>
+                <div className="shirt-number d-flex">
+                    {this.calculatePlayerRoundPoints(playerData[0])}
+                    <span className="pt">pt</span>
                 </div>
                 <div className="player-name">
                     {playerData[0].name}
@@ -167,8 +186,20 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
+                <button type="button" className="btn btn-outline-dark change-player">Change player</button>
             </div>
         }
+    }
+
+    sendTeamPick = () => {
+        const data = {
+            username: this.context.bitrulez,
+            selectedDay: this.context.selectedDay,
+            teamPickData: this.context.teamPickData,
+        }
+        putTeamPickForDay(data,"opETBasNekaDugaCkaSIfraOdmnogOKARAkterAMalaIVelikaSlovaSve").then((response) => {
+            console.log(response)
+        })
     }
 
     checkItsReadyButton = () => {
@@ -176,16 +207,16 @@ class PlayersOnField extends React.Component {
         const pickPlayerPosition = ["Player1Id", "Player2Id", "Player3Id", "Player4Id", "Player5Id", "Player6Id", "Player7Id"]
         let pickCounter = 0
         pickPlayerPosition.forEach((pickPlayer) => {
-            if (teamPickData[pickPlayer] !== null){
+            if (teamPickData[pickPlayer] !== null) {
                 pickCounter++
             }
         })
-        if (pickCounter === 7){
-            return <button type="button" className="btn btn-success align-self-end">That's it! I'm ready to go</button>
+        if (pickCounter === 7) {
+            return <button type="button" className="btn btn-success align-self-end" onClick={this.sendTeamPick}>That's it! I'm ready to go</button>
         } else {
             return <button type="button" className="btn btn-success align-self-end" disabled>That's it! I'm ready to go</button>
         }
-        
+
     }
     render() {
         return (

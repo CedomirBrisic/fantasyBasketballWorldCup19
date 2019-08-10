@@ -76,18 +76,7 @@ export default class AppStore extends Component {
         this.setState({
             bitrulez: data
         })
-        let data2 = ""
-        const qwerty = ["qwe","#r4fwf","FWwef","wef3r","Frbb3","afV","wefV","Vbevg","wfwv","vsvF","sdfv1","bit"]
-        let counter = 0;
-        for (let i = 0; i < data.length; i++){
-            data2+=data[i]+qwerty[counter]
-            if(counter === 12){
-                counter = 0
-            } else {
-                counter++
-            }
-        }
-        sessionStorage.setItem("bitrulez", data2)
+        sessionStorage.setItem("bitrulez", data)
     }
 
     getFantasyDataContext = () => {
@@ -149,17 +138,9 @@ export default class AppStore extends Component {
         })
     }
     componentDidMount() {
-        const qwerty = ["qwe","#r4fwf","FWwef","wef3r","Frbb3","afV","wefV","Vbevg","wfwv","vsvF","sdfv1","bit"]
         let data = sessionStorage.getItem("bitrulez")
-        let data2=""
-        if(data !== null){
-            qwerty.forEach((qwe,index) => {
-                const xxx = data.split(qwe)
-                data2 = xxx
-            })
-        }
         this.setState({
-            bitrulez: data2
+            bitrulez: data
         })
         // this.interval = setInterval(
         //     () => this.clocify(),
