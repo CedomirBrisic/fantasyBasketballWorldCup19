@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppContext } from "./screens/_context/AppContext";
 import getFantasyData from "./webhooks/getFantasyData";
 import humanReadDateAndTime from "./services/humanReadDateAndTime";
+import checkEligibilityToPickTeam from "./services/checkEligibilityToPickTeam";
 
 export default class AppStore extends Component {
     state = {
@@ -31,10 +32,17 @@ export default class AppStore extends Component {
             Player5Id: null,
             Player6Id: null,
             Player7Id: null,
-            isLocked: false
         },
+        teamPickDataIsSubmitted: false,
+        teamPickIsLocked: false,
 
         isInitialLoading: true,
+    }
+    teamPickIsSubmitted = () => {
+        this.setState({
+            teamPickDataIsSubmitted: true,
+        })
+        window.location.reload();
     }
 
     resetTeamPicks = () => {
@@ -154,6 +162,91 @@ export default class AppStore extends Component {
     //     });
     // }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.teamPickData !== this.state.teamPickData) {
+            const userData = this.state.fantasyUsers.filter((user) => {
+                if (user.username === this.state.bitrulez) {
+                    return user
+                }
+            })
+            const teamPickData = {
+                Player1Id: userData[0][this.state.selectedDay].Player1Id,
+                Player2Id: userData[0][this.state.selectedDay].Player2Id,
+                Player3Id: userData[0][this.state.selectedDay].Player3Id,
+                Player4Id: userData[0][this.state.selectedDay].Player4Id,
+                Player5Id: userData[0][this.state.selectedDay].Player5Id,
+                Player6Id: userData[0][this.state.selectedDay].Player6Id,
+                Player7Id: userData[0][this.state.selectedDay].Player7Id,
+            }
+            let allPlayersArePickedCounter = 0
+            const teamPickPlayersIds = ["Player1Id", "Player2Id", "Player3Id", "Player4Id", "Player5Id", "Player6Id", "Player7Id"]
+            teamPickPlayersIds.forEach((plyerId) => {
+                if (teamPickData[plyerId] !== null) {
+                    allPlayersArePickedCounter++
+                }
+            })
+            if (allPlayersArePickedCounter !== 7) {
+                this.setState({
+                    teamPickIsLocked: false,
+                    teamPickDataIsSubmitted: false
+                })
+            }
+        }
+
+
+
+        if (prevState.selectedDay !== this.state.selectedDay && this.state.showTeam) {
+            const userData = this.state.fantasyUsers.filter((user) => {
+                if (user.username === this.state.bitrulez) {
+                    return user
+                }
+            })
+            const teamPickData = {
+                Player1Id: userData[0][this.state.selectedDay].Player1Id,
+                Player2Id: userData[0][this.state.selectedDay].Player2Id,
+                Player3Id: userData[0][this.state.selectedDay].Player3Id,
+                Player4Id: userData[0][this.state.selectedDay].Player4Id,
+                Player5Id: userData[0][this.state.selectedDay].Player5Id,
+                Player6Id: userData[0][this.state.selectedDay].Player6Id,
+                Player7Id: userData[0][this.state.selectedDay].Player7Id,
+            }
+            let allPlayersArePickedCounter = 0
+            const teamPickPlayersIds = ["Player1Id", "Player2Id", "Player3Id", "Player4Id", "Player5Id", "Player6Id", "Player7Id"]
+            teamPickPlayersIds.forEach((plyerId) => {
+                if (teamPickData[plyerId] !== null) {
+                    allPlayersArePickedCounter++
+                }
+            })
+            const selectedDayFirstMatch = this.state.selectedDay + "--first-match"
+            const selectedDayFirstMatchTime = this.state.dropdowns[0].teamsByDay[selectedDayFirstMatch]
+            const nowHour = this.state.nowDateAndTime.humanTime.split(":")[0]
+            const nowMinutes = this.state.nowDateAndTime.humanTime.split(":")[1]
+            const firstMatchHour = selectedDayFirstMatchTime.split(":")[0]
+            const firstMatchMinutes = selectedDayFirstMatchTime.split(":")[1]
+            if (allPlayersArePickedCounter === 7) {
+
+                if (nowHour < firstMatchHour) {
+                    this.setState({
+                        teamPickData,
+                        teamPickIsLocked: true,
+                        teamPickDataIsSubmitted: true
+                    })
+
+                } else if (nowHour === firstMatchHour && nowMinutes < firstMatchMinutes) {
+                    this.setState({
+                        teamPickData,
+                        teamPickIsLocked: true,
+                        teamPickDataIsSubmitted: true
+                    })
+                } else {
+                    this.setState({
+                        teamPickData,
+                    })
+                }
+            }
+        }
+    }
+
     render() {
         return (
             <AppContext.Provider value={{
@@ -167,7 +260,8 @@ export default class AppStore extends Component {
                 closeSinglePlayerModal: this.closeSinglePlayerModal,
                 choosePlayerForTeam: this.choosePlayerForTeam,
                 pickPlayerForTeam: this.pickPlayerForTeam,
-                depositUserKey:this.depositUserKey,
+                depositUserKey: this.depositUserKey,
+                teamPickIsSubmitted: this.teamPickIsSubmitted,
             }}>
 
                 {this.props.children}
