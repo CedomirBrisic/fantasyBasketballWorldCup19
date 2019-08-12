@@ -44,6 +44,7 @@ export default class AppStore extends Component {
             Player6Id: null,
             Player7Id: null,
         },
+        teamPickDayTotal:null,
 
         isInitialLoading: true,
     }

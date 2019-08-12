@@ -1,3 +1,6 @@
+import calculateBasketballPlayerTDFantasyPoints from "./calculateBasketballPlayerTDFantasyPoints";
+const possiblePlayerIds = ["Player1Id", "Player2Id", "Player3Id", "Player4Id", "Player5Id", "Player6Id", "Player7Id"]
+
 const checkEligibilityForPickTeam = (fantasyUsers, username, selectedDay, nowDateAndTime, teamsByDay, basketballPlayers) => {
     const userData = fantasyUsers.filter((user) => {
         if (user.username === username) {
@@ -15,6 +18,43 @@ const checkEligibilityForPickTeam = (fantasyUsers, username, selectedDay, nowDat
         isSubmitted: userData[0][selectedDay].isSubmitted,
     }
 
+    const teamPickDataByPoints = [{
+            playerObjectKey: "Player1Id",
+            id: userData[0][selectedDay].Player1Id,
+            summaSummarum: null
+        },
+        {
+            playerObjectKey: "Player2Id",
+            id: userData[0][selectedDay].Player2Id,
+            summaSummarum: null
+        },
+        {
+            playerObjectKey: "Player3Id",
+            id: userData[0][selectedDay].Player3Id,
+            summaSummarum: null
+        },
+        {
+            playerObjectKey: "Player4Id",
+            id: userData[0][selectedDay].Player4Id,
+            summaSummarum: null
+        },
+        {
+            playerObjectKey: "Player5Id",
+            id: userData[0][selectedDay].Player5Id,
+            summaSummarum: null
+        },
+        {
+            playerObjectKey: "Player6Id",
+            id: userData[0][selectedDay].Player6Id,
+            summaSummarum: null
+        },
+        {
+            playerObjectKey: "Player7Id",
+            id: userData[0][selectedDay].Player7Id,
+            summaSummarum: null
+        },
+    ]
+
     const teamPickLockData = {
         Player1Id: null,
         Player2Id: null,
@@ -24,15 +64,16 @@ const checkEligibilityForPickTeam = (fantasyUsers, username, selectedDay, nowDat
         Player6Id: null,
         Player7Id: null,
     }
-    const possiblePlayerIds = ["Player1Id", "Player2Id", "Player3Id", "Player4Id", "Player5Id", "Player6Id", "Player7Id"]
 
     if (teamPickData.isSubmitted) {
-        possiblePlayerIds.forEach((playerId) => {
+        possiblePlayerIds.forEach((playerId, index) => {
             const playerData = basketballPlayers.filter((player) => {
                 if (player._id.$oid === teamPickData[playerId]) {
                     return player
                 }
             })
+
+            teamPickDataByPoints[index].summaSummarum = parseFloat(calculateBasketballPlayerTDFantasyPoints(playerData[0], selectedDay).summaSummarum)
             const playerTeam = playerData[0].team
             const teamData = teamsByDay[selectedDay].filter((team) => {
                 if (team.name === playerTeam) {
@@ -78,12 +119,59 @@ const checkEligibilityForPickTeam = (fantasyUsers, username, selectedDay, nowDat
         })
     }
 
+    teamPickDataByPoints.sort(function (a, b) {
+        return b.summaSummarum - a.summaSummarum
+    })
+
+    
+    const teamPickDataByPointsIds = []
+    teamPickDataByPoints.forEach((player) => {
+        if (!!player.summaSummarum){
+            teamPickDataByPointsIds.push(player)
+        }
+    })
+    teamPickDataByPoints.forEach((player) => {
+        if (!player.summaSummarum){
+            teamPickDataByPointsIds.push(player)
+        }
+    })
+console.log(teamPickDataByPointsIds)
+
+    const outputTeamPickData = {
+        Player1Id: teamPickDataByPointsIds[0].id,
+        Player2Id: teamPickDataByPointsIds[1].id,
+        Player3Id: teamPickDataByPointsIds[2].id,
+        Player4Id: teamPickDataByPointsIds[3].id,
+        Player5Id: teamPickDataByPointsIds[4].id,
+        Player6Id: teamPickDataByPointsIds[5].id,
+        Player7Id: teamPickDataByPointsIds[6].id,
+        isSubmitted: teamPickData.isSubmitted,
+    }
+
+    const outputTeamPickLockData = {
+        Player1Id: teamPickLockData[teamPickDataByPointsIds[0].playerObjectKey],
+        Player2Id: teamPickLockData[teamPickDataByPointsIds[1].playerObjectKey],
+        Player3Id: teamPickLockData[teamPickDataByPointsIds[2].playerObjectKey],
+        Player4Id: teamPickLockData[teamPickDataByPointsIds[3].playerObjectKey],
+        Player5Id: teamPickLockData[teamPickDataByPointsIds[4].playerObjectKey],
+        Player6Id: teamPickLockData[teamPickDataByPointsIds[5].playerObjectKey],
+        Player7Id: teamPickLockData[teamPickDataByPointsIds[6].playerObjectKey],
+    }
 
     const outputObject = {
-        teamPickData,
-        teamPickLockData
+        teamPickData: outputTeamPickData,
+        teamPickLockData: outputTeamPickLockData
+        // teamPickData,
+        // teamPickLockData
     }
+    // console.log(outputTeamPickData, outputTeamPickLockData)
     return outputObject
 }
 
 export default checkEligibilityForPickTeam;
+
+// items.sort(function (a, b) {
+//     return a.value - b.value;
+//   });
+
+// calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedDay) => {
