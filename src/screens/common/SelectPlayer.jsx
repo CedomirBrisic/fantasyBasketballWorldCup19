@@ -219,7 +219,7 @@ class SelectPlayer extends React.Component {
                             <div className="clockify-wrapper d-flex justify-content-between">
                                 <span>
                                     Zulu time:
-                        </span>
+                                </span>
                                 <span>
                                     {this.context.nowDateAndTime.humanDate}
                                 </span>

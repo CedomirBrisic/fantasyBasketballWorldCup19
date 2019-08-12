@@ -8,7 +8,7 @@ import TeamPickSuccessfullySubmited from "../modals/TeamPickSuccessfullySubmited
 class PlayersOnField extends React.Component {
     static contextType = AppContext;
     state = {
-        showTeamPickSuccessfullySubmited:false
+        showTeamPickSuccessfullySubmited: false
     }
 
     choosePlayer = (event) => {
@@ -40,8 +40,8 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
-                {!this.context.teamPickIsLocked &&
-                <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 1" onClick={this.choosePlayer}>Change player</button>
+                {!this.context.teamPickLockData.Player1Id &&
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 1" onClick={this.choosePlayer}>Change player</button>
                 }
             </div>
         }
@@ -67,8 +67,8 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
-                {!this.context.teamPickIsLocked &&
-                <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 2" onClick={this.choosePlayer}>Change player</button>
+                {!this.context.teamPickLockData.Player2Id &&
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 2" onClick={this.choosePlayer}>Change player</button>
                 }
             </div>
         }
@@ -94,8 +94,8 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
-                {!this.context.teamPickIsLocked &&
-                <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 3" onClick={this.choosePlayer}>Change player</button>
+                {!this.context.teamPickLockData.Player3Id &&
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 3" onClick={this.choosePlayer}>Change player</button>
                 }
             </div>
         }
@@ -121,8 +121,8 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
-                {!this.context.teamPickIsLocked &&
-                <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 4" onClick={this.choosePlayer}>Change player</button>
+                {!this.context.teamPickLockData.Player4Id &&
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 4" onClick={this.choosePlayer}>Change player</button>
                 }
             </div>
         }
@@ -148,8 +148,8 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
-                {!this.context.teamPickIsLocked &&
-                <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 5" onClick={this.choosePlayer}>Change player</button>
+                {!this.context.teamPickLockData.Player5Id &&
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 5" onClick={this.choosePlayer}>Change player</button>
                 }
             </div>
         }
@@ -175,8 +175,8 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
-                {!this.context.teamPickIsLocked &&
-                <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 6" onClick={this.choosePlayer}>Change player</button>
+                {!this.context.teamPickLockData.Player6Id &&
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 6" onClick={this.choosePlayer}>Change player</button>
                 }
             </div>
         }
@@ -202,22 +202,26 @@ class PlayersOnField extends React.Component {
                         {playerData[0].team}
                     </span>
                 </div>
-                {!this.context.teamPickIsLocked &&
-                <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 7" onClick={this.choosePlayer}>Change player</button>
+                {!this.context.teamPickLockData.Player7Id &&
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 7" onClick={this.choosePlayer}>Change player</button>
                 }
             </div>
         }
     }
 
     sendTeamPick = () => {
+        const teamPickData = {
+            ...this.context.teamPickData,
+            ["isSubmitted"]: true
+        }
         const data = {
             username: this.context.bitrulez,
             selectedDay: this.context.selectedDay,
-            teamPickData: this.context.teamPickData,
+            teamPickData,
         }
         putTeamPickForDay(data, "opETBasNekaDugaCkaSIfraOdmnogOKARAkterAMalaIVelikaSlovaSve").then((response) => {
             this.setState({
-                showTeamPickSuccessfullySubmited:true
+                showTeamPickSuccessfullySubmited: true
             })
         })
     }
@@ -231,7 +235,7 @@ class PlayersOnField extends React.Component {
                 pickCounter++
             }
         })
-        if(this.context.teamPickDataIsSubmitted){
+        if (this.context.teamPickData.isSubmitted) {
             return ""
         } else if (pickCounter === 7) {
             return <button type="button" className="btn btn-success align-self-end" onClick={this.sendTeamPick}>That's it! I'm ready to go</button>
@@ -242,7 +246,7 @@ class PlayersOnField extends React.Component {
 
     closeTeamPickSuccessfullySubmitedModal = () => {
         this.setState({
-            showTeamPickSuccessfullySubmited:false
+            showTeamPickSuccessfullySubmited: false
         })
         this.context.teamPickIsSubmitted()
     }
@@ -250,8 +254,19 @@ class PlayersOnField extends React.Component {
         return (
             <>
                 <div className="show-players-on-field-container d-flex flex-column justify-content-between">
-                    <div className="screen-title d-flex justify-content-center">
-                        <span>{this.context.bitrulez}'s Team for {this.context.selectedDay}</span>
+                    <div className="screen-title d-flex justify-content-between align-items-center">
+                        <div>{this.context.bitrulez}'s Team for {this.context.selectedDay}</div>
+                        <div className="clockify-wrapper d-flex justify-content-between">
+                            <span>
+                                Zulu time:
+                            </span>
+                            <span>
+                                {this.context.nowDateAndTime.humanDate}
+                            </span>
+                            <span>
+                                {this.context.nowDateAndTime.humanTime}
+                            </span>
+                        </div>
                     </div>
                     <section className="picked-players-container d-flex flex-column justify-content-between">
                         <div className="three-players-container d-flex justify-content-around">
@@ -414,7 +429,7 @@ class PlayersOnField extends React.Component {
                 </div>
                 {this.state.showTeamPickSuccessfullySubmited &&
                     <Portal>
-                        <TeamPickSuccessfullySubmited showTeamPickSuccessfullySubmited={this.state.showTeamPickSuccessfullySubmited} closeTeamPickSuccessfullySubmitedModal={this.closeTeamPickSuccessfullySubmitedModal}/>
+                        <TeamPickSuccessfullySubmited showTeamPickSuccessfullySubmited={this.state.showTeamPickSuccessfullySubmited} closeTeamPickSuccessfullySubmitedModal={this.closeTeamPickSuccessfullySubmitedModal} />
                     </Portal>
                 }
             </>

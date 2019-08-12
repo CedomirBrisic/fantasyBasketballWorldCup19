@@ -10,7 +10,6 @@ const putTeamPickForDay = (data, qwe) => {
         })
     }).then((response) => {
         const result = response.json()
-        console.log(response)
         if (response.ok) {
             return result
         } else {
