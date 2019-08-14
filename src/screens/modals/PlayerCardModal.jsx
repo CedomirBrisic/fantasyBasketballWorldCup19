@@ -296,9 +296,6 @@ class PlayerCardModal extends React.Component {
                                         </span>
                                     </div>
                                 </div>
-
-
-
                                 <div className="summa-summarum-fantasy-points d-flex justify-content-between">
                                     <span className="label">
                                         Summa Summarum:

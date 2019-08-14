@@ -8,7 +8,7 @@ class Rules extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            showRoundPointsCalc: true,
+            showRoundPointsCalc: false,
             showF1WCPointsCalc: false
         }
     }
