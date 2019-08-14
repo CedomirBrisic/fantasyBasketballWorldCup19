@@ -11,10 +11,11 @@ class F1WCPointsCalc extends React.Component {
     render() {
         return (
             <Modal className="f1wc-points-calc-modal" visible={this.props.showF1WCPointsCalc} onClickBackdrop={this.props.closeF1WCPointsCalcModal}>
+                    <div className="close" onClick={this.props.closeF1WCPointsCalcModal}>&times;</div>
                 <div className="f1wc-points-calc-modal-container">
                     <h3>F1WC is main cometition of TD Fantasy</h3>
                     <div className="label-wrapper">
-                        <p>At the end on every round, top 10 TD Fantasy players for that day are awarded with F1WC points.</p>
+                        <p>At the end of every round, top 10 TD Fantasy users for that day are awarded with F1WC points.</p>
                         <p>They are calculated on following way:</p>
                     </div>
                     <div className="d-flex justify-content-between align-items-center w-100 ">

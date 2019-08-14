@@ -22,7 +22,7 @@ class PlayersOnField extends React.Component {
         return calculatedPlayerData.summaSummarum
     }
 
-    
+
     mapPlayer1OnField = () => {
         if (this.context.teamPickData.Player1Id !== null) {
             const playerId = this.context.teamPickData.Player1Id
@@ -37,7 +37,7 @@ class PlayersOnField extends React.Component {
                 </div>
                 <div className="player-team-wrapper d-flex align-items-center" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     <span className="team-image-wrapper" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team}/>
+                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                         {playerData[0].team}
@@ -64,7 +64,7 @@ class PlayersOnField extends React.Component {
                 </div>
                 <div className="player-team-wrapper d-flex align-items-center" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     <span className="team-image-wrapper" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team}/>
+                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                         {playerData[0].team}
@@ -91,7 +91,7 @@ class PlayersOnField extends React.Component {
                 </div>
                 <div className="player-team-wrapper d-flex align-items-center" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     <span className="team-image-wrapper" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team}/>
+                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                         {playerData[0].team}
@@ -118,7 +118,7 @@ class PlayersOnField extends React.Component {
                 </div>
                 <div className="player-team-wrapper d-flex align-items-center" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     <span className="team-image-wrapper" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team}/>
+                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                         {playerData[0].team}
@@ -145,7 +145,7 @@ class PlayersOnField extends React.Component {
                 </div>
                 <div className="player-team-wrapper d-flex align-items-center" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     <span className="team-image-wrapper" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team}/>
+                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                         {playerData[0].team}
@@ -172,7 +172,7 @@ class PlayersOnField extends React.Component {
                 </div>
                 <div className="player-team-wrapper d-flex align-items-center" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     <span className="team-image-wrapper" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team}/>
+                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                         {playerData[0].team}
@@ -199,7 +199,7 @@ class PlayersOnField extends React.Component {
                 </div>
                 <div className="player-team-wrapper d-flex align-items-center" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     <span className="team-image-wrapper" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team}/>
+                        <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                         {playerData[0].team}
@@ -439,6 +439,9 @@ class PlayersOnField extends React.Component {
                         <PlayerCardModal />
                     </Portal>
                 }
+                <Portal>
+                    <TeamPickSuccessfullySubmited showTeamPickSuccessfullySubmited={this.state.showTeamPickSuccessfullySubmited} closeTeamPickSuccessfullySubmitedModal={this.closeTeamPickSuccessfullySubmitedModal} />
+                </Portal>
             </>
         )
     }

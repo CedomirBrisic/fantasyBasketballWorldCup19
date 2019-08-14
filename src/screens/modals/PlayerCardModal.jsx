@@ -213,7 +213,7 @@ class PlayerCardModal extends React.Component {
 
 
                                 <div>
-                                    <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "free-throws-wrapper" ? "isHovered" : ""}`} data-stats-element="free-throws-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "free-throws-wrapper" ? "isHovered" : ""}`} data-stats-element="free-throws-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement} data-toggle="tooltip" data-placement="top" title=" All free throw shots scored by player are multiplied by free throws shot percentage">
                                         <span className="label" data-stats-element="free-throws-wrapper">
                                             Free throws:
                                         </span>
@@ -221,7 +221,7 @@ class PlayerCardModal extends React.Component {
                                             {this.state.tdFantasyPoints.freeThrowsPoints}
                                         </span>
                                     </div>
-                                    <div className={`single-item-bonus-wrapper d-flex justify-content-between ${this.state.hoveredElement === "free-throws-wrapper" ? "isHovered" : ""}`} data-stats-element="free-throws-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <div className={`single-item-bonus-wrapper d-flex justify-content-between ${this.state.hoveredElement === "free-throws-wrapper" ? "isHovered" : ""}`} data-stats-element="free-throws-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement} data-toggle="tooltip" data-placement="top" title="When player shoots free throws without miss (but 3 or more shots !!!) he is rewarded with bonus - 25%">
                                         <span className="label" data-stats-element="free-throws-wrapper">
                                             Free throws - bonus:
                                         </span>
@@ -229,7 +229,7 @@ class PlayerCardModal extends React.Component {
                                             {this.state.tdFantasyPoints.freeThrowsPointsBonus}
                                         </span>
                                     </div>
-                                    <div className={`single-item-penalty-wrapper d-flex justify-content-between ${this.state.hoveredElement === "free-throws-wrapper" ? "isHovered" : ""}`} data-stats-element="free-throws-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <div className={`single-item-penalty-wrapper d-flex justify-content-between ${this.state.hoveredElement === "free-throws-wrapper" ? "isHovered" : ""}`} data-stats-element="free-throws-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement} data-toggle="tooltip" data-placement="top" title="When player shoots free throws without scoring (but 3 or more shots !!!) he is penalized with negative points (first three misses are -1pt and every next miss is -1pt)">
                                         <span className="label" data-stats-element="free-throws-wrapper">
                                             Free throws - penalty:
                                         </span>
@@ -242,7 +242,7 @@ class PlayerCardModal extends React.Component {
 
 
                                 <div>
-                                    <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "two-points-wrapper" ? "isHovered" : ""}`} data-stats-element="two-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "two-points-wrapper" ? "isHovered" : ""}`} data-stats-element="two-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement} data-toggle="tooltip" data-placement="top" title="All two point shots scored by player are multiplied by two points shot percentage">
                                         <span className="label" data-stats-element="two-points-wrapper">
                                             Two points:
                                     </span>
@@ -250,7 +250,7 @@ class PlayerCardModal extends React.Component {
                                             {this.state.tdFantasyPoints.twoPoints}
                                         </span>
                                     </div>
-                                    <div className={`single-item-bonus-wrapper d-flex justify-content-between ${this.state.hoveredElement === "two-points-wrapper" ? "isHovered" : ""}`} data-stats-element="two-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <div className={`single-item-bonus-wrapper d-flex justify-content-between ${this.state.hoveredElement === "two-points-wrapper" ? "isHovered" : ""}`} data-stats-element="two-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement} data-toggle="tooltip" data-placement="top" title="When player shoots two point shots without miss (but 3 or more shots !!!) he is rewarded with bonus - 50%">
                                         <span className="label" data-stats-element="two-points-wrapper">
                                             Two points - bonus:
                                     </span>
@@ -258,7 +258,7 @@ class PlayerCardModal extends React.Component {
                                             {this.state.tdFantasyPoints.twoPointsBonus}
                                         </span>
                                     </div>
-                                    <div className={`single-item-penalty-wrapper d-flex justify-content-between ${this.state.hoveredElement === "two-points-wrapper" ? "isHovered" : ""}`} data-stats-element="two-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <div className={`single-item-penalty-wrapper d-flex justify-content-between ${this.state.hoveredElement === "two-points-wrapper" ? "isHovered" : ""}`} data-stats-element="two-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement} data-toggle="tooltip" data-placement="top" title="When player shoots two point shots without scoring (but 3 or more shots !!!) he is penalized with negative points (first three misses are -2pt and every next miss is -1pt)">
                                         <span className="label" data-stats-element="two-points-wrapper">
                                             Two points - penalty:
                                     </span>
@@ -271,7 +271,7 @@ class PlayerCardModal extends React.Component {
 
 
                                 <div>
-                                    <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "three-points-wrapper" ? "isHovered" : ""}`} data-stats-element="three-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "three-points-wrapper" ? "isHovered" : ""}`} data-stats-element="three-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement} data-toggle="tooltip" data-placement="top" title=" All three point shots scored by player are multiplied by three points shot percentage">
                                         <span className="label" data-stats-element="three-points-wrapper">
                                             Three points:
                                         </span>
@@ -279,7 +279,7 @@ class PlayerCardModal extends React.Component {
                                             {this.state.tdFantasyPoints.threePoints}
                                         </span>
                                     </div>
-                                    <div className={`single-item-bonus-wrapper d-flex justify-content-between ${this.state.hoveredElement === "three-points-wrapper" ? "isHovered" : ""}`} data-stats-element="three-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <div className={`single-item-bonus-wrapper d-flex justify-content-between ${this.state.hoveredElement === "three-points-wrapper" ? "isHovered" : ""}`} data-stats-element="three-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement} data-toggle="tooltip" data-placement="top" title="When player shoots three point shots without miss (but 3 or more shots !!!) he is rewarded with bonus - 100%">
                                         <span className="label" data-stats-element="three-points-wrapper">
                                             Three points - bonus:
                                         </span>
@@ -287,7 +287,7 @@ class PlayerCardModal extends React.Component {
                                             {this.state.tdFantasyPoints.threePointsBonus}
                                         </span>
                                     </div>
-                                    <div className={`single-item-penalty-wrapper d-flex justify-content-between ${this.state.hoveredElement === "three-points-wrapper" ? "isHovered" : ""}`} data-stats-element="three-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
+                                    <div className={`single-item-penalty-wrapper d-flex justify-content-between ${this.state.hoveredElement === "three-points-wrapper" ? "isHovered" : ""}`} data-stats-element="three-points-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement} data-toggle="tooltip" data-placement="top" title="When player shoots three points shots without scoring (but 3 or more shots !!!) he is penalized with negative points (first three misses are -3pt and every next miss is -1pt)">
                                         <span className="label" data-stats-element="three-points-wrapper">
                                             Three points - penalty:
                                         </span>

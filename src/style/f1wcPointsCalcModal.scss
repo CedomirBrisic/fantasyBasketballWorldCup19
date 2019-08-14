@@ -10,6 +10,16 @@
         .modal-content {
             min-height: 40vw;
             background-color: rgba(0, 0, 0, 0);
+            .close{
+                color: #ffffff;
+                font-size: 4.5vw;
+                position: absolute;
+                right: -2vw;
+                top: -3vw;
+                &:hover{
+                    cursor: pointer;
+                }
+            }
 
 
             .f1wc-points-calc-modal-container {
