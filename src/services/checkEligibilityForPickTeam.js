@@ -86,7 +86,6 @@ const checkEligibilityForPickTeam = (fantasyUsers, username, selectedDay, nowDat
             const teamGameStartHour = parseInt(teamData[0].gameStart.split(":")[0], 10)
             const teamGameStartMinutes = parseInt(teamData[0].gameStart.split(":")[1], 10)
 
-            let tooLate = null
 
             if (selectedDay === nowDateAndTime.humanDate) {
                 if (nowHour > teamGameStartHour) {
@@ -119,23 +118,26 @@ const checkEligibilityForPickTeam = (fantasyUsers, username, selectedDay, nowDat
         })
     }
 
-    teamPickDataByPoints.sort(function (a, b) {
+
+
+    const teamPickDataByPointsIds = []
+    teamPickDataByPoints.forEach((player) => {
+        if (!!player.summaSummarum) {
+            teamPickDataByPointsIds.push(player)
+        }
+    })
+    teamPickDataByPoints.forEach((player) => {
+        if (!player.summaSummarum) {
+            teamPickDataByPointsIds.push(player)
+        }
+    })
+    teamPickDataByPointsIds.sort(function (a, b) {
         return b.summaSummarum - a.summaSummarum
     })
 
-    
-    const teamPickDataByPointsIds = []
-    teamPickDataByPoints.forEach((player) => {
-        if (!!player.summaSummarum){
-            teamPickDataByPointsIds.push(player)
-        }
-    })
-    teamPickDataByPoints.forEach((player) => {
-        if (!player.summaSummarum){
-            teamPickDataByPointsIds.push(player)
-        }
-    })
-console.log(teamPickDataByPointsIds)
+
+
+
 
     const outputTeamPickData = {
         Player1Id: teamPickDataByPointsIds[0].id,
@@ -158,20 +160,164 @@ console.log(teamPickDataByPointsIds)
         Player7Id: teamPickLockData[teamPickDataByPointsIds[6].playerObjectKey],
     }
 
+
+    const calculatedFirstFiveRealLifeStatsTotals = {
+        gameWinsCounter: 0,
+        assists: 0,
+        rebounds: 0,
+        blocks: 0,
+        steals: 0,
+        turnovers: 0,
+        freeThrows: 0,
+        twoPoints: 0,
+        threePoints: 0,
+        // freeThrowsAttempts:0,
+        // freeThrowsScored:0,
+        // twoPointsAttempts:0,
+        // twoPointsScored:0,
+        // threePointsAttempts:0,
+        // threePointsScored:0
+    }
+
+    const calculatedFirstFiveFantasyPointsStatsTotals = {
+        gameWins: 0,
+        assists: 0,
+        rebounds: 0,
+        blocks: 0,
+        steals: 0,
+        turnovers: 0,
+        freeThrows: 0,
+        freeThrowsBonuses: 0,
+        freeThrowsPenalties: 0,
+        twoPoints: 0,
+        twoPointsBonuses: 0,
+        twoPointsPenalties: 0,
+        threePoints: 0,
+        threePointsBonuses: 0,
+        threePointsPenalties: 0
+    }
+
+    let totalSummaSummarum = 0;
+    for (let i = 1; i < 6; i++) {
+        const playerData = basketballPlayers.filter((player) => {
+            if (player._id.$oid === outputTeamPickData[`Player${i}Id`]) {
+                return player
+            }
+        })
+        if (playerData[0]) {
+            //FANTASY POINTS STATS
+            const playerFantasyPointsData = calculateBasketballPlayerTDFantasyPoints(playerData[0], selectedDay)
+            if (playerFantasyPointsData.gameWin !== "n/a") {
+                calculatedFirstFiveFantasyPointsStatsTotals.gameWins += parseFloat(playerFantasyPointsData.gameWin)
+            }
+            if (playerFantasyPointsData.assists !== "n/a") {
+                calculatedFirstFiveFantasyPointsStatsTotals.assists += parseFloat(playerFantasyPointsData.assists)
+            }
+            if (playerFantasyPointsData.rebounds !== "n/a") {
+                calculatedFirstFiveFantasyPointsStatsTotals.rebounds += parseFloat(playerFantasyPointsData.rebounds)
+            }
+            if (playerFantasyPointsData.blocks !== "n/a") {
+                calculatedFirstFiveFantasyPointsStatsTotals.blocks += parseFloat(playerFantasyPointsData.blocks)
+            }
+            if (playerFantasyPointsData.steals !== "n/a") {
+                calculatedFirstFiveFantasyPointsStatsTotals.steals += parseFloat(playerFantasyPointsData.steals)
+            }
+            if (playerFantasyPointsData.turnovers !== "n/a") {
+                calculatedFirstFiveFantasyPointsStatsTotals.turnovers += parseFloat(playerFantasyPointsData.turnovers)
+            }
+            if (playerFantasyPointsData.freeThrowsPoints !== "n/a") {
+                calculatedFirstFiveFantasyPointsStatsTotals.freeThrows += parseFloat(playerFantasyPointsData.freeThrowsPoints)
+            }
+            if (playerFantasyPointsData.freeThrowsPointsBonus !== "-") {
+                calculatedFirstFiveFantasyPointsStatsTotals.freeThrowsBonuses += parseFloat(playerFantasyPointsData.freeThrowsPointsBonus)
+            }
+            if (playerFantasyPointsData.freeThrowsPointsPenalty !== "-") {
+                calculatedFirstFiveFantasyPointsStatsTotals.freeThrowsPenalties += parseFloat(playerFantasyPointsData.freeThrowsPointsPenalty)
+            }
+            if (playerFantasyPointsData.twoPoints !== "n/a") {
+                calculatedFirstFiveFantasyPointsStatsTotals.twoPoints += parseFloat(playerFantasyPointsData.twoPoints)
+            }
+            if (playerFantasyPointsData.twoPointsBonus !== "-") {
+                calculatedFirstFiveFantasyPointsStatsTotals.twoPointsBonuses += parseFloat(playerFantasyPointsData.twoPointsBonus)
+            }
+            if (playerFantasyPointsData.twoPointsPenalty !== "-") {
+                calculatedFirstFiveFantasyPointsStatsTotals.twoPointsPenalties += parseFloat(playerFantasyPointsData.twoPointsPenalty)
+            }
+            if (playerFantasyPointsData.threePoints !== "n/a") {
+                calculatedFirstFiveFantasyPointsStatsTotals.threePoints += parseFloat(playerFantasyPointsData.threePoints)
+            }
+            if (playerFantasyPointsData.threePointsBonus !== "-") {
+                calculatedFirstFiveFantasyPointsStatsTotals.threePointsBonuses += parseFloat(playerFantasyPointsData.threePointsBonus)
+            }
+            if (playerFantasyPointsData.threePointsPenalty !== "-") {
+                calculatedFirstFiveFantasyPointsStatsTotals.threePointsPenalties += parseFloat(playerFantasyPointsData.threePointsPenalty)
+            }
+            if (playerFantasyPointsData.summaSummarum !== "N/A") {
+                totalSummaSummarum += parseFloat(playerFantasyPointsData.summaSummarum)
+            }
+
+
+            // REAL LIFE STATS
+            if (playerData[0][selectedDay].assists !== "n/a") {
+                calculatedFirstFiveRealLifeStatsTotals.assists += parseInt(playerData[0][selectedDay].assists, 10)
+            }
+            if (playerData[0][selectedDay].rebounds !== "n/a") {
+                calculatedFirstFiveRealLifeStatsTotals.rebounds += parseInt(playerData[0][selectedDay].rebounds, 10)
+            }
+            if (playerData[0][selectedDay].rebounds !== "n/a") {
+                calculatedFirstFiveRealLifeStatsTotals.rebounds += parseInt(playerData[0][selectedDay].rebounds, 10)
+            }
+            if (playerData[0][selectedDay].blocks !== "n/a") {
+                calculatedFirstFiveRealLifeStatsTotals.blocks += parseInt(playerData[0][selectedDay].blocks, 10)
+            }
+            if (playerData[0][selectedDay].steals !== "n/a") {
+                calculatedFirstFiveRealLifeStatsTotals.steals += parseInt(playerData[0][selectedDay].steals, 10)
+            }
+            if (playerData[0][selectedDay].turnovers !== "n/a") {
+                calculatedFirstFiveRealLifeStatsTotals.turnovers += parseInt(playerData[0][selectedDay].turnovers, 10)
+            }
+            if (playerData[0][selectedDay].freeThrowScored !== "n") {
+                calculatedFirstFiveRealLifeStatsTotals.freeThrows += parseInt(playerData[0][selectedDay].freeThrowScored, 10)
+            }
+            // if (playerData[0][selectedDay].freeThrowAttempts !== "a") {
+            //     calculatedFirstFiveRealLifeStatsTotals.freeThrowsAttempts += parseInt(playerData[0][selectedDay].freeThrowAttempts, 10)
+            // }
+            // if (playerData[0][selectedDay].freeThrowScored !== "n") {
+            //     calculatedFirstFiveRealLifeStatsTotals.freeThrowsScored += parseInt(playerData[0][selectedDay].freeThrowScored, 10)
+            // }
+
+            if (playerData[0][selectedDay].fieldGoalsScored !== "n") {
+                calculatedFirstFiveRealLifeStatsTotals.twoPoints += parseInt(playerData[0][selectedDay].fieldGoalsScored, 10)*2
+            }
+            // if (playerData[0][selectedDay].fieldGoalsAttempts !== "a") {
+            //     calculatedFirstFiveRealLifeStatsTotals.twoPointsAttempts += parseInt(playerData[0][selectedDay].fieldGoalsAttempts, 10)
+            // }
+            // if (playerData[0][selectedDay].fieldGoalsScored !== "n") {
+            //     calculatedFirstFiveRealLifeStatsTotals.twoPointsScored += parseInt(playerData[0][selectedDay].fieldGoalsScored, 10)
+            // }
+            if (playerData[0][selectedDay].threePointsScored !== "n") {
+                calculatedFirstFiveRealLifeStatsTotals.threePoints += parseInt(playerData[0][selectedDay].threePointsScored, 10)*3
+            }
+            // if (playerData[0][selectedDay].threePointsAttempts !== "a") {
+            //     calculatedFirstFiveRealLifeStatsTotals.threePointsAttempts += parseInt(playerData[0][selectedDay].threePointsAttempts, 10)
+            // }
+            // if (playerData[0][selectedDay].threePointsScored !== "n") {
+            //     calculatedFirstFiveRealLifeStatsTotals.threePointsScored += parseInt(playerData[0][selectedDay].threePointsScored, 10)
+            // }
+            if (playerData[0][selectedDay].teamWin === "yes") {
+                calculatedFirstFiveRealLifeStatsTotals.gameWinsCounter++
+            }
+        }
+    }
+
     const outputObject = {
         teamPickData: outputTeamPickData,
-        teamPickLockData: outputTeamPickLockData
-        // teamPickData,
-        // teamPickLockData
+        teamPickLockData: outputTeamPickLockData,
+        calculatedFirstFiveRealLifeStatsTotals,
+        calculatedFirstFiveFantasyPointsStatsTotals,
+        totalSummaSummarum: totalSummaSummarum.toFixed(2)
     }
-    // console.log(outputTeamPickData, outputTeamPickLockData)
     return outputObject
 }
 
 export default checkEligibilityForPickTeam;
-
-// items.sort(function (a, b) {
-//     return a.value - b.value;
-//   });
-
-// calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedDay) => {

@@ -185,10 +185,15 @@ class SelectPlayer extends React.Component {
                 }
             })
         }
-
-        if (outputPlayers.length === 0 && !this.state.isTooLateMessage) {
+        if (Array.isArray(eligibleTeams[selectedDay])) {
+            if (outputPlayers.length === 0 && !this.state.isTooLateMessage) {
+                this.setState({
+                    isTooLateMessage: true
+                })
+            }
+        } else if (!this.state.gamesNotFinishedMessage) {
             this.setState({
-                isTooLateMessage: true
+                gamesNotFinishedMessage: true
             })
         }
         return outputPlayers
@@ -258,9 +263,14 @@ class SelectPlayer extends React.Component {
                                 <span className="too-late-message-2"><i>pick players for next round... nothing is over till 15th September</i></span>
                             </div>
                         }
+                        {this.state.gamesNotFinishedMessage &&
+                            <div className="too-late-message d-flex flex-column justify-content-center align-items-center">
+                                <span>Selection is unavailable till all participants are known</span>
+                            </div>
+                        }
                     </div>
                 </section>
-                {this.context.selectedPlayerForPlayerCardModal &&
+                {this.context.selectedPlayerForPlayerCardModal && this.context.showSelectPlayer &&
                     <Portal>
                         <PlayerCardModal />
                     </Portal>
