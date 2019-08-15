@@ -29,7 +29,7 @@ class DashboardSelectTeam extends React.Component {
                     if (nowHour > teamHour) {
                         isEligible = false
                     } else if (nowHour === teamHour) {
-                        if (nowMinutes > teamMinutes) {
+                        if (nowMinutes >= teamMinutes) {
                             isEligible = false
                         }
                     }
@@ -69,11 +69,16 @@ class DashboardSelectTeam extends React.Component {
             </div>
         }
     }
+    sendSelectPlayerSearchValue = (event) => {
+        const data = event.target.value
+        this.context.depositSelectPlayerSearchValue(data)
+    }
     render() {
         return (
             <section className={`dashboard-select-team-container d-flex flex-column justify align-items-center ${this.context.showSelectTeamDashboard ? "show-selected-team" : ""}`}>
                 <button type="button" className={`btn btn-outline-light select-all ${this.context.selectedTeam === "all-eligible-teams" ? "is-selected" : ""}`} data-selected-team="all-eligible-teams" data-is-clickable="true" onClick={this.depositSelectedTeam}><i data-selected-team="all-eligible-teams" data-is-clickable="true">Show all eligible players</i></button>
                 <div className="dashboard-select-team-list-wrapper d-flex flex-column justify-content-between ">
+                <input value={this.context.selectPlayerSearchValue} onChange={this.sendSelectPlayerSearchValue} type="search" placeholder="Search player by name"/>
                     {this.mapEligibleTeams()}
                 </div>
             </section>

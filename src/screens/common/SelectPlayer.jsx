@@ -3,11 +3,13 @@ import { AppContext } from '../../screens/_context/AppContext';
 import { Portal } from 'react-portal';
 import eligibleDays from "../../services/eligibleDays";
 import PlayerCardModal from "../modals/PlayerCardModal"
+import sortPlayersOnSelectScreen from "../../services/sortPlayersOnSelectScreen";
 
 class SelectPlayer extends React.Component {
     static contextType = AppContext;
     state = {
-        isTooLateMessage: false
+        isTooLateMessage: false,
+        sortFilterValue: "playerTeam"
     }
 
     checkSelectedTeamString = () => {
@@ -48,7 +50,7 @@ class SelectPlayer extends React.Component {
                         if (nowHour > teamHour) {
                             isEligible = false
                         } else if (nowHour === teamHour) {
-                            if (nowMinutes > teamMinutes) {
+                            if (nowMinutes >= teamMinutes) {
                                 isEligible = false
                             }
                         }
@@ -104,6 +106,7 @@ class SelectPlayer extends React.Component {
                                     }
                                 })
 
+                                
                                 const outputPlayer =
                                     <tr key={player.name + index} className="single-player-item" data-player-name={player.name} data-player-team={player.team} onClick={this.context.showSinglePlayerModal}>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`# ${player.shirtNumber}`}</td>
@@ -196,7 +199,16 @@ class SelectPlayer extends React.Component {
                 gamesNotFinishedMessage: true
             })
         }
-        return outputPlayers
+        const sortedOutputPlayer = sortPlayersOnSelectScreen(outputPlayers, this.state.sortFilterValue, this.context.selectPlayerSearchValue)
+        return sortedOutputPlayer
+    }
+    
+
+    depositSortFilterValue = (event) => {
+        const sortFilterValue = event.target.getAttribute("data-sort-filter-value")
+        this.setState({
+            sortFilterValue
+        })
     }
     render() {
         return (
@@ -240,17 +252,17 @@ class SelectPlayer extends React.Component {
                         <table>
                             <thead>
                                 <tr className="">
-                                    <th>No</th>
-                                    <th>Player name</th>
-                                    <th>Team</th>
-                                    <th>Assists</th>
-                                    <th>Rebounds</th>
-                                    <th>Blocks</th>
-                                    <th>Steals</th>
-                                    <th>Turnovers</th>
-                                    <th>Free throws</th>
-                                    <th>Two points</th>
-                                    <th>Three points</th>
+                                    <th data-sort-filter-value="shirtNumber" onClick={this.depositSortFilterValue}><button data-sort-filter-value="shirtNumber" type="button" className={`btn ${this.state.sortFilterValue=== "shirtNumber" ? "btn-success":"btn-outline-dark"}`}>No</button></th>
+                                    <th data-sort-filter-value="playerName" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerName" type="button" className={`btn ${this.state.sortFilterValue=== "playerName" ? "btn-success":"btn-outline-dark"}`}>Player name</button></th>
+                                    <th data-sort-filter-value="playerTeam" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerTeam" type="button" className={`btn ${this.state.sortFilterValue=== "playerTeam" ? "btn-success":"btn-outline-dark"}`}>Team</button></th>
+                                    <th data-sort-filter-value="assists" onClick={this.depositSortFilterValue}><button data-sort-filter-value="assists" type="button" className={`btn ${this.state.sortFilterValue=== "assists" ? "btn-success":"btn-outline-dark"}`}>Assists</button></th>
+                                    <th data-sort-filter-value="rebounds" onClick={this.depositSortFilterValue}><button data-sort-filter-value="rebounds" type="button" className={`btn ${this.state.sortFilterValue=== "rebounds" ? "btn-success":"btn-outline-dark"}`}>Rebounds</button></th>
+                                    <th data-sort-filter-value="blocks" onClick={this.depositSortFilterValue}><button data-sort-filter-value="blocks" type="button" className={`btn ${this.state.sortFilterValue=== "blocks" ? "btn-success":"btn-outline-dark"}`}>Blocks</button></th>
+                                    <th data-sort-filter-value="steals" onClick={this.depositSortFilterValue}><button data-sort-filter-value="steals" type="button" className={`btn ${this.state.sortFilterValue=== "steals" ? "btn-success":"btn-outline-dark"}`}>Steals</button></th>
+                                    <th data-sort-filter-value="turnovers" onClick={this.depositSortFilterValue}><button data-sort-filter-value="turnovers" type="button" className={`btn ${this.state.sortFilterValue=== "turnovers" ? "btn-success":"btn-outline-dark"}`}>Turnovers</button></th>
+                                    <th data-sort-filter-value="freeThrows" onClick={this.depositSortFilterValue}><button data-sort-filter-value="freeThrows" type="button" className={`btn ${this.state.sortFilterValue=== "freeThrows" ? "btn-success":"btn-outline-dark"}`}>Free throws</button></th>
+                                    <th data-sort-filter-value="twoPoints" onClick={this.depositSortFilterValue}><button data-sort-filter-value="twoPoints" type="button" className={`btn ${this.state.sortFilterValue=== "twoPoints" ? "btn-success":"btn-outline-dark"}`}>Two points</button></th>
+                                    <th data-sort-filter-value="threePoints" onClick={this.depositSortFilterValue}><button data-sort-filter-value="threePoints" type="button" className={`btn ${this.state.sortFilterValue=== "threePoints" ? "btn-success":"btn-outline-dark"}`}>Three points</button></th>
                                 </tr>
                             </thead>
                             <tbody className="players-data-container">
