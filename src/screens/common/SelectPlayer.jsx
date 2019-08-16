@@ -4,12 +4,13 @@ import { Portal } from 'react-portal';
 import eligibleDays from "../../services/eligibleDays";
 import PlayerCardModal from "../modals/PlayerCardModal"
 import sortPlayersOnSelectScreen from "../../services/sortPlayersOnSelectScreen";
+import calculateBasketballPlayerTDFantasyGrandTotalPoints from "../../services/calculateBasketballPlayerTDFantasyGrandTotalPoints";
 
 class SelectPlayer extends React.Component {
     static contextType = AppContext;
     state = {
         isTooLateMessage: false,
-        sortFilterValue: "playerTeam"
+        sortFilterValue: "ptPerGame"
     }
 
     checkSelectedTeamString = () => {
@@ -106,10 +107,10 @@ class SelectPlayer extends React.Component {
                                     }
                                 })
 
-                                
+
                                 const outputPlayer =
                                     <tr key={player.name + index} className="single-player-item" data-player-name={player.name} data-player-team={player.team} onClick={this.context.showSinglePlayerModal}>
-                                        <td data-player-name={player.name} data-player-team={player.team}>{`# ${player.shirtNumber}`}</td>
+                                        <td data-player-name={player.name} data-player-team={player.team}>{`# ${(calculateBasketballPlayerTDFantasyGrandTotalPoints(player) / gamesPlayed).toFixed(2)}`}</td>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${player.team}`}</td>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
@@ -167,7 +168,7 @@ class SelectPlayer extends React.Component {
 
                     const outputPlayer =
                         <tr key={player.name + index} className="single-player-item" data-player-name={player.name} data-player-team={player.team} onClick={this.context.showSinglePlayerModal}>
-                            <td data-player-name={player.name} data-player-team={player.team}>{`# ${player.shirtNumber}`}</td>
+                            <td data-player-name={player.name} data-player-team={player.team}>{`# ${(calculateBasketballPlayerTDFantasyGrandTotalPoints(player) / gamesPlayed).toFixed(2)}`}</td>
                             <td data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
                             <td data-player-name={player.name} data-player-team={player.team}>{`${player.team}`}</td>
                             <td data-player-name={player.name} data-player-team={player.team}>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
@@ -202,7 +203,7 @@ class SelectPlayer extends React.Component {
         const sortedOutputPlayer = sortPlayersOnSelectScreen(outputPlayers, this.state.sortFilterValue, this.context.selectPlayerSearchValue)
         return sortedOutputPlayer
     }
-    
+
 
     depositSortFilterValue = (event) => {
         const sortFilterValue = event.target.getAttribute("data-sort-filter-value")
@@ -252,17 +253,17 @@ class SelectPlayer extends React.Component {
                         <table>
                             <thead>
                                 <tr className="">
-                                    <th data-sort-filter-value="shirtNumber" onClick={this.depositSortFilterValue}><button data-sort-filter-value="shirtNumber" type="button" className={`btn ${this.state.sortFilterValue=== "shirtNumber" ? "btn-success":"btn-outline-dark"}`}>No</button></th>
-                                    <th data-sort-filter-value="playerName" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerName" type="button" className={`btn ${this.state.sortFilterValue=== "playerName" ? "btn-success":"btn-outline-dark"}`}>Player name</button></th>
-                                    <th data-sort-filter-value="playerTeam" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerTeam" type="button" className={`btn ${this.state.sortFilterValue=== "playerTeam" ? "btn-success":"btn-outline-dark"}`}>Team</button></th>
-                                    <th data-sort-filter-value="assists" onClick={this.depositSortFilterValue}><button data-sort-filter-value="assists" type="button" className={`btn ${this.state.sortFilterValue=== "assists" ? "btn-success":"btn-outline-dark"}`}>Assists</button></th>
-                                    <th data-sort-filter-value="rebounds" onClick={this.depositSortFilterValue}><button data-sort-filter-value="rebounds" type="button" className={`btn ${this.state.sortFilterValue=== "rebounds" ? "btn-success":"btn-outline-dark"}`}>Rebounds</button></th>
-                                    <th data-sort-filter-value="blocks" onClick={this.depositSortFilterValue}><button data-sort-filter-value="blocks" type="button" className={`btn ${this.state.sortFilterValue=== "blocks" ? "btn-success":"btn-outline-dark"}`}>Blocks</button></th>
-                                    <th data-sort-filter-value="steals" onClick={this.depositSortFilterValue}><button data-sort-filter-value="steals" type="button" className={`btn ${this.state.sortFilterValue=== "steals" ? "btn-success":"btn-outline-dark"}`}>Steals</button></th>
-                                    <th data-sort-filter-value="turnovers" onClick={this.depositSortFilterValue}><button data-sort-filter-value="turnovers" type="button" className={`btn ${this.state.sortFilterValue=== "turnovers" ? "btn-success":"btn-outline-dark"}`}>Turnovers</button></th>
-                                    <th data-sort-filter-value="freeThrows" onClick={this.depositSortFilterValue}><button data-sort-filter-value="freeThrows" type="button" className={`btn ${this.state.sortFilterValue=== "freeThrows" ? "btn-success":"btn-outline-dark"}`}>Free throws</button></th>
-                                    <th data-sort-filter-value="twoPoints" onClick={this.depositSortFilterValue}><button data-sort-filter-value="twoPoints" type="button" className={`btn ${this.state.sortFilterValue=== "twoPoints" ? "btn-success":"btn-outline-dark"}`}>Two points</button></th>
-                                    <th data-sort-filter-value="threePoints" onClick={this.depositSortFilterValue}><button data-sort-filter-value="threePoints" type="button" className={`btn ${this.state.sortFilterValue=== "threePoints" ? "btn-success":"btn-outline-dark"}`}>Three points</button></th>
+                                    <th data-sort-filter-value="ptPerGame" onClick={this.depositSortFilterValue}><button data-sort-filter-value="ptPerGame" type="button" className={`btn ${this.state.sortFilterValue === "ptPerGame" ? "btn-success" : "btn-outline-dark"}`}>pt per Game</button></th>
+                                    <th data-sort-filter-value="playerName" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerName" type="button" className={`btn ${this.state.sortFilterValue === "playerName" ? "btn-success" : "btn-outline-dark"}`}>Player name</button></th>
+                                    <th data-sort-filter-value="playerTeam" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerTeam" type="button" className={`btn ${this.state.sortFilterValue === "playerTeam" ? "btn-success" : "btn-outline-dark"}`}>Team</button></th>
+                                    <th data-sort-filter-value="assists" onClick={this.depositSortFilterValue}><button data-sort-filter-value="assists" type="button" className={`btn ${this.state.sortFilterValue === "assists" ? "btn-success" : "btn-outline-dark"}`}>Assists</button></th>
+                                    <th data-sort-filter-value="rebounds" onClick={this.depositSortFilterValue}><button data-sort-filter-value="rebounds" type="button" className={`btn ${this.state.sortFilterValue === "rebounds" ? "btn-success" : "btn-outline-dark"}`}>Rebounds</button></th>
+                                    <th data-sort-filter-value="blocks" onClick={this.depositSortFilterValue}><button data-sort-filter-value="blocks" type="button" className={`btn ${this.state.sortFilterValue === "blocks" ? "btn-success" : "btn-outline-dark"}`}>Blocks</button></th>
+                                    <th data-sort-filter-value="steals" onClick={this.depositSortFilterValue}><button data-sort-filter-value="steals" type="button" className={`btn ${this.state.sortFilterValue === "steals" ? "btn-success" : "btn-outline-dark"}`}>Steals</button></th>
+                                    <th data-sort-filter-value="turnovers" onClick={this.depositSortFilterValue}><button data-sort-filter-value="turnovers" type="button" className={`btn ${this.state.sortFilterValue === "turnovers" ? "btn-success" : "btn-outline-dark"}`}>Turnovers</button></th>
+                                    <th data-sort-filter-value="freeThrows" onClick={this.depositSortFilterValue}><button data-sort-filter-value="freeThrows" type="button" className={`btn ${this.state.sortFilterValue === "freeThrows" ? "btn-success" : "btn-outline-dark"}`}>Free throws</button></th>
+                                    <th data-sort-filter-value="twoPoints" onClick={this.depositSortFilterValue}><button data-sort-filter-value="twoPoints" type="button" className={`btn ${this.state.sortFilterValue === "twoPoints" ? "btn-success" : "btn-outline-dark"}`}>Two points</button></th>
+                                    <th data-sort-filter-value="threePoints" onClick={this.depositSortFilterValue}><button data-sort-filter-value="threePoints" type="button" className={`btn ${this.state.sortFilterValue === "threePoints" ? "btn-success" : "btn-outline-dark"}`}>Three points</button></th>
                                 </tr>
                             </thead>
                             <tbody className="players-data-container">

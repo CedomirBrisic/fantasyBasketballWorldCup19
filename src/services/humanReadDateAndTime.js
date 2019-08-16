@@ -42,8 +42,8 @@ const humanReadDateAndTime = () => {
     const outputDate = `${dd}${ddth}-${mm}`
     const outputTime = `${hh}:${min00}:${sec00}`
     const humanDateAndTime = {
-        humanDate: "2nd-September",
-        humanTime: "7:30:00"
+        humanDate: "5th-September",
+        humanTime: "7:29:00"
         // humanDate: outputDate,
         // humanTime: outputTime
     }

@@ -14,7 +14,7 @@ export default class AppStore extends Component {
 
         showSelectDayDashboard: true,
         showSelectTeamDashboard: false,
-        selectPlayerSearchValue:"",
+        selectPlayerSearchValue: "",
 
         selectedDay: null,
         selectedTeam: "all-eligible-teams",
@@ -55,12 +55,6 @@ export default class AppStore extends Component {
             freeThrows: 0,
             twoPoints: 0,
             threePoints: 0,
-            // freeThrowsAttempts:0,
-            // freeThrowsScored:0,
-            // twoPointsAttempts:0,
-            // twoPointsScored:0,
-            // threePointsAttempts:0,
-            // threePointsScored:0
         },
         calculatedFirstFiveFantasyPointsStatsTotals: {
             gameWins: 0,
@@ -80,6 +74,9 @@ export default class AppStore extends Component {
             threePointsPenalties: 0
         },
         teamPickDayTotal: null,
+
+        userTotalRoundPoints: 0,
+        userAvgRoundPointsPerGame: 0,
 
         isInitialLoading: true,
     }
@@ -190,11 +187,33 @@ export default class AppStore extends Component {
             showPlayerCardModal: false
         })
     }
+
+
+    calculateUsersRoundPoints = () => {
+        let roundsPlayed = null
+        const dayIndex = eligibleDays.indexOf(this.state.nowDateAndTime.humanDate)
+        if (dayIndex === -1 && this.state.nowDateAndTime.humanDate.split("-")[1] !== "August") {
+            roundsPlayed = 16
+        } else {
+            roundsPlayed = eligibleDays.indexOf(this.state.nowDateAndTime.humanDate) + 1
+        }
+
+        let userTotalRoundPoints = 0;
+        for (let i = 0; i < roundsPlayed; i++) {
+            userTotalRoundPoints += parseFloat(checkEligibilityForPickTeam(this.state.fantasyUsers, this.state.bitrulez, eligibleDays[i], this.state.nowDateAndTime, this.state.dropdowns[0].teamsByDay, this.state.basketballPlayers).totalSummaSummarum)
+        }
+        this.setState({
+            userTotalRoundPoints,
+            userAvgRoundPointsPerGame: userTotalRoundPoints / roundsPlayed
+        })
+    }
+
     componentDidMount() {
         let data = sessionStorage.getItem("bitrulez")
         this.setState({
             bitrulez: data
         })
+
         // this.interval = setInterval(
         //     () => this.clocify(),
         //     1000
@@ -218,6 +237,10 @@ export default class AppStore extends Component {
                 calculatedFirstFiveFantasyPointsStatsTotals: calculatedPickData.calculatedFirstFiveFantasyPointsStatsTotals,
             })
         }
+
+        if (prevState.dropdowns === null && this.state.dropdowns !== null) {
+            this.calculateUsersRoundPoints()
+        }
     }
 
     render() {
@@ -235,7 +258,7 @@ export default class AppStore extends Component {
                 pickPlayerForTeam: this.pickPlayerForTeam,
                 depositUserKey: this.depositUserKey,
                 teamPickIsSubmitted: this.teamPickIsSubmitted,
-                depositSelectPlayerSearchValue: this.depositSelectPlayerSearchValue
+                depositSelectPlayerSearchValue: this.depositSelectPlayerSearchValue,
             }}>
 
                 {this.props.children}

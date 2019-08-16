@@ -59,7 +59,7 @@ const sortPlayersOnSelectScreen = (playersForRender, sortFilterName, selectPlaye
                 singlePlayerFilterDataValue.valueForSorting = threePointsStringValue.split("/")[0] / threePointsStringValue.split("/")[1]
                 singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
                 break;
-            case 'shirtNumber':
+            case 'ptPerGame':
                 singlePlayerFilterDataValue.playerIndex = i;
                 singlePlayerFilterDataValue.valueForSorting = playersForRender[i].props.children[0].props.children.split(" ")[1]
                 singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
@@ -78,17 +78,10 @@ const sortPlayersOnSelectScreen = (playersForRender, sortFilterName, selectPlaye
         }
     }
 
+    playersFilterDataValuesForSorting.sort(function (a, b) {
+        return b.valueForSorting - a.valueForSorting
+    })
 
-
-    if (sortFilterName === "shirtNumber") {
-        playersFilterDataValuesForSorting.sort(function (a, b) {
-            return a.valueForSorting - b.valueForSorting
-        })
-    } else {
-        playersFilterDataValuesForSorting.sort(function (a, b) {
-            return b.valueForSorting - a.valueForSorting
-        })
-    }
     let playersFilterDataValuesSorted = playersFilterDataValuesForSorting.concat(playersFilterDataValuesForNotSorting)
 
     if (selectPlayerSearchValue !== "") {

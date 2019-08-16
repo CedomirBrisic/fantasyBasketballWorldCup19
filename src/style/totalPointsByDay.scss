@@ -1,3 +1,18 @@
-.total-points-by-day-container{
-    color: purple;
+.total-points-by-day-container {
+    margin-left: 1vw;
+    height: 100%;
+    color: #ffffff;
+    font-size: 0.9vw;
+    // transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 0.2vw 0 0.2vw 1vw;
+
+    span {
+        border: 1px solid #ffffff;
+        margin-left: 0.5vw;
+        margin-right: 1.5vw;
+        padding-left: 0.5vw;
+        padding-right: 0.5vw;
+        border-radius: 0.5vw;
+    }
 }

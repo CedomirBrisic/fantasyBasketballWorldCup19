@@ -1,4 +1,5 @@
 import React from 'react';
+import { AppContext } from '../screens/_context/AppContext';
 import HallOfFameLists from './common/HallOfFameLists';
 import HallOfFameUserStats from './common/HallOfFameUserStats';
 
@@ -6,19 +7,15 @@ import HallOfFameUserStats from './common/HallOfFameUserStats';
 
 
 class HallOfFameScreen extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+    static contextType = AppContext;
 
-        }
-    }
     render() {
         return (
-            <h1 className="hall-of-fame-screen-container">
-                Hello from Hall of Fame screen
-                <HallOfFameLists />
-                <HallOfFameUserStats />
-            </h1>
+            <div className="hall-of-fame-screen-container">
+               
+                {/* <HallOfFameLists />
+                <HallOfFameUserStats /> */}
+            </div>
         )
     }
 }
