@@ -42,7 +42,7 @@ class Rules extends React.Component {
         return (
             <>
                 <section className="rules-container">
-                    <h3 className="d-flex justify-content-between align-items-center"><i>Rules</i><b>↓</b></h3>
+                    <h3 className="d-flex justify-content-between align-items-center"><i>Rules</i></h3>
                     <h5><span className="rule-numer-order">#1 -</span> YOU <span className="first-do-not-talk">do not talk</span> about TD-Fantasy</h5>
                     <h5><span className="rule-numer-order">#2 -</span> YOU <span className="second-do-not-talk">do not talk</span> about TD-Fantasy</h5>
                     <h5><span className="rule-numer-order">#3 -</span> One day - One round (16 rounds total)</h5>

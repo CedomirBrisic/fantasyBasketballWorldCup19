@@ -20,7 +20,7 @@ class TotalPointsByDay extends React.Component {
                 </div>
                }
                 <div className="d-flex">
-                    Total Round points:
+                    Grand Total round points:
                     <span>
                         {this.context.userTotalRoundPoints.toFixed(2)}
                     </span>

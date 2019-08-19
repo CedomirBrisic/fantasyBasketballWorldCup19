@@ -79,6 +79,15 @@ export default class AppStore extends Component {
         userAvgRoundPointsPerGame: 0,
 
         isInitialLoading: true,
+
+        hallOfFameSelectedDay: "all-days",
+
+    }
+
+    depositHallOfFameSelectedDay = (selectedDay) => {
+        this.setState ({
+            hallOfFameSelectedDay:selectedDay
+        })
     }
 
     depositSelectPlayerSearchValue = (data) => {
@@ -259,6 +268,7 @@ export default class AppStore extends Component {
                 depositUserKey: this.depositUserKey,
                 teamPickIsSubmitted: this.teamPickIsSubmitted,
                 depositSelectPlayerSearchValue: this.depositSelectPlayerSearchValue,
+                depositHallOfFameSelectedDay: this.depositHallOfFameSelectedDay
             }}>
 
                 {this.props.children}

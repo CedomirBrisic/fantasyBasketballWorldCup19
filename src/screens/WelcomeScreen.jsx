@@ -12,9 +12,14 @@ class WelcomeScreen extends React.Component {
     }
     render() {
         return (
-            <div className="w-100 welcome-screen-container d-flex justify-content-between">
-                <SignInWrapper />
-                <Rules />
+            <div className="w-100 welcome-screen-container d-flex flex-column justify-content-between">
+                <h1>
+                    TD Fantasy - Virtual basketball manager game - World Cup 2019 edition
+                </h1>
+                <div className="d-flex h-100 justify-content-between">
+                    <SignInWrapper />
+                    <Rules />
+                </div>
             </div>
         )
     }

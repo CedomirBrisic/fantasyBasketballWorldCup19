@@ -2,13 +2,18 @@ const sortPlayersOnSelectScreen = (playersForRender, sortFilterName, selectPlaye
 
     const playersFilterDataValuesForSorting = []
     const playersFilterDataValuesForNotSorting = []
+
+    const goodShootersFilterDataValuesForSorting = []
+    const goodShootersFilterDataValuesForNotSorting = []
+
     const outputSortedPlayers = []
 
     for (let i = 0; i < playersForRender.length; i++) {
         const singlePlayerFilterDataValue = {
             playerIndex: null,
             valueForSorting: null,
-            playerName: null
+            playerName: null,
+            shotScored: null,
         }
         switch (sortFilterName) {
             case 'playerTeam':
@@ -46,18 +51,21 @@ const sortPlayersOnSelectScreen = (playersForRender, sortFilterName, selectPlaye
                 const freeThrowsStringValue = playersForRender[i].props.children[8].props.children
                 singlePlayerFilterDataValue.valueForSorting = freeThrowsStringValue.split("/")[0] / freeThrowsStringValue.split("/")[1]
                 singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
+                singlePlayerFilterDataValue.shotScored = freeThrowsStringValue.split("/")[0]
                 break;
             case 'twoPoints':
                 singlePlayerFilterDataValue.playerIndex = i;
                 const twoPointsStringValue = playersForRender[i].props.children[9].props.children
                 singlePlayerFilterDataValue.valueForSorting = twoPointsStringValue.split("/")[0] / twoPointsStringValue.split("/")[1]
                 singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
+                singlePlayerFilterDataValue.shotScored = twoPointsStringValue.split("/")[0]
                 break;
             case 'threePoints':
                 singlePlayerFilterDataValue.playerIndex = i;
                 const threePointsStringValue = playersForRender[i].props.children[10].props.children
                 singlePlayerFilterDataValue.valueForSorting = threePointsStringValue.split("/")[0] / threePointsStringValue.split("/")[1]
                 singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
+                singlePlayerFilterDataValue.shotScored = threePointsStringValue.split("/")[0]
                 break;
             case 'ptPerGame':
                 singlePlayerFilterDataValue.playerIndex = i;
@@ -77,12 +85,28 @@ const sortPlayersOnSelectScreen = (playersForRender, sortFilterName, selectPlaye
             playersFilterDataValuesForSorting.push(singlePlayerFilterDataValue)
         }
     }
-
+    
+    
     playersFilterDataValuesForSorting.sort(function (a, b) {
         return b.valueForSorting - a.valueForSorting
     })
-
+    
     let playersFilterDataValuesSorted = playersFilterDataValuesForSorting.concat(playersFilterDataValuesForNotSorting)
+
+    if (sortFilterName === "freeThrows" || sortFilterName === "twoPoints" || sortFilterName === "threePoints") {
+        playersFilterDataValuesSorted.forEach((player) => {
+            if (player.valueForSorting === 1) {
+                goodShootersFilterDataValuesForSorting.push(player)
+            } else {
+                goodShootersFilterDataValuesForNotSorting.push(player)
+            }
+        })
+        goodShootersFilterDataValuesForSorting.sort(function (a, b) {
+            return b.shotScored - a.shotScored
+        })
+
+        playersFilterDataValuesSorted = goodShootersFilterDataValuesForSorting.concat(goodShootersFilterDataValuesForNotSorting)
+    }
 
     if (selectPlayerSearchValue !== "") {
         playersFilterDataValuesSorted = playersFilterDataValuesSorted.filter((player) => {

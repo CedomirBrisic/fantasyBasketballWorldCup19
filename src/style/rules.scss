@@ -1,5 +1,5 @@
 .rules-container {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.1);
     // background: url("../images/paper-1990111_1280.jpg");
     background-size: 100% 100%;
     color: #ffffff;
@@ -10,11 +10,11 @@
     -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
     box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
-    height: 5vw;
+    height: 42vw;
     overflow: hidden;
     &:hover {
         animation: openRules 0.2s ease-in-out forwards;
-        cursor: pointer;
+        // cursor: pointer;
     }
     h3 {
         font-size: 1.8vw;
@@ -68,10 +68,10 @@
     }
     @keyframes openRules {
         0% {
-            height: 5vw;
+            background-color: rgba(0, 0, 0, 0.1);
         }
         100% {
-            height: 42vw;
+            background-color: rgba(0, 0, 0, 0.9);
         }
     }
 }
