@@ -14,7 +14,7 @@ class TeamPickSuccessfullySubmited extends React.Component {
                 <div className="d-flex align-items-center message">
                     <h3>Good job!!! <br/>
                     Your selection is successfully submitted</h3>
-                    <div className="check-mark-wrapper">
+                    <div className="check-mark-wrapper" onClick={this.props.closeTeamPickSuccessfullySubmitedModal}>
                         &#10004;
                     </div>
                 </div>

@@ -81,12 +81,22 @@ export default class AppStore extends Component {
         isInitialLoading: true,
 
         hallOfFameSelectedDay: "all-days",
+        isHallOfFame: false
 
     }
-
+    depositIsHallOfFame = () => {
+        this.setState({
+            isHallOfFame: true
+        })
+    }
+    depositIsNotHallOfFame = () => {
+        this.setState({
+            isHallOfFame: false
+        })
+    }
     depositHallOfFameSelectedDay = (selectedDay) => {
-        this.setState ({
-            hallOfFameSelectedDay:selectedDay
+        this.setState({
+            hallOfFameSelectedDay: selectedDay,
         })
     }
 
@@ -220,7 +230,7 @@ export default class AppStore extends Component {
     componentDidMount() {
         let data = sessionStorage.getItem("bitrulez")
         this.setState({
-            bitrulez: data
+            bitrulez: data,
         })
 
         // this.interval = setInterval(
@@ -268,7 +278,9 @@ export default class AppStore extends Component {
                 depositUserKey: this.depositUserKey,
                 teamPickIsSubmitted: this.teamPickIsSubmitted,
                 depositSelectPlayerSearchValue: this.depositSelectPlayerSearchValue,
-                depositHallOfFameSelectedDay: this.depositHallOfFameSelectedDay
+                depositHallOfFameSelectedDay: this.depositHallOfFameSelectedDay,
+                depositIsHallOfFame: this.depositIsHallOfFame,
+                depositIsNotHallOfFame:this.depositIsNotHallOfFame
             }}>
 
                 {this.props.children}

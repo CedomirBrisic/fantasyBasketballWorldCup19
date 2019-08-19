@@ -93,17 +93,17 @@ class SelectPlayer extends React.Component {
                                 eligibleDays.forEach((day) => {
                                     if (player[day].assists !== "n/a") {
                                         gamesPlayed++
-                                        assistsSum = assistsSum + parseInt(player[day].assists)
-                                        reboundsSum = reboundsSum + parseInt(player[day].rebounds)
-                                        blocksSum = blocksSum + parseInt(player[day].blocks, 10)
-                                        stealsSum = stealsSum + parseInt(player[day].steals, 10)
-                                        turnoversSum = turnoversSum + parseInt(player[day].turnovers, 10)
-                                        freeThrowsScoredSum = freeThrowsScoredSum + parseInt(player[day].freeThrowScored, 10)
-                                        freeThrowsAttemptsSum = freeThrowsAttemptsSum + parseInt(player[day].freeThrowAttempts, 10)
-                                        fieldGoalsScoredSum = fieldGoalsScoredSum + parseInt(player[day].fieldGoalsScored, 10)
-                                        fieldGoalsAttemptsSum = fieldGoalsAttemptsSum + parseInt(player[day].fieldGoalsAttempts, 10)
-                                        threePointsScoredSum = threePointsScoredSum + parseInt(player[day].threePointsScored, 10)
-                                        threePointsAttemptsSum = threePointsAttemptsSum + parseInt(player[day].threePointsAttempts, 10)
+                                        assistsSum = !isNaN(parseInt(player[day].assists, 10)) ? assistsSum + parseInt(player[day].assists, 10) : assistsSum
+                                        reboundsSum = !isNaN(parseInt(player[day].rebounds, 10)) ? reboundsSum + parseInt(player[day].rebounds, 10) : reboundsSum
+                                        blocksSum =!isNaN(parseInt(player[day].blocks,10))? blocksSum + parseInt(player[day].blocks, 10): blocksSum
+                                        stealsSum = !isNaN(parseInt(player[day].steals,10))?stealsSum + parseInt(player[day].steals, 10): stealsSum
+                                        turnoversSum = !isNaN(parseInt(player[day].turnovers,10))?turnoversSum + parseInt(player[day].turnovers, 10): turnoversSum
+                                        freeThrowsScoredSum = !isNaN(parseInt(player[day].freeThrowScored,10))?freeThrowsScoredSum + parseInt(player[day].freeThrowScored, 10): freeThrowsScoredSum
+                                        freeThrowsAttemptsSum = !isNaN(parseInt(player[day].freeThrowAttempts,10))?freeThrowsAttemptsSum + parseInt(player[day].freeThrowAttempts, 10): freeThrowsAttemptsSum
+                                        fieldGoalsScoredSum = !isNaN(parseInt(player[day].fieldGoalsScored,10))?fieldGoalsScoredSum + parseInt(player[day].fieldGoalsScored, 10): fieldGoalsScoredSum
+                                        fieldGoalsAttemptsSum = !isNaN(parseInt(player[day].fieldGoalsAttempts,10))?fieldGoalsAttemptsSum + parseInt(player[day].fieldGoalsAttempts, 10): fieldGoalsAttemptsSum
+                                        threePointsScoredSum = !isNaN(parseInt(player[day].threePointsScored,10))?threePointsScoredSum + parseInt(player[day].threePointsScored, 10): threePointsScoredSum
+                                        threePointsAttemptsSum = !isNaN(parseInt(player[day].threePointsAttempts,10))?threePointsAttemptsSum + parseInt(player[day].threePointsAttempts, 10): threePointsAttemptsSum
                                     }
                                 })
 
@@ -111,8 +111,8 @@ class SelectPlayer extends React.Component {
                                 const outputPlayer =
                                     <tr key={player.name + index} className="single-player-item" data-player-name={player.name} data-player-team={player.team} onClick={this.context.showSinglePlayerModal}>
                                         <td data-player-name={player.name} data-player-team={player.team}>{` ${(calculateBasketballPlayerTDFantasyGrandTotalPoints(player) / gamesPlayed).toFixed(2)}`}</td>
-                                        <td data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
-                                        <td data-player-name={player.name} data-player-team={player.team}>{`${player.team}`}</td>
+                                        <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
+                                        <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${player.team}`}</td>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${(reboundsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (reboundsSum / gamesPlayed).toFixed(2)}`}</td>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${(blocksSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (blocksSum / gamesPlayed).toFixed(2)}`}</td>
@@ -152,25 +152,25 @@ class SelectPlayer extends React.Component {
                     eligibleDays.forEach((day) => {
                         if (player[day].assists !== "n/a") {
                             gamesPlayed++
-                            assistsSum = assistsSum + parseInt(player[day].assists)
-                            reboundsSum = reboundsSum + parseInt(player[day].rebounds)
-                            blocksSum = blocksSum + parseInt(player[day].blocks, 10)
-                            stealsSum = stealsSum + parseInt(player[day].steals, 10)
-                            turnoversSum = turnoversSum + parseInt(player[day].turnovers, 10)
-                            freeThrowsScoredSum = freeThrowsScoredSum + parseInt(player[day].freeThrowScored, 10)
-                            freeThrowsAttemptsSum = freeThrowsAttemptsSum + parseInt(player[day].freeThrowAttempts, 10)
-                            fieldGoalsScoredSum = fieldGoalsScoredSum + parseInt(player[day].fieldGoalsScored, 10)
-                            fieldGoalsAttemptsSum = fieldGoalsAttemptsSum + parseInt(player[day].fieldGoalsAttempts, 10)
-                            threePointsScoredSum = threePointsScoredSum + parseInt(player[day].threePointsScored, 10)
-                            threePointsAttemptsSum = threePointsAttemptsSum + parseInt(player[day].threePointsAttempts, 10)
+                            assistsSum = !isNaN(parseInt(player[day].assists, 10)) ? assistsSum + parseInt(player[day].assists, 10) : assistsSum
+                            reboundsSum = !isNaN(parseInt(player[day].rebounds, 10)) ? reboundsSum + parseInt(player[day].rebounds, 10) : reboundsSum
+                            blocksSum =!isNaN(parseInt(player[day].blocks,10))? blocksSum + parseInt(player[day].blocks, 10): blocksSum
+                            stealsSum = !isNaN(parseInt(player[day].steals,10))?stealsSum + parseInt(player[day].steals, 10): stealsSum
+                            turnoversSum = !isNaN(parseInt(player[day].turnovers,10))?turnoversSum + parseInt(player[day].turnovers, 10): turnoversSum
+                            freeThrowsScoredSum = !isNaN(parseInt(player[day].freeThrowScored,10))?freeThrowsScoredSum + parseInt(player[day].freeThrowScored, 10): freeThrowsScoredSum
+                            freeThrowsAttemptsSum = !isNaN(parseInt(player[day].freeThrowAttempts,10))?freeThrowsAttemptsSum + parseInt(player[day].freeThrowAttempts, 10): freeThrowsAttemptsSum
+                            fieldGoalsScoredSum = !isNaN(parseInt(player[day].fieldGoalsScored,10))?fieldGoalsScoredSum + parseInt(player[day].fieldGoalsScored, 10): fieldGoalsScoredSum
+                            fieldGoalsAttemptsSum = !isNaN(parseInt(player[day].fieldGoalsAttempts,10))?fieldGoalsAttemptsSum + parseInt(player[day].fieldGoalsAttempts, 10): fieldGoalsAttemptsSum
+                            threePointsScoredSum = !isNaN(parseInt(player[day].threePointsScored,10))?threePointsScoredSum + parseInt(player[day].threePointsScored, 10): threePointsScoredSum
+                            threePointsAttemptsSum = !isNaN(parseInt(player[day].threePointsAttempts,10))?threePointsAttemptsSum + parseInt(player[day].threePointsAttempts, 10): threePointsAttemptsSum
                         }
                     })
 
                     const outputPlayer =
                         <tr key={player.name + index} className="single-player-item" data-player-name={player.name} data-player-team={player.team} onClick={this.context.showSinglePlayerModal}>
                             <td data-player-name={player.name} data-player-team={player.team}>{` ${(calculateBasketballPlayerTDFantasyGrandTotalPoints(player) / gamesPlayed).toFixed(2)}`}</td>
-                            <td data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
-                            <td data-player-name={player.name} data-player-team={player.team}>{`${player.team}`}</td>
+                            <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
+                            <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${player.team}`}</td>
                             <td data-player-name={player.name} data-player-team={player.team}>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
                             <td data-player-name={player.name} data-player-team={player.team}>{`${(reboundsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (reboundsSum / gamesPlayed).toFixed(2)}`}</td>
                             <td data-player-name={player.name} data-player-team={player.team}>{`${(blocksSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (blocksSum / gamesPlayed).toFixed(2)}`}</td>
@@ -254,8 +254,8 @@ class SelectPlayer extends React.Component {
                             <thead>
                                 <tr className="">
                                     <th data-sort-filter-value="ptPerGame" onClick={this.depositSortFilterValue}><button data-sort-filter-value="ptPerGame" type="button" className={`btn ${this.state.sortFilterValue === "ptPerGame" ? "btn-success" : "btn-outline-dark"}`}>Fantasy points</button></th>
-                                    <th data-sort-filter-value="playerName" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerName" type="button" className={`btn ${this.state.sortFilterValue === "playerName" ? "btn-success" : "btn-outline-dark"}`}>Player name</button></th>
-                                    <th data-sort-filter-value="playerTeam" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerTeam" type="button" className={`btn ${this.state.sortFilterValue === "playerTeam" ? "btn-success" : "btn-outline-dark"}`}>Team</button></th>
+                                    <th className="not-centered" data-sort-filter-value="playerName" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerName" type="button" className={`btn ${this.state.sortFilterValue === "playerName" ? "btn-success" : "btn-outline-dark"}`}>Player name</button></th>
+                                    <th className="not-centered" data-sort-filter-value="playerTeam" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerTeam" type="button" className={`btn ${this.state.sortFilterValue === "playerTeam" ? "btn-success" : "btn-outline-dark"}`}>Team</button></th>
                                     <th data-sort-filter-value="assists" onClick={this.depositSortFilterValue}><button data-sort-filter-value="assists" type="button" className={`btn ${this.state.sortFilterValue === "assists" ? "btn-success" : "btn-outline-dark"}`}>Assists</button></th>
                                     <th data-sort-filter-value="rebounds" onClick={this.depositSortFilterValue}><button data-sort-filter-value="rebounds" type="button" className={`btn ${this.state.sortFilterValue === "rebounds" ? "btn-success" : "btn-outline-dark"}`}>Rebounds</button></th>
                                     <th data-sort-filter-value="blocks" onClick={this.depositSortFilterValue}><button data-sort-filter-value="blocks" type="button" className={`btn ${this.state.sortFilterValue === "blocks" ? "btn-success" : "btn-outline-dark"}`}>Blocks</button></th>

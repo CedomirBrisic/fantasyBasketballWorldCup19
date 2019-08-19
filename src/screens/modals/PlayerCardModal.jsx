@@ -318,7 +318,7 @@ class PlayerCardModal extends React.Component {
                                 {calculateBasketballPlayerTDFantasyGrandTotalPoints(this.context.selectedPlayerForPlayerCardModal).toFixed(2)} Points
                         </div>
                         </div>
-                        {this.context.showSelectPlayer &&
+                        {this.context.showSelectPlayer && !this.context.isHallOfFame &&
                             <button type="button" className="btn btn-success" data-picked-player-id={`${this.context.selectedPlayerForPlayerCardModal._id.$oid}`} onClick={this.pickThisPlayerForTeam}>I want this guy in my team for {this.context.selectedDay}</button>
                         }
                     </div>

@@ -72,6 +72,9 @@
                     border-radius: 0.2vw;
                 }
             }
+            .not-centered{
+                text-align: start;
+            }
 
             tbody {
                 tr {
@@ -86,6 +89,9 @@
 
                     td {
                         text-align: center;
+                    }
+                    .not-centered{
+                        text-align: start;
                     }
                 }
 

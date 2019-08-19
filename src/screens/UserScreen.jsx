@@ -13,6 +13,7 @@ class UserScreen extends React.Component {
 
     componentDidMount() {
         this.context.getFantasyDataContext()
+        this.context.depositIsNotHallOfFame()
     }
     toggleShowSelectDayDashboard = () => {
         this.context.toggleShowSelectDayDashboard()

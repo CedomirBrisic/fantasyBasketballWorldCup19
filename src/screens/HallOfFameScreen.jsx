@@ -3,7 +3,7 @@ import { AppContext } from '../screens/_context/AppContext';
 import { Link } from 'react-router-dom'
 import HallOfFameLists from './common/HallOfFameLists';
 import HallOfFameUserStats from './common/HallOfFameUserStats';
-import HallOfFamePlayerListStats from "./common/HallOfFamePlayerListStats";
+import HallOfFameRealLifePlayerListStats from "./common/HallOfFameRealLifePlayerListStats";
 import DashboardSelectDay from "./common/DashboardSelectDay";
 
 
@@ -12,7 +12,7 @@ import DashboardSelectDay from "./common/DashboardSelectDay";
 class HallOfFameScreen extends React.Component {
     static contextType = AppContext;
     state = {
-        listView: "basketball-players-stats",
+        listView: "basketball-players-real-life-stats",
     }
 
     depositSelectedDay = (event) => {
@@ -30,17 +30,17 @@ class HallOfFameScreen extends React.Component {
         if (this.context.isInitialLoading) {
             this.context.getFantasyDataContext()
         }
+        this.context.depositIsHallOfFame()
     }
 
     render() {
-        // console.log(this.state.listView === "basketball-players-stats?" ? "active" : "")
         return (
             <div className="hall-of-fame-screen-container d-flex flex-column">
                 <div className="d-flex">
                     <div className="dashboard-select-day-container d-flex flex-column justify align-items-center show-selected-day">
                         <p><i>Select Round for more details</i></p>
                         <div className="dashboard-select-day-list-wrapper d-flex flex-column justify-content-between">
-                            <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "all-days" ? "is-selected" : ""}`} data-day-to-select="all-days" onClick={this.depositSelectedDay}>All rounds so far</button>
+                            <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "all-days" ? "is-selected" : ""}`} data-day-to-select="all-days" onClick={this.depositSelectedDay}>All rounds - Total</button>
                             <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "31st-August" ? "is-selected" : ""}`} data-day-to-select="31st-August" onClick={this.depositSelectedDay}>31st August</button>
                             <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "1st-September" ? "is-selected" : ""}`} data-day-to-select="1st-September" onClick={this.depositSelectedDay}>1st September</button>
                             <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "2nd-September" ? "is-selected" : ""}`} data-day-to-select="2nd-September" onClick={this.depositSelectedDay}>2nd September</button>
@@ -59,18 +59,22 @@ class HallOfFameScreen extends React.Component {
                             <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "15th-September" ? "is-selected" : ""}`} data-day-to-select="15th-September" onClick={this.depositSelectedDay}>15th September</button>
                         </div>
                     </div>
-                    <div className="lists-container">
-                        <div className="hall-of-fame-links-wrapper d-flex justify-content-around">
-                            <button type="button" className={`btn btn-outline-dark ${this.state.listView === "f1wc" ? "active" : ""}`} data-view="f1wc" onClick={this.depositSelectedList}>F1WC Points</button>
-                            <button type="button" className={`btn btn-outline-dark ${this.state.listView === "round-points" ? "active" : ""}`} data-view="round-points" onClick={this.depositSelectedList}>Round points</button>
-                            <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-stats" ? "active" : ""}`} data-view="basketball-players-stats" onClick={this.depositSelectedList}>Basketball Players stats</button>
-                        </div>
-                        {/* <HallOfFameLists />
+                    {this.context.isInitialLoading &&
+                        <h1>It's Loading...</h1>}
+                    {!this.context.isInitialLoading &&
+                        <div className="lists-container">
+                            <div className="hall-of-fame-links-wrapper d-flex justify-content-around">
+                                <button type="button" className={`btn btn-outline-dark ${this.state.listView === "f1wc" ? "active" : ""}`} data-view="f1wc" onClick={this.depositSelectedList}>Users F1WC Points</button>
+                                <button type="button" className={`btn btn-outline-dark ${this.state.listView === "round-points" ? "active" : ""}`} data-view="round-points" onClick={this.depositSelectedList}>Users Round points</button>
+                                <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-real-life-stats" ? "active" : ""}`} data-view="basketball-players-real-life-stats" onClick={this.depositSelectedList}>Players Real Life stats</button>
+                            </div>
+                            {/* <HallOfFameLists />
                             <HallOfFameUserStats /> */}
-                        {this.state.listView === "basketball-players-stats" &&
-                            <HallOfFamePlayerListStats />
-                        }
-                    </div>
+                            {this.state.listView === "basketball-players-real-life-stats" &&
+                                <HallOfFameRealLifePlayerListStats />
+                            }
+                        </div>
+                    }
 
                 </div>
                 <Link to={`user-screen`}>

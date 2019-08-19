@@ -7,27 +7,37 @@
         border: 4px double #ffffff;
         padding-left: 1vw;
         height: 43vw;
-        color: #ffffff;
+        color: rgba(255, 255, 255, 0);
         overflow-y: scroll;
         scroll-behavior: smooth;
         //ZA ANIMACIJU!!!
         background-color: rgba(0, 0, 0, 0);
         animation: darkenBackground 2s forwards;
+
         @keyframes darkenBackground {
-            0%{
-                background-color: rgba(0, 0, 0, 0); 
+            0% {
+                background-color: rgba(0, 0, 0, 0);
+                color: rgba(255, 255, 255, 0);
+
             }
-            100%{
-                    background-color: rgba(0, 0, 0, 0.90); 
-                }
+
+            100% {
+                background-color: rgba(0, 0, 0, 0.90);
+                color: rgba(255, 255, 255, 1);
+
+            }
         }
+
         @-webkit-keyframes darkenBackground {
-            0%{
-                background-color: rgba(0, 0, 0, 0); 
+            0% {
+                background-color: rgba(0, 0, 0, 0);
+                color: rgba(255, 255, 255, 0);
             }
-            100%{
-                    background-color: rgba(0, 0, 0, 0.90); 
-                }
+
+            100% {
+                background-color: rgba(0, 0, 0, 0.90);
+                color: rgba(255, 255, 255, 1);
+            }
         }
 
         th {
@@ -45,7 +55,8 @@
             height: 3vw;
             background-color: rgba(255, 255, 255, 0.79);
             text-align: center;
-            .btn{
+
+            .btn {
                 font-size: 0.79vw;
                 padding: 0.4vw 1vw;
             }
@@ -66,6 +77,9 @@
                 background-color: rgba(255, 255, 255, 0.79);
                 color: #000000;
                 cursor: pointer;
+            }
+            .not-centered{
+                text-align: start;
             }
         }
     }
