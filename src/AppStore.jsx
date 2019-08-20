@@ -94,10 +94,19 @@ export default class AppStore extends Component {
             isHallOfFame: false
         })
     }
-    depositHallOfFameSelectedDay = (selectedDay) => {
-        this.setState({
-            hallOfFameSelectedDay: selectedDay,
-        })
+    depositHallOfFameSelectedDay = (dayToDeposit) => {
+        if (dayToDeposit !== "all-days"){
+            this.setState({
+                hallOfFameSelectedDay: dayToDeposit,
+                selectedDay: dayToDeposit
+            })            
+        } else {
+            this.setState({
+                hallOfFameSelectedDay: dayToDeposit,
+                selectedDay: "31st-August"
+            })
+
+        }
     }
 
     depositSelectPlayerSearchValue = (data) => {

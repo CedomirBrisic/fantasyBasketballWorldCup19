@@ -206,7 +206,7 @@ class PlayerCardModal extends React.Component {
                                     <span className="label" data-stats-element="turnovers-wrapper">
                                         Turnovers:
                                 </span>
-                                    <span className="data" data-stats-element="turnovers-wrapper">
+                                    <span className={`data ${this.state.tdFantasyPoints.turnovers < 0 ? "text-danger" : ""}`} data-stats-element="turnovers-wrapper">
                                         {this.state.tdFantasyPoints.turnovers}
                                     </span>
                                 </div>
@@ -225,7 +225,7 @@ class PlayerCardModal extends React.Component {
                                         <span className="label" data-stats-element="free-throws-wrapper">
                                             Free throws - bonus:
                                         </span>
-                                        <span className="data" data-stats-element="free-throws-wrapper">
+                                        <span className={`data ${this.state.tdFantasyPoints.freeThrowsPointsBonus > 0 ? "text-success" : ""}`} data-stats-element="free-throws-wrapper">
                                             {this.state.tdFantasyPoints.freeThrowsPointsBonus}
                                         </span>
                                     </div>
@@ -233,7 +233,7 @@ class PlayerCardModal extends React.Component {
                                         <span className="label" data-stats-element="free-throws-wrapper">
                                             Free throws - penalty:
                                         </span>
-                                        <span className="data" data-stats-element="free-throws-wrapper">
+                                        <span className={`data ${this.state.tdFantasyPoints.freeThrowsPointsPenalty < 0 ? "text-danger" : ""}`} data-stats-element="free-throws-wrapper">
                                             {this.state.tdFantasyPoints.freeThrowsPointsPenalty}
                                         </span>
                                     </div>
@@ -254,7 +254,7 @@ class PlayerCardModal extends React.Component {
                                         <span className="label" data-stats-element="two-points-wrapper">
                                             Two points - bonus:
                                     </span>
-                                        <span className="data" data-stats-element="two-points-wrapper">
+                                        <span className={`data ${this.state.tdFantasyPoints.twoPointsBonus > 0 ? "text-success" : ""}`} data-stats-element="two-points-wrapper">
                                             {this.state.tdFantasyPoints.twoPointsBonus}
                                         </span>
                                     </div>
@@ -262,7 +262,7 @@ class PlayerCardModal extends React.Component {
                                         <span className="label" data-stats-element="two-points-wrapper">
                                             Two points - penalty:
                                     </span>
-                                        <span className="data" data-stats-element="two-points-wrapper">
+                                        <span className={`data ${this.state.tdFantasyPoints.twoPointsPenalty < 0 ? "text-danger" : ""}`} data-stats-element="two-points-wrapper">
                                             {this.state.tdFantasyPoints.twoPointsPenalty}
                                         </span>
                                     </div>
@@ -283,7 +283,7 @@ class PlayerCardModal extends React.Component {
                                         <span className="label" data-stats-element="three-points-wrapper">
                                             Three points - bonus:
                                         </span>
-                                        <span className="data" data-stats-element="three-points-wrapper">
+                                        <span className={`data ${this.state.tdFantasyPoints.threePointsBonus > 0 ? "text-success" : ""}`} data-stats-element="three-points-wrapper">
                                             {this.state.tdFantasyPoints.threePointsBonus}
                                         </span>
                                     </div>
@@ -291,7 +291,7 @@ class PlayerCardModal extends React.Component {
                                         <span className="label" data-stats-element="three-points-wrapper">
                                             Three points - penalty:
                                         </span>
-                                        <span className="data" data-stats-element="three-points-wrapper">
+                                        <span className={`data ${this.state.tdFantasyPoints.threePointsPenalty < 0 ? "text-danger" : ""}`} data-stats-element="three-points-wrapper">
                                             {this.state.tdFantasyPoints.threePointsPenalty}
                                         </span>
                                     </div>

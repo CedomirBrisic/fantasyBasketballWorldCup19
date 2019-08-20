@@ -77,6 +77,36 @@ const sortPlayersOnSelectScreen = (playersForRender, sortFilterName, selectPlaye
                 singlePlayerFilterDataValue.valueForSorting = playersForRender[i].props.children[1].props.children
                 singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
                 break;
+            case 'gamesWon':
+                singlePlayerFilterDataValue.playerIndex = i;
+                singlePlayerFilterDataValue.valueForSorting = playersForRender[i].props.children[2].props.children
+                singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
+                break;
+            case 'freeThrowsFantasy':
+                singlePlayerFilterDataValue.playerIndex = i;
+                singlePlayerFilterDataValue.valueForSorting = playersForRender[i].props.children[8].props.children
+                singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
+                break;
+            case 'twoPointsFantasy':
+                singlePlayerFilterDataValue.playerIndex = i;
+                singlePlayerFilterDataValue.valueForSorting = playersForRender[i].props.children[9].props.children
+                singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
+                break;
+            case 'threePointsFantasy':
+                singlePlayerFilterDataValue.playerIndex = i;
+                singlePlayerFilterDataValue.valueForSorting = playersForRender[i].props.children[10].props.children
+                singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
+                break;
+            case 'bonuses':
+                singlePlayerFilterDataValue.playerIndex = i;
+                singlePlayerFilterDataValue.valueForSorting = playersForRender[i].props.children[11].props.children
+                singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
+                break;
+            case 'penalties':
+                singlePlayerFilterDataValue.playerIndex = i;
+                singlePlayerFilterDataValue.valueForSorting = playersForRender[i].props.children[12].props.children
+                singlePlayerFilterDataValue.playerName = playersForRender[i].props.children[1].props.children
+                break;
         }
 
         if (isNaN(singlePlayerFilterDataValue.valueForSorting)) {
@@ -85,12 +115,12 @@ const sortPlayersOnSelectScreen = (playersForRender, sortFilterName, selectPlaye
             playersFilterDataValuesForSorting.push(singlePlayerFilterDataValue)
         }
     }
-    
-    
+
+
     playersFilterDataValuesForSorting.sort(function (a, b) {
         return b.valueForSorting - a.valueForSorting
     })
-    
+
     let playersFilterDataValuesSorted = playersFilterDataValuesForSorting.concat(playersFilterDataValuesForNotSorting)
 
     if (sortFilterName === "freeThrows" || sortFilterName === "twoPoints" || sortFilterName === "threePoints") {

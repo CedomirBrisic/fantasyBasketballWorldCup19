@@ -12,9 +12,7 @@ import PlayerCardModal from "../modals/PlayerCardModal";
 class HallOfFamePlayerListStats extends React.Component {
     static contextType = AppContext;
     state = {
-        sortFilterValue: "ptPerGame",
-        playerSearchValue: ""
-
+        sortFilterValue: "ptPerGame"
     }
     depositSortFilterValue = (event) => {
         const sortFilterValue = event.target.getAttribute("data-sort-filter-value")
@@ -129,7 +127,7 @@ class HallOfFamePlayerListStats extends React.Component {
             })
         }
 
-        const sortedOutputPlayer = sortPlayersOnSelectScreen(outputPlayers, this.state.sortFilterValue, this.state.playerSearchValue)
+        const sortedOutputPlayer = sortPlayersOnSelectScreen(outputPlayers, this.state.sortFilterValue, this.props.searchValue)
         return sortedOutputPlayer
     }
 
@@ -145,8 +143,8 @@ class HallOfFamePlayerListStats extends React.Component {
                             <thead className="w-100">
                                 <tr className="w-100">
                                     <th data-sort-filter-value="ptPerGame" onClick={this.depositSortFilterValue}><button data-sort-filter-value="ptPerGame" type="button" className={`btn ${this.state.sortFilterValue === "ptPerGame" ? "btn-success" : "btn-outline-dark"}`}>Fantasy points</button></th>
-                                    <th className="not-centered"><button data-sort-filter-value="playerName" type="button" className={`btn ${this.state.sortFilterValue === "playerName" ? "btn-success" : "btn-outline-dark"}`}>Player name</button></th>
-                                    <th className="not-centered"><button data-sort-filter-value="playerTeam" type="button" className={`btn ${this.state.sortFilterValue === "playerTeam" ? "btn-success" : "btn-outline-dark"}`}>Team</button></th>
+                                    <th className="not-centered">Player name</th>
+                                    <th className="not-centered">Team</th>
                                     <th data-sort-filter-value="assists" onClick={this.depositSortFilterValue}><button data-sort-filter-value="assists" type="button" className={`btn ${this.state.sortFilterValue === "assists" ? "btn-success" : "btn-outline-dark"}`}>Assists</button></th>
                                     <th data-sort-filter-value="rebounds" onClick={this.depositSortFilterValue}><button data-sort-filter-value="rebounds" type="button" className={`btn ${this.state.sortFilterValue === "rebounds" ? "btn-success" : "btn-outline-dark"}`}>Rebounds</button></th>
                                     <th data-sort-filter-value="blocks" onClick={this.depositSortFilterValue}><button data-sort-filter-value="blocks" type="button" className={`btn ${this.state.sortFilterValue === "blocks" ? "btn-success" : "btn-outline-dark"}`}>Blocks</button></th>

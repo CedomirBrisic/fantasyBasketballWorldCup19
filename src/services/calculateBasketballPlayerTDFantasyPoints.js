@@ -26,7 +26,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
     if (inputPlayerData[cardSelectedDay].teamWin === "no") {
         calulatedGameWin = "0"
     } else if (inputPlayerData[cardSelectedDay].teamWin === "yes") {
-        calulatedGameWin = "+4"
+        calulatedGameWin = "4"
         calculatedSummaSummarum += 4
     } else {
         calulatedGameWin = "n/a"
@@ -36,7 +36,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
     if (inputPlayerData[cardSelectedDay].assists === "0") {
         calulatedAssists = "0"
     } else if (parseInt(inputPlayerData[cardSelectedDay].assists, 10) > 0) {
-        calulatedAssists = `+${inputPlayerData[cardSelectedDay].assists}`
+        calulatedAssists = `${inputPlayerData[cardSelectedDay].assists}`
         calculatedSummaSummarum += parseInt(inputPlayerData[cardSelectedDay].assists, 10)
     } else {
         calulatedAssists = "n/a"
@@ -46,7 +46,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
     if (inputPlayerData[cardSelectedDay].rebounds === "0") {
         calulatedRebounds = "0"
     } else if (parseInt(inputPlayerData[cardSelectedDay].rebounds, 10) > 0) {
-        calulatedRebounds = `+${inputPlayerData[cardSelectedDay].rebounds}`
+        calulatedRebounds = `${inputPlayerData[cardSelectedDay].rebounds}`
         calculatedSummaSummarum += parseInt(inputPlayerData[cardSelectedDay].rebounds, 10)
     } else {
         calulatedRebounds = "n/a"
@@ -56,7 +56,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
     if (inputPlayerData[cardSelectedDay].blocks === "0") {
         calulatedBlocks = "0"
     } else if (parseInt(inputPlayerData[cardSelectedDay].blocks, 10) > 0) {
-        calulatedBlocks = `+${inputPlayerData[cardSelectedDay].blocks}`
+        calulatedBlocks = `${inputPlayerData[cardSelectedDay].blocks}`
         calculatedSummaSummarum += parseInt(inputPlayerData[cardSelectedDay].blocks, 10)
     } else {
         calulatedBlocks = "n/a"
@@ -66,7 +66,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
     if (inputPlayerData[cardSelectedDay].steals === "0") {
         calulatedSteals = "0"
     } else if (parseInt(inputPlayerData[cardSelectedDay].steals, 10) > 0) {
-        calulatedSteals = `+${inputPlayerData[cardSelectedDay].steals}`
+        calulatedSteals = `${inputPlayerData[cardSelectedDay].steals}`
         calculatedSummaSummarum += parseInt(inputPlayerData[cardSelectedDay].steals, 10)
     } else {
         calulatedSteals = "n/a"
@@ -109,7 +109,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
         if (freeThrowPercentage === 0 || freeThrowPercentage === null) {
             calulatedFreeThrows = "0"
         } else {
-            calulatedFreeThrows = `+${(freeThrowsScored * freeThrowPercentage).toFixed(2)}`
+            calulatedFreeThrows = `${(freeThrowsScored * freeThrowPercentage).toFixed(2)}`
             calculatedSummaSummarum += (freeThrowsScored * freeThrowPercentage)
         }
 
@@ -154,7 +154,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
         if (twoPointsPercentage === 0 || twoPointsPercentage === null) {
             calulatedTwoPoints = "0"
         } else {
-            calulatedTwoPoints = `+${(twoPointsScored * 2 * twoPointsPercentage).toFixed(2)}`
+            calulatedTwoPoints = `${(twoPointsScored * 2 * twoPointsPercentage).toFixed(2)}`
             calculatedSummaSummarum += (twoPointsScored * 2 * twoPointsPercentage)
         }
 
@@ -179,7 +179,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
 
 
 
-     //          THREE POINTS          //
+    //          THREE POINTS          //
     ////////////////////////////////////////////////////////////////////////
     let threePointsScored = null
     let threePointsAttempts = null
@@ -200,7 +200,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
         if (threePointsPercentage === 0 || threePointsPercentage === null) {
             calulatedThreePoints = "0"
         } else {
-            calulatedThreePoints = `+${(threePointsScored * 3 * threePointsPercentage).toFixed(2)}`
+            calulatedThreePoints = `${(threePointsScored * 3 * threePointsPercentage).toFixed(2)}`
             calculatedSummaSummarum += (threePointsScored * 3 * threePointsPercentage)
         }
 
@@ -232,6 +232,31 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
         checkedSummaSummarum = "N/A"
     }
 
+    let calculatedBonusTotal = 0
+    if (!isNaN(calulatedFreePoints3ScoredWithoutMiss)) {
+        calculatedBonusTotal =  calculatedBonusTotal + parseFloat(calulatedFreePoints3ScoredWithoutMiss)
+    }
+    if (!isNaN(calulatedTwoPoints3ScoredWithoutMiss)) {
+        calculatedBonusTotal = calculatedBonusTotal + parseFloat(calulatedTwoPoints3ScoredWithoutMiss)
+    }
+    if (!isNaN(calulatedThreePoints3ScoredWithoutMiss)) {
+        calculatedBonusTotal = calculatedBonusTotal + parseFloat(calulatedThreePoints3ScoredWithoutMiss)
+    }
+
+
+    let calculatedPenaltiesTotal = 0
+    if (!isNaN(calulatedFreeThrows3Miss)) {
+        calculatedPenaltiesTotal =  calculatedPenaltiesTotal + parseFloat(calulatedFreeThrows3Miss)
+    }
+    if (!isNaN(calulatedTwoPoints3Miss)) {
+        calculatedPenaltiesTotal = calculatedPenaltiesTotal + parseFloat(calulatedTwoPoints3Miss)
+    }
+    if (!isNaN(calulatedThreePoints3Miss)) {
+        calculatedPenaltiesTotal = calculatedPenaltiesTotal + parseFloat(calulatedThreePoints3Miss)
+    }
+
+    
+
     const outputPlayerData = {
         gameWin: calulatedGameWin,
         assists: calulatedAssists,
@@ -245,9 +270,11 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
         twoPoints: calulatedTwoPoints,
         twoPointsBonus: calulatedTwoPoints3ScoredWithoutMiss,
         twoPointsPenalty: calulatedTwoPoints3Miss,
-        threePoints:calulatedThreePoints,
-        threePointsBonus:calulatedThreePoints3ScoredWithoutMiss,
-        threePointsPenalty:calulatedThreePoints3Miss,
+        threePoints: calulatedThreePoints,
+        threePointsBonus: calulatedThreePoints3ScoredWithoutMiss,
+        threePointsPenalty: calulatedThreePoints3Miss,
+        bonusesSummaSummarum: calculatedBonusTotal,
+        penaltiesSummaSummarum: calculatedPenaltiesTotal,
         summaSummarum: checkedSummaSummarum,
     }
     return outputPlayerData

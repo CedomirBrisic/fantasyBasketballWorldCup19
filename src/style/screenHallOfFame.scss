@@ -15,8 +15,15 @@
             .btn{
                 font-size: 1vw;
                 font-weight: 800;
-                padding-left: 3vw;
-                padding-right: 3vw;
+                padding-left: 1.5vw;
+                padding-right: 1.5vw;
+            }
+            input{
+                width: 15vw;
+                padding: 0 1vw;
+                outline: none;
+                border: 4px double #000000;
+                font-size: 1vw;
             }
         }
     }

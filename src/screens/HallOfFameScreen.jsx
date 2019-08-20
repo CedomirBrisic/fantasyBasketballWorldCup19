@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import HallOfFameLists from './common/HallOfFameLists';
 import HallOfFameUserStats from './common/HallOfFameUserStats';
 import HallOfFameRealLifePlayerListStats from "./common/HallOfFameRealLifePlayerListStats";
+import HallOfFameFantasyPlayersList from "./common/HallOfFameFantasyPlayersList";
 import DashboardSelectDay from "./common/DashboardSelectDay";
 
 
@@ -12,7 +13,9 @@ import DashboardSelectDay from "./common/DashboardSelectDay";
 class HallOfFameScreen extends React.Component {
     static contextType = AppContext;
     state = {
-        listView: "basketball-players-real-life-stats",
+        listView: "basketball-players-fantasy-points",
+        searchPlaceholder: "Search player by name",
+        searchValue: ""
     }
 
     depositSelectedDay = (event) => {
@@ -22,8 +25,22 @@ class HallOfFameScreen extends React.Component {
 
     depositSelectedList = (event) => {
         const listView = event.target.getAttribute("data-view")
+        let searchPlaceholderValue = ""
+
+        if (listView === "basketball-players-real-life-stats" || listView === "basketball-players-fantasy-points") {
+            searchPlaceholderValue = "Search player by name"
+        } else {
+            searchPlaceholderValue = "Search user by name"
+        }
         this.setState({
-            listView
+            listView,
+            searchPlaceholderValue
+        })
+    }
+    depositSearchValue = (event) => {
+        const searchValue = event.target.value
+        this.setState({
+            searchValue
         })
     }
     componentDidMount() {
@@ -64,14 +81,19 @@ class HallOfFameScreen extends React.Component {
                     {!this.context.isInitialLoading &&
                         <div className="lists-container">
                             <div className="hall-of-fame-links-wrapper d-flex justify-content-around">
-                                <button type="button" className={`btn btn-outline-dark ${this.state.listView === "f1wc" ? "active" : ""}`} data-view="f1wc" onClick={this.depositSelectedList}>Users F1WC Points</button>
-                                <button type="button" className={`btn btn-outline-dark ${this.state.listView === "round-points" ? "active" : ""}`} data-view="round-points" onClick={this.depositSelectedList}>Users Round points</button>
-                                <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-real-life-stats" ? "active" : ""}`} data-view="basketball-players-real-life-stats" onClick={this.depositSelectedList}>Players Real Life stats</button>
+                                <button type="button" className={`btn btn-outline-dark ${this.state.listView === "f1wc" ? "active" : ""}`} data-view="f1wc" onClick={this.depositSelectedList}>Users - F1WC Points</button>
+                                <button type="button" className={`btn btn-outline-dark ${this.state.listView === "round-points" ? "active" : ""}`} data-view="round-points" onClick={this.depositSelectedList}>Users - Round points</button>
+                                <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-fantasy-points" ? "active" : ""}`} data-view="basketball-players-fantasy-points" onClick={this.depositSelectedList}>Players - Fantasy points</button>
+                                <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-real-life-stats" ? "active" : ""}`} data-view="basketball-players-real-life-stats" onClick={this.depositSelectedList}>Players - Real Life stats</button>
+                                <input type="search" placeholder={this.state.searchPlaceholder} value={this.state.searchValue} onChange={this.depositSearchValue} />
                             </div>
                             {/* <HallOfFameLists />
                             <HallOfFameUserStats /> */}
+                            {this.state.listView === "basketball-players-fantasy-points" &&
+                                <HallOfFameFantasyPlayersList searchValue={this.state.searchValue} />
+                            }
                             {this.state.listView === "basketball-players-real-life-stats" &&
-                                <HallOfFameRealLifePlayerListStats />
+                                <HallOfFameRealLifePlayerListStats searchValue={this.state.searchValue} />
                             }
                         </div>
                     }
