@@ -42,14 +42,20 @@ class Register extends React.Component {
     }
     depositEmail = (event) => {
         const email = event.target.value;
+        
         this.setState({
             email
         })
     }
+    checkIsEnter = (event) => {
+        if (event.keyCode === 13) {
+            this.sendRegistration()
+        }
+    }
 
     sendRegistration = () => {
         let isValidated = true
-        if (this.state.username === "") {
+        if (this.state.username === "" || this.state.username.length > 16) {
             this.setState({
                 validateUsernameAlert: true
             })
@@ -102,7 +108,7 @@ class Register extends React.Component {
                 if (response.length === 0) {
                     postRegisterNewUser(data, "nekaRenDomSiFRaOdDostaKARAkterA123").then(() => {
                         postRegisterNewFantasyUser(data.username, "nekaRendOMSiFRaOdDostaKARAkterA123").then(() => {
-                            this.props.successfullyRegistered();
+                            this.props.successfullyRegistered(data.username, data.password);
                         })
                     })
                 } else {
@@ -117,7 +123,7 @@ class Register extends React.Component {
 
     checkUsernameValidationMessage = () => {
         if (this.state.validateUsernameAlert) {
-            return "Hey! You need to put something as Username"
+            return "Hey! You need to put something as Username but not more then 16 characters"
         } else {
             return this.state.isUsernameOccupied ? "User Name is Occupied, you need to be more creative :-)" : "";
         }
@@ -150,7 +156,7 @@ class Register extends React.Component {
                         {this.checkUsernameValidationMessage()}
                     </label>
                     <input value={this.state.username} onChange={this.depositUsername} type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username" required />
-                    <small id="usernameHelp" className="form-text text-muted">It's your username for this game. And it needs to be unique.
+                    <small id="usernameHelp" className="form-text text-muted">It's your username for this game<br/>It needs to be unique and it has to be 16 characters max.
                         </small>
                 </div>
                 <div className="form-group">
@@ -173,7 +179,7 @@ class Register extends React.Component {
                     <label htmlFor="emailInput" className={`${this.state.validateEmailAlert ? "red-letters" : ""}`}>
                         {this.checkEmailValidationMessage()}
                     </label>
-                    <input value={this.state.email} onChange={this.depositEmail} type="email" className="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email" required />
+                    <input value={this.state.email} onChange={this.depositEmail} onKeyDown={this.checkIsEnter} type="email" className="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email" required />
                     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.<br />
                         We actually don't know why do we need it at all :-)
                         </small>

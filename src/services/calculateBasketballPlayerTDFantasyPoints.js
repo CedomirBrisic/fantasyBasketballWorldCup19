@@ -234,7 +234,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
 
     let calculatedBonusTotal = 0
     if (!isNaN(calulatedFreePoints3ScoredWithoutMiss)) {
-        calculatedBonusTotal =  calculatedBonusTotal + parseFloat(calulatedFreePoints3ScoredWithoutMiss)
+        calculatedBonusTotal = calculatedBonusTotal + parseFloat(calulatedFreePoints3ScoredWithoutMiss)
     }
     if (!isNaN(calulatedTwoPoints3ScoredWithoutMiss)) {
         calculatedBonusTotal = calculatedBonusTotal + parseFloat(calulatedTwoPoints3ScoredWithoutMiss)
@@ -246,7 +246,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
 
     let calculatedPenaltiesTotal = 0
     if (!isNaN(calulatedFreeThrows3Miss)) {
-        calculatedPenaltiesTotal =  calculatedPenaltiesTotal + parseFloat(calulatedFreeThrows3Miss)
+        calculatedPenaltiesTotal = calculatedPenaltiesTotal + parseFloat(calulatedFreeThrows3Miss)
     }
     if (!isNaN(calulatedTwoPoints3Miss)) {
         calculatedPenaltiesTotal = calculatedPenaltiesTotal + parseFloat(calulatedTwoPoints3Miss)
@@ -254,8 +254,6 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
     if (!isNaN(calulatedThreePoints3Miss)) {
         calculatedPenaltiesTotal = calculatedPenaltiesTotal + parseFloat(calulatedThreePoints3Miss)
     }
-
-    
 
     const outputPlayerData = {
         gameWin: calulatedGameWin,

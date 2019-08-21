@@ -8,13 +8,17 @@ class SignInWrapper extends React.Component {
         super(props)
         this.state = {
             successfullyRegistered: false,
-            initialLoad: true
+            initialLoad: true,
+            username: "",
+            password:"",
         }
     }
 
-    successfullyRegistered = () => {
+    successfullyRegistered = (name, pass) => {
         this.setState({
-            successfullyRegistered: true
+            successfullyRegistered: true,
+            username: name,
+            password:pass
         })
     }
 
@@ -45,7 +49,7 @@ class SignInWrapper extends React.Component {
                         <a className="nav-link btn-outline-light" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Register</a>
                     </div>
                     <div className="tab-content" id="v-pills-tabContent">
-                        <div className={`tab-pane fade ${this.checkIsActiveTab()}`} id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"><LogIn successfullyRegistered={this.state.successfullyRegistered} /></div>
+                        <div className={`tab-pane fade ${this.checkIsActiveTab()}`} id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"><LogIn successfullyRegistered={this.state.successfullyRegistered} username={this.state.username} password={this.state.password}/></div>
                         <div className={`tab-pane fade ${this.checkIsActiveTab2()}`} id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><Register successfullyRegistered={this.successfullyRegistered}/></div>
                     </div>
                 </div>

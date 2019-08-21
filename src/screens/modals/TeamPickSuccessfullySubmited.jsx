@@ -8,12 +8,21 @@ class TeamPickSuccessfullySubmited extends React.Component {
 
         }
     }
+
+    componentDidUpdate(prevProps) {
+        if (!prevProps.showTeamPickSuccessfullySubmited && this.props.showTeamPickSuccessfullySubmited) {
+            setTimeout(function () {
+                this.props.closeTeamPickSuccessfullySubmitedModal()
+            }.bind(this)
+                , 2400);
+        }
+    }
     render() {
         return (
             <Modal className="team-pick-modal-successfully-submited-container" visible={this.props.showTeamPickSuccessfullySubmited} onClickBackdrop={this.props.closeTeamPickSuccessfullySubmitedModal}>
                 <div className="d-flex align-items-center message">
-                    <h3>Good job!!! <br/>
-                    Your selection is successfully submitted</h3>
+                    <h3>Good job!!! <br />
+                        Your selection is successfully submitted</h3>
                     <div className="check-mark-wrapper" onClick={this.props.closeTeamPickSuccessfullySubmitedModal}>
                         &#10004;
                     </div>

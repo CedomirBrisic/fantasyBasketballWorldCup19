@@ -262,13 +262,13 @@ class PlayersOnField extends React.Component {
                         <div>Round points total: <span className="round-points">{isNaN(this.context.teamPickDayTotal) ? "0.00" : this.context.teamPickDayTotal}</span></div>
                         <div className="clockify-wrapper d-flex justify-content-between">
                             <span>
-                                Zulu time:
-                            </span>
-                            <span>
                                 {this.context.nowDateAndTime.humanDate}
                             </span>
                             <span>
                                 {this.context.nowDateAndTime.humanTime}
+                            </span>
+                            <span>
+                                Zulu time
                             </span>
                         </div>
                     </div>

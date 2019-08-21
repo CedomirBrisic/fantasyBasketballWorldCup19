@@ -95,15 +95,15 @@ class SelectPlayer extends React.Component {
                                         gamesPlayed++
                                         assistsSum = !isNaN(parseInt(player[day].assists, 10)) ? assistsSum + parseInt(player[day].assists, 10) : assistsSum
                                         reboundsSum = !isNaN(parseInt(player[day].rebounds, 10)) ? reboundsSum + parseInt(player[day].rebounds, 10) : reboundsSum
-                                        blocksSum =!isNaN(parseInt(player[day].blocks,10))? blocksSum + parseInt(player[day].blocks, 10): blocksSum
-                                        stealsSum = !isNaN(parseInt(player[day].steals,10))?stealsSum + parseInt(player[day].steals, 10): stealsSum
-                                        turnoversSum = !isNaN(parseInt(player[day].turnovers,10))?turnoversSum + parseInt(player[day].turnovers, 10): turnoversSum
-                                        freeThrowsScoredSum = !isNaN(parseInt(player[day].freeThrowScored,10))?freeThrowsScoredSum + parseInt(player[day].freeThrowScored, 10): freeThrowsScoredSum
-                                        freeThrowsAttemptsSum = !isNaN(parseInt(player[day].freeThrowAttempts,10))?freeThrowsAttemptsSum + parseInt(player[day].freeThrowAttempts, 10): freeThrowsAttemptsSum
-                                        fieldGoalsScoredSum = !isNaN(parseInt(player[day].fieldGoalsScored,10))?fieldGoalsScoredSum + parseInt(player[day].fieldGoalsScored, 10): fieldGoalsScoredSum
-                                        fieldGoalsAttemptsSum = !isNaN(parseInt(player[day].fieldGoalsAttempts,10))?fieldGoalsAttemptsSum + parseInt(player[day].fieldGoalsAttempts, 10): fieldGoalsAttemptsSum
-                                        threePointsScoredSum = !isNaN(parseInt(player[day].threePointsScored,10))?threePointsScoredSum + parseInt(player[day].threePointsScored, 10): threePointsScoredSum
-                                        threePointsAttemptsSum = !isNaN(parseInt(player[day].threePointsAttempts,10))?threePointsAttemptsSum + parseInt(player[day].threePointsAttempts, 10): threePointsAttemptsSum
+                                        blocksSum = !isNaN(parseInt(player[day].blocks, 10)) ? blocksSum + parseInt(player[day].blocks, 10) : blocksSum
+                                        stealsSum = !isNaN(parseInt(player[day].steals, 10)) ? stealsSum + parseInt(player[day].steals, 10) : stealsSum
+                                        turnoversSum = !isNaN(parseInt(player[day].turnovers, 10)) ? turnoversSum + parseInt(player[day].turnovers, 10) : turnoversSum
+                                        freeThrowsScoredSum = !isNaN(parseInt(player[day].freeThrowScored, 10)) ? freeThrowsScoredSum + parseInt(player[day].freeThrowScored, 10) : freeThrowsScoredSum
+                                        freeThrowsAttemptsSum = !isNaN(parseInt(player[day].freeThrowAttempts, 10)) ? freeThrowsAttemptsSum + parseInt(player[day].freeThrowAttempts, 10) : freeThrowsAttemptsSum
+                                        fieldGoalsScoredSum = !isNaN(parseInt(player[day].fieldGoalsScored, 10)) ? fieldGoalsScoredSum + parseInt(player[day].fieldGoalsScored, 10) : fieldGoalsScoredSum
+                                        fieldGoalsAttemptsSum = !isNaN(parseInt(player[day].fieldGoalsAttempts, 10)) ? fieldGoalsAttemptsSum + parseInt(player[day].fieldGoalsAttempts, 10) : fieldGoalsAttemptsSum
+                                        threePointsScoredSum = !isNaN(parseInt(player[day].threePointsScored, 10)) ? threePointsScoredSum + parseInt(player[day].threePointsScored, 10) : threePointsScoredSum
+                                        threePointsAttemptsSum = !isNaN(parseInt(player[day].threePointsAttempts, 10)) ? threePointsAttemptsSum + parseInt(player[day].threePointsAttempts, 10) : threePointsAttemptsSum
                                     }
                                 })
 
@@ -154,15 +154,15 @@ class SelectPlayer extends React.Component {
                             gamesPlayed++
                             assistsSum = !isNaN(parseInt(player[day].assists, 10)) ? assistsSum + parseInt(player[day].assists, 10) : assistsSum
                             reboundsSum = !isNaN(parseInt(player[day].rebounds, 10)) ? reboundsSum + parseInt(player[day].rebounds, 10) : reboundsSum
-                            blocksSum =!isNaN(parseInt(player[day].blocks,10))? blocksSum + parseInt(player[day].blocks, 10): blocksSum
-                            stealsSum = !isNaN(parseInt(player[day].steals,10))?stealsSum + parseInt(player[day].steals, 10): stealsSum
-                            turnoversSum = !isNaN(parseInt(player[day].turnovers,10))?turnoversSum + parseInt(player[day].turnovers, 10): turnoversSum
-                            freeThrowsScoredSum = !isNaN(parseInt(player[day].freeThrowScored,10))?freeThrowsScoredSum + parseInt(player[day].freeThrowScored, 10): freeThrowsScoredSum
-                            freeThrowsAttemptsSum = !isNaN(parseInt(player[day].freeThrowAttempts,10))?freeThrowsAttemptsSum + parseInt(player[day].freeThrowAttempts, 10): freeThrowsAttemptsSum
-                            fieldGoalsScoredSum = !isNaN(parseInt(player[day].fieldGoalsScored,10))?fieldGoalsScoredSum + parseInt(player[day].fieldGoalsScored, 10): fieldGoalsScoredSum
-                            fieldGoalsAttemptsSum = !isNaN(parseInt(player[day].fieldGoalsAttempts,10))?fieldGoalsAttemptsSum + parseInt(player[day].fieldGoalsAttempts, 10): fieldGoalsAttemptsSum
-                            threePointsScoredSum = !isNaN(parseInt(player[day].threePointsScored,10))?threePointsScoredSum + parseInt(player[day].threePointsScored, 10): threePointsScoredSum
-                            threePointsAttemptsSum = !isNaN(parseInt(player[day].threePointsAttempts,10))?threePointsAttemptsSum + parseInt(player[day].threePointsAttempts, 10): threePointsAttemptsSum
+                            blocksSum = !isNaN(parseInt(player[day].blocks, 10)) ? blocksSum + parseInt(player[day].blocks, 10) : blocksSum
+                            stealsSum = !isNaN(parseInt(player[day].steals, 10)) ? stealsSum + parseInt(player[day].steals, 10) : stealsSum
+                            turnoversSum = !isNaN(parseInt(player[day].turnovers, 10)) ? turnoversSum + parseInt(player[day].turnovers, 10) : turnoversSum
+                            freeThrowsScoredSum = !isNaN(parseInt(player[day].freeThrowScored, 10)) ? freeThrowsScoredSum + parseInt(player[day].freeThrowScored, 10) : freeThrowsScoredSum
+                            freeThrowsAttemptsSum = !isNaN(parseInt(player[day].freeThrowAttempts, 10)) ? freeThrowsAttemptsSum + parseInt(player[day].freeThrowAttempts, 10) : freeThrowsAttemptsSum
+                            fieldGoalsScoredSum = !isNaN(parseInt(player[day].fieldGoalsScored, 10)) ? fieldGoalsScoredSum + parseInt(player[day].fieldGoalsScored, 10) : fieldGoalsScoredSum
+                            fieldGoalsAttemptsSum = !isNaN(parseInt(player[day].fieldGoalsAttempts, 10)) ? fieldGoalsAttemptsSum + parseInt(player[day].fieldGoalsAttempts, 10) : fieldGoalsAttemptsSum
+                            threePointsScoredSum = !isNaN(parseInt(player[day].threePointsScored, 10)) ? threePointsScoredSum + parseInt(player[day].threePointsScored, 10) : threePointsScoredSum
+                            threePointsAttemptsSum = !isNaN(parseInt(player[day].threePointsAttempts, 10)) ? threePointsAttemptsSum + parseInt(player[day].threePointsAttempts, 10) : threePointsAttemptsSum
                         }
                     })
 
@@ -218,12 +218,18 @@ class SelectPlayer extends React.Component {
                     <div className="d-flex justify-content-between align-items-center w-100 select-player-label-wrapper">
                         <div>
                             {this.context.selectedTeam &&
+                                this.context.selectedTeam === "Serbia" &&
+                                <a href={`https://www.sportske.net/vesti/kosarka/reprezentacija-srbije.html`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Pročitaj više o našima`}</button></a>
+                            }
+                            {this.context.selectedTeam &&
                                 this.context.selectedTeam === "Cote d'Ivoire" &&
+                                this.context.selectedTeam !== "Serbia" &&
                                 <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/Cote-d-Ivoire`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
                             }
                             {this.context.selectedTeam &&
                                 this.context.selectedTeam !== "all-eligible-teams" &&
                                 this.context.selectedTeam !== "Cote d'Ivoire" &&
+                                this.context.selectedTeam !== "Serbia" &&
                                 <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/${this.checkSelectedTeamString()}`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
                             }
                             {this.context.selectedTeam === "all-eligible-teams" &&
@@ -232,17 +238,17 @@ class SelectPlayer extends React.Component {
                         </div>
                         <div className="label-and-clock-wrapper d-flex justify-content-between align-items-center">
                             <div className="table-label">
-                                <i>Table of average stats (per game)</i>
+                                <i>Table of average Real Life stats (per game)</i>
                             </div>
                             <div className="clockify-wrapper d-flex justify-content-between">
-                                <span>
-                                    Zulu time:
-                                </span>
                                 <span>
                                     {this.context.nowDateAndTime.humanDate}
                                 </span>
                                 <span>
                                     {this.context.nowDateAndTime.humanTime}
+                                </span>
+                                <span>
+                                    Zulu time
                                 </span>
                             </div>
                         </div>

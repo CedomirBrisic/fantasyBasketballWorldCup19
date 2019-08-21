@@ -59,6 +59,7 @@ class Rules extends React.Component {
                         <button type="button" className="btn btn-outline-light" onClick={this.openF1WCPointsCalcModal}>F1WC points calc</button>
                         <button type="button" className="btn btn-outline-light" onClick={this.openRoundPointsCalcModal}>Round points calc</button>
                     </div>
+                    <i className="made-in">Made in Serbia, the Land of Basketball</i>
                 </section>
                 <Portal>
                     <RoundPointsCalc showRoundPointsCalc={this.state.showRoundPointsCalc} closeRoundPointsCalcModal={this.closeRoundPointsCalcModal} />

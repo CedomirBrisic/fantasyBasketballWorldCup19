@@ -1,11 +1,11 @@
 import React from 'react';
 import { AppContext } from '../screens/_context/AppContext';
 import { Link } from 'react-router-dom'
-import HallOfFameLists from './common/HallOfFameLists';
 import HallOfFameUserStats from './common/HallOfFameUserStats';
 import HallOfFameRealLifePlayerListStats from "./common/HallOfFameRealLifePlayerListStats";
 import HallOfFameFantasyPlayersList from "./common/HallOfFameFantasyPlayersList";
-import DashboardSelectDay from "./common/DashboardSelectDay";
+import HallOfFameF1WCList from './common/HallOfFameF1WCList';
+import HallOfFameTotalPointsList from './common/HallOfFameTotalPointsList';
 
 
 
@@ -13,7 +13,7 @@ import DashboardSelectDay from "./common/DashboardSelectDay";
 class HallOfFameScreen extends React.Component {
     static contextType = AppContext;
     state = {
-        listView: "basketball-players-fantasy-points",
+        listView: "round-points",
         searchPlaceholder: "Search player by name",
         searchValue: ""
     }
@@ -25,16 +25,16 @@ class HallOfFameScreen extends React.Component {
 
     depositSelectedList = (event) => {
         const listView = event.target.getAttribute("data-view")
-        let searchPlaceholderValue = ""
+        let searchPlaceholder = ""
 
         if (listView === "basketball-players-real-life-stats" || listView === "basketball-players-fantasy-points") {
-            searchPlaceholderValue = "Search player by name"
+            searchPlaceholder = "Search player by name"
         } else {
-            searchPlaceholderValue = "Search user by name"
+            searchPlaceholder = "Search user by name"
         }
         this.setState({
             listView,
-            searchPlaceholderValue
+            searchPlaceholder
         })
     }
     depositSearchValue = (event) => {
@@ -87,8 +87,12 @@ class HallOfFameScreen extends React.Component {
                                 <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-real-life-stats" ? "active" : ""}`} data-view="basketball-players-real-life-stats" onClick={this.depositSelectedList}>Players - Real Life stats</button>
                                 <input type="search" placeholder={this.state.searchPlaceholder} value={this.state.searchValue} onChange={this.depositSearchValue} />
                             </div>
-                            {/* <HallOfFameLists />
-                            <HallOfFameUserStats /> */}
+                            {/* <HallOfFameUserStats /> */}
+
+                            {/* <HallOfFameF1WCList /> */}
+                            {this.state.listView === "round-points" &&
+                                <HallOfFameTotalPointsList searchValue={this.state.searchValue} selectedDay={this.context.hallOfFameSelectedDay}/>
+                            }
                             {this.state.listView === "basketball-players-fantasy-points" &&
                                 <HallOfFameFantasyPlayersList searchValue={this.state.searchValue} />
                             }
