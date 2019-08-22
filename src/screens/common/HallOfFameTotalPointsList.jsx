@@ -84,7 +84,6 @@ class HallOfFameTotalPointsList extends React.Component {
         const fantasyUsers = this.state.fantasyUsersSorted
         const searchValue = this.props.searchValue.toLowerCase()
         for (let i = 0; i < fantasyUsers.length; i++) {
-            console.log(fantasyUsers[i].username.toLowerCase(), "-----", searchValue)
             if (fantasyUsers[i].username.toLowerCase().includes(searchValue)) {
                 const outputElement =
                     <tr key={fantasyUsers[i].username + i}>
@@ -102,6 +101,7 @@ class HallOfFameTotalPointsList extends React.Component {
         return this.state.fantasyUsersSorted[10].summaSummarum == 0 ? false : true
     }
     componentDidMount() {
+        this.props.clearSearchValue()
         this.calculateAllUsers()
     }
     componentDidUpdate(prevProps) {

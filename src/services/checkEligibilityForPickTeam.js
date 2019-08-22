@@ -264,9 +264,6 @@ const checkEligibilityForPickTeam = (fantasyUsers, username, selectedDay, nowDat
             if (playerData[0][selectedDay].rebounds !== "n/a") {
                 calculatedFirstFiveRealLifeStatsTotals.rebounds += parseInt(playerData[0][selectedDay].rebounds, 10)
             }
-            if (playerData[0][selectedDay].rebounds !== "n/a") {
-                calculatedFirstFiveRealLifeStatsTotals.rebounds += parseInt(playerData[0][selectedDay].rebounds, 10)
-            }
             if (playerData[0][selectedDay].blocks !== "n/a") {
                 calculatedFirstFiveRealLifeStatsTotals.blocks += parseInt(playerData[0][selectedDay].blocks, 10)
             }

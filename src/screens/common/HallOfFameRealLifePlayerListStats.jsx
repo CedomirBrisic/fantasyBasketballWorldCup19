@@ -131,6 +131,9 @@ class HallOfFamePlayerListStats extends React.Component {
         return sortedOutputPlayer
     }
 
+    componentDidMount() {
+        this.props.clearSearchValue()
+    }
 
 
     render() {

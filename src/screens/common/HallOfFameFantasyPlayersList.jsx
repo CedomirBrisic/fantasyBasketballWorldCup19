@@ -134,7 +134,10 @@ class HallOfFameFantasyPlayersList extends React.Component {
         const sortedOutputPlayer = sortPlayersOnSelectScreen(outputPlayers, this.state.sortFilterValue, this.props.searchValue)
         return sortedOutputPlayer
     }
+    componentDidMount() {
+        this.props.clearSearchValue()
 
+    }
 
 
     render() {

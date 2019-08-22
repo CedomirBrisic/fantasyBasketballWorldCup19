@@ -43,6 +43,11 @@ class HallOfFameScreen extends React.Component {
             searchValue
         })
     }
+    clearSearchValue = () => {
+        this.setState({
+            searchValue:""
+        })
+    }
     componentDidMount() {
         if (this.context.isInitialLoading) {
             this.context.getFantasyDataContext()
@@ -178,6 +183,7 @@ class HallOfFameScreen extends React.Component {
                 {!this.context.isInitialLoading &&
                     <div className="hall-of-fame-screen-container d-flex flex-column">
                         <div className="d-flex">
+                            {this.state.listView !== "f1wc" &&
                             <div className="dashboard-select-day-container d-flex flex-column justify align-items-center show-selected-day">
                                 <p><i>Select Round for more details</i></p>
                                 <div className="dashboard-select-day-list-wrapper d-flex flex-column justify-content-between">
@@ -199,30 +205,30 @@ class HallOfFameScreen extends React.Component {
                                     <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "14th-September" ? "is-selected" : ""}`} data-day-to-select="14th-September" onClick={this.depositSelectedDay}>14th September</button>
                                     <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "15th-September" ? "is-selected" : ""}`} data-day-to-select="15th-September" onClick={this.depositSelectedDay}>15th September</button>
                                 </div>
-                            </div>
+                            </div>}
 
                             {!this.context.isInitialLoading &&
                                 <div className="lists-container">
                                     <div className="hall-of-fame-links-wrapper d-flex justify-content-around">
-                                        <button type="button" className={`btn btn-outline-dark ${this.state.listView === "f1wc" ? "active" : ""}`} data-view="f1wc" onClick={this.depositSelectedList}>Users - F1WC Points</button>
+                                        <button type="button" className={`btn btn-outline-dark ${this.state.listView === "f1wc" ? "active" : ""}`} data-view="f1wc" onClick={this.depositSelectedList}>Ultimate Hall of Fame</button>
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "round-points" ? "active" : ""}`} data-view="round-points" onClick={this.depositSelectedList}>Users - Round points</button>
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-fantasy-points" ? "active" : ""}`} data-view="basketball-players-fantasy-points" onClick={this.depositSelectedList}>Players - Fantasy points</button>
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-real-life-stats" ? "active" : ""}`} data-view="basketball-players-real-life-stats" onClick={this.depositSelectedList}>Players - Real Life stats</button>
                                         <input type="search" placeholder={this.state.searchPlaceholder} value={this.state.searchValue} onChange={this.depositSearchValue} />
                                     </div>
                                     {this.state.listView === "f1wc" &&
-                                        <HallOfFameF1WCList searchValue={this.state.searchValue} />
+                                        <HallOfFameF1WCList searchValue={this.state.searchValue} clearSearchValue={this.clearSearchValue}/>
                                     }
                                     {/* <HallOfFameUserStats /> */}
 
                                     {this.state.listView === "round-points" &&
-                                        <HallOfFameTotalPointsList searchValue={this.state.searchValue} selectedDay={this.context.hallOfFameSelectedDay} />
+                                        <HallOfFameTotalPointsList searchValue={this.state.searchValue} selectedDay={this.context.hallOfFameSelectedDay} clearSearchValue={this.clearSearchValue}/>
                                     }
                                     {this.state.listView === "basketball-players-fantasy-points" &&
-                                        <HallOfFameFantasyPlayersList searchValue={this.state.searchValue} />
+                                        <HallOfFameFantasyPlayersList searchValue={this.state.searchValue} clearSearchValue={this.clearSearchValue}/>
                                     }
                                     {this.state.listView === "basketball-players-real-life-stats" &&
-                                        <HallOfFameRealLifePlayerListStats searchValue={this.state.searchValue} />
+                                        <HallOfFameRealLifePlayerListStats searchValue={this.state.searchValue} clearSearchValue={this.clearSearchValue}/>
                                     }
                                 </div>
                             }

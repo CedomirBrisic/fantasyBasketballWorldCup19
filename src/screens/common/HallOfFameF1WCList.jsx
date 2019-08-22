@@ -1,14 +1,87 @@
 import React from 'react';
 import { AppContext } from '../_context/AppContext';
+import checkEligibilityForPickTeam from "../../services/checkEligibilityForPickTeam";
 
 class HallOfFameF1WCList extends React.Component {
     static contextType = AppContext;
     state = {
+        fantasyF1WCUsersSorted: null
+    }
 
+
+    sortF1WCUsers = () => {
+        let outputCalculated = []
+        if (this.context.hallOfFameSelectedDay !== "all-days") {
+            let outputNotCalculatet = null
+            const fantasyUsersF1WCforOneDay = []
+            this.context.fantasyUsers.forEach((user) => {
+                const calculatedData = checkEligibilityForPickTeam(this.context.fantasyUsers, user.username, this.context.hallOfFameSelectedDay, this.context.nowDateAndTime, this.context.dropdowns[0].teamsByDay, this.context.basketballPlayers)
+                const userData = {
+                    username: user.username,
+                    summaSummarum: calculatedData.totalSummaSummarum,
+                    teamPickIds: calculatedData.teamPickData,
+                }
+                fantasyUsersF1WCforOneDay.push(userData)
+            })
+            outputNotCalculatet = fantasyUsersF1WCforOneDay
+            if (outputNotCalculatet !== null) {
+                outputNotCalculatet.sort(function (a, b) {
+                    return b.summaSummarum - a.summaSummarum
+                })
+                for (let i = 0; i < 10; i++) {
+                    if (outputNotCalculatet[i].summaSummarum != 0) {
+
+                        switch (i) {
+                            case 0:
+                                outputNotCalculatet[i]["f1wcPoints"] = 25
+                                break;
+                            case 1:
+                                outputNotCalculatet[i]["f1wcPoints"] = 18
+                                break;
+                            case 2:
+                                outputNotCalculatet[i]["f1wcPoints"] = 15
+                                break;
+                            case 3:
+                                outputNotCalculatet[i]["f1wcPoints"] = 12
+                                break;
+                            case 4:
+                                outputNotCalculatet[i]["f1wcPoints"] = 10
+                                break;
+                            case 5:
+                                outputNotCalculatet[i]["f1wcPoints"] = 8
+                                break;
+                            case 6:
+                                outputNotCalculatet[i]["f1wcPoints"] = 6
+                                break;
+                            case 7:
+                                outputNotCalculatet[i]["f1wcPoints"] = 4
+                                break;
+                            case 8:
+                                outputNotCalculatet[i]["f1wcPoints"] = 2
+                                break;
+                            case 9:
+                                outputNotCalculatet[i]["f1wcPoints"] = 1
+                                break;
+                        }
+                        outputCalculated.push(outputNotCalculatet[i])
+                    }
+                }
+                console.log(outputCalculated)
+            }
+        }
+        // this.setState({
+        //     fantasyF1WCUsersSorted: outputCalculated
+        // })
+    }
+
+    componentDidMount() {
+        this.sortF1WCUsers()
+        this.props.clearSearchValue()
     }
 
 
     render() {
+        this.sortF1WCUsers()
         return (
             <>
                 <div className="hall-of-fame-f1wc-list-container">
@@ -113,7 +186,7 @@ class HallOfFameF1WCList extends React.Component {
                                     </div>
                                 </div>
                                 <div className="title">
-                                    He is special !
+                                   <i>I'm special...</i>
                             </div>
                             </div>
 
@@ -135,7 +208,7 @@ class HallOfFameF1WCList extends React.Component {
                                     </div>
                                 </div>
                                 <div className="title">
-                                    He is special !
+                                   <i>I'm special...</i>
                             </div>
                             </div>
 
@@ -158,7 +231,7 @@ class HallOfFameF1WCList extends React.Component {
                                     </div>
                                 </div>
                                 <div className="title">
-                                    He is special !
+                                   <i>I'm special...</i>
                             </div>
                             </div>
 
@@ -181,7 +254,7 @@ class HallOfFameF1WCList extends React.Component {
                                     </div>
                                 </div>
                                 <div className="title">
-                                    He is special !
+                                   <i>I'm special...</i>
                             </div>
                             </div>
 
@@ -204,7 +277,7 @@ class HallOfFameF1WCList extends React.Component {
                                     </div>
                                 </div>
                                 <div className="title">
-                                    He is special !
+                                   <i>I'm special...</i>
                             </div>
                             </div>
 
@@ -227,7 +300,7 @@ class HallOfFameF1WCList extends React.Component {
                                     </div>
                                 </div>
                                 <div className="title">
-                                    He is special !
+                                   <i>I'm special...</i>
                             </div>
                             </div>
 
@@ -250,8 +323,9 @@ class HallOfFameF1WCList extends React.Component {
                                     </div>
                                 </div>
                                 <div className="title">
-                                    He is special !
-                            </div>
+                                    {/* PITAJ DA LI JE POSLEDNJI */}
+                                    <i>I'm special...</i>
+                                </div>
                             </div>
 
 

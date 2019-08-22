@@ -3,7 +3,7 @@
     background-image: url("../images/hallOfFameBg.jpg");
     background-size: cover;
     background-position: center;
-    width: 83vw;
+    width: 100%;
     height: 43vw;
 
     .hall-of-fame-f1wc-list-wrapper {
@@ -24,14 +24,14 @@
         .first-place-container {
 
             width: 20vw;
-            margin-left: 34vw;
+            margin-left: 41vw;
             position: relative;
 
             .image-wrapper {
 
                 img {
                     animation: showIt 1s forwards;
-                    animation-delay: 1s;
+                    animation-delay: 1.2s;
 
                     @-webkit-keyframes showIt {
                         100% {
@@ -103,13 +103,13 @@
 
 
         .second-third-container {
-            background: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, 1) 100%);
+            background: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, 0.97) 100%);
 
             //------------------------SECOND PLACE------------------------
             .second-place-container {
 
                 width: 20vw;
-                margin-left: 6vw;
+                margin-left: 14vw;
                 margin-top: 7.9vw;
                 position: relative;
 
@@ -247,9 +247,9 @@
 
         //------------------------CHOSEN FEW------------------------
         .chosen-few-container {
-            background-color: #000000;
+            background-color: rgba(0,0,0,0.97);
             padding: 2vw;
-            padding-left: 8vw;
+            padding-left: 14vw;
             .chosen-one-container {
                 position: relative;
                 width: 33%;
@@ -303,8 +303,8 @@
                     color: #ffffff;
                     font-size: 1.2vw;
                     position: absolute;
-                    top: 14vw;
-                    right: 7vw;
+                    top: 17vw;
+                    right: 12vw;
                 }
             }
         }
