@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&display=swap&subset=cyrillic,cyrillic-ext,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Fondamento:400,400i&display=swap');
 @import url('./style/logIn.scss');
 @import url('./style/register.scss');
 @import url('./style/rules.scss');
@@ -40,4 +41,26 @@ a:hover{
 }
 .modal-backdrop {
     background-color: #000000;;
+}
+
+.loader-container{
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    h1{
+        margin-bottom: 3vw;
+        font-size: 2.4vw;
+        color: #ffffff;
+    }
+    .spinner-border{
+        width: 4vw;
+        height: 5vw;
+    }
+    .made-in{
+        font-weight: 300;
+        color: #ffffff;
+        font-size: 1vw;
+        margin-left: auto;
+        
+    }
 }

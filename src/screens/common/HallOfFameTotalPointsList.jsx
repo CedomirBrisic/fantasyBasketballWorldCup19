@@ -68,8 +68,8 @@ class HallOfFameTotalPointsList extends React.Component {
         const fantasyUsers = this.state.fantasyUsersSorted
         for (let i = 10; i < fantasyUsers.length; i++) {
             const outputElement =
-                <tr>
-                    <td>{i}</td>
+                <tr key={fantasyUsers[i].username + i}>
+                    <td className="orer-no">{i + 1}</td>
                     <td>{fantasyUsers[i].username}</td>
                     <td>{fantasyUsers[i].summaSummarum}</td>
                 </tr>
@@ -78,6 +78,26 @@ class HallOfFameTotalPointsList extends React.Component {
         }
         return output
     }
+
+    mapSearched = () => {
+        const output = []
+        const fantasyUsers = this.state.fantasyUsersSorted
+        const searchValue = this.props.searchValue.toLowerCase()
+        for (let i = 0; i < fantasyUsers.length; i++) {
+            console.log(fantasyUsers[i].username.toLowerCase(), "-----", searchValue)
+            if (fantasyUsers[i].username.toLowerCase().includes(searchValue)) {
+                const outputElement =
+                    <tr key={fantasyUsers[i].username + i}>
+                        <td className="orer-no">{i + 1}</td>
+                        <td>{fantasyUsers[i].username}</td>
+                        <td>{fantasyUsers[i].summaSummarum}</td>
+                    </tr>
+                output.push(outputElement)
+            }
+        }
+        return output
+    }
+
     checkIsPlebseView = () => {
         return this.state.fantasyUsersSorted[10].summaSummarum == 0 ? false : true
     }
@@ -93,11 +113,12 @@ class HallOfFameTotalPointsList extends React.Component {
         return (
             <>
                 {this.state.fantasyUsersSorted &&
+                    this.props.searchValue === "" &&
                     <div className="hall-of-fame-total-points-list-container">
-                        <div className="sticky-container d-flex flex-column align-items-center">
+                        <div className="hall-of-fame-total-points-list-wrapper d-flex flex-column align-items-center">
                             <div className="first-place-wrapper d-flex align-items-center">
                                 <div className="user-order-no">
-                                    &#8544;
+                                    1.
                              </div>
                                 <div className="d-flex flex-column justify-content-between">
                                     <div className="top">
@@ -106,16 +127,19 @@ class HallOfFameTotalPointsList extends React.Component {
                                     <div className="bottom">
                                         <i>TD Fantasy points:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "1,000,000" : this.state.fantasyUsersSorted[0].summaSummarum}<sup>pt</sup>
                                     </div>
+                                    <div className="bottom-bottom">
+                                        <i>F1WC Points:</i>25<sup>pt</sup>
+                                    </div>
                                 </div>
                                 <div className="silhouette-wrapper">
-                                    <img className="img-fluid" src={require("../../images/winner.png")} alt="triumph" />
+                                    <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />
                                 </div>
                             </div>
 
                             <div className=" d-flex justify-content-between align-items-center w-100">
                                 <div className="not-first-place-wrapper d-flex align-items-center second-to-show">
                                     <div className="user-order-no">
-                                        &#8545;
+                                        2.
                                 </div>
                                     <div className="d-flex flex-column justify-content-between">
                                         <div className="top">
@@ -124,14 +148,17 @@ class HallOfFameTotalPointsList extends React.Component {
                                         <div className="bottom">
                                             {this.state.fantasyUsersSorted[1].summaSummarum}<sup>pt</sup>
                                         </div>
+                                        <div className="bottom-bottom">
+                                            18<sup>pt</sup>
+                                        </div>
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/boywinner.png")} alt="triumph" />}
+                                        {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
                                     </div>
                                 </div>
                                 <div className="not-first-place-wrapper d-flex align-items-center third-to-show">
                                     <div className="user-order-no">
-                                        &#8546;
+                                        3.
                                 </div>
                                     <div className="d-flex flex-column justify-content-between">
                                         <div className="top">
@@ -140,14 +167,17 @@ class HallOfFameTotalPointsList extends React.Component {
                                         <div className="bottom">
                                             {this.state.fantasyUsersSorted[2].summaSummarum}<sup>pt</sup>
                                         </div>
+                                        <div className="bottom-bottom">
+                                            15<sup>pt</sup>
+                                        </div>
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/boywinner.png")} alt="triumph" />}
+                                        {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
                                     </div>
                                 </div>
                                 <div className="not-first-place-wrapper d-flex align-items-center fourth-to-show">
                                     <div className="user-order-no">
-                                        &#8547;
+                                        4.
                                 </div>
                                     <div className="d-flex flex-column justify-content-between">
                                         <div className="top">
@@ -156,9 +186,12 @@ class HallOfFameTotalPointsList extends React.Component {
                                         <div className="bottom">
                                             {this.state.fantasyUsersSorted[3].summaSummarum}<sup>pt</sup>
                                         </div>
+                                        <div className="bottom-bottom">
+                                            12<sup>pt</sup>
+                                        </div>
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/boywinner.png")} alt="triumph" />}
+                                        {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +201,7 @@ class HallOfFameTotalPointsList extends React.Component {
                             <div className=" d-flex justify-content-between align-items-center w-100">
                                 <div className="not-first-place-wrapper d-flex align-items-center fifth-to-show">
                                     <div className="user-order-no">
-                                        &#8548;
+                                        5.
                                 </div>
                                     <div className="d-flex flex-column justify-content-between">
                                         <div className="top">
@@ -177,14 +210,17 @@ class HallOfFameTotalPointsList extends React.Component {
                                         <div className="bottom">
                                             {this.state.fantasyUsersSorted[4].summaSummarum}<sup>pt</sup>
                                         </div>
+                                        <div className="bottom-bottom">
+                                            10<sup>pt</sup>
+                                        </div>
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/boywinner.png")} alt="triumph" />}
+                                        {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
                                     </div>
                                 </div>
                                 <div className="not-first-place-wrapper d-flex align-items-center sixth-to-show">
                                     <div className="user-order-no">
-                                        &#8549;
+                                        6.
                                 </div>
                                     <div className="d-flex flex-column justify-content-between">
                                         <div className="top">
@@ -193,14 +229,17 @@ class HallOfFameTotalPointsList extends React.Component {
                                         <div className="bottom">
                                             {this.state.fantasyUsersSorted[5].summaSummarum}<sup>pt</sup>
                                         </div>
+                                        <div className="bottom-bottom">
+                                            8<sup>pt</sup>
+                                        </div>
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/boywinner.png")} alt="triumph" />}
+                                        {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
                                     </div>
                                 </div>
                                 <div className="not-first-place-wrapper d-flex align-items-center seventh-to-show">
                                     <div className="user-order-no">
-                                        &#8550;
+                                        7.
                                 </div>
                                     <div className="d-flex flex-column justify-content-between">
                                         <div className="top">
@@ -209,21 +248,21 @@ class HallOfFameTotalPointsList extends React.Component {
                                         <div className="bottom">
                                             {this.state.fantasyUsersSorted[6].summaSummarum}<sup>pt</sup>
                                         </div>
+                                        <div className="bottom-bottom">
+                                            6<sup>pt</sup>
+                                        </div>
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/boywinner.png")} alt="triumph" />}
+                                        {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
                                     </div>
                                 </div>
                             </div>
 
 
-
-
-
                             <div className=" d-flex justify-content-between align-items-center w-100">
                                 <div className="not-first-place-wrapper d-flex align-items-center eight-to-show">
                                     <div className="user-order-no">
-                                        &#8551;
+                                        8.
                                 </div>
                                     <div className="d-flex flex-column justify-content-between">
                                         <div className="top">
@@ -232,14 +271,17 @@ class HallOfFameTotalPointsList extends React.Component {
                                         <div className="bottom">
                                             {this.state.fantasyUsersSorted[7].summaSummarum}<sup>pt</sup>
                                         </div>
+                                        <div className="bottom-bottom">
+                                            4<sup>pt</sup>
+                                        </div>
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/boywinner.png")} alt="triumph" />}
+                                        {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
                                     </div>
                                 </div>
                                 <div className="not-first-place-wrapper d-flex align-items-center ninth-to-show">
                                     <div className="user-order-no">
-                                        &#8552;
+                                        9.
                                 </div>
                                     <div className="d-flex flex-column justify-content-between">
                                         <div className="top">
@@ -248,14 +290,17 @@ class HallOfFameTotalPointsList extends React.Component {
                                         <div className="bottom">
                                             {this.state.fantasyUsersSorted[8].summaSummarum}<sup>pt</sup>
                                         </div>
+                                        <div className="bottom-bottom">
+                                            2<sup>pt</sup>
+                                        </div>
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/boywinner.png")} alt="triumph" />}
+                                        {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
                                     </div>
                                 </div>
                                 <div className="not-first-place-wrapper d-flex align-items-center tenth-to-show">
                                     <div className="user-order-no">
-                                        &#8553;
+                                        10.
                                 </div>
                                     <div className="d-flex flex-column justify-content-between">
                                         <div className="top">
@@ -264,36 +309,66 @@ class HallOfFameTotalPointsList extends React.Component {
                                         <div className="bottom">
                                             {this.state.fantasyUsersSorted[9].summaSummarum}<sup>pt</sup>
                                         </div>
+                                        <div className="bottom-bottom">
+                                            1<sup>pt</sup>
+                                        </div>
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[9].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/boywinner.png")} alt="triumph" />}
+                                        {this.state.fantasyUsersSorted[9].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {this.checkIsPlebseView() &&
-                            <div className="plebs-container">
-                                <div className="plebse-title">------------------------- SCROLL DOWN TO SEE REST OF PLEBSE -------------------------</div>
 
+                            {this.checkIsPlebseView() &&
+                                this.props.searchValue === "" &&
+                                <div className="plebs-container">
+                                    <div className="plebse-title">------------------------- SCROLL DOWN TO SEE REST OF PLEBSE -------------------------</div>
+
+                                    <table>
+                                        <thead className="w-100">
+                                            <tr className="w-100">
+                                                <th className="orer-no">Position No.</th>
+                                                <th>Username</th>
+                                                <th className="td-points">TD Fantasy points</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.mapPlebs()}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+
+                            {!this.checkIsPlebseView() &&
+                                this.props.searchValue === "" &&
+                                <div className="plebs-container">
+                                    <div className="plebse-title">------------------------- THERE IS NO DATA YET -------------------------</div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                }
+                {this.state.fantasyUsersSorted &&
+                    this.props.searchValue !== "" &&
+                    <div className="hall-of-fame-total-points-list-container">
+                        <div className="hall-of-fame-total-points-list-wrapper d-flex flex-column align-items-center">
+                            <div className="plebs-container">
+                                <div className="plebse-title">------------------------- SEARCHED RESULTS -------------------------</div>
                                 <table>
                                     <thead className="w-100">
                                         <tr className="w-100">
-                                            <th className="orer-no">Order No.</th>
+                                            <th className="orer-no">Position No.</th>
                                             <th>Username</th>
                                             <th className="td-points">TD Fantasy points</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.mapPlebs()}
+                                        {this.mapSearched()}
                                     </tbody>
                                 </table>
                             </div>
-                        }
-                        {!this.checkIsPlebseView() &&
-                            <div className="plebse-title">------------------------- THERE IS NO DATA YET -------------------------</div>
-                        }
-
-
+                        </div>
                     </div>
                 }
             </>
