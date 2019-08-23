@@ -1,13 +1,18 @@
 import React from 'react';
 import { AppContext } from '../../screens/_context/AppContext';
+import { Portal } from 'react-portal';
 import eligibleDays from "../../services/eligibleDays";
 import checkEligibilityForPickTeam from "../../services/checkEligibilityForPickTeam";
+import HallOfFameUserStatsModal from "../modals/HallOfFameUserStatsModal";
+
 
 
 class HallOfFameTotalPointsList extends React.Component {
     static contextType = AppContext;
     state = {
-        fantasyUsersSorted: null
+        fantasyUsersSorted: null,
+        showUserModal: false,
+        fantasyUserForModalData: null
     }
     calculateAllUsers = () => {
         let output = null
@@ -68,10 +73,10 @@ class HallOfFameTotalPointsList extends React.Component {
         const fantasyUsers = this.state.fantasyUsersSorted
         for (let i = 10; i < fantasyUsers.length; i++) {
             const outputElement =
-                <tr key={fantasyUsers[i].username + i}>
-                    <td className="orer-no">{i + 1}</td>
-                    <td>{fantasyUsers[i].username}</td>
-                    <td>{fantasyUsers[i].summaSummarum}</td>
+                <tr key={fantasyUsers[i].username + i} data-fantasy-user-sorted-index={i} onClick={this.depositUserDataForModal}>
+                    <td className="orer-no" data-fantasy-user-sorted-index={i}>{i + 1}</td>
+                    <td data-fantasy-user-sorted-index={i}>{fantasyUsers[i].username}</td>
+                    <td data-fantasy-user-sorted-index={i}>{fantasyUsers[i].summaSummarum}</td>
                 </tr>
 
             output.push(outputElement)
@@ -86,10 +91,10 @@ class HallOfFameTotalPointsList extends React.Component {
         for (let i = 0; i < fantasyUsers.length; i++) {
             if (fantasyUsers[i].username.toLowerCase().includes(searchValue)) {
                 const outputElement =
-                    <tr key={fantasyUsers[i].username + i}>
-                        <td className="orer-no">{i + 1}</td>
-                        <td>{fantasyUsers[i].username}</td>
-                        <td>{fantasyUsers[i].summaSummarum}</td>
+                    <tr key={fantasyUsers[i].username + i} data-fantasy-user-sorted-index={i} onClick={this.depositUserDataForModal}>
+                        <td className="orer-no" data-fantasy-user-sorted-index={i}>{i + 1}</td>
+                        <td data-fantasy-user-sorted-index={i}>{fantasyUsers[i].username}</td>
+                        <td data-fantasy-user-sorted-index={i}>{fantasyUsers[i].summaSummarum}</td>
                     </tr>
                 output.push(outputElement)
             }
@@ -99,6 +104,21 @@ class HallOfFameTotalPointsList extends React.Component {
 
     checkIsPlebseView = () => {
         return this.state.fantasyUsersSorted[10].summaSummarum == 0 ? false : true
+    }
+
+    closeUserModal = () => {
+        this.setState({
+            showUserModal: false
+        })
+    }
+
+    depositUserDataForModal = (event) => {
+        const index = event.target.getAttribute("data-fantasy-user-sorted-index")
+        const data = this.state.fantasyUsersSorted[index]
+        this.setState({
+            showUserModal: true,
+            fantasyUserForModalData: data
+        })
     }
     componentDidMount() {
         this.props.clearSearchValue()
@@ -116,82 +136,96 @@ class HallOfFameTotalPointsList extends React.Component {
                     this.props.searchValue === "" &&
                     <div className="hall-of-fame-total-points-list-container">
                         <div className="hall-of-fame-total-points-list-wrapper d-flex flex-column align-items-center">
-                            <div className="first-place-wrapper d-flex align-items-center">
-                                <div className="user-order-no">
+                            <div className="first-place-wrapper d-flex align-items-center" data-fantasy-user-sorted-index={0} onClick={this.depositUserDataForModal}>
+                                <div className="user-order-no" data-fantasy-user-sorted-index={0}>
                                     1.
-                             </div>
-                                <div className="d-flex flex-column justify-content-between">
-                                    <div className="top">
-                                        <i>Username:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "Placeholder for you" : this.state.fantasyUsersSorted[0].username}
-                                    </div>
-                                    <div className="bottom">
-                                        <i>TD Fantasy points:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "1,000,000" : this.state.fantasyUsersSorted[0].summaSummarum}<sup>pt</sup>
-                                    </div>
-                                    <div className="bottom-bottom">
-                                        <i>F1WC Points:</i>25<sup>pt</sup>
-                                    </div>
                                 </div>
-                                <div className="silhouette-wrapper">
-                                    <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />
+                                <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={0}>
+                                    <div className="top" data-fantasy-user-sorted-index={0}>
+                                        <i data-fantasy-user-sorted-index={0}>Username:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "Placeholder for you" : this.state.fantasyUsersSorted[0].username}
+                                    </div>
+                                    <div className="bottom" data-fantasy-user-sorted-index={0}>
+                                        <i data-fantasy-user-sorted-index={0}>TD Fantasy points:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "1,000,000" : this.state.fantasyUsersSorted[0].summaSummarum}<sup data-fantasy-user-sorted-index={0}>pt</sup>
+                                    </div>
+                                    {this.context.hallOfFameSelectedDay !== "all-days" &&
+                                        <div className="bottom-bottom" data-fantasy-user-sorted-index={0}>
+                                            <i data-fantasy-user-sorted-index={0}>F1WC Points:</i>25<sup data-fantasy-user-sorted-index={0}>pt</sup>
+                                        </div>
+                                    }
+                                </div>
+                                <div className="silhouette-wrapper" data-fantasy-user-sorted-index={0}>
+                                    <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={0} />
                                 </div>
                             </div>
 
-                            <div className=" d-flex justify-content-between align-items-center w-100">
-                                <div className="not-first-place-wrapper d-flex align-items-center second-to-show">
-                                    <div className="user-order-no">
+
+                            <div className=" d-flex justify-content-between align-items-center w-100" >
+
+                                <div className="not-first-place-wrapper d-flex align-items-center second-to-show" data-fantasy-user-sorted-index={1} onClick={this.depositUserDataForModal}>
+                                    <div className="user-order-no" data-fantasy-user-sorted-index={1}>
                                         2.
-                                </div>
-                                    <div className="d-flex flex-column justify-content-between">
-                                        <div className="top">
+                                    </div>
+                                    <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={1}>
+                                        <div className="top" data-fantasy-user-sorted-index={1}>
                                             {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[1].username}
                                         </div>
-                                        <div className="bottom">
-                                            {this.state.fantasyUsersSorted[1].summaSummarum}<sup>pt</sup>
+                                        <div className="bottom" data-fantasy-user-sorted-index={1}>
+                                            {this.state.fantasyUsersSorted[1].summaSummarum}<sup data-fantasy-user-sorted-index={1}>pt</sup>
                                         </div>
-                                        <div className="bottom-bottom">
-                                            18<sup>pt</sup>
-                                        </div>
+                                        {this.context.hallOfFameSelectedDay !== "all-days" &&
+                                            <div className="bottom-bottom" data-fantasy-user-sorted-index={1}>
+                                                18<sup data-fantasy-user-sorted-index={1}>pt</sup>
+                                            </div>}
                                     </div>
-                                    <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
+                                    <div className="silhouette-wrapper" data-fantasy-user-sorted-index={1}>
+                                        {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={1}/>}
                                     </div>
                                 </div>
-                                <div className="not-first-place-wrapper d-flex align-items-center third-to-show">
-                                    <div className="user-order-no">
+
+
+                                <div className="not-first-place-wrapper d-flex align-items-center third-to-show" data-fantasy-user-sorted-index={2} onClick={this.depositUserDataForModal}>
+                                    <div className="user-order-no" data-fantasy-user-sorted-index={2}>
                                         3.
-                                </div>
-                                    <div className="d-flex flex-column justify-content-between">
-                                        <div className="top">
+                                    </div>
+                                    <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={2}>
+                                        <div className="top" data-fantasy-user-sorted-index={2}>
                                             {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[2].username}
                                         </div>
-                                        <div className="bottom">
-                                            {this.state.fantasyUsersSorted[2].summaSummarum}<sup>pt</sup>
+                                        <div className="bottom" data-fantasy-user-sorted-index={2}>
+                                            {this.state.fantasyUsersSorted[2].summaSummarum}<sup data-fantasy-user-sorted-index={2}>pt</sup>
                                         </div>
-                                        <div className="bottom-bottom">
-                                            15<sup>pt</sup>
-                                        </div>
+                                        {this.context.hallOfFameSelectedDay !== "all-days" &&
+                                            <div className="bottom-bottom" data-fantasy-user-sorted-index={2}>
+                                                15<sup data-fantasy-user-sorted-index={2}>pt</sup>
+                                            </div>
+                                        }
                                     </div>
-                                    <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
+                                    <div className="silhouette-wrapper" data-fantasy-user-sorted-index={2}>
+                                        {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={2}/>}
                                     </div>
                                 </div>
-                                <div className="not-first-place-wrapper d-flex align-items-center fourth-to-show">
-                                    <div className="user-order-no">
+
+
+
+                                <div className="not-first-place-wrapper d-flex align-items-center fourth-to-show" data-fantasy-user-sorted-index={3} onClick={this.depositUserDataForModal}>
+                                    <div className="user-order-no" data-fantasy-user-sorted-index={3}>
                                         4.
-                                </div>
-                                    <div className="d-flex flex-column justify-content-between">
-                                        <div className="top">
+                                    </div>
+                                    <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={3}>
+                                        <div className="top" data-fantasy-user-sorted-index={3}>
                                             {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[3].username}
                                         </div>
-                                        <div className="bottom">
-                                            {this.state.fantasyUsersSorted[3].summaSummarum}<sup>pt</sup>
+                                        <div className="bottom" data-fantasy-user-sorted-index={3}>
+                                            {this.state.fantasyUsersSorted[3].summaSummarum}<sup data-fantasy-user-sorted-index={3}>pt</sup>
                                         </div>
-                                        <div className="bottom-bottom">
-                                            12<sup>pt</sup>
-                                        </div>
+                                        {this.context.hallOfFameSelectedDay !== "all-days" &&
+                                            <div className="bottom-bottom" data-fantasy-user-sorted-index={3}>
+                                                12<sup data-fantasy-user-sorted-index={3}>pt</sup>
+                                            </div>
+                                        }
                                     </div>
-                                    <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
+                                    <div className="silhouette-wrapper" data-fantasy-user-sorted-index={3}>
+                                        {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={3}/>}
                                     </div>
                                 </div>
                             </div>
@@ -199,121 +233,140 @@ class HallOfFameTotalPointsList extends React.Component {
 
 
                             <div className=" d-flex justify-content-between align-items-center w-100">
-                                <div className="not-first-place-wrapper d-flex align-items-center fifth-to-show">
-                                    <div className="user-order-no">
+                                <div className="not-first-place-wrapper d-flex align-items-center fifth-to-show" data-fantasy-user-sorted-index={4} onClick={this.depositUserDataForModal}>
+                                    <div className="user-order-no" data-fantasy-user-sorted-index={4}>
                                         5.
-                                </div>
-                                    <div className="d-flex flex-column justify-content-between">
-                                        <div className="top">
+                                    </div>
+                                    <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={4}>
+                                        <div className="top" data-fantasy-user-sorted-index={4}>
                                             {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[4].username}
                                         </div>
-                                        <div className="bottom">
-                                            {this.state.fantasyUsersSorted[4].summaSummarum}<sup>pt</sup>
+                                        <div className="bottom" data-fantasy-user-sorted-index={4}>
+                                            {this.state.fantasyUsersSorted[4].summaSummarum}<sup data-fantasy-user-sorted-index={4}>pt</sup>
                                         </div>
-                                        <div className="bottom-bottom">
-                                            10<sup>pt</sup>
-                                        </div>
+                                        {this.context.hallOfFameSelectedDay !== "all-days" &&
+                                            <div className="bottom-bottom" data-fantasy-user-sorted-index={4}>
+                                                10<sup data-fantasy-user-sorted-index={4}>pt</sup>
+                                            </div>
+                                        }
                                     </div>
-                                    <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
+                                    <div className="silhouette-wrapper" data-fantasy-user-sorted-index={4}>
+                                        {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={4}/>}
                                     </div>
                                 </div>
-                                <div className="not-first-place-wrapper d-flex align-items-center sixth-to-show">
-                                    <div className="user-order-no">
+
+
+
+                                <div className="not-first-place-wrapper d-flex align-items-center sixth-to-show" data-fantasy-user-sorted-index={5} onClick={this.depositUserDataForModal}>
+                                    <div className="user-order-no" data-fantasy-user-sorted-index={5}>
                                         6.
-                                </div>
-                                    <div className="d-flex flex-column justify-content-between">
-                                        <div className="top">
+                                    </div>
+                                    <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={5}>
+                                        <div className="top" data-fantasy-user-sorted-index={5}>
                                             {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[5].username}
                                         </div>
-                                        <div className="bottom">
-                                            {this.state.fantasyUsersSorted[5].summaSummarum}<sup>pt</sup>
+                                        <div className="bottom" data-fantasy-user-sorted-index={5}>
+                                            {this.state.fantasyUsersSorted[5].summaSummarum}<sup data-fantasy-user-sorted-index={5}>pt</sup>
                                         </div>
-                                        <div className="bottom-bottom">
-                                            8<sup>pt</sup>
-                                        </div>
+                                        {this.context.hallOfFameSelectedDay !== "all-days" &&
+                                            <div className="bottom-bottom" data-fantasy-user-sorted-index={5}>
+                                                8<sup data-fantasy-user-sorted-index={5}>pt</sup>
+                                            </div>
+                                        }
                                     </div>
-                                    <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
+                                    <div className="silhouette-wrapper" data-fantasy-user-sorted-index={5}>
+                                        {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={5}/>}
                                     </div>
                                 </div>
-                                <div className="not-first-place-wrapper d-flex align-items-center seventh-to-show">
-                                    <div className="user-order-no">
+
+                                <div className="not-first-place-wrapper d-flex align-items-center seventh-to-show" data-fantasy-user-sorted-index={6} onClick={this.depositUserDataForModal}>
+                                    <div className="user-order-no" data-fantasy-user-sorted-index={6}>
                                         7.
-                                </div>
-                                    <div className="d-flex flex-column justify-content-between">
-                                        <div className="top">
+                                    </div>
+                                    <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={6}>
+                                        <div className="top" data-fantasy-user-sorted-index={6}>
                                             {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[6].username}
                                         </div>
-                                        <div className="bottom">
-                                            {this.state.fantasyUsersSorted[6].summaSummarum}<sup>pt</sup>
+                                        <div className="bottom" data-fantasy-user-sorted-index={6}>
+                                            {this.state.fantasyUsersSorted[6].summaSummarum}<sup data-fantasy-user-sorted-index={6}>pt</sup>
                                         </div>
-                                        <div className="bottom-bottom">
-                                            6<sup>pt</sup>
-                                        </div>
+                                        {this.context.hallOfFameSelectedDay !== "all-days" &&
+                                            <div className="bottom-bottom" data-fantasy-user-sorted-index={6}>
+                                                6<sup data-fantasy-user-sorted-index={6}>pt</sup>
+                                            </div>
+                                        }
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
+                                        {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={6}/>}
                                     </div>
                                 </div>
                             </div>
 
 
                             <div className=" d-flex justify-content-between align-items-center w-100">
-                                <div className="not-first-place-wrapper d-flex align-items-center eight-to-show">
-                                    <div className="user-order-no">
+                                <div className="not-first-place-wrapper d-flex align-items-center eight-to-show" data-fantasy-user-sorted-index={7} onClick={this.depositUserDataForModal}>
+                                    <div className="user-order-no" data-fantasy-user-sorted-index={7}>
                                         8.
                                 </div>
-                                    <div className="d-flex flex-column justify-content-between">
-                                        <div className="top">
+                                    <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={7}>
+                                        <div className="top" data-fantasy-user-sorted-index={7}>
                                             {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[7].username}
                                         </div>
-                                        <div className="bottom">
-                                            {this.state.fantasyUsersSorted[7].summaSummarum}<sup>pt</sup>
+                                        <div className="bottom" data-fantasy-user-sorted-index={7}>
+                                            {this.state.fantasyUsersSorted[7].summaSummarum}<sup data-fantasy-user-sorted-index={7}>pt</sup>
                                         </div>
-                                        <div className="bottom-bottom">
-                                            4<sup>pt</sup>
-                                        </div>
+                                        {this.context.hallOfFameSelectedDay !== "all-days" &&
+                                            <div className="bottom-bottom" data-fantasy-user-sorted-index={7}>
+                                                4<sup data-fantasy-user-sorted-index={7}>pt</sup>
+                                            </div>
+                                        }
                                     </div>
-                                    <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
+                                    <div className="silhouette-wrapper" data-fantasy-user-sorted-index={7}>
+                                        {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={7}/>}
                                     </div>
                                 </div>
-                                <div className="not-first-place-wrapper d-flex align-items-center ninth-to-show">
-                                    <div className="user-order-no">
+
+                                <div className="not-first-place-wrapper d-flex align-items-center ninth-to-show" data-fantasy-user-sorted-index={8} onClick={this.depositUserDataForModal}>
+                                    <div className="user-order-no" data-fantasy-user-sorted-index={8}>
                                         9.
-                                </div>
-                                    <div className="d-flex flex-column justify-content-between">
-                                        <div className="top">
+                                    </div>
+                                    <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={8}>
+                                        <div className="top" data-fantasy-user-sorted-index={8}>
                                             {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[8].username}
                                         </div>
-                                        <div className="bottom">
-                                            {this.state.fantasyUsersSorted[8].summaSummarum}<sup>pt</sup>
+                                        <div className="bottom" data-fantasy-user-sorted-index={8}>
+                                            {this.state.fantasyUsersSorted[8].summaSummarum}<sup data-fantasy-user-sorted-index={8}>pt</sup>
                                         </div>
-                                        <div className="bottom-bottom">
-                                            2<sup>pt</sup>
-                                        </div>
+                                        {this.context.hallOfFameSelectedDay !== "all-days" &&
+                                            <div className="bottom-bottom" data-fantasy-user-sorted-index={8}>
+                                                2<sup data-fantasy-user-sorted-index={8}>pt</sup>
+                                            </div>
+                                        }
                                     </div>
-                                    <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
+                                    <div className="silhouette-wrapper" data-fantasy-user-sorted-index={8}>
+                                        {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={8}/>}
                                     </div>
                                 </div>
-                                <div className="not-first-place-wrapper d-flex align-items-center tenth-to-show">
-                                    <div className="user-order-no">
+
+
+                                <div className="not-first-place-wrapper d-flex align-items-center tenth-to-show" data-fantasy-user-sorted-index={9} onClick={this.depositUserDataForModal}>
+                                    <div className="user-order-no" data-fantasy-user-sorted-index={9}>
                                         10.
-                                </div>
-                                    <div className="d-flex flex-column justify-content-between">
-                                        <div className="top">
+                                    </div>
+                                    <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={9}>
+                                        <div className="top" data-fantasy-user-sorted-index={9}>
                                             {this.state.fantasyUsersSorted[9].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[9].username}
                                         </div>
-                                        <div className="bottom">
-                                            {this.state.fantasyUsersSorted[9].summaSummarum}<sup>pt</sup>
+                                        <div className="bottom" data-fantasy-user-sorted-index={9}>
+                                            {this.state.fantasyUsersSorted[9].summaSummarum}<sup data-fantasy-user-sorted-index={9}>pt</sup>
                                         </div>
-                                        <div className="bottom-bottom">
-                                            1<sup>pt</sup>
-                                        </div>
+                                        {this.context.hallOfFameSelectedDay !== "all-days" &&
+                                            <div className="bottom-bottom" data-fantasy-user-sorted-index={9}>
+                                                1<sup  data-fantasy-user-sorted-index={9}>pt</sup>
+                                            </div>
+                                        }
                                     </div>
-                                    <div className="silhouette-wrapper">
+                                    <div className="silhouette-wrapper" data-fantasy-user-sorted-index={9}>
                                         {this.state.fantasyUsersSorted[9].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" />}
                                     </div>
                                 </div>
@@ -371,6 +424,10 @@ class HallOfFameTotalPointsList extends React.Component {
                         </div>
                     </div>
                 }
+                <Portal>
+                    <HallOfFameUserStatsModal isShowing={this.state.showUserModal} closeModal={this.closeUserModal} userData={this.state.fantasyUserForModalData}/>
+
+                </Portal>
             </>
         )
     }

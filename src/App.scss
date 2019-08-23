@@ -5,23 +5,17 @@
 @import url('./style/rules.scss');
 @import url('./style/signInWrapper.scss');
 @import url('./style/screenWelcome.scss');
-@import url('./style/f1wcPointsByDay.scss');
 @import url('./style/totalPointsByDay.scss');
 @import url('./style/header.scss');
 @import url('./style/dashboardSelectDay.scss');
-@import url('./style/singleMatchSet.scss');
 @import url('./style/dashboardSelectTeam.scss');
-@import url('./style/screenAdmin.scss');
 @import url('./style/playersOnField.scss');
 @import url('./style/selectPlayer.scss');
 @import url('./style/playerCardModal.scss');
 @import url('./style/screenUser.scss');
 @import url('./style/hallOfFameF1WCList.scss');
 @import url('./style/hallOfFameTotalPointsList.scss');
-@import url('./style/hallOfFameUserStatsF1WC.scss');
-@import url('./style/hallOfFameUserStatsTotalPoints.scss');
-@import url('./style/hallOfFameLists.scss');
-@import url('./style/hallOfFameUserStats.scss');
+@import url('./style/hallOfFameUserStatsModal.scss');
 @import url('./style/screenHallOfFame.scss');
 @import url('./style/f1wcPointsCalcModal.scss');
 @import url('./style/roundPointsCalcModal.scss');
@@ -64,3 +58,16 @@ a:hover{
         
     }
 }
+
+::-webkit-scrollbar {
+    width: 0.5vw;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: red; 
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

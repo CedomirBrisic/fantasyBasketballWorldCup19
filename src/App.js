@@ -1,10 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
-
-
-
 import WelcomeScreen from './screens/WelcomeScreen';
-// import AdminScreen from './screens/AdminScreen';
 import UserScreen from './screens/UserScreen';
 import HallOfFameScreen from './screens/HallOfFameScreen';
 
@@ -18,26 +14,6 @@ function App() {
         <Route exact path='/' component={WelcomeScreen} />
         <Route exact path='/user-screen' component={UserScreen} />
         <Route exact path='/hall-of-fame' component={HallOfFameScreen} />
-        
-
-        {/* <F1WCPointsByDay /> */} 
-        {/* <TotalPointsByDay /> */}
-        {/* <Header /> */}
-        {/* <DashboardSelectDay /> */}
-        {/* <SingleMatchSet /> */}
-        {/* <DashboardSelectTeam /> */}
-        {/* <AdminScreen /> */}
-        {/* <PlayersOnField /> */}
-        {/* <SelectPlayer /> */}
-        {/* <PlayerCardModal /> */}
-        {/* <UserScreen /> */}
-        {/* <HallOfFameF1WCList /> */}
-        {/* <HallOfFameTotalPointsList /> */}
-        {/* <HallOfFameUserStatsF1WC /> */}
-        {/* <HallOfFameUserStatsTotalPoints /> */}
-        {/* <HallOfFameLists /> */}
-        {/* <HallOfFameUserStats /> */}
-        {/* <HallOfFameScreen /> */}
       </Switch>
     </div>
   );

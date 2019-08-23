@@ -1,7 +1,6 @@
 import React from 'react';
 import { AppContext } from '../screens/_context/AppContext';
 import { Link } from 'react-router-dom'
-import HallOfFameUserStats from './common/HallOfFameUserStats';
 import HallOfFameRealLifePlayerListStats from "./common/HallOfFameRealLifePlayerListStats";
 import HallOfFameFantasyPlayersList from "./common/HallOfFameFantasyPlayersList";
 import HallOfFameF1WCList from './common/HallOfFameF1WCList';
@@ -13,7 +12,7 @@ import HallOfFameTotalPointsList from './common/HallOfFameTotalPointsList';
 class HallOfFameScreen extends React.Component {
     static contextType = AppContext;
     state = {
-        listView: "f1wc",
+        listView: "round-points",
         searchPlaceholder: "Search player by name",
         searchValue: ""
     }
