@@ -136,6 +136,10 @@ class HallOfFameTotalPointsList extends React.Component {
                     this.props.searchValue === "" &&
                     <div className="hall-of-fame-total-points-list-container">
                         <div className="hall-of-fame-total-points-list-wrapper d-flex flex-column align-items-center">
+                            {this.context.hallOfFameSelectedDay !== "all-days" &&
+                            this.state.fantasyUsersSorted[0].summaSummarum != 0&& 
+                                <div className="made-it-trough"><i>Users that made it through in battle<br/>for F1WC points</i></div>
+                            }
                             <div className="first-place-wrapper d-flex align-items-center" data-fantasy-user-sorted-index={0} onClick={this.depositUserDataForModal}>
                                 <div className="user-order-no" data-fantasy-user-sorted-index={0}>
                                     1.
@@ -178,7 +182,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                             </div>}
                                     </div>
                                     <div className="silhouette-wrapper" data-fantasy-user-sorted-index={1}>
-                                        {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={1}/>}
+                                        {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={1} />}
                                     </div>
                                 </div>
 
@@ -201,7 +205,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                         }
                                     </div>
                                     <div className="silhouette-wrapper" data-fantasy-user-sorted-index={2}>
-                                        {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={2}/>}
+                                        {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={2} />}
                                     </div>
                                 </div>
 
@@ -225,7 +229,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                         }
                                     </div>
                                     <div className="silhouette-wrapper" data-fantasy-user-sorted-index={3}>
-                                        {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={3}/>}
+                                        {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={3} />}
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +255,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                         }
                                     </div>
                                     <div className="silhouette-wrapper" data-fantasy-user-sorted-index={4}>
-                                        {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={4}/>}
+                                        {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={4} />}
                                     </div>
                                 </div>
 
@@ -275,7 +279,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                         }
                                     </div>
                                     <div className="silhouette-wrapper" data-fantasy-user-sorted-index={5}>
-                                        {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={5}/>}
+                                        {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={5} />}
                                     </div>
                                 </div>
 
@@ -297,7 +301,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                         }
                                     </div>
                                     <div className="silhouette-wrapper">
-                                        {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={6}/>}
+                                        {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={6} />}
                                     </div>
                                 </div>
                             </div>
@@ -322,7 +326,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                         }
                                     </div>
                                     <div className="silhouette-wrapper" data-fantasy-user-sorted-index={7}>
-                                        {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={7}/>}
+                                        {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={7} />}
                                     </div>
                                 </div>
 
@@ -344,7 +348,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                         }
                                     </div>
                                     <div className="silhouette-wrapper" data-fantasy-user-sorted-index={8}>
-                                        {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={8}/>}
+                                        {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "" : <img className="img-fluid" src={require("../../images/runnwinner.png")} alt="triumph" data-fantasy-user-sorted-index={8} />}
                                     </div>
                                 </div>
 
@@ -362,7 +366,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                         </div>
                                         {this.context.hallOfFameSelectedDay !== "all-days" &&
                                             <div className="bottom-bottom" data-fantasy-user-sorted-index={9}>
-                                                1<sup  data-fantasy-user-sorted-index={9}>pt</sup>
+                                                1<sup data-fantasy-user-sorted-index={9}>pt</sup>
                                             </div>
                                         }
                                     </div>
@@ -425,7 +429,7 @@ class HallOfFameTotalPointsList extends React.Component {
                     </div>
                 }
                 <Portal>
-                    <HallOfFameUserStatsModal isShowing={this.state.showUserModal} closeModal={this.closeUserModal} userData={this.state.fantasyUserForModalData}/>
+                    <HallOfFameUserStatsModal isShowing={this.state.showUserModal} closeModal={this.closeUserModal} userData={this.state.fantasyUserForModalData} />
 
                 </Portal>
             </>

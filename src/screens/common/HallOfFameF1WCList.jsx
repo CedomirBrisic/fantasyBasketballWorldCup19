@@ -72,7 +72,7 @@ class HallOfFameF1WCList extends React.Component {
 
             }
         })
-
+        
         const outputCalculatedSummedUp = []
         const outputUsernames = []
         outputCalculated.forEach((user) => {
@@ -80,7 +80,7 @@ class HallOfFameF1WCList extends React.Component {
                 outputUsernames.push(user.username)
             }
         })
-
+        
         outputUsernames.forEach((username) => {
             let f1WCgrandTotal = 0
             let summedUpUser = null
@@ -89,6 +89,7 @@ class HallOfFameF1WCList extends React.Component {
                     f1WCgrandTotal += user.f1wcPoints
                     summedUpUser = user
                     summedUpUser["f1WCgrandTotal"] = f1WCgrandTotal
+                    summedUpUser["summaSummarum"] = null
                 }
             })
             outputCalculatedSummedUp.push(summedUpUser)
