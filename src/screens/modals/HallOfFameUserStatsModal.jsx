@@ -132,7 +132,7 @@ class HallOfFameUserStatsModal extends React.Component {
         const selectedUserForModal = fantasyUsersCalculatedPointsForAllDays.filter((user) => user.username === this.props.userData.username)
 
         if (selectedUserForModal.length === 1) {
-            return selectedUserForModal[0].summaSummarum
+            return selectedUserForModal[0].summaSummarum.toFixed(2)
         } else {
             return "0"
         }

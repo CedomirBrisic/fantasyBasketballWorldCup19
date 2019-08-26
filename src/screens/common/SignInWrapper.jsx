@@ -42,7 +42,7 @@ class SignInWrapper extends React.Component {
     }
     render() {
         return (
-            <section className="sign-in-container d-flex align-items-center">
+            <section className="sign-in-container d-flex">
                 <div className="nav-wrapper d-flex">
                     <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" onClick={this.changeInitialLoadState}>
                         <a className={`nav-link btn-outline-light ${this.checkIsActiveTab()}`} id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">LogIn</a>

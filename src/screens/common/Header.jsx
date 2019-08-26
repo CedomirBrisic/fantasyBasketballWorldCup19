@@ -21,6 +21,9 @@ class Header extends React.Component {
                 <Link className="hall-of-fame-wrapper" to={`hall-of-fame`}>
                     Hall of Fame
                 </Link>
+                <Link className="hall-of-fame-wrapper text-danger" to={``}>
+                    Srpski
+                </Link>
             </div>
         )
     }

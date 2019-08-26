@@ -1,26 +1,29 @@
-.log-in-container{
-    padding: 2vw 4vw;
-    // height: 40vw;
+.log-in-container {
+    padding: 4vh 4vw;
     min-width: 36vw;
-    h3{
+
+    h3 {
         color: greenyellow;
         font-size: 2vw;
     }
+
     .check-mark-wrapper {
         color: greenyellow;
         font-size: 2.4vw;
         margin-left: 2.4vw;
     }
+
     .form-group {
         -webkit-box-shadow: 0px 0px 0.5vw 0px rgba(0, 0, 0, 0.1);
         -moz-box-shadow: 0px 0px 0.5vw 0px rgba(0, 0, 0, 0.1);
         box-shadow: 0px 0px 0.5vw 0px rgba(0, 0, 0, 0.1);
         padding: 1vw 1vw;
         transition: transform 0.5s;
-        margin-bottom: 2.5vw;
-        .form-control{
+        margin-bottom: 5vh;
+
+        .form-control {
             height: auto;
-            padding: 1vw 1vw;
+            padding: 2vh 1vw;
         }
 
         small {
@@ -31,7 +34,7 @@
         label {
             color: #ffffff;
             font-size: 1.1vw;
-            margin-bottom: 0.5vw;
+            margin-bottom: 1vh;
         }
 
         input {
@@ -46,13 +49,17 @@
         }
 
     }
-    .red-letters{
+
+    .red-letters {
         color: rgb(255, 230, 0);
         font-size: 1.1vw;
+        line-height: 1.7vw;
         font-weight: 500;
     }
-    h6{
+
+    h6 {
         font-size: 0.75vw;
+        line-height: 2vw;
         color: rgb(255, 230, 0);
     }
 
@@ -60,7 +67,52 @@
         color: #ffffff;
         border-color: #ffffff;
         font-size: 1.2vw;
-        padding: 0.2vw 1vw;
+        padding: 0.5vh 1vw;
         margin-top: 2vw;
+    }
+}
+
+.ask-for-fullscreen-container {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+    background-image: url("../images/welcomeScreen.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+
+    .ask-for-fullscreen-wrapper {
+        margin-left: 7vw;
+        background-color: rgba(0, 0, 0, 0.79);
+        width: 45vw;
+        height: 35vh;
+
+        h1 {
+            font-size: 2vw;
+            color: #ffffff;
+        }
+
+        h4 {
+            font-size: 1.5vw;
+            color: #ffffff;
+        }
+
+        h5 {
+            font-size: 1vw;
+            color: #ffffff;
+        }
+
+        .buttons-container {
+            width: 100%;
+
+            button {
+                font-size: 1.2vw;
+            }
+        }
     }
 }

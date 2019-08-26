@@ -154,9 +154,20 @@ class UserScreen extends React.Component {
                                 </div>
                             </div>
                             <div className="made-in"><i>Made in Land of Basketball</i></div>
+                            <div className="credits-container w-100 d-flex flex-column">
+                                <i>We thank to Pixabay for letting us borrow some of theirs images</i>
+                                <i>SPECIAL THANKS TO:</i>
+                                <i className="credits">David Mark from Pixabay</i>
+                                <i className="credits">Dimitris Vetsikas from Pixabay</i>
+                                <i className="credits">Pexels from Pixabay</i>
+                                <i className="credits">Clker-Free-Vector-Images from Pixabay</i>
+                                <i className="credits">mohamed Hassan from Pixabay</i>
+                                <i className="credits">BedexpStock from Pixabay</i>
+                                <i className="credits">OpenClipart-Vectors from Pixabay </i> 
                         </div>
                     </div>
-                }
+                    </div>
+            }
                 {!this.context.isInitialLoading &&
                     <div className="user-screen-container d-flex flex-column justify-content-between">
                         <Header />

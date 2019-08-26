@@ -10,9 +10,8 @@
     box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
     height: 42vw;
     overflow: hidden;
-    &:hover {
-        animation: openRules 0.2s ease-in-out forwards;
-    }
+    animation: openRules 2.4s ease-in-out forwards;
+
     position: relative;
     .made-in {
         color: #ffffff;
