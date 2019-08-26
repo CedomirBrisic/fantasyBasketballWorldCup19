@@ -81,6 +81,7 @@ export default class AppStore extends Component {
         userAvgRoundPointsPerGame: 0,
 
         isInitialLoading: true,
+        isLandscape: null,
 
         hallOfFameSelectedDay: "all-days",
         isHallOfFame: false
@@ -250,6 +251,7 @@ export default class AppStore extends Component {
             bitrulez2: data2,
         })
 
+
         this.interval = setInterval(
             () => this.clocify(),
             1000
@@ -260,6 +262,15 @@ export default class AppStore extends Component {
         this.setState({
             nowDateAndTime: humanReadDateAndTime()
         });
+        if (window.innerHeight > window.innerWidth) {
+            this.setState({
+                isLandscape: false
+            })
+        } else {
+            this.setState({
+                isLandscape: true
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -282,27 +293,34 @@ export default class AppStore extends Component {
     render() {
         return (
             <>
-                <AppContext.Provider value={{
-                    ...this.state,
-                    getFantasyDataContext: this.getFantasyDataContext,
-                    toggleShowSelectDayDashboard: this.toggleShowSelectDayDashboard,
-                    goBackToTeamView: this.goBackToTeamView,
-                    changeSelectedDay: this.changeSelectedDay,
-                    changeSelectedTeam: this.changeSelectedTeam,
-                    showSinglePlayerModal: this.showSinglePlayerModal,
-                    closeSinglePlayerModal: this.closeSinglePlayerModal,
-                    choosePlayerForTeam: this.choosePlayerForTeam,
-                    pickPlayerForTeam: this.pickPlayerForTeam,
-                    depositUserKey: this.depositUserKey,
-                    teamPickIsSubmitted: this.teamPickIsSubmitted,
-                    depositSelectPlayerSearchValue: this.depositSelectPlayerSearchValue,
-                    depositHallOfFameSelectedDay: this.depositHallOfFameSelectedDay,
-                    depositIsHallOfFame: this.depositIsHallOfFame,
-                    depositIsNotHallOfFame: this.depositIsNotHallOfFame
-                }}>
+                {this.state.isLandscape &&
+                    <AppContext.Provider value={{
+                        ...this.state,
+                        getFantasyDataContext: this.getFantasyDataContext,
+                        toggleShowSelectDayDashboard: this.toggleShowSelectDayDashboard,
+                        goBackToTeamView: this.goBackToTeamView,
+                        changeSelectedDay: this.changeSelectedDay,
+                        changeSelectedTeam: this.changeSelectedTeam,
+                        showSinglePlayerModal: this.showSinglePlayerModal,
+                        closeSinglePlayerModal: this.closeSinglePlayerModal,
+                        choosePlayerForTeam: this.choosePlayerForTeam,
+                        pickPlayerForTeam: this.pickPlayerForTeam,
+                        depositUserKey: this.depositUserKey,
+                        teamPickIsSubmitted: this.teamPickIsSubmitted,
+                        depositSelectPlayerSearchValue: this.depositSelectPlayerSearchValue,
+                        depositHallOfFameSelectedDay: this.depositHallOfFameSelectedDay,
+                        depositIsHallOfFame: this.depositIsHallOfFame,
+                        depositIsNotHallOfFame: this.depositIsNotHallOfFame
+                    }}>
 
-                    {this.props.children}
-                </AppContext.Provider >
+                        {this.props.children}
+                    </AppContext.Provider >
+                }
+                {!this.state.isLandscape &&
+                    <div className="landscape-message">
+                        <h1>Rotate your phone<br />
+                            to LANDSCAPE mode</h1>
+                    </div>}
             </>
         )
     }
