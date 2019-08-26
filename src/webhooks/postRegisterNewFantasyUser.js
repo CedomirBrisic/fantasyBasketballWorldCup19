@@ -1,5 +1,4 @@
 const postRegisterNewFantasyUser = (data, qwe) => {
-    // nekaRendOMSiFRaOdDostaKARAkterA123
     return fetch(`https://webhooks.mongodb-stitch.com/api/client/v2.0/app/basketball-fantasy-gpizn/service/http/incoming_webhook/POSTregisterNewFantasyUser?secret=${qwe}`, {
         method: "POST",
         headers: {

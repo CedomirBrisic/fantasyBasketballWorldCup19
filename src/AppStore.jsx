@@ -250,17 +250,17 @@ export default class AppStore extends Component {
             bitrulez2: data2,
         })
 
-        // this.interval = setInterval(
-        //     () => this.clocify(),
-        //     1000
-        // );
+        this.interval = setInterval(
+            () => this.clocify(),
+            1000
+        );
     }
 
-    // clocify() {
-    //     this.setState({
-    //         nowDateAndTime: humanReadDateAndTime()
-    //     });
-    // }
+    clocify() {
+        this.setState({
+            nowDateAndTime: humanReadDateAndTime()
+        });
+    }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.selectedDay !== this.state.selectedDay && this.state.showTeam) {

@@ -293,7 +293,7 @@ class HallOfFameUserStatsModal extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.userData !== null && prevProps !== this.props) {
+        if (this.props.userData !== null && prevProps.userData !== this.props.userData) {
             const dayToSet = this.context.hallOfFameSelectedDay === "all-days" ? "31st-August" : this.context.hallOfFameSelectedDay
             this.setState({
                 selectedDay: dayToSet,

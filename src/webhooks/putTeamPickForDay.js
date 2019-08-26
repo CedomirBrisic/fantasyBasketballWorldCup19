@@ -1,5 +1,4 @@
 const putTeamPickForDay = (data, qwe) => {
-    // opETBasNekaDugaCkaSIfraOdmnogOKARAkterAMalaIVelikaSlovaSve
     return fetch(`https://webhooks.mongodb-stitch.com/api/client/v2.0/app/basketball-fantasy-gpizn/service/http/incoming_webhook/PUTteamPickForDay?secret=${qwe}`, {
         method: "PUT",
         headers: {

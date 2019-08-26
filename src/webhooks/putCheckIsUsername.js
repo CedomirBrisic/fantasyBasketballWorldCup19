@@ -1,5 +1,4 @@
 const putCheckIsUsername = (data, qwe) => {
-    // nekaRendomSiFRaOdDostaKARAkterA123
     return fetch(`https://webhooks.mongodb-stitch.com/api/client/v2.0/app/basketball-fantasy-gpizn/service/http/incoming_webhook/PUTcheckUsername?secret=${qwe}`, {
         method: "PUT",
         headers: {
