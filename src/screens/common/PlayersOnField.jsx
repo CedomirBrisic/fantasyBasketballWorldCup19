@@ -2,6 +2,7 @@ import React from 'react';
 import { AppContext } from '../_context/AppContext';
 import { Portal } from 'react-portal';
 import calculateBasketballPlayerTDFantasyPoints from "../../services/calculateBasketballPlayerTDFantasyPoints";
+import putCheckUsernameAndPassword from "../../webhooks/putCheckUsernameAndPassword";
 import putTeamPickForDay from "../../webhooks/putTeamPickForDay";
 import TeamPickSuccessfullySubmited from "../modals/TeamPickSuccessfullySubmited";
 import PlayerCardModal from "../modals/PlayerCardModal";
@@ -219,14 +220,31 @@ class PlayersOnField extends React.Component {
         }
         const data = {
             username: this.context.bitrulez,
+            password: this.context.bitrulez2,
             selectedDay: this.context.selectedDay,
             teamPickData,
         }
-        putTeamPickForDay(data, "opETBasNekaDugaCkaSIfraOdmnogOKARAkterAMalaIVelikaSlovaSve").then((response) => {
-            this.setState({
-                showTeamPickSuccessfullySubmited: true
-            })
+        const data2 = {
+            username: this.context.bitrulez,
+            password: this.context.bitrulez2
+        }
+
+        putCheckUsernameAndPassword(data2, "nekArendomSifrAOdDostaKArakTerA123").then((response) => {
+            if (response.length === 0) {
+                alert(`Too many players online right now...
+                server can't handle it...
+                try again a little bit later`)
+            } else {
+                putTeamPickForDay(data, "opETBasNekaDugaCkaSIfraOdmnogOKARAkterAMalaIVelikaSlovaSve").then((response) => {
+                    this.setState({
+                        showTeamPickSuccessfullySubmited: true
+                    })
+                })
+            }
         })
+
+
+
     }
 
     checkItsReadyButton = () => {

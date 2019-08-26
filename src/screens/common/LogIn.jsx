@@ -41,7 +41,7 @@ class LogIn extends React.Component {
     }
 
     proceedToUserScreen = (userData) => {
-        this.context.depositUserKey(userData[0].username)
+        this.context.depositUserKey(userData[0].username, this.state.password)
         this.setState({
             goToUserScreen: "nekAReNDOMSifraOdBAsdostAkarakTERA"
         })

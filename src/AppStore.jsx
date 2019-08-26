@@ -5,12 +5,14 @@ import humanReadDateAndTime from "./services/humanReadDateAndTime";
 import eligibleDays from "./services/eligibleDays";
 import checkEligibilityForPickTeam from "./services/checkEligibilityForPickTeam";
 
+
 export default class AppStore extends Component {
     state = {
         basketballPlayers: null,
         dropdowns: null,
         fantasyUsers: null,
         bitrulez: null,
+        bitrulez2: null,
 
         showSelectDayDashboard: true,
         showSelectTeamDashboard: false,
@@ -95,11 +97,11 @@ export default class AppStore extends Component {
         })
     }
     depositHallOfFameSelectedDay = (dayToDeposit) => {
-        if (dayToDeposit !== "all-days"){
+        if (dayToDeposit !== "all-days") {
             this.setState({
                 hallOfFameSelectedDay: dayToDeposit,
                 selectedDay: dayToDeposit
-            })            
+            })
         } else {
             this.setState({
                 hallOfFameSelectedDay: dayToDeposit,
@@ -140,11 +142,13 @@ export default class AppStore extends Component {
             selectedTeam: data
         })
     }
-    depositUserKey = (data) => {
+    depositUserKey = (data, data2) => {
         this.setState({
-            bitrulez: data
+            bitrulez: data,
+            bitrulez2: data2
         })
         sessionStorage.setItem("bitrulez", data)
+        sessionStorage.setItem("bitrulez2", data2)
     }
 
     getFantasyDataContext = () => {
@@ -204,10 +208,12 @@ export default class AppStore extends Component {
                 return player
             }
         })
-        this.setState({
-            selectedPlayerForPlayerCardModal: selectedPlayer[0],
-            showPlayerCardModal: true
-        })
+        if (playerName !== null && playerTeam !== null) {
+            this.setState({
+                selectedPlayerForPlayerCardModal: selectedPlayer[0],
+                showPlayerCardModal: true
+            })
+        }
     }
     closeSinglePlayerModal = () => {
         this.setState({
@@ -238,8 +244,10 @@ export default class AppStore extends Component {
 
     componentDidMount() {
         let data = sessionStorage.getItem("bitrulez")
+        let data2 = sessionStorage.getItem("bitrulez2")
         this.setState({
             bitrulez: data,
+            bitrulez2: data2,
         })
 
         // this.interval = setInterval(
@@ -273,27 +281,29 @@ export default class AppStore extends Component {
 
     render() {
         return (
-            <AppContext.Provider value={{
-                ...this.state,
-                getFantasyDataContext: this.getFantasyDataContext,
-                toggleShowSelectDayDashboard: this.toggleShowSelectDayDashboard,
-                goBackToTeamView: this.goBackToTeamView,
-                changeSelectedDay: this.changeSelectedDay,
-                changeSelectedTeam: this.changeSelectedTeam,
-                showSinglePlayerModal: this.showSinglePlayerModal,
-                closeSinglePlayerModal: this.closeSinglePlayerModal,
-                choosePlayerForTeam: this.choosePlayerForTeam,
-                pickPlayerForTeam: this.pickPlayerForTeam,
-                depositUserKey: this.depositUserKey,
-                teamPickIsSubmitted: this.teamPickIsSubmitted,
-                depositSelectPlayerSearchValue: this.depositSelectPlayerSearchValue,
-                depositHallOfFameSelectedDay: this.depositHallOfFameSelectedDay,
-                depositIsHallOfFame: this.depositIsHallOfFame,
-                depositIsNotHallOfFame:this.depositIsNotHallOfFame
-            }}>
+            <>
+                <AppContext.Provider value={{
+                    ...this.state,
+                    getFantasyDataContext: this.getFantasyDataContext,
+                    toggleShowSelectDayDashboard: this.toggleShowSelectDayDashboard,
+                    goBackToTeamView: this.goBackToTeamView,
+                    changeSelectedDay: this.changeSelectedDay,
+                    changeSelectedTeam: this.changeSelectedTeam,
+                    showSinglePlayerModal: this.showSinglePlayerModal,
+                    closeSinglePlayerModal: this.closeSinglePlayerModal,
+                    choosePlayerForTeam: this.choosePlayerForTeam,
+                    pickPlayerForTeam: this.pickPlayerForTeam,
+                    depositUserKey: this.depositUserKey,
+                    teamPickIsSubmitted: this.teamPickIsSubmitted,
+                    depositSelectPlayerSearchValue: this.depositSelectPlayerSearchValue,
+                    depositHallOfFameSelectedDay: this.depositHallOfFameSelectedDay,
+                    depositIsHallOfFame: this.depositIsHallOfFame,
+                    depositIsNotHallOfFame: this.depositIsNotHallOfFame
+                }}>
 
-                {this.props.children}
-            </AppContext.Provider >
+                    {this.props.children}
+                </AppContext.Provider >
+            </>
         )
     }
 }
