@@ -14,7 +14,7 @@ class SelectPlayer extends React.Component {
     }
 
     checkSelectedTeamString = () => {
-        const selectedTeam = this.context.selectedTeam.split(" ").join("-")
+        const selectedTeam = this.context.teamSelected.split(" ").join("-")
         if (selectedTeam === "South-Korea") {
             return "Korea"
         } else {
@@ -22,7 +22,7 @@ class SelectPlayer extends React.Component {
         }
     }
     mapEligiblePlayers = () => {
-        const selectedTeam = this.context.selectedTeam
+        const selectedTeam = this.context.teamSelected
         const selectedDay = this.context.selectedDay
         const players = this.context.basketballPlayers
         const eligibleTeams = this.context.dropdowns[0].teamsByDay
@@ -36,9 +36,6 @@ class SelectPlayer extends React.Component {
                 selectedPlayersIds.push(this.context.teamPickData[playerPosition])
             }
         })
-
-
-
         if (selectedTeam === "all-eligible-teams" && eligibleDays.indexOf(selectedDay) !== -1) {
             if (Array.isArray(eligibleTeams[selectedDay])) {
                 eligibleTeams[selectedDay].forEach((team) => {
@@ -137,6 +134,7 @@ class SelectPlayer extends React.Component {
         else if (eligibleDays.indexOf(selectedDay) !== -1) {
             players.forEach((player, index) => {
                 if (selectedTeam === player.team) {
+
                     let assistsSum = 0;
                     let reboundsSum = 0;
                     let blocksSum = 0;
@@ -214,45 +212,43 @@ class SelectPlayer extends React.Component {
     render() {
         return (
             <>
-                    <div className="d-flex justify-content-between align-items-center w-100 select-player-label-wrapper">
-                            {this.context.selectedTeam &&
-                                this.context.selectedTeam === "Serbia" &&
-                                <a href={`https://www.sportske.net/vesti/kosarka/reprezentacija-srbije.html`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Pročitaj više o našima`}</button></a>
-                            }
-                            {this.context.selectedTeam &&
-                                this.context.selectedTeam === "Cote d'Ivoire" &&
-                                this.context.selectedTeam !== "Serbia" &&
-                                <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/Cote-d-Ivoire`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
-                            }
-                            {this.context.selectedTeam &&
-                                this.context.selectedTeam !== "all-eligible-teams" &&
-                                this.context.selectedTeam !== "Cote d'Ivoire" &&
-                                this.context.selectedTeam !== "Serbia" &&
-                                <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/${this.checkSelectedTeamString()}`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.selectedTeam} national team`}</button></a>
-                            }
-                            {this.context.selectedTeam === "all-eligible-teams" &&
-                                <a href={`http://www.fiba.basketball/basketballworldcup/2019`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">Find out more about World Cup</button></a>
-                            }
-                        <div className="label-and-clock-wrapper d-flex justify-content-between align-items-center">
-                            <div className="table-label">
-                                <i>Table of average Real Life stats<br className="d-block d-md-none"/> (per game)</i>
-                            </div>
-                            <div className="clockify-wrapper d-flex justify-content-between">
-                                <span>
-                                    {this.context.nowDateAndTime.humanDate}
+                <div className="d-flex justify-content-between align-items-center w-100 select-player-label-wrapper">
+                    {this.context.teamSelected &&
+                        this.context.teamSelected === "Serbia" &&
+                        <a href={`https://www.sportske.net/vesti/kosarka/reprezentacija-srbije.html`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Pročitaj više o našima`}</button></a>
+                    }
+                    {this.context.teamSelected &&
+                        this.context.teamSelected === "Cote d'Ivoire" &&
+                        this.context.teamSelected !== "Serbia" &&
+                        <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/Cote-d-Ivoire`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.teamSelected} national team`}</button></a>
+                    }
+                    {this.context.teamSelected &&
+                        this.context.teamSelected !== "all-eligible-teams" &&
+                        this.context.teamSelected !== "Cote d'Ivoire" &&
+                        this.context.teamSelected !== "Serbia" &&
+                        <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/${this.checkSelectedTeamString()}`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.teamSelected} national team`}</button></a>
+                    }
+                    {this.context.teamSelected === "all-eligible-teams" &&
+                        <a href={`http://www.fiba.basketball/basketballworldcup/2019`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">Find out more about World Cup</button></a>
+                    }
+                    <div className="label-and-clock-wrapper d-flex justify-content-between align-items-center">
+                        <div className="table-label">
+                            <i>Table of average Real Life stats<br className="d-block d-md-none" /> (per game)</i>
+                        </div>
+                        <div className="clockify-wrapper d-flex justify-content-between">
+                            <span>
+                                {this.context.nowDateAndTime.humanDate}
+                            </span>
+                            <span>
+                                {this.context.nowDateAndTime.humanTime}
+                            </span>
+                            <span>
+                                Zulu time
                                 </span>
-                                <span>
-                                    {this.context.nowDateAndTime.humanTime}
-                                </span>
-                                <span>
-                                    Zulu time
-                                </span>
-                            </div>
                         </div>
                     </div>
+                </div>
                 <section className="select-player-container d-flex flex-column">
-
-
                     <div className="players-table-container">
                         <table>
                             <thead>

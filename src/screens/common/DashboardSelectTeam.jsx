@@ -8,10 +8,9 @@ class DashboardSelectTeam extends React.Component {
 
     depositSelectedTeam = (event) => {
         const isClickable = event.target.getAttribute("data-is-clickable")
+        const selectedTeam = event.target.getAttribute("data-selected-team")
         if (isClickable === "true") {
-            const selectedTeam = event.target.getAttribute("data-selected-team")
             this.context.changeSelectedTeam(selectedTeam)
-            this.context.depositSelectPlayerSearchValue("")
         }
     }
 
@@ -54,8 +53,8 @@ class DashboardSelectTeam extends React.Component {
                     }
                 }
 
-                return <button key={team.name + index} type="button" className={`btn d-flex align-items-center ${isEligible ? "btn-outline-light" : "btn-outline-dark"} ${this.context.selectedTeam === `${team.name}` ? "is-selected" : ""}`} data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`} onClick={this.depositSelectedTeam}>
-                    <span className="team-image-wrapper" data-selected-team={`${team.name}`}>
+                return <button key={team.name + index} type="button" className={`btn d-flex align-items-center ${isEligible ? "btn-outline-light" : "btn-outline-dark"} ${this.context.teamSelected === `${team.name}` ? "is-selected" : ""}`} data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`} onClick={this.depositSelectedTeam}>
+                    <span className="team-image-wrapper" data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`}>
                         <img className="img-fluid" src={require(`../../images/flags/Flag of ${team.name}.png`)} alt={`${team.name}`} data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`} />
                     </span>
                     <span className="team-title" data-selected-team={`${team.name}`} data-is-clickable={`${isEligible}`}>
@@ -76,7 +75,7 @@ class DashboardSelectTeam extends React.Component {
     render() {
         return (
             <section className={`dashboard-select-team-container d-flex flex-column justify align-items-center ${this.context.showSelectTeamDashboard ? "show-selected-team" : ""}`}>
-                <button type="button" className={`btn btn-outline-light select-all ${this.context.selectedTeam === "all-eligible-teams" ? "is-selected" : ""}`} data-selected-team="all-eligible-teams" data-is-clickable="true" onClick={this.depositSelectedTeam}><i data-selected-team="all-eligible-teams" data-is-clickable="true">All eligible players</i></button>
+                <button type="button" className={`btn btn-outline-light select-all ${this.context.teamSelected === "all-eligible-teams" ? "is-selected" : ""}`} data-selected-team="all-eligible-teams" data-is-clickable="true" onClick={this.depositSelectedTeam}><i data-selected-team="all-eligible-teams" data-is-clickable="true">All eligible players</i></button>
                 <div className="dashboard-select-team-list-wrapper d-md-flex flex-md-column justify-content-md-between ">
                 <input value={this.context.selectPlayerSearchValue} onChange={this.sendSelectPlayerSearchValue} type="search" placeholder="Search player by name"/>
                     {this.mapEligibleTeams()}

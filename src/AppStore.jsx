@@ -19,7 +19,7 @@ export default class AppStore extends Component {
         selectPlayerSearchValue: "",
 
         selectedDay: null,
-        selectedTeam: "all-eligible-teams",
+        teamSelected: "all-eligible-teams",
         nowDateAndTime: humanReadDateAndTime(),
 
         selectedPlayerForPlayerCardModal: null,
@@ -86,7 +86,6 @@ export default class AppStore extends Component {
         hallOfFameSelectedDay: "all-days",
         isHallOfFame: false,
 
-
     }
     depositIsHallOfFame = () => {
         this.setState({
@@ -116,7 +115,7 @@ export default class AppStore extends Component {
     depositSelectPlayerSearchValue = (data) => {
         this.setState({
             selectPlayerSearchValue: data,
-            selectedTeam: "all-eligible-teams"
+            teamSelected: "all-eligible-teams"
         })
     }
     teamPickIsSubmitted = () => {
@@ -136,14 +135,10 @@ export default class AppStore extends Component {
     changeSelectedDay = (data) => {
         this.setState({
             selectedDay: data,
-            selectedTeam: "all-eligible-teams"
+            teamSelected: "all-eligible-teams"
         })
     }
-    changeSelectedTeam = (data) => {
-        this.setState({
-            selectedTeam: data
-        })
-    }
+
     depositUserKey = (data, data2) => {
         this.setState({
             bitrulez: data,
@@ -186,7 +181,7 @@ export default class AppStore extends Component {
             showSelectPlayer: false,
             showSelectDayDashboard: true,
             showSelectTeamDashboard: false,
-            selectedTeam: "all-eligible-teams",
+            teamSelected: "all-eligible-teams",
         })
     }
     pickPlayerForTeam = (inputPlayerPosition, playerId) => {
@@ -248,16 +243,16 @@ export default class AppStore extends Component {
         let data = sessionStorage.getItem("bitrulez")
         let data2 = sessionStorage.getItem("bitrulez2")
 
-            this.setState({
-                bitrulez: data,
-                bitrulez2: data2,
-            })
-   
+        this.setState({
+            bitrulez: data,
+            bitrulez2: data2,
+        })
 
-        this.interval = setInterval(
-            () => this.clocify(),
-            1000
-        );
+
+        // this.interval = setInterval(
+        //     () => this.clocify(),
+        //     1000
+        // );
     }
 
     clocify() {
@@ -291,7 +286,12 @@ export default class AppStore extends Component {
             this.calculateUsersRoundPoints()
         }
     }
-
+    changeSelectedTeam = (data) => {
+        this.setState({
+            teamSelected: data,
+            selectPlayerSearchValue: ""
+        })
+    }
     render() {
         return (
             <>
