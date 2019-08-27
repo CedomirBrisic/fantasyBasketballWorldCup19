@@ -5,7 +5,7 @@ import TotalWCPointsByDay from './TotalPointsByDay';
 
 
 
-class Header extends React.Component {
+class SRBHeader extends React.Component {
     static contextType = AppContext;
 
     render() {
@@ -26,12 +26,12 @@ class Header extends React.Component {
                 <Link className="hall-of-fame-wrapper" to={`hall-of-fame`}>
                     Hall of Fame
                 </Link>
-                <Link className="hall-of-fame-wrapper text-danger" to={`/srb/user-screen`}>
-                    Srpski
+                <Link className="hall-of-fame-wrapper text-danger" to={`/user-screen`}>
+                    English please
                 </Link>
             </div>
         )
     }
 }
 
-export default Header
+export default SRBHeader

@@ -81,7 +81,7 @@ export default class AppStore extends Component {
         userAvgRoundPointsPerGame: 0,
 
         isInitialLoading: true,
-        isLandscape: true,
+        isLandscape: false,
 
         hallOfFameSelectedDay: "all-days",
         isHallOfFame: false,
@@ -248,26 +248,18 @@ export default class AppStore extends Component {
             bitrulez2: data2,
         })
 
+this.checkLandscape()
 
-        // this.interval = setInterval(
-        //     () => this.clocify(),
-        //     1000
-        // );
+        this.interval = setInterval(
+            () => this.clocify(),
+            1000
+        );
     }
 
     clocify() {
         this.setState({
             nowDateAndTime: humanReadDateAndTime()
         });
-        if (window.innerHeight > window.innerWidth) {
-            this.setState({
-                isLandscape: false
-            })
-        } else {
-            this.setState({
-                isLandscape: true
-            })
-        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -284,6 +276,22 @@ export default class AppStore extends Component {
 
         if (prevState.dropdowns === null && this.state.dropdowns !== null) {
             this.calculateUsersRoundPoints()
+        }
+        this.checkLandscape()
+    }
+    checkLandscape = () => {
+        if(this.state.isLandscape){
+            if (window.innerHeight > window.innerWidth) {
+                this.setState({
+                    isLandscape: false,
+                })
+            }
+        } else {
+            if (window.innerHeight < window.innerWidth) {
+                this.setState({
+                    isLandscape: true,
+                })
+            }
         }
     }
     changeSelectedTeam = (data) => {

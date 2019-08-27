@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap4-modal';
 
-class F1WCPointsCalc extends React.Component {
+class SRBF1WCPointsCalc extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -11,63 +11,63 @@ class F1WCPointsCalc extends React.Component {
     render() {
         return (
             <Modal className="f1wc-points-calc-modal" visible={this.props.showF1WCPointsCalc} onClickBackdrop={this.props.closeF1WCPointsCalcModal}>
-                    <div className="close" onClick={this.props.closeF1WCPointsCalcModal}>&times;</div>
+                <div className="close" onClick={this.props.closeF1WCPointsCalcModal}>&times;</div>
                 <div className="f1wc-points-calc-modal-container">
-                    <h3>TD competition is main competition of Sportske Fantasy</h3>
+                    <h3>Takmičenje za TD poene je glavni deo takmičenja u okviru Sportske Fantazija</h3>
                     <div className="label-wrapper">
-                        <p>At the end of every round, top 10 Sportske Fantasy users for that day are awarded with TD points</p>
-                        <p>They are calculated on the following way:</p>
+                        <p>Na kraju svake runde, 10 najbolje Sportske Fantazi igrača za taj dan su nagrađeni TD poenima</p>
+                        <p>A oni se računaju na sledeći način:</p>
                     </div>
                     <div className="d-flex justify-content-between align-items-center w-100 ">
                         <div className="d-flex flex-column justify-content-around rule-items-wraper">
                             <div className="d-flex justify-content-between rule-item">
-                                <p>1st place</p>
-                                <p>25pt</p>
+                                <p>Prvo mesto</p>
+                                <p>25 poena</p>
                             </div>
                             <div className="d-flex justify-content-between rule-item">
-                                <p>2nd place</p>
-                                <p>18pt</p>
+                                <p>Drugo mesto</p>
+                                <p>18 poena</p>
                             </div>
                             <div className="d-flex justify-content-between rule-item">
-                                <p>3rd place</p>
-                                <p>15pt</p>
+                                <p>Treće mesto</p>
+                                <p>15 poena</p>
                             </div>
                             <div className="d-flex justify-content-between rule-item">
-                                <p>4th place</p>
-                                <p>12pt</p>
+                                <p>Četvrto mesto</p>
+                                <p>12 poena</p>
                             </div>
                             <div className="d-flex justify-content-between rule-item">
-                                <p>5th place</p>
-                                <p>10pt</p>
+                                <p>Peto mesto</p>
+                                <p>10 poena</p>
                             </div>
                             <div className="d-flex justify-content-between rule-item">
-                                <p>6th place</p>
-                                <p>8pt</p>
+                                <p>Šesto mesto</p>
+                                <p>8 poena</p>
                             </div>
                             <div className="d-flex justify-content-between rule-item">
-                                <p>7th place</p>
-                                <p>6pt</p>
+                                <p>Sedmo mesto</p>
+                                <p>6 poena</p>
                             </div>
                             <div className="d-flex justify-content-between rule-item">
-                                <p>8th place</p>
-                                <p>4pt</p>
+                                <p>Osmo mesto</p>
+                                <p>4 poena</p>
                             </div>
                             <div className="d-flex justify-content-between rule-item">
-                                <p>9th place</p>
-                                <p>2pt</p>
+                                <p>Deveto mesto</p>
+                                <p>2 poena</p>
                             </div>
                             <div className="d-flex justify-content-between rule-item">
-                                <p>10th place</p>
-                                <p>1pt</p>
+                                <p>Deseto mesto</p>
+                                <p>1 poen</p>
                             </div>
                         </div>
                         <div className="winner-container d-flex flex-column justify-content-center align-items-center">
-                        <div className="winner-image-wrapper">
-                            <img className="img-fluid" src={require("../../images/wreath-304896_640.png")} alt="winner"/>
-                        </div>
-                        <div className="winner-label d-flex flex-column">
-                        <span className="winner-label-1">Winner of All Winners, Fantasy Grand Master, Ruler of Ignorants and Slayer of Noobs...</span><span className="winner-label-1">You can become one, if on evening of 15th September 2019<br/>you have most points at the main hall of Hall of Fame</span>
-                        </div>
+                            <div className="winner-image-wrapper">
+                                <img className="img-fluid" src={require("../../images/wreath-304896_640.png")} alt="winner" />
+                            </div>
+                            <div className="winner-label d-flex flex-column">
+                                <span className="winner-label-1">Pobednik svih pobednika, Velemajstor ove igre, Tlačitelj površnih i Egzekutor tikvana...</span><span className="winner-label-1">Možeš postati ako uveče, 15-og septembra 2019 imaš najviše poena u glavnom holu Kuće slavnih.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,4 +76,4 @@ class F1WCPointsCalc extends React.Component {
     }
 }
 
-export default F1WCPointsCalc
+export default SRBF1WCPointsCalc

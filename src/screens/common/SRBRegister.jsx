@@ -4,7 +4,7 @@ import postRegisterNewFantasyUser from "../../webhooks/postRegisterNewFantasyUse
 import putCheckIsUsername from '../../webhooks/putCheckIsUsername';
 
 
-class Register extends React.Component {
+class SRBRegister extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -123,28 +123,28 @@ class Register extends React.Component {
 
     checkUsernameValidationMessage = () => {
         if (this.state.validateUsernameAlert) {
-            return "Hey! You need to put something as Username but not more then 16 characters"
+            return "Trebalo bi da staviš nešto kao korisničko ime ali gledaj da nema više od 16 karaktera"
         } else {
-            return this.state.isUsernameOccupied ? "User Name is Occupied, you need to be more creative :-)" : "";
+            return this.state.isUsernameOccupied ? "Korisničko ime je zauzeto, moraš biti malo kreativniji :-)" : "";
         }
     }
 
     checkPasswordValidationMessage = () => {
         if (this.state.validatePasswordAlert) {
-            return "You know that you'll need password, right?"
+            return "Znaš da ti je potrebna lozinka?"
         }
     }
 
     checkPasswordConfirmValidationMessage = () => {
         if (this.state.validatePasswordConfirmAlert) {
-            return "Just retype your password once again, it's not that difficult"
+            return "Samo treba da ponoviš lozinku još jednom, nije baš toliko teško :-)"
         }
     }
 
 
     checkEmailValidationMessage = () => {
         if (this.state.validateEmailAlert) {
-            return `At least put "@" sign so it looks like an email`
+            return `Barem stavi znak "@" da izgelda kao da je prava emejl adresa`
         }
     }
 
@@ -155,39 +155,39 @@ class Register extends React.Component {
                     <label htmlFor="username" className={`${this.state.isUsernameOccupied ? "red-letters" : ""} ${this.state.validateUsernameAlert ? "red-letters" : ""}`}>
                         {this.checkUsernameValidationMessage()}
                     </label>
-                    <input value={this.state.username} onChange={this.depositUsername} type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username" required />
-                    <small id="usernameHelp" className="form-text text-muted">It's your username for this game<br/>It needs to be unique and it has to be 16 characters max.
+                    <input value={this.state.username} onChange={this.depositUsername} type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Unesi željeno korisničko ime" required />
+                    <small id="usernameHelp" className="form-text text-muted">Ovo je tvoje korisničko ime za igru.<br/>Mora da bude jedinstveno i da nema više od 16 karaktera
                         </small>
                 </div>
                 <div className="form-group">
                     <label htmlFor="password" className={`${this.state.validatePasswordAlert ? "red-letters" : ""}`}>
                         {this.checkPasswordValidationMessage()}
                     </label>
-                    <input value={this.state.password} onChange={this.depositPassword} type="password" className="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter password" required />
-                    <small id="passwordHelp" className="form-text text-muted">It's your password for this game. We suggest something like 12345 :-)
+                    <input value={this.state.password} onChange={this.depositPassword} type="password" className="form-control" id="password" aria-describedby="passwordHelp" placeholder="Unesi svoju buduću lozinku" required />
+                    <small id="passwordHelp" className="form-text text-muted">Ovo je tvoja lozinka za ovu igru. Predlažemo nešto tipa 12345 :-)
                         </small>
                 </div>
                 <div className="form-group">
                     <label htmlFor="passwordConfirm" className={`${this.state.validatePasswordConfirmAlert ? "red-letters" : ""}`}>
                         {this.checkPasswordConfirmValidationMessage()}
                     </label>
-                    <input value={this.state.passwordConfirm} onChange={this.depositPasswordConfirm} type="password" className="form-control" id="passwordConfirm" aria-describedby="passwordComfirmHelp" placeholder="Confirm password" required />
-                    <small id="passwordHelp" className="form-text text-muted">Retype your password once again so you can be sure that you didn't misspelled it
+                    <input value={this.state.passwordConfirm} onChange={this.depositPasswordConfirm} type="password" className="form-control" id="passwordConfirm" aria-describedby="passwordComfirmHelp" placeholder="Ponovi lozinku još jednom" required />
+                    <small id="passwordHelp" className="form-text text-muted">Ponovi lozinku još jednom kako bi bio siguran da je nisi pogrešno otkucao
                         </small>
                 </div>
                 <div className="form-group">
                     <label htmlFor="emailInput" className={`${this.state.validateEmailAlert ? "red-letters" : ""}`}>
                         {this.checkEmailValidationMessage()}
                     </label>
-                    <input value={this.state.email} onChange={this.depositEmail} onKeyDown={this.checkIsEnter} type="email" className="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email" required />
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.<br />
-                        We actually don't know why do we need it at all :-) ... except if you'll need to reset password
+                    <input value={this.state.email} onChange={this.depositEmail} onKeyDown={this.checkIsEnter} type="email" className="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Unesi svoju emejl adresu" required />
+                    <small id="emailHelp" className="form-text text-muted">Nikada je nećemo podeliti sa nekim drugim.<br />
+                        Nismo baš ni sigurni zašto nam treba :-) ... osim ako budeš hteo da promeniš lozinku
                         </small>
                 </div>
-                <button onClick={this.sendRegistration} type="submit" className="btn btn-outline-secondary">Submit</button>
+                <button onClick={this.sendRegistration} type="submit" className="btn btn-outline-secondary">Pošalji registraciju</button>
             </section>
         )
     }
 }
 
-export default Register
+export default SRBRegister

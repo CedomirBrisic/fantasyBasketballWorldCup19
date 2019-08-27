@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap4-modal';
 
-class RoundPointsCalc extends React.Component {
+class SRBRoundPointsCalc extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -12,44 +12,45 @@ class RoundPointsCalc extends React.Component {
         return (
             <Modal className="round-points-calc-modal-container" visible={this.props.showRoundPointsCalc} onClickBackdrop={this.props.closeRoundPointsCalcModal}>
                 <div className="close" onClick={this.props.closeRoundPointsCalcModal}>&times;</div>
-                <h3>Game is composed of 16 days / 16 rounds...    First round is on 31st-August and last one is on 15th-September 2019</h3>
+                <h3>Igra traje 16 dana / 16 runda... Prva runda je 31-og avgusta a poslednja 15-og septembra 2019
+                </h3>
                 <div className="label-wrapper">
-                    <p>At the end of every round, top 10 Sportske Fantasy users for that day are awarded with TD points</p>
-                    <p>But to be in that top 10, you first need to submit your team composed of 7 basketball players</p>
-                    <p>Once when they finish their matches, their real life stats are their basis and points from first five are included in your team points for that round<br />Other two are going to the bench...</p>
+                    <p>Na kraju svake runde, 10 prvoplasiranih Sportske Fantazi igrača tog dana su nagrađeni TD poenima</p>
+                    <p>Ali da bi bio u 10 prvoplasiranih, prvo moraš da izabereš svoju ekipu sačinjenu od 7 košarkaša</p>
+                    <p>Onda kada završe svoje mečeve, njihova statistika u stvarnosti postaje njihova baza a poeni prve petorke se računa u poene tvog tima za aktuelnu rundu<br />Preostala dvojica idu na klupu...</p>
                 </div>
                 <div className="stats-calc-container d-flex justify-content-between align-items-center">
                     <div className="left-container d-flex flex-column justify-content-between">
-                        <p className="container-label">Straightforward points:</p>
+                        <p className="container-label">Čisti poeni:</p>
                         <div className="d-flex justify-content-between rule-item">
-                            <p>1 Assist</p>
-                            <p>+1 pt</p>
+                            <p>1 Asistencija</p>
+                            <p>+1 poen</p>
                         </div>
                         <div className="d-flex justify-content-between rule-item">
-                            <p>1 Rebound</p>
-                            <p>+1 pt</p>
+                            <p>1 Skok</p>
+                            <p>+1 poen</p>
                         </div>
                         <div className="d-flex justify-content-between rule-item">
-                            <p>1 Block</p>
-                            <p>+1 pt</p>
+                            <p>1 Blokada</p>
+                            <p>+1 poen</p>
                         </div>
                         <div className="d-flex justify-content-between rule-item">
-                            <p>1 Steal</p>
-                            <p>+1 pt</p>
+                            <p>1 Ukradena lopta</p>
+                            <p>+1 poen</p>
                         </div>
                         <div className="d-flex justify-content-between rule-item">
-                            <p>1 Turnover</p>
-                            <p>-1 pt</p>
+                            <p>1 Izgubljena lopta</p>
+                            <p>-1 poen</p>
                         </div>
                         <div className="d-flex justify-content-between rule-item">
-                            <p>Game won</p>
-                            <p>+4 pt</p>
+                            <p>Pobeda</p>
+                            <p>+4 poena</p>
                         </div>
                     </div>
                     <div className="right-container">
                         <div className="set-rules-wrapper">
-                            <p className="container-label">Weighted score points:</p>
-                            <p className="rule-label">Points weighted by shot percentage:</p>
+                            <p className="container-label">Ponderisani poeni:</p>
+                            <p className="rule-label">Poeni ponderisani procentom šuta:</p>
                             <p className="rule-explanation">
                                 All points scored by player are multiplied by shot percentage and it's done separately<br/>
                                 for Free throws, 2pt shots and 3pt shots.
@@ -99,4 +100,4 @@ class RoundPointsCalc extends React.Component {
     }
 }
 
-export default RoundPointsCalc
+export default SRBRoundPointsCalc
