@@ -214,9 +214,7 @@ class SelectPlayer extends React.Component {
     render() {
         return (
             <>
-                <section className="select-player-container d-flex flex-column">
                     <div className="d-flex justify-content-between align-items-center w-100 select-player-label-wrapper">
-                        <div>
                             {this.context.selectedTeam &&
                                 this.context.selectedTeam === "Serbia" &&
                                 <a href={`https://www.sportske.net/vesti/kosarka/reprezentacija-srbije.html`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Pročitaj više o našima`}</button></a>
@@ -235,10 +233,9 @@ class SelectPlayer extends React.Component {
                             {this.context.selectedTeam === "all-eligible-teams" &&
                                 <a href={`http://www.fiba.basketball/basketballworldcup/2019`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">Find out more about World Cup</button></a>
                             }
-                        </div>
                         <div className="label-and-clock-wrapper d-flex justify-content-between align-items-center">
                             <div className="table-label">
-                                <i>Table of average Real Life stats (per game)</i>
+                                <i>Table of average Real Life stats<br className="d-block d-md-none"/> (per game)</i>
                             </div>
                             <div className="clockify-wrapper d-flex justify-content-between">
                                 <span>
@@ -253,6 +250,7 @@ class SelectPlayer extends React.Component {
                             </div>
                         </div>
                     </div>
+                <section className="select-player-container d-flex flex-column">
 
 
                     <div className="players-table-container">

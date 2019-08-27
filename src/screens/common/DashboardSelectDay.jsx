@@ -16,7 +16,7 @@ class DashboardSelectDay extends React.Component {
         return (
             <section className={`dashboard-select-day-container d-flex flex-column justify align-items-center ${this.context.showSelectDayDashboard ? "show-selected-day" : ""}`}>
                 <p><i>Select Round for more details</i></p>
-                <div className="dashboard-select-day-list-wrapper d-flex flex-column justify-content-between ">
+                <div className="dashboard-select-day-list-wrapper d-md-flex flex-md-column justify-content-md-between ">
                     <button type="button" className={`btn btn-outline-light ${this.context.selectedDay === "31st-August" ? "is-selected" : ""}`} data-day-to-select="31st-August" onClick={this.depositSelectedDay}>31st August</button>
                     <button type="button" className={`btn btn-outline-light ${this.context.selectedDay === "1st-September" ? "is-selected" : ""}`} data-day-to-select="1st-September" onClick={this.depositSelectedDay}>1st September</button>
                     <button type="button" className={`btn btn-outline-light ${this.context.selectedDay === "2nd-September" ? "is-selected" : ""}`} data-day-to-select="2nd-September" onClick={this.depositSelectedDay}>2nd September</button>

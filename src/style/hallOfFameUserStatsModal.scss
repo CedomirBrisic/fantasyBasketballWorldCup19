@@ -1,6 +1,9 @@
 .user-details-modal {
     .modal-dialog {
         margin: 2vw;
+        @media (max-width:996px){
+            margin-top: 1vh;
+        }
 
         .modal-content {
             width: 96vw;

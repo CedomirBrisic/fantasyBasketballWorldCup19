@@ -13,8 +13,9 @@
 
     .modal-dialog {
         max-width: 80%;
-        // min-height: 42vw;
-        // padding: 1vw 2vw;
+        @media (max-width:996px){
+            margin-top: 1vh;
+        }
 
         .modal-content {
             min-height: 40vw;

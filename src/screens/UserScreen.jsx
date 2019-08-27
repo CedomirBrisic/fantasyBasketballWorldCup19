@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppContext } from '../screens/_context/AppContext';
+import { Redirect } from 'react-router-dom'
 import Header from './common/Header';
 import DashboardSelectDay from './common/DashboardSelectDay';
 import PlayersOnField from './common/PlayersOnField';
@@ -10,10 +11,24 @@ import DashboardSelectTeam from './common/DashboardSelectTeam';
 
 class UserScreen extends React.Component {
     static contextType = AppContext;
+    state = {
+        redirect: false
+    }
 
     componentDidMount() {
-        this.context.getFantasyDataContext()
-        this.context.depositIsNotHallOfFame()
+        let data = sessionStorage.getItem("bitrulez")
+        let data2 = sessionStorage.getItem("bitrulez2")
+        if (data === null && data2 === null) {
+            this.setState({
+                redirect: true,
+            })
+        } else {
+            this.setState({
+                redirect: false,
+            })
+            this.context.getFantasyDataContext()
+            this.context.depositIsNotHallOfFame()
+        }
     }
     toggleShowSelectDayDashboard = () => {
         this.context.toggleShowSelectDayDashboard()
@@ -33,6 +48,9 @@ class UserScreen extends React.Component {
         }
     }
     render() {
+        if (this.state.redirect) {
+            return <Redirect to='/' />
+        }
         return (
             <>
                 {this.context.isInitialLoading &&
@@ -163,11 +181,11 @@ class UserScreen extends React.Component {
                                 <i className="credits">Clker-Free-Vector-Images from Pixabay</i>
                                 <i className="credits">mohamed Hassan from Pixabay</i>
                                 <i className="credits">BedexpStock from Pixabay</i>
-                                <i className="credits">OpenClipart-Vectors from Pixabay </i> 
+                                <i className="credits">OpenClipart-Vectors from Pixabay </i>
+                            </div>
                         </div>
                     </div>
-                    </div>
-            }
+                }
                 {!this.context.isInitialLoading &&
                     <div className="user-screen-container d-flex flex-column justify-content-between">
                         <Header />

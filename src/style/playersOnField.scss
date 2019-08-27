@@ -52,7 +52,6 @@
                 width: 100%;
 
                 img {
-                    // width: 12vw;
                     height: 12vw;
                     filter: drop-shadow(16px 16px 20px red) invert(75%);
                 }
@@ -62,7 +61,6 @@
                     transition: transform 0.2s;
                     color: rgba(255, 255, 255, 0.79);
                     position: relative;
-                    // bottom: 4vw;
                     left: 1vw;
                 }
 
@@ -174,6 +172,10 @@
                 font-size: 0.79vw;
                 bottom: -2.24vw;
                 z-index: 1;
+                @media (max-width:996px){
+                    bottom: -3.6vw;
+                    color: #ffffff;
+                }
             }
 
             .shirt-number {
@@ -228,6 +230,10 @@
                 font-size: 0.79vw;
                 top: -2vw;
                 z-index: 1;
+                @media (max-width:996px){
+                    top: -2.5vw;
+                    color: #ffffff;
+                }
             }
 
             .shirt-number {
@@ -269,6 +275,10 @@
         font-size: 0.79vw;
         background-color: rgba(0, 0, 0, 0.79);
         margin-top: 0.5vw;
+        width: 79vw;
+        @media (max-width:996px){
+            font-size: 1vw;
+        }
 
         th {
             color: #000000;

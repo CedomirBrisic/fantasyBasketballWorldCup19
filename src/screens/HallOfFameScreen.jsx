@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppContext } from '../screens/_context/AppContext';
 import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import HallOfFameRealLifePlayerListStats from "./common/HallOfFameRealLifePlayerListStats";
 import HallOfFameFantasyPlayersList from "./common/HallOfFameFantasyPlayersList";
 import HallOfFameF1WCList from './common/HallOfFameF1WCList';
@@ -14,7 +15,8 @@ class HallOfFameScreen extends React.Component {
     state = {
         listView: "round-points",
         searchPlaceholder: "Search player by name",
-        searchValue: ""
+        searchValue: "",
+        redirect: false
     }
 
     depositSelectedDay = (event) => {
@@ -47,14 +49,29 @@ class HallOfFameScreen extends React.Component {
             searchValue: ""
         })
     }
+
     componentDidMount() {
-        if (this.context.isInitialLoading) {
-            this.context.getFantasyDataContext()
+        let data = sessionStorage.getItem("bitrulez")
+        let data2 = sessionStorage.getItem("bitrulez2")
+        if (data === null && data2 === null) {
+            this.setState({
+                redirect: true,
+            })
+        } else {
+            this.setState({
+                redirect: false,
+            })
+            if (this.context.isInitialLoading) {
+                this.context.getFantasyDataContext()
+            }
+            this.context.depositIsHallOfFame()
         }
-        this.context.depositIsHallOfFame()
     }
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect to='/' />
+        }
         return (
             <>
                 {this.context.isInitialLoading &&
@@ -195,10 +212,10 @@ class HallOfFameScreen extends React.Component {
                         <div className="d-flex">
                             {this.state.listView !== "f1wc" &&
                                 <div className="dashboard-select-day-container move-it-down d-flex flex-column justify align-items-center show-selected-day">
-                                    <p><i>Select Round for more details</i></p>
-                                    <div className="dashboard-select-day-list-wrapper d-flex flex-column justify-content-between">
+                                    <p><i>Select Round</i></p>
+                                    <div className="dashboard-select-day-list-wrapper d-md-flex flex-md-column justify-content-md-between">
                                         <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "all-days" ? "is-selected" : ""}`} data-day-to-select="all-days" onClick={this.depositSelectedDay}>All rounds - Total</button>
-                                        <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "31st-August" ? "is-selected" : ""}`} data-day-to-select="31st-August" onClick={this.depositSelectedDay}>31st August</button>
+                                        <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "31st-August" ? "is-selected" : ""}`} data-day-to-select="31st-August" onClick={this.depositSelectedDay}>31st<br className="d-block d-md-none" />August</button>
                                         <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "1st-September" ? "is-selected" : ""}`} data-day-to-select="1st-September" onClick={this.depositSelectedDay}>1st September</button>
                                         <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "2nd-September" ? "is-selected" : ""}`} data-day-to-select="2nd-September" onClick={this.depositSelectedDay}>2nd September</button>
                                         <button type="button" className={`btn btn-outline-light ${this.context.hallOfFameSelectedDay === "3rd-September" ? "is-selected" : ""}`} data-day-to-select="3rd-September" onClick={this.depositSelectedDay}>3rd September</button>
@@ -219,6 +236,9 @@ class HallOfFameScreen extends React.Component {
 
                             {!this.context.isInitialLoading &&
                                 <div className="lists-container">
+                                    <Link to={`user-screen`}>
+                                        <button type="button" className="btn  btn-danger back-button">Back to User screen</button>
+                                    </Link>
                                     <div className="hall-of-fame-links-wrapper d-flex justify-content-around">
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "f1wc" ? "active" : ""}`} data-view="f1wc" onClick={this.depositSelectedList}>Ultimate Hall of Fame</button>
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "round-points" ? "active" : ""}`} data-view="round-points" onClick={this.depositSelectedList}>Users - Round points</button>

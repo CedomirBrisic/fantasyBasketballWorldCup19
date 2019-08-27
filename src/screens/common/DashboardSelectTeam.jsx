@@ -7,11 +7,11 @@ class DashboardSelectTeam extends React.Component {
     }
 
     depositSelectedTeam = (event) => {
-
         const isClickable = event.target.getAttribute("data-is-clickable")
         if (isClickable === "true") {
             const selectedTeam = event.target.getAttribute("data-selected-team")
             this.context.changeSelectedTeam(selectedTeam)
+            this.context.depositSelectPlayerSearchValue("")
         }
     }
 
@@ -76,8 +76,8 @@ class DashboardSelectTeam extends React.Component {
     render() {
         return (
             <section className={`dashboard-select-team-container d-flex flex-column justify align-items-center ${this.context.showSelectTeamDashboard ? "show-selected-team" : ""}`}>
-                <button type="button" className={`btn btn-outline-light select-all ${this.context.selectedTeam === "all-eligible-teams" ? "is-selected" : ""}`} data-selected-team="all-eligible-teams" data-is-clickable="true" onClick={this.depositSelectedTeam}><i data-selected-team="all-eligible-teams" data-is-clickable="true">Show all eligible players</i></button>
-                <div className="dashboard-select-team-list-wrapper d-flex flex-column justify-content-between ">
+                <button type="button" className={`btn btn-outline-light select-all ${this.context.selectedTeam === "all-eligible-teams" ? "is-selected" : ""}`} data-selected-team="all-eligible-teams" data-is-clickable="true" onClick={this.depositSelectedTeam}><i data-selected-team="all-eligible-teams" data-is-clickable="true">All eligible players</i></button>
+                <div className="dashboard-select-team-list-wrapper d-md-flex flex-md-column justify-content-md-between ">
                 <input value={this.context.selectPlayerSearchValue} onChange={this.sendSelectPlayerSearchValue} type="search" placeholder="Search player by name"/>
                     {this.mapEligibleTeams()}
                 </div>
