@@ -410,7 +410,7 @@ class HallOfFameTotalPointsList extends React.Component {
                     this.props.searchValue !== "" &&
                     <div className="hall-of-fame-total-points-list-container">
                         <div className="hall-of-fame-total-points-list-wrapper d-flex flex-column align-items-center">
-                            <div className="plebs-container">
+                            <div className="plebs-container-searched">
                                 <div className="plebse-title">------------------------- SEARCHED RESULTS -------------------------</div>
                                 <table>
                                     <thead className="w-100">

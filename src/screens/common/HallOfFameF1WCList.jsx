@@ -127,7 +127,7 @@ class HallOfFameF1WCList extends React.Component {
                     </div>
                     <div className="title">
                         {/* PITAJ DA LI JE POSLEDNJI */}
-                        <i>{`${i === fantasyUsers.length - 1 ? "I'm special too !" : "I'm special . . ."}`}</i>
+                        <i>{`${i === fantasyUsers.length - 1 ? "Aleee aleeeee me too !" : "Aleee aleeeee . . ."}`}</i>
                     </div>
                 </div>
 
