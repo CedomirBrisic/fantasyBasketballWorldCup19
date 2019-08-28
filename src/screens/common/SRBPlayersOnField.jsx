@@ -4,8 +4,10 @@ import { Portal } from 'react-portal';
 import calculateBasketballPlayerTDFantasyPoints from "../../services/calculateBasketballPlayerTDFantasyPoints";
 import putCheckUsernameAndPassword from "../../webhooks/putCheckUsernameAndPassword";
 import putTeamPickForDay from "../../webhooks/putTeamPickForDay";
-import TeamPickSuccessfullySubmited from "../modals/TeamPickSuccessfullySubmited";
-import PlayerCardModal from "../modals/PlayerCardModal";
+import serbischeDatum from "../../services/serbischeDatum";
+import serbischeNazivTima from "../../services/serbischeNazivTima";
+import SRBTeamPickSuccessfullySubmited from "../modals/SRBTeamPickSuccessfullySubmited";
+import SRBPlayerCardModal from "../modals/SRBPlayerCardModal";
 
 class SRBPlayersOnField extends React.Component {
     static contextType = AppContext;
@@ -23,7 +25,6 @@ class SRBPlayersOnField extends React.Component {
         return calculatedPlayerData.summaSummarum
     }
 
-
     mapPlayer1OnField = () => {
         if (this.context.teamPickData.Player1Id !== null) {
             const playerId = this.context.teamPickData.Player1Id
@@ -31,7 +32,7 @@ class SRBPlayersOnField extends React.Component {
             return <div key={playerData[0].shirtNumber + playerData[0].team} className={`first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} onClick={this.context.showSinglePlayerModal}>
                 <div className="shirt-number d-flex" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {this.calculatePlayerRoundPoints(playerData[0])}
-                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>pt</span>
+                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>p</span>
                 </div>
                 <div className="player-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {playerData[0].name}
@@ -41,11 +42,11 @@ class SRBPlayersOnField extends React.Component {
                         <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        {playerData[0].team}
+                        {serbischeNazivTima(playerData[0].team)}
                     </span>
                 </div>
                 {!this.context.teamPickLockData.Player1Id &&
-                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 1" onClick={this.choosePlayer}>Change player</button>
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 1" onClick={this.choosePlayer}>Izmena</button>
                 }
             </div>
         }
@@ -58,7 +59,7 @@ class SRBPlayersOnField extends React.Component {
             return <div key={playerData[0].shirtNumber + playerData[0].team} className={`first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} onClick={this.context.showSinglePlayerModal}>
                 <div className="shirt-number d-flex" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {this.calculatePlayerRoundPoints(playerData[0])}
-                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>pt</span>
+                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>p</span>
                 </div>
                 <div className="player-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {playerData[0].name}
@@ -68,11 +69,11 @@ class SRBPlayersOnField extends React.Component {
                         <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        {playerData[0].team}
+                        {serbischeNazivTima(playerData[0].team)}
                     </span>
                 </div>
                 {!this.context.teamPickLockData.Player2Id &&
-                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 2" onClick={this.choosePlayer}>Change player</button>
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 2" onClick={this.choosePlayer}>Izmena</button>
                 }
             </div>
         }
@@ -85,7 +86,7 @@ class SRBPlayersOnField extends React.Component {
             return <div key={playerData[0].shirtNumber + playerData[0].team} className={`first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} onClick={this.context.showSinglePlayerModal}>
                 <div className="shirt-number d-flex" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {this.calculatePlayerRoundPoints(playerData[0])}
-                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>pt</span>
+                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>p</span>
                 </div>
                 <div className="player-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {playerData[0].name}
@@ -95,11 +96,11 @@ class SRBPlayersOnField extends React.Component {
                         <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        {playerData[0].team}
+                        {serbischeNazivTima(playerData[0].team)}
                     </span>
                 </div>
                 {!this.context.teamPickLockData.Player3Id &&
-                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 3" onClick={this.choosePlayer}>Change player</button>
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 3" onClick={this.choosePlayer}>Izmena</button>
                 }
             </div>
         }
@@ -112,7 +113,7 @@ class SRBPlayersOnField extends React.Component {
             return <div key={playerData[0].shirtNumber + playerData[0].team} className={`first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} onClick={this.context.showSinglePlayerModal}>
                 <div className="shirt-number d-flex" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {this.calculatePlayerRoundPoints(playerData[0])}
-                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>pt</span>
+                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>p</span>
                 </div>
                 <div className="player-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {playerData[0].name}
@@ -122,11 +123,11 @@ class SRBPlayersOnField extends React.Component {
                         <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        {playerData[0].team}
+                        {serbischeNazivTima(playerData[0].team)}
                     </span>
                 </div>
                 {!this.context.teamPickLockData.Player4Id &&
-                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 4" onClick={this.choosePlayer}>Change player</button>
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 4" onClick={this.choosePlayer}>Izmena</button>
                 }
             </div>
         }
@@ -139,7 +140,7 @@ class SRBPlayersOnField extends React.Component {
             return <div key={playerData[0].shirtNumber + playerData[0].team} className={`first-five-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} onClick={this.context.showSinglePlayerModal}>
                 <div className="shirt-number d-flex" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {this.calculatePlayerRoundPoints(playerData[0])}
-                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>pt</span>
+                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>p</span>
                 </div>
                 <div className="player-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {playerData[0].name}
@@ -149,11 +150,11 @@ class SRBPlayersOnField extends React.Component {
                         <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        {playerData[0].team}
+                        {serbischeNazivTima(playerData[0].team)}
                     </span>
                 </div>
                 {!this.context.teamPickLockData.Player5Id &&
-                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 5" onClick={this.choosePlayer}>Change player</button>
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 5" onClick={this.choosePlayer}>Izmena</button>
                 }
             </div>
         }
@@ -166,7 +167,7 @@ class SRBPlayersOnField extends React.Component {
             return <div key={playerData[0].shirtNumber + playerData[0].team} className={`bench-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} onClick={this.context.showSinglePlayerModal}>
                 <div className="shirt-number d-flex" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {this.calculatePlayerRoundPoints(playerData[0])}
-                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>pt</span>
+                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>p</span>
                 </div>
                 <div className="player-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {playerData[0].name}
@@ -176,11 +177,11 @@ class SRBPlayersOnField extends React.Component {
                         <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        {playerData[0].team}
+                        {serbischeNazivTima(playerData[0].team)}
                     </span>
                 </div>
                 {!this.context.teamPickLockData.Player6Id &&
-                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 6" onClick={this.choosePlayer}>Change player</button>
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 6" onClick={this.choosePlayer}>Izmena</button>
                 }
             </div>
         }
@@ -193,7 +194,7 @@ class SRBPlayersOnField extends React.Component {
             return <div key={playerData[0].shirtNumber + playerData[0].team} className={`bench-player-wrapper-selected d-flex flex-column justify-content-between align-items-center ${this.context.showSelectDayDashboard ? "" : "glow"}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} onClick={this.context.showSinglePlayerModal}>
                 <div className="shirt-number d-flex" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {this.calculatePlayerRoundPoints(playerData[0])}
-                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>pt</span>
+                    <span className="pt" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>p</span>
                 </div>
                 <div className="player-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
                     {playerData[0].name}
@@ -203,11 +204,11 @@ class SRBPlayersOnField extends React.Component {
                         <img className="img-fluid" src={require(`../../images/flags/Flag of ${playerData[0].team}.png`)} alt={`${playerData[0].team}`} data-player-name={playerData[0].name} data-player-team={playerData[0].team} />
                     </span>
                     <span className="team-name" data-player-name={playerData[0].name} data-player-team={playerData[0].team}>
-                        {playerData[0].team}
+                        {serbischeNazivTima(playerData[0].team)}
                     </span>
                 </div>
                 {!this.context.teamPickLockData.Player7Id &&
-                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 7" onClick={this.choosePlayer}>Change player</button>
+                    <button type="button" className="btn btn-outline-dark change-player" data-player-position="Player 7" onClick={this.choosePlayer}>Izmena</button>
                 }
             </div>
         }
@@ -259,9 +260,9 @@ class SRBPlayersOnField extends React.Component {
         if (this.context.teamPickData.isSubmitted) {
             return ""
         } else if (pickCounter === 7) {
-            return <button type="button" className="btn btn-success align-self-end" onClick={this.sendTeamPick}>That's it! I'm ready to go</button>
+            return <button type="button" className="btn btn-success align-self-end" onClick={this.sendTeamPick}>To je to! Spreman sam</button>
         } else {
-            return <button type="button" className="btn btn-light align-self-end" disabled>Choose all 7 players before submitting</button>
+            return <button type="button" className="btn btn-light align-self-end" disabled>Izaberi svih 7 košarkaša kako bi mogao da prijaviš ekipu</button>
         }
     }
 
@@ -276,17 +277,17 @@ class SRBPlayersOnField extends React.Component {
             <>
                 <div className="show-players-on-field-container d-flex flex-column justify-content-between">
                     <div className="screen-title d-flex justify-content-between align-items-center">
-                        <div>{this.context.bitrulez}'s Team for {this.context.selectedDay}</div>
-                        <div>Round points total: <span className="round-points">{isNaN(this.context.teamPickDayTotal) ? "0.00" : this.context.teamPickDayTotal}</span></div>
+                        <div>{this.context.bitrulez} ekipa za {serbischeDatum(this.context.selectedDay)}</div>
+                        <div>Sportske Fantazi poena: <span className="round-points">{isNaN(this.context.teamPickDayTotal) ? "0.00" : this.context.teamPickDayTotal}</span></div>
                         <div className="clockify-wrapper d-flex justify-content-between">
                             <span>
-                                {this.context.nowDateAndTime.humanDate}
+                                {serbischeDatum(this.context.nowDateAndTime.humanDate)}
                             </span>
                             <span>
                                 {this.context.nowDateAndTime.humanTime}
                             </span>
                             <span>
-                                Zulu time
+                                Grinič vreme
                             </span>
                         </div>
                     </div>
@@ -299,7 +300,7 @@ class SRBPlayersOnField extends React.Component {
                                 <div className="first-five-player-wrapper" data-player-position="Player 1" onClick={this.choosePlayer}>
                                     <div className="not-selected-player" data-player-position="Player 1">
                                         <img className="img-fluid" src={require("../../images/basketballPlayers/basketball-player-1.png")} alt="player 1" data-player-position="Player 1" />
-                                        <div className="pick-player-title" data-player-position="Player 1">Pick player 1</div>
+                                        <div className="pick-player-title" data-player-position="Player 1">Izaberi poziciju 1</div>
                                     </div>
                                 </div>
                             }
@@ -312,7 +313,7 @@ class SRBPlayersOnField extends React.Component {
                                 <div className="first-five-player-wrapper" data-player-position="Player 2" onClick={this.choosePlayer}>
                                     <div className="not-selected-player" data-player-position="Player 2">
                                         <img className="img-fluid" src={require("../../images/basketballPlayers/basketball-player-2.png")} alt="player 1" data-player-position="Player 2" />
-                                        <div className="pick-player-title" data-player-position="Player 2">Pick player 2</div>
+                                        <div className="pick-player-title" data-player-position="Player 2">Izaberi poziciju 2</div>
                                     </div>
                                 </div>}
                             {this.context.teamPickData.Player2Id !== null &&
@@ -325,7 +326,7 @@ class SRBPlayersOnField extends React.Component {
                                 <div className="first-five-player-wrapper" data-player-position="Player 3" onClick={this.choosePlayer}>
                                     <div className="not-selected-player" data-player-position="Player 3">
                                         <img className="img-fluid" src={require("../../images/basketballPlayers/basketball-player-3.png")} alt="player 1" data-player-position="Player 3" />
-                                        <div className="pick-player-title" data-player-position="Player 3">Pick player 3</div>
+                                        <div className="pick-player-title" data-player-position="Player 3">Izaberi poziciju 3</div>
                                     </div>
                                 </div>}
                             {this.context.teamPickData.Player3Id !== null &&
@@ -339,7 +340,7 @@ class SRBPlayersOnField extends React.Component {
                                 <div className="first-five-player-wrapper" data-player-position="Player 4" onClick={this.choosePlayer}>
                                     <div className="not-selected-player" data-player-position="Player 4">
                                         <img className="img-fluid" src={require("../../images/basketballPlayers/basketball-player-4.png")} alt="player 1" data-player-position="Player 4" />
-                                        <div className="pick-player-title" data-player-position="Player 4">Pick player 4</div>
+                                        <div className="pick-player-title" data-player-position="Player 4">Izaberi poziciju 4</div>
                                     </div>
                                 </div>}
                             {this.context.teamPickData.Player4Id !== null &&
@@ -351,7 +352,7 @@ class SRBPlayersOnField extends React.Component {
                                 <div className="first-five-player-wrapper" data-player-position="Player 5" onClick={this.choosePlayer}>
                                     <div className="not-selected-player" data-player-position="Player 5">
                                         <img className="img-fluid" src={require("../../images/basketballPlayers/basketball-player-5.png")} alt="player 1" data-player-position="Player 5" />
-                                        <div className="pick-player-title" data-player-position="Player 5">Pick player 5</div>
+                                        <div className="pick-player-title" data-player-position="Player 5">Izaberi poziciju 5</div>
                                     </div>
                                 </div>}
                             {this.context.teamPickData.Player5Id !== null &&
@@ -365,7 +366,7 @@ class SRBPlayersOnField extends React.Component {
                                     <div className="bench-player-wrapper" data-player-position="Player 6" onClick={this.choosePlayer}>
                                         <div className="not-selected-player-b-1" data-player-position="Player 6">
                                             <img className="img-fluid" src={require("../../images/basketballPlayers/basketball-player-6.png")} alt="player 1" data-player-position="Player 6" />
-                                            <div className="pick-player-title" data-player-position="Player 6">Pick player 6</div>
+                                            <div className="pick-player-title" data-player-position="Player 6">Izaberi poziciju 6</div>
                                         </div>
                                     </div>}
                                 {this.context.teamPickData.Player6Id !== null &&
@@ -377,7 +378,7 @@ class SRBPlayersOnField extends React.Component {
                                     <div className="bench-player-wrapper" data-player-position="Player 7" onClick={this.choosePlayer}>
                                         <div className="not-selected-player-b-2" data-player-position="Player 7">
                                             <img className="img-fluid" src={require("../../images/basketballPlayers/basketball-player-7.png")} alt="player 1" data-player-position="Player 7" />
-                                            <div className="pick-player-title" data-player-position="Player 7">Pick player 7</div>
+                                            <div className="pick-player-title" data-player-position="Player 7">Izaberi poziciju 7</div>
                                         </div>
                                     </div>}
                                 {this.context.teamPickData.Player7Id !== null &&
@@ -389,28 +390,28 @@ class SRBPlayersOnField extends React.Component {
                     <table className="points-container">
                         <thead>
                             <tr className="">
-                                <th>FIRST FIVE TOTAL</th>
-                                <th>Team wins</th>
-                                <th>Assists</th>
-                                <th>Rebounds</th>
-                                <th>Blocks</th>
-                                <th>Steals</th>
-                                <th>Turnovers</th>
-                                <th>Free throws</th>
-                                <th>FT bonuses</th>
-                                <th>FT penalties</th>
-                                <th>Two points</th>
-                                <th>2pt bonuses</th>
-                                <th>2pt penalties</th>
-                                <th>Three points</th>
-                                <th>3pt bonuses</th>
-                                <th>3pt penalties</th>
+                                <th>PRVA PETORKA</th>
+                                <th>Pobede</th>
+                                <th>Asistencije</th>
+                                <th>Skokovi</th>
+                                <th>Blokade</th>
+                                <th>Ukradene</th>
+                                <th>Izgubljene</th>
+                                <th>Bacanja</th>
+                                <th>1p bonusi</th>
+                                <th>1p penali</th>
+                                <th>Dva poena</th>
+                                <th>2p bonusi</th>
+                                <th>2p penali</th>
+                                <th>Trojke</th>
+                                <th>3p bonusi</th>
+                                <th>3p penali</th>
                             </tr>
                         </thead>
                         <tbody className="players-data-container">
                             <tr>
                                 <th>
-                                    Real life (qty)
+                                    Stvarnost
                                 </th>
                                 <td>{this.context.calculatedFirstFiveRealLifeStatsTotals.gameWinsCounter}</td>
                                 <td>{isNaN(this.context.calculatedFirstFiveRealLifeStatsTotals.assists) ? "0" : this.context.calculatedFirstFiveRealLifeStatsTotals.assists}</td>
@@ -431,7 +432,7 @@ class SRBPlayersOnField extends React.Component {
 
                             <tr>
                                 <th>
-                                    Fantasy points
+                                    Sportske Fantazi
                           </th>
                                 <td className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.gameWins > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.gameWins.toFixed(2)}</td>
                                 <td className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.assists > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.assists.toFixed(2)}</td>
@@ -439,26 +440,26 @@ class SRBPlayersOnField extends React.Component {
                                 <td className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.blocks > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.blocks.toFixed(2)}</td>
                                 <td className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.steals > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.steals.toFixed(2)}</td>
                                 <td className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.turnovers > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.turnovers.toFixed(2)}</td>
-                                <td data-toggle="tooltip" data-placement="top" title="Points are calculated for each player from first five separately and then summed up here" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrows > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrows.toFixed(2)}</td>
-                                <td data-toggle="tooltip" data-placement="top" title="Points are calculated for each player from first five separately and then summed up here" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrowsBonuses > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrowsBonuses.toFixed(2)}</td>
-                                <td data-toggle="tooltip" data-placement="top" title="Points are calculated for each player from first five separately and then summed up here" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrowsPenalties >= 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrowsPenalties.toFixed(2)}</td>
-                                <td data-toggle="tooltip" data-placement="top" title="Points are calculated for each player from first five separately and then summed up here" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPoints > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPoints.toFixed(2)}</td>
-                                <td data-toggle="tooltip" data-placement="top" title="Points are calculated for each player from first five separately and then summed up here" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPointsBonuses > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPointsBonuses.toFixed(2)}</td>
-                                <td data-toggle="tooltip" data-placement="top" title="Points are calculated for each player from first five separately and then summed up here" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPointsPenalties >= 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPointsPenalties.toFixed(2)}</td>
-                                <td data-toggle="tooltip" data-placement="top" title="Points are calculated for each player from first five separately and then summed up here" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePoints > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePoints.toFixed(2)}</td>
-                                <td data-toggle="tooltip" data-placement="top" title="Points are calculated for each player from first five separately and then summed up here" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePointsBonuses > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePointsBonuses.toFixed(2)}</td>
-                                <td data-toggle="tooltip" data-placement="top" title="Points are calculated for each player from first five separately and then summed up here" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePointsPenalties >= 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePointsPenalties.toFixed(2)}</td>
+                                <td data-toggle="tooltip" data-placement="top" title="Sportske Fantazi poeni se računaju za svakog košarkaša zasebno pa se nakon toga poeni prve petorke sabiraju ovde" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrows > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrows.toFixed(2)}</td>
+                                <td data-toggle="tooltip" data-placement="top" title="Sportske Fantazi poeni se računaju za svakog košarkaša zasebno pa se nakon toga poeni prve petorke sabiraju ovde" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrowsBonuses > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrowsBonuses.toFixed(2)}</td>
+                                <td data-toggle="tooltip" data-placement="top" title="Sportske Fantazi poeni se računaju za svakog košarkaša zasebno pa se nakon toga poeni prve petorke sabiraju ovde" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrowsPenalties >= 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.freeThrowsPenalties.toFixed(2)}</td>
+                                <td data-toggle="tooltip" data-placement="top" title="Sportske Fantazi poeni se računaju za svakog košarkaša zasebno pa se nakon toga poeni prve petorke sabiraju ovde" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPoints > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPoints.toFixed(2)}</td>
+                                <td data-toggle="tooltip" data-placement="top" title="Sportske Fantazi poeni se računaju za svakog košarkaša zasebno pa se nakon toga poeni prve petorke sabiraju ovde" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPointsBonuses > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPointsBonuses.toFixed(2)}</td>
+                                <td data-toggle="tooltip" data-placement="top" title="Sportske Fantazi poeni se računaju za svakog košarkaša zasebno pa se nakon toga poeni prve petorke sabiraju ovde" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPointsPenalties >= 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.twoPointsPenalties.toFixed(2)}</td>
+                                <td data-toggle="tooltip" data-placement="top" title="Sportske Fantazi poeni se računaju za svakog košarkaša zasebno pa se nakon toga poeni prve petorke sabiraju ovde" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePoints > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePoints.toFixed(2)}</td>
+                                <td data-toggle="tooltip" data-placement="top" title="Sportske Fantazi poeni se računaju za svakog košarkaša zasebno pa se nakon toga poeni prve petorke sabiraju ovde" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePointsBonuses > 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePointsBonuses.toFixed(2)}</td>
+                                <td data-toggle="tooltip" data-placement="top" title="Sportske Fantazi poeni se računaju za svakog košarkaša zasebno pa se nakon toga poeni prve petorke sabiraju ovde" className={`${this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePointsPenalties >= 0 ? "points-good" : "points-not-good"}`}>{this.context.calculatedFirstFiveFantasyPointsStatsTotals.threePointsPenalties.toFixed(2)}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 {this.context.selectedPlayerForPlayerCardModal && this.context.showTeam &&
                     <Portal>
-                        <PlayerCardModal />
+                        <SRBPlayerCardModal />
                     </Portal>
                 }
                 <Portal>
-                    <TeamPickSuccessfullySubmited showTeamPickSuccessfullySubmited={this.state.showTeamPickSuccessfullySubmited} closeTeamPickSuccessfullySubmitedModal={this.closeTeamPickSuccessfullySubmitedModal} />
+                    <SRBTeamPickSuccessfullySubmited showTeamPickSuccessfullySubmited={this.state.showTeamPickSuccessfullySubmited} closeTeamPickSuccessfullySubmitedModal={this.closeTeamPickSuccessfullySubmitedModal} />
                 </Portal>
             </>
         )

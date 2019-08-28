@@ -19,7 +19,7 @@ class WelcomeScreen extends React.Component {
                         Sportske Fantasy - Virtual basketball manager game - World Cup 2019 edition
                     </h1>
                     <Link className="jezik" to={`/srb`}>
-                        Daj na Srpskom
+                        Daj na srpskom
                     </Link>
                 </div>
                 <div className="d-flex h-100 justify-content-between">

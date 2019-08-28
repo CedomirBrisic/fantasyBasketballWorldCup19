@@ -16,7 +16,7 @@ class SRBF1WCPointsCalc extends React.Component {
                     <h3>Takmičenje za TD poene je glavni deo takmičenja u okviru Sportske Fantazija</h3>
                     <div className="label-wrapper">
                         <p>Na kraju svake runde, 10 najbolje Sportske Fantazi igrača za taj dan su nagrađeni TD poenima</p>
-                        <p>A oni se računaju na sledeći način:</p>
+                        <p>Računaju se na sledeći način:</p>
                     </div>
                     <div className="d-flex justify-content-between align-items-center w-100 ">
                         <div className="d-flex flex-column justify-content-around rule-items-wraper">

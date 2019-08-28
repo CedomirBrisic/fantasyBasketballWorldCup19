@@ -121,13 +121,13 @@ class SRBHallOfFameF1WCList extends React.Component {
                                 {fantasyUsers[i].username}
                             </div>
                             <div className="bottom">
-                                {fantasyUsers[i].f1WCgrandTotal}<sup>pt</sup>
+                                {fantasyUsers[i].f1WCgrandTotal} <sup>p</sup>
                             </div>
                         </div>
                     </div>
                     <div className="title">
                         {/* PITAJ DA LI JE POSLEDNJI */}
-                        <i>{`${i === fantasyUsers.length - 1 ? "I'm special too !" : "I'm special . . ."}`}</i>
+                        <i>{`${i === fantasyUsers.length - 1 ? "I ja sam poseban !" : "Ja sam poseban . . ."}`}</i>
                     </div>
                 </div>
 
@@ -206,12 +206,12 @@ class SRBHallOfFameF1WCList extends React.Component {
                                             {this.state.fantasyF1WCUsersSorted[0].username}
                                         </div>
                                         <div className="bottom">
-                                            {this.state.fantasyF1WCUsersSorted[0].f1WCgrandTotal}<sup>pt</sup>
+                                            {this.state.fantasyF1WCUsersSorted[0].f1WCgrandTotal} <sup>p</sup>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="title">
-                                    Fantasy Grand Master
+                                    Velemajstor ove igre
                             </div>
                             </div>
 
@@ -232,12 +232,12 @@ class SRBHallOfFameF1WCList extends React.Component {
                                                 {this.state.fantasyF1WCUsersSorted[1].username}
                                             </div>
                                             <div className="bottom">
-                                                {this.state.fantasyF1WCUsersSorted[1].f1WCgrandTotal}<sup>pt</sup>
+                                                {this.state.fantasyF1WCUsersSorted[1].f1WCgrandTotal} <sup>p</sup>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="title">
-                                        Ruler of Ignorants
+                                        Tlačitelj površnih
                                     </div>
                                 </div>
 
@@ -256,12 +256,12 @@ class SRBHallOfFameF1WCList extends React.Component {
                                                 {this.state.fantasyF1WCUsersSorted[2].username}
                                             </div>
                                             <div className="bottom">
-                                                {this.state.fantasyF1WCUsersSorted[2].f1WCgrandTotal}<sup>pt</sup>
+                                                {this.state.fantasyF1WCUsersSorted[2].f1WCgrandTotal} <sup>p</sup>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="title">
-                                        Slayer of Noobs
+                                        Egzekutor tikvana
                                     </div>
                                 </div>
                             </div>
@@ -279,13 +279,13 @@ class SRBHallOfFameF1WCList extends React.Component {
                     this.props.searchValue !== "" &&
                     <div className="hall-of-fame-f1wc-points-list-wrapper d-flex flex-column align-items-center">
                         <div className="plebs-container d-flex flex-column align-items-center">
-                            <div className="plebse-title">------------------------- SEARCHED RESULTS -------------------------</div>
+                            <div className="plebse-title">------------------------- REZULTAT PRETRAGE -------------------------</div>
                             <table>
                                 <thead className="w-100">
                                     <tr className="w-100">
-                                        <th className="orer-no">Position No.</th>
-                                        <th>Username</th>
-                                        <th className="td-points">F1WC Total points</th>
+                                        <th className="orer-no">Pozicija</th>
+                                        <th>Korisnik</th>
+                                        <th className="td-points">TD poeni - ukupno</th>
                                     </tr>
                                 </thead>
                                 <tbody>

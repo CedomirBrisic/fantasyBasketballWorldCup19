@@ -125,7 +125,7 @@ class SRBRegister extends React.Component {
         if (this.state.validateUsernameAlert) {
             return "Trebalo bi da staviš nešto kao korisničko ime ali gledaj da nema više od 16 karaktera"
         } else {
-            return this.state.isUsernameOccupied ? "Korisničko ime je zauzeto, moraš biti malo kreativniji :-)" : "";
+            return this.state.isUsernameOccupied ? "Korisničko ime je zauzeto, trebaš biti malo kreativniji :-)" : "";
         }
     }
 
@@ -144,7 +144,7 @@ class SRBRegister extends React.Component {
 
     checkEmailValidationMessage = () => {
         if (this.state.validateEmailAlert) {
-            return `Barem stavi znak "@" da izgelda kao da je prava emejl adresa`
+            return `Barem stavi znak "@" da izgleda kao da je prava emejl adresa`
         }
     }
 
@@ -156,7 +156,7 @@ class SRBRegister extends React.Component {
                         {this.checkUsernameValidationMessage()}
                     </label>
                     <input value={this.state.username} onChange={this.depositUsername} type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Unesi željeno korisničko ime" required />
-                    <small id="usernameHelp" className="form-text text-muted">Ovo je tvoje korisničko ime za igru.<br/>Mora da bude jedinstveno i da nema više od 16 karaktera
+                    <small id="usernameHelp" className="form-text text-muted">Ovo je tvoje korisničko ime za igru.<br/>Treba da bude jedinstveno i da nema više od 16 karaktera
                         </small>
                 </div>
                 <div className="form-group">

@@ -2,7 +2,9 @@ import React from 'react';
 import { AppContext } from '../../screens/_context/AppContext';
 import { Portal } from 'react-portal';
 import eligibleDays from "../../services/eligibleDays";
-import PlayerCardModal from "../modals/PlayerCardModal"
+import serbischeDatum from "../../services/serbischeDatum";
+import serbischeNazivTima from "../../services/serbischeNazivTima";
+import SRBPlayerCardModal from "../modals/SRBPlayerCardModal"
 import sortPlayersOnSelectScreen from "../../services/sortPlayersOnSelectScreen";
 import calculateBasketballPlayerTDFantasyGrandTotalPoints from "../../services/calculateBasketballPlayerTDFantasyGrandTotalPoints";
 
@@ -109,7 +111,7 @@ class SRBSelectPlayer extends React.Component {
                                     <tr key={player.name + index} className="single-player-item" data-player-name={player.name} data-player-team={player.team} onClick={this.context.showSinglePlayerModal}>
                                         <td data-player-name={player.name} data-player-team={player.team}>{` ${(calculateBasketballPlayerTDFantasyGrandTotalPoints(player) / gamesPlayed).toFixed(2)}`}</td>
                                         <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
-                                        <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${player.team}`}</td>
+                                        <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${serbischeNazivTima(player.team)}`}</td>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${(reboundsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (reboundsSum / gamesPlayed).toFixed(2)}`}</td>
                                         <td data-player-name={player.name} data-player-team={player.team}>{`${(blocksSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (blocksSum / gamesPlayed).toFixed(2)}`}</td>
@@ -168,7 +170,7 @@ class SRBSelectPlayer extends React.Component {
                         <tr key={player.name + index} className="single-player-item" data-player-name={player.name} data-player-team={player.team} onClick={this.context.showSinglePlayerModal}>
                             <td data-player-name={player.name} data-player-team={player.team}>{` ${(calculateBasketballPlayerTDFantasyGrandTotalPoints(player) / gamesPlayed).toFixed(2)}`}</td>
                             <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
-                            <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${player.team}`}</td>
+                            <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${serbischeNazivTima(player.team)}`}</td>
                             <td data-player-name={player.name} data-player-team={player.team}>{`${(assistsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (assistsSum / gamesPlayed).toFixed(2)}`}</td>
                             <td data-player-name={player.name} data-player-team={player.team}>{`${(reboundsSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (reboundsSum / gamesPlayed).toFixed(2)}`}</td>
                             <td data-player-name={player.name} data-player-team={player.team}>{`${(blocksSum / gamesPlayed).toFixed(2) === "NaN" ? "n/a" : (blocksSum / gamesPlayed).toFixed(2)}`}</td>
@@ -220,30 +222,30 @@ class SRBSelectPlayer extends React.Component {
                     {this.context.teamSelected &&
                         this.context.teamSelected === "Cote d'Ivoire" &&
                         this.context.teamSelected !== "Serbia" &&
-                        <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/Cote-d-Ivoire`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.teamSelected} national team`}</button></a>
+                        <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/Cote-d-Ivoire`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Saznaj više o nacionalnom timu ${serbischeNazivTima(this.context.teamSelected)}`}</button></a>
                     }
                     {this.context.teamSelected &&
                         this.context.teamSelected !== "all-eligible-teams" &&
                         this.context.teamSelected !== "Cote d'Ivoire" &&
                         this.context.teamSelected !== "Serbia" &&
-                        <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/${this.checkSelectedTeamString()}`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Find out more about ${this.context.teamSelected} national team`}</button></a>
+                        <a href={`http://www.fiba.basketball/basketballworldcup/2019/team/${this.checkSelectedTeamString()}`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Saznaj više o nacionalnom timu ${serbischeNazivTima(this.context.teamSelected)}`}</button></a>
                     }
                     {this.context.teamSelected === "all-eligible-teams" &&
-                        <a href={`http://www.fiba.basketball/basketballworldcup/2019`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">Find out more about World Cup</button></a>
+                        <a href={`http://www.fiba.basketball/basketballworldcup/2019`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">Saznaj više o svetskom prvenstvu</button></a>
                     }
                     <div className="label-and-clock-wrapper d-flex justify-content-between align-items-center">
                         <div className="table-label">
-                            <i>Table of average Real Life stats<br className="d-block d-md-none" /> (per game)</i>
+                            <i>Prosečni statistički podaci u stvarnosti<br className="d-block d-md-none" /> (po utakmici) </i>
                         </div>
                         <div className="clockify-wrapper d-flex justify-content-between">
                             <span>
-                                {this.context.nowDateAndTime.humanDate}
+                                {serbischeDatum(this.context.nowDateAndTime.humanDate)}
                             </span>
                             <span>
                                 {this.context.nowDateAndTime.humanTime}
                             </span>
                             <span>
-                                Zulu time
+                                Grinič vreme
                                 </span>
                         </div>
                     </div>
@@ -253,17 +255,17 @@ class SRBSelectPlayer extends React.Component {
                         <table>
                             <thead>
                                 <tr className="">
-                                    <th data-sort-filter-value="ptPerGame" onClick={this.depositSortFilterValue}><button data-sort-filter-value="ptPerGame" type="button" className={`btn ${this.state.sortFilterValue === "ptPerGame" ? "btn-success" : "btn-outline-dark"}`}>Fantasy points</button></th>
-                                    <th className="not-centered" data-sort-filter-value="playerName" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerName" type="button" className={`btn ${this.state.sortFilterValue === "playerName" ? "btn-success" : "btn-outline-dark"}`}>Player name</button></th>
-                                    <th className="not-centered" data-sort-filter-value="playerTeam" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerTeam" type="button" className={`btn ${this.state.sortFilterValue === "playerTeam" ? "btn-success" : "btn-outline-dark"}`}>Team</button></th>
-                                    <th data-sort-filter-value="assists" onClick={this.depositSortFilterValue}><button data-sort-filter-value="assists" type="button" className={`btn ${this.state.sortFilterValue === "assists" ? "btn-success" : "btn-outline-dark"}`}>Assists</button></th>
-                                    <th data-sort-filter-value="rebounds" onClick={this.depositSortFilterValue}><button data-sort-filter-value="rebounds" type="button" className={`btn ${this.state.sortFilterValue === "rebounds" ? "btn-success" : "btn-outline-dark"}`}>Rebounds</button></th>
-                                    <th data-sort-filter-value="blocks" onClick={this.depositSortFilterValue}><button data-sort-filter-value="blocks" type="button" className={`btn ${this.state.sortFilterValue === "blocks" ? "btn-success" : "btn-outline-dark"}`}>Blocks</button></th>
-                                    <th data-sort-filter-value="steals" onClick={this.depositSortFilterValue}><button data-sort-filter-value="steals" type="button" className={`btn ${this.state.sortFilterValue === "steals" ? "btn-success" : "btn-outline-dark"}`}>Steals</button></th>
-                                    <th data-sort-filter-value="turnovers" onClick={this.depositSortFilterValue}><button data-sort-filter-value="turnovers" type="button" className={`btn ${this.state.sortFilterValue === "turnovers" ? "btn-success" : "btn-outline-dark"}`}>Turnovers</button></th>
-                                    <th data-sort-filter-value="freeThrows" onClick={this.depositSortFilterValue}><button data-sort-filter-value="freeThrows" type="button" className={`btn ${this.state.sortFilterValue === "freeThrows" ? "btn-success" : "btn-outline-dark"}`}>Free throws</button></th>
-                                    <th data-sort-filter-value="twoPoints" onClick={this.depositSortFilterValue}><button data-sort-filter-value="twoPoints" type="button" className={`btn ${this.state.sortFilterValue === "twoPoints" ? "btn-success" : "btn-outline-dark"}`}>Two points</button></th>
-                                    <th data-sort-filter-value="threePoints" onClick={this.depositSortFilterValue}><button data-sort-filter-value="threePoints" type="button" className={`btn ${this.state.sortFilterValue === "threePoints" ? "btn-success" : "btn-outline-dark"}`}>Three points</button></th>
+                                    <th data-sort-filter-value="ptPerGame" onClick={this.depositSortFilterValue}><button data-sort-filter-value="ptPerGame" type="button" className={`btn ${this.state.sortFilterValue === "ptPerGame" ? "btn-success" : "btn-outline-dark"}`}>Fantazi poeni</button></th>
+                                    <th className="not-centered" data-sort-filter-value="playerName" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerName" type="button" className={`btn ${this.state.sortFilterValue === "playerName" ? "btn-success" : "btn-outline-dark"}`}>Ime</button></th>
+                                    <th className="not-centered" data-sort-filter-value="playerTeam" onClick={this.depositSortFilterValue}><button data-sort-filter-value="playerTeam" type="button" className={`btn ${this.state.sortFilterValue === "playerTeam" ? "btn-success" : "btn-outline-dark"}`}>Reprezentacija</button></th>
+                                    <th data-sort-filter-value="assists" onClick={this.depositSortFilterValue}><button data-sort-filter-value="assists" type="button" className={`btn ${this.state.sortFilterValue === "assists" ? "btn-success" : "btn-outline-dark"}`}>Asistencije</button></th>
+                                    <th data-sort-filter-value="rebounds" onClick={this.depositSortFilterValue}><button data-sort-filter-value="rebounds" type="button" className={`btn ${this.state.sortFilterValue === "rebounds" ? "btn-success" : "btn-outline-dark"}`}>Skokovi</button></th>
+                                    <th data-sort-filter-value="blocks" onClick={this.depositSortFilterValue}><button data-sort-filter-value="blocks" type="button" className={`btn ${this.state.sortFilterValue === "blocks" ? "btn-success" : "btn-outline-dark"}`}>Blokade</button></th>
+                                    <th data-sort-filter-value="steals" onClick={this.depositSortFilterValue}><button data-sort-filter-value="steals" type="button" className={`btn ${this.state.sortFilterValue === "steals" ? "btn-success" : "btn-outline-dark"}`}>Ukradene</button></th>
+                                    <th data-sort-filter-value="turnovers" onClick={this.depositSortFilterValue}><button data-sort-filter-value="turnovers" type="button" className={`btn ${this.state.sortFilterValue === "turnovers" ? "btn-success" : "btn-outline-dark"}`}>Izgubljene</button></th>
+                                    <th data-sort-filter-value="freeThrows" onClick={this.depositSortFilterValue}><button data-sort-filter-value="freeThrows" type="button" className={`btn ${this.state.sortFilterValue === "freeThrows" ? "btn-success" : "btn-outline-dark"}`}>Slobodna bacanja</button></th>
+                                    <th data-sort-filter-value="twoPoints" onClick={this.depositSortFilterValue}><button data-sort-filter-value="twoPoints" type="button" className={`btn ${this.state.sortFilterValue === "twoPoints" ? "btn-success" : "btn-outline-dark"}`}>Za dva poena</button></th>
+                                    <th data-sort-filter-value="threePoints" onClick={this.depositSortFilterValue}><button data-sort-filter-value="threePoints" type="button" className={`btn ${this.state.sortFilterValue === "threePoints" ? "btn-success" : "btn-outline-dark"}`}>Za tri poena</button></th>
                                 </tr>
                             </thead>
                             <tbody className="players-data-container">
@@ -272,20 +274,20 @@ class SRBSelectPlayer extends React.Component {
                         </table>
                         {this.state.isTooLateMessage &&
                             <div className="too-late-message d-flex flex-column justify-content-center align-items-center">
-                                <span>All games for {this.context.selectedDay} already started...</span>
-                                <span className="too-late-message-2"><i>pick players for next round... nothing is over till 15th September</i></span>
+                                <span>Svi mečevi za {serbischeDatum(this.context.selectedDay)} su već počeli...</span>
+                                <span className="too-late-message-2"><i>izaberi ekipu za narednu rundu... ništa nije gotovo do 15. Septembra</i></span>
                             </div>
                         }
                         {this.state.gamesNotFinishedMessage &&
                             <div className="too-late-message d-flex flex-column justify-content-center align-items-center">
-                                <span>Selection is unavailable till all participants are known</span>
+                                <span>Nije moguće birati igrače <br/> dok ne budu poznati svi učesnici</span>
                             </div>
                         }
                     </div>
                 </section>
                 {this.context.selectedPlayerForPlayerCardModal && this.context.showSelectPlayer &&
                     <Portal>
-                        <PlayerCardModal />
+                        <SRBPlayerCardModal />
                     </Portal>
                 }
             </>

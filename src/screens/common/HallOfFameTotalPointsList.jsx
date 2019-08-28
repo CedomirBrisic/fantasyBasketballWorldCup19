@@ -146,7 +146,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                 </div>
                                 <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={0}>
                                     <div className="top" data-fantasy-user-sorted-index={0}>
-                                        <i data-fantasy-user-sorted-index={0}>Username:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "Placeholder for you" : this.state.fantasyUsersSorted[0].username}
+                                        <i data-fantasy-user-sorted-index={0}>Username:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "Reserved for you" : this.state.fantasyUsersSorted[0].username}
                                     </div>
                                     <div className="bottom" data-fantasy-user-sorted-index={0}>
                                         <i data-fantasy-user-sorted-index={0}>TD Fantasy points:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "1,000,000" : parseFloat(this.state.fantasyUsersSorted[0].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={0}>pt</sup>
@@ -171,7 +171,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={1}>
                                         <div className="top" data-fantasy-user-sorted-index={1}>
-                                            {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[1].username}
+                                            {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "Reserved for your friend" : this.state.fantasyUsersSorted[1].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={1}>
                                             {parseFloat(this.state.fantasyUsersSorted[1].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={1}>pt</sup>
@@ -193,7 +193,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={2}>
                                         <div className="top" data-fantasy-user-sorted-index={2}>
-                                            {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[2].username}
+                                            {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "Reserved for your friend" : this.state.fantasyUsersSorted[2].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={2}>
                                             {parseFloat(this.state.fantasyUsersSorted[2].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={2}>pt</sup>
@@ -217,7 +217,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={3}>
                                         <div className="top" data-fantasy-user-sorted-index={3}>
-                                            {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[3].username}
+                                            {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "Reserved for your friend" : this.state.fantasyUsersSorted[3].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={3}>
                                             {parseFloat(this.state.fantasyUsersSorted[3].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={3}>pt</sup>
@@ -243,7 +243,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={4}>
                                         <div className="top" data-fantasy-user-sorted-index={4}>
-                                            {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[4].username}
+                                            {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "Reserved for your friend" : this.state.fantasyUsersSorted[4].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={4}>
                                             {parseFloat(this.state.fantasyUsersSorted[4].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={4}>pt</sup>
@@ -267,7 +267,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={5}>
                                         <div className="top" data-fantasy-user-sorted-index={5}>
-                                            {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[5].username}
+                                            {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "Reserved for your friend" : this.state.fantasyUsersSorted[5].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={5}>
                                             {parseFloat(this.state.fantasyUsersSorted[5].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={5}>pt</sup>
@@ -289,7 +289,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={6}>
                                         <div className="top" data-fantasy-user-sorted-index={6}>
-                                            {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[6].username}
+                                            {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "Reserved for your friend" : this.state.fantasyUsersSorted[6].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={6}>
                                             {parseFloat(this.state.fantasyUsersSorted[6].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={6}>pt</sup>
@@ -314,7 +314,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                 </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={7}>
                                         <div className="top" data-fantasy-user-sorted-index={7}>
-                                            {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[7].username}
+                                            {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "Reserved for your friend" : this.state.fantasyUsersSorted[7].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={7}>
                                             {parseFloat(this.state.fantasyUsersSorted[7].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={7}>pt</sup>
@@ -336,7 +336,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={8}>
                                         <div className="top" data-fantasy-user-sorted-index={8}>
-                                            {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[8].username}
+                                            {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "Reserved for your friend" : this.state.fantasyUsersSorted[8].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={8}>
                                             {parseFloat(this.state.fantasyUsersSorted[8].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={8}>pt</sup>
@@ -359,7 +359,7 @@ class HallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={9}>
                                         <div className="top" data-fantasy-user-sorted-index={9}>
-                                            {this.state.fantasyUsersSorted[9].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[9].username}
+                                            {this.state.fantasyUsersSorted[9].summaSummarum == 0 ? "Reserved for your friend" : this.state.fantasyUsersSorted[9].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={9}>
                                             {parseFloat(this.state.fantasyUsersSorted[9].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={9}>pt</sup>

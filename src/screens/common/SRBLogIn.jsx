@@ -92,7 +92,7 @@ class SRBLogIn extends React.Component {
     }
     render() {
         if (this.state.goToUserScreen === "nekAReNDOMSifraOdBAsdostAkarakTERA") {
-            return <Redirect to='/user-screen' />
+            return <Redirect to='/srb/user-screen' />
         }
         return (
             // Forgot your username or password?

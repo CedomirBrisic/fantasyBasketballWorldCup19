@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { AppContext } from '../_context/AppContext';
-import TotalWCPointsByDay from './TotalPointsByDay';
+import TotalPointsByDay from './TotalPointsByDay';
 
 
 
@@ -21,13 +21,13 @@ class Header extends React.Component {
                     <i>username:</i> {this.context.bitrulez}
                 </div>
                 <div className="d-flex">
-                    <TotalWCPointsByDay />
+                    <TotalPointsByDay />
                 </div>
                 <Link className="hall-of-fame-wrapper" to={`hall-of-fame`}>
                     Hall of Fame
                 </Link>
                 <Link className="hall-of-fame-wrapper text-danger" to={`/srb/user-screen`}>
-                    Srpski
+                    Daj na srpskom
                 </Link>
             </div>
         )

@@ -138,7 +138,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                         <div className="hall-of-fame-total-points-list-wrapper d-flex flex-column align-items-center">
                             {this.context.hallOfFameSelectedDay !== "all-days" &&
                             this.state.fantasyUsersSorted[0].summaSummarum != 0&& 
-                                <div className="made-it-trough"><i>Users that made it through in battle<br/>for F1WC points</i></div>
+                                <div className="made-it-trough"><i>Korisnici koji su se probili<br/>u bitci za TD poene</i></div>
                             }
                             <div className="first-place-wrapper d-flex align-items-center" data-fantasy-user-sorted-index={0} onClick={this.depositUserDataForModal}>
                                 <div className="user-order-no" data-fantasy-user-sorted-index={0}>
@@ -146,14 +146,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                 </div>
                                 <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={0}>
                                     <div className="top" data-fantasy-user-sorted-index={0}>
-                                        <i data-fantasy-user-sorted-index={0}>Username:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "Placeholder for you" : this.state.fantasyUsersSorted[0].username}
+                                        <i data-fantasy-user-sorted-index={0}>Korisničko ime:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? `Rezervisano za tebe` : this.state.fantasyUsersSorted[0].username}
                                     </div>
                                     <div className="bottom" data-fantasy-user-sorted-index={0}>
-                                        <i data-fantasy-user-sorted-index={0}>TD Fantasy points:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "1,000,000" : parseFloat(this.state.fantasyUsersSorted[0].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={0}>pt</sup>
+                                        <i data-fantasy-user-sorted-index={0}>Sportske Fantazi poeni:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "1,000,000" : parseFloat(this.state.fantasyUsersSorted[0].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={0}>p</sup>
                                     </div>
                                     {this.context.hallOfFameSelectedDay !== "all-days" &&
-                                        <div className="bottom-bottom" data-fantasy-user-sorted-index={0}>
-                                            <i data-fantasy-user-sorted-index={0}>F1WC Points:</i>25<sup data-fantasy-user-sorted-index={0}>pt</sup>
+                                        <div className="bottom-bottom serbische-td-poeni" data-fantasy-user-sorted-index={0}>
+                                            <i data-fantasy-user-sorted-index={0}>TD Poeni:</i>25 <sup data-fantasy-user-sorted-index={0}>p</sup>
                                         </div>
                                     }
                                 </div>
@@ -171,14 +171,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={1}>
                                         <div className="top" data-fantasy-user-sorted-index={1}>
-                                            {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[1].username}
+                                            {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[1].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={1}>
-                                            {parseFloat(this.state.fantasyUsersSorted[1].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={1}>pt</sup>
+                                            {parseFloat(this.state.fantasyUsersSorted[1].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={1}>p</sup>
                                         </div>
                                         {this.context.hallOfFameSelectedDay !== "all-days" &&
                                             <div className="bottom-bottom" data-fantasy-user-sorted-index={1}>
-                                                18<sup data-fantasy-user-sorted-index={1}>pt</sup>
+                                                18 <sup data-fantasy-user-sorted-index={1}>p</sup>
                                             </div>}
                                     </div>
                                     <div className="silhouette-wrapper" data-fantasy-user-sorted-index={1}>
@@ -193,14 +193,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={2}>
                                         <div className="top" data-fantasy-user-sorted-index={2}>
-                                            {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[2].username}
+                                            {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[2].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={2}>
-                                            {parseFloat(this.state.fantasyUsersSorted[2].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={2}>pt</sup>
+                                            {parseFloat(this.state.fantasyUsersSorted[2].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={2}>p</sup>
                                         </div>
                                         {this.context.hallOfFameSelectedDay !== "all-days" &&
                                             <div className="bottom-bottom" data-fantasy-user-sorted-index={2}>
-                                                15<sup data-fantasy-user-sorted-index={2}>pt</sup>
+                                                15 <sup data-fantasy-user-sorted-index={2}>p</sup>
                                             </div>
                                         }
                                     </div>
@@ -217,14 +217,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={3}>
                                         <div className="top" data-fantasy-user-sorted-index={3}>
-                                            {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[3].username}
+                                            {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[3].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={3}>
-                                            {parseFloat(this.state.fantasyUsersSorted[3].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={3}>pt</sup>
+                                            {parseFloat(this.state.fantasyUsersSorted[3].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={3}>p</sup>
                                         </div>
                                         {this.context.hallOfFameSelectedDay !== "all-days" &&
                                             <div className="bottom-bottom" data-fantasy-user-sorted-index={3}>
-                                                12<sup data-fantasy-user-sorted-index={3}>pt</sup>
+                                                12 <sup data-fantasy-user-sorted-index={3}>p</sup>
                                             </div>
                                         }
                                     </div>
@@ -243,14 +243,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={4}>
                                         <div className="top" data-fantasy-user-sorted-index={4}>
-                                            {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[4].username}
+                                            {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[4].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={4}>
-                                            {parseFloat(this.state.fantasyUsersSorted[4].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={4}>pt</sup>
+                                            {parseFloat(this.state.fantasyUsersSorted[4].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={4}>p</sup>
                                         </div>
                                         {this.context.hallOfFameSelectedDay !== "all-days" &&
                                             <div className="bottom-bottom" data-fantasy-user-sorted-index={4}>
-                                                10<sup data-fantasy-user-sorted-index={4}>pt</sup>
+                                                10 <sup data-fantasy-user-sorted-index={4}>p</sup>
                                             </div>
                                         }
                                     </div>
@@ -267,14 +267,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={5}>
                                         <div className="top" data-fantasy-user-sorted-index={5}>
-                                            {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[5].username}
+                                            {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[5].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={5}>
-                                            {parseFloat(this.state.fantasyUsersSorted[5].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={5}>pt</sup>
+                                            {parseFloat(this.state.fantasyUsersSorted[5].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={5}>p</sup>
                                         </div>
                                         {this.context.hallOfFameSelectedDay !== "all-days" &&
                                             <div className="bottom-bottom" data-fantasy-user-sorted-index={5}>
-                                                8<sup data-fantasy-user-sorted-index={5}>pt</sup>
+                                                8 <sup data-fantasy-user-sorted-index={5}>p</sup>
                                             </div>
                                         }
                                     </div>
@@ -289,14 +289,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={6}>
                                         <div className="top" data-fantasy-user-sorted-index={6}>
-                                            {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[6].username}
+                                            {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[6].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={6}>
-                                            {parseFloat(this.state.fantasyUsersSorted[6].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={6}>pt</sup>
+                                            {parseFloat(this.state.fantasyUsersSorted[6].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={6}>p</sup>
                                         </div>
                                         {this.context.hallOfFameSelectedDay !== "all-days" &&
                                             <div className="bottom-bottom" data-fantasy-user-sorted-index={6}>
-                                                6<sup data-fantasy-user-sorted-index={6}>pt</sup>
+                                                6 <sup data-fantasy-user-sorted-index={6}>p</sup>
                                             </div>
                                         }
                                     </div>
@@ -314,14 +314,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                 </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={7}>
                                         <div className="top" data-fantasy-user-sorted-index={7}>
-                                            {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[7].username}
+                                            {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[7].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={7}>
-                                            {parseFloat(this.state.fantasyUsersSorted[7].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={7}>pt</sup>
+                                            {parseFloat(this.state.fantasyUsersSorted[7].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={7}>p</sup>
                                         </div>
                                         {this.context.hallOfFameSelectedDay !== "all-days" &&
                                             <div className="bottom-bottom" data-fantasy-user-sorted-index={7}>
-                                                4<sup data-fantasy-user-sorted-index={7}>pt</sup>
+                                                4 <sup data-fantasy-user-sorted-index={7}>p</sup>
                                             </div>
                                         }
                                     </div>
@@ -336,14 +336,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={8}>
                                         <div className="top" data-fantasy-user-sorted-index={8}>
-                                            {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[8].username}
+                                            {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[8].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={8}>
-                                            {parseFloat(this.state.fantasyUsersSorted[8].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={8}>pt</sup>
+                                            {parseFloat(this.state.fantasyUsersSorted[8].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={8}>p</sup>
                                         </div>
                                         {this.context.hallOfFameSelectedDay !== "all-days" &&
                                             <div className="bottom-bottom" data-fantasy-user-sorted-index={8}>
-                                                2<sup data-fantasy-user-sorted-index={8}>pt</sup>
+                                                2 <sup data-fantasy-user-sorted-index={8}>p</sup>
                                             </div>
                                         }
                                     </div>
@@ -359,14 +359,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={9}>
                                         <div className="top" data-fantasy-user-sorted-index={9}>
-                                            {this.state.fantasyUsersSorted[9].summaSummarum == 0 ? "Placeholder for your friend" : this.state.fantasyUsersSorted[9].username}
+                                            {this.state.fantasyUsersSorted[9].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[9].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={9}>
-                                            {parseFloat(this.state.fantasyUsersSorted[9].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={9}>pt</sup>
+                                            {parseFloat(this.state.fantasyUsersSorted[9].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={9}>p</sup>
                                         </div>
                                         {this.context.hallOfFameSelectedDay !== "all-days" &&
                                             <div className="bottom-bottom" data-fantasy-user-sorted-index={9}>
-                                                1<sup data-fantasy-user-sorted-index={9}>pt</sup>
+                                                1 <sup data-fantasy-user-sorted-index={9}>p</sup>
                                             </div>
                                         }
                                     </div>
@@ -379,14 +379,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                             {this.checkIsPlebseView() &&
                                 this.props.searchValue === "" &&
                                 <div className="plebs-container">
-                                    <div className="plebse-title">------------------------- SCROLL DOWN TO SEE REST OF PLEBSE -------------------------</div>
+                                    <div className="plebse-title">------------------------- SKROLUJ DOLE ZA OSTATAK EKIPE -------------------------</div>
 
                                     <table>
                                         <thead className="w-100">
                                             <tr className="w-100">
-                                                <th className="orer-no">Position No.</th>
-                                                <th>Username</th>
-                                                <th className="td-points">TD Fantasy points</th>
+                                                <th className="orer-no">Pozicija</th>
+                                                <th>Korisnik</th>
+                                                <th className="td-points">Sportske Fantazi poeni</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -399,7 +399,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                             {!this.checkIsPlebseView() &&
                                 this.props.searchValue === "" &&
                                 <div className="plebs-container">
-                                    <div className="plebse-title">------------------------- THERE IS NO DATA YET -------------------------</div>
+                                    <div className="plebse-title">------------------------- JOŠ UVEK NEMA PODATAKA -------------------------</div>
                                 </div>
                             }
 
@@ -410,14 +410,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                     this.props.searchValue !== "" &&
                     <div className="hall-of-fame-total-points-list-container">
                         <div className="hall-of-fame-total-points-list-wrapper d-flex flex-column align-items-center">
-                            <div className="plebs-container">
-                                <div className="plebse-title">------------------------- SEARCHED RESULTS -------------------------</div>
+                            <div className="plebs-container-searched">
+                                <div className="plebse-title">------------------------- REZULTAT PRETRAGE -------------------------</div>
                                 <table>
                                     <thead className="w-100">
                                         <tr className="w-100">
-                                            <th className="orer-no">Position No.</th>
-                                            <th>Username</th>
-                                            <th className="td-points">TD Fantasy points</th>
+                                            <th className="orer-no">Pozicija</th>
+                                            <th>Korisnik</th>
+                                            <th className="td-points">Sportske Fantazi poeni</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -430,7 +430,6 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                 }
                 <Portal>
                     <HallOfFameUserStatsModal isShowing={this.state.showUserModal} closeModal={this.closeUserModal} userData={this.state.fantasyUserForModalData} />
-
                 </Portal>
             </>
         )

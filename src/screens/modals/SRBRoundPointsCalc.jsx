@@ -21,7 +21,7 @@ class SRBRoundPointsCalc extends React.Component {
                 </div>
                 <div className="stats-calc-container d-flex justify-content-between align-items-center">
                     <div className="left-container d-flex flex-column justify-content-between">
-                        <p className="container-label">Čisti poeni:</p>
+                        <p className="container-label">Čisti Sportske Fantazi poeni:</p>
                         <div className="d-flex justify-content-between rule-item">
                             <p>1 Asistencija</p>
                             <p>+1 poen</p>
@@ -49,45 +49,45 @@ class SRBRoundPointsCalc extends React.Component {
                     </div>
                     <div className="right-container">
                         <div className="set-rules-wrapper">
-                            <p className="container-label">Ponderisani poeni:</p>
+                            <p className="container-label">Ponderisani Sportske Fantazi poeni:</p>
                             <p className="rule-label">Poeni ponderisani procentom šuta:</p>
                             <p className="rule-explanation">
-                                All points scored by player are multiplied by shot percentage and it's done separately<br/>
-                                for Free throws, 2pt shots and 3pt shots.
-                                <br/><br/>
-                                e.g. Player shoots 7/10 Free throws --> that's 7 points multiplied by 70% ==> 7 x 0.7 = 4.9pt
-                                <br/><br/>
-                                e.g. Player shoots 6/10 Two points --> that's 12 points multiplied by 60% ==> 12 x 0.6 = 7.2pt
-                                <br/><br/>
-                                e.g. Player shoots 5/10 Three points --> that's 15 points multiplied by 50% ==> 15 x 0.5 = 7.5pt
+                                Svi postignuti koševi se množe procentom šuta i to se radi odvojeno za slobodna bacanja,<br />
+                                kao i za šuteve za dva i tri poena
+                                <br /><br />
+                                npr. Košarkaš šutira 7/10 slobodna bacanja --> to je 7 koševa ponderisano sa 70% ==> 7 x 0.7 = 4.9p
+                                <br /><br />
+                                npr. Košarkaš šutira 6/10 za dva poena --> to je 12 koševa ponderisano sa 60% ==> 12 x 0.6 = 7.2p
+                                <br /><br />
+                                npr. Košarkaš šutira 5/10 za tri poena --> to je 15 koševa ponderisano sa 50% ==> 15 x 0.5 = 7.5p
                             </p>
                         </div>
                         <div className="set-rules-wrapper">
-                            <p className="rule-label">Bonus points:</p>
+                            <p className="rule-label">Bonus poeni:</p>
                             <p className="rule-explanation">
-                                When player shoots without miss (but 3 or more shots !!!) he is rewarded with bonus that is again calculated separately and bonuses are as follows:<br/>
-                                (Free throws - 25%) (Two points shots - 50%) (Three points shots - 100%) 
-                                <br/><br/>
-                                e.g. Player shoots 7/7 Free throws --> that's 7 points multiplied by 25% ==> 7 x 0.25 = 1.75pt BONUS
-                                <br/><br/>
-                                e.g. Player shoots 6/6 Two points --> that's 12 points multiplied by 50% ==> 12 x 0.5 = 6pt <span className="bonus">BONUS</span>
-                                <br/><br/>
-                                e.g. Player shoots 5/5 Three points --> that's 15 points multiplied by 100% ==> 15 x 1 = 15pt BONUS
+                                Kada košarkaš pogađa bez promašaja (ali 3 ili više šuta !!!) nagrađen je bonus poenima koji se opet računaju zasebno i oni iznose:<br />
+                                (Slobodna bacanja - 25%) (Šutevi za dva - 50%) (Šutevi za tri - 100%)
+                                <br /><br />
+                                npr. Košarkaš šutira 7/7 slobodna bacanja --> to je 7 koševa ponderisano sa 25% ==> 7 x 0.25 = 1.75p BONUS
+                                <br /><br />
+                                npr. Košarkaš šutira 6/6 za dva --> to je 12 koševa ponderisano sa 50% ==> 12 x 0.5 = 6p BONUS
+                                <br /><br />
+                                npr. Košarkaš šutira5/5 za tri --> to je 15 koševa ponderisano sa 100% ==> 15 x 1 = 15p BONUS
                             </p>
                         </div>
                         <div className="set-rules-wrapper">
-                            <p className="rule-label">Penalty points:</p>
+                            <p className="rule-label">Kazneni poeni:</p>
                             <p className="rule-explanation">
-                                When player shoots without scoring (but 3 or more shots !!!) he is penalized with negative points that are again calculated separately and penalties are as follows:<br/>
-                                (Free throws, first three misses are -1pt and every next miss is -1pt)<br/>
-                                (Two points shots, first three misses are -2pt and every next miss is -1pt)<br/>
-                                (Three points shots, first three misses are -3pt and every next miss is -1pt) 
-                                <br/><br/>
-                                e.g. Player shoots 0/7 Free throws --> that's -1pt for 0/3 and -4pt for next 0/4 ==> -1 + (4 x -1) = -5pt PENALTY
-                                <br/><br/>
-                                e.g. Player shoots 0/6 Two points --> that's -2pt for 0/3 and -3pt for next 0/3 ==> -2 + (3 x -1) = -5pt PENALTY
-                                <br/><br/>
-                                e.g. Player shoots 0/5 Three points --> that's -3pt for 0/3 and -2pt for next 0/2 ==> -3 + (2 x -1) = -5pt PENALTY
+                                Kada košarkaš šutira bez pogotka (ali 3 ili više pokušaja !!!) dobija kaznene poene koji se opet računaju zasebno i oni iznose:<br />
+                                (Slobodna bacanja- prva tri promašaja su -1p, dok je svaki sledeći dodatnih -1p)<br />
+                                (Šut za dva- prva tri promašaja su -2p, dok je svaki sledeći dodatnih -1p)<br />
+                                (Šut za tri- prva tri promašaja su -3p, dok je svaki sledeći dodatnih -1p)
+                                <br /><br />
+                                npr. Košarkaš šutira 0/7 slobodna bacanja --> to je -1p za 0/3 i -4p za narednih 0/4 ==> -1 + (4 x -1) = -5p PENALA
+                                <br /><br />
+                                npr. Košarkaš šutira 0/6 za dva --> to je -2p za 0/3 i -3p za narednih 0/3 ==> -2 + (3 x -1) = -5p PENALA
+                                <br /><br />
+                                npr. Košarkaš šutira 0/5 za tri --> to je -3p za 0/3 i -2p za narednih 0/2 ==> -3 + (2 x -1) = -5p PENALA
                             </p>
                         </div>
                     </div>
