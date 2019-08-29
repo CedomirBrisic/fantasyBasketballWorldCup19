@@ -346,7 +346,7 @@ export default class AppStore extends Component {
                         <h3>Sportske Fantasy advises you:</h3>
                         <h1>Rotate your phone<br />
                             to LANDSCAPE mode</h1>
-                        <button type="button" class="btn btn-outline-danger" data-language="serbische" onClick={this.changeIsSerbische}>Daj na srpskom</button>
+                        <button type="button" className="btn btn-outline-danger" data-language="serbische" onClick={this.changeIsSerbische}>Daj na srpskom</button>
                     </div>}
 
                 {!this.state.isLandscape &&
@@ -355,7 +355,7 @@ export default class AppStore extends Component {
                         <h3>Sportske Fantazi <br/> te savetuju:</h3>
                         <h1>Rotiraj svoj telefon<br />
                             da bude u "LANDSCAPE" modu</h1>
-                        <button type="button" class="btn btn-outline-danger" data-language="english" onClick={this.changeIsSerbische}>English please</button>
+                        <button type="button" className="btn btn-outline-danger" data-language="english" onClick={this.changeIsSerbische}>English please</button>
                     </div>}
             </>
         )

@@ -107,10 +107,15 @@ class LogIn extends React.Component {
                         <input value={this.state.password} onChange={this.depositPassword} onKeyDown={this.checkIsEnter} type="password" className="form-control" id="passwordLogin" aria-describedby="passwordHelp" placeholder="Your password" required />
                     </div>
                     <h6 className={`${this.state.badUsernameOrPassword ? "d-block" : "d-none"}`}>
-                        If you forgot your user name or password, send us an email and we'll help... We are good guys :-) <br />
+                        If you forgot your user name or password, send us an email (<a href="mailto:admin@sportskefantasy.com">admin@sportskefantasy.com</a>) and we'll help...<br/>
+                        We are good guys :-) <br />
                         But you need to send it from email address you used for registration <br />
                     </h6>
                     <button onClick={this.sendLogIn} type="submit" className="w-100 btn btn-outline-secondary">Log In</button>
+                    <div className="criticism-mail">
+                        For criticism and suggestions send us an email to:<br/>
+                        <a href="mailto:admin@sportskefantasy.com">admin@sportskefantasy.com</a>
+                    </div>
                 </section>
             </>
         )

@@ -1,57 +1,54 @@
 const serbischeDatum = (date) => {
     let datum = ""
-    switch (date) {
-        case '31st-August':
-            datum = "31. Avgust"
+    let dateSplit = date.split("-")
+    const month = dateSplit[1]
+    let dan = ""
+    let mesec = ""
+    if (dateSplit[0].length === 4){
+        dan = dateSplit[0][0] + dateSplit[0][1]
+    } else if (dateSplit[0].length === 3){
+        dan = dateSplit[0][0]
+    }
+    switch (month) {
+        case 'January':
+            mesec = "Januar"
             break;
-        case '1st-September':
-            datum = "1. Septembar"
+        case 'February':
+            mesec = "Februar"
             break;
-        case '2nd-September':
-            datum = "2. Septembar"
+        case 'March':
+            mesec = "Mart"
             break;
-        case '3rd-September':
-            datum = "3. Septembar"
+        case 'April':
+            mesec = "April"
             break;
-        case '4th-September':
-            datum = "4. Septembar"
+        case 'May':
+            mesec = "Maj"
             break;
-        case '5th-September':
-            datum = "5. Septembar"
+        case 'June':
+            mesec = "Jun"
             break;
-        case '6th-September':
-            datum = "6. Septembar"
+        case 'July':
+            mesec = "Jul"
             break;
-        case '7th-September':
-            datum = "7. Septembar"
+        case 'August':
+            mesec = "Avgust"
             break;
-        case '8th-September':
-            datum = "8. Septembar"
+        case 'September':
+            mesec = "Septembar"
             break;
-        case '9th-September':
-            datum = "9. Septembar"
+        case 'October':
+            mesec = "Oktobar"
             break;
-        case '10th-September':
-            datum = "10. Septembar"
+        case 'November':
+            mesec = "Novembar"
             break;
-        case '11th-September':
-            datum = "11. Septembar"
-            break;
-        case '12th-September':
-            datum = "12. Septembar"
-            break;
-        case '13th-September':
-            datum = "13. Septembar"
-            break;
-        case '14th-September':
-            datum = "14. Septembar"
-            break;
-        case '15th-September':
-            datum = "15. Septembar"
+        case 'December':
+            mesec = "Decembar"
             break;
     }
 
-    return datum
+    return datum = `${dan} - ${mesec}`
 }
 
 export default serbischeDatum

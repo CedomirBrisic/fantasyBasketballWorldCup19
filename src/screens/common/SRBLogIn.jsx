@@ -107,11 +107,15 @@ class SRBLogIn extends React.Component {
                         <input value={this.state.password} onChange={this.depositPassword} onKeyDown={this.checkIsEnter} type="password" className="form-control" id="passwordLogin" aria-describedby="passwordHelp" placeholder="Tvoja lozinka" required />
                     </div>
                     <h6 className={`${this.state.badUsernameOrPassword ? "d-block" : "d-none"}`}>
-                        Ako si zaborabio lozinku ili korisničko ime, pošalji nam mejl i mi ćemo gledati da ti pomognemo...<br/>
-                        Mi smo dobri momci :-)<br /><br />
+                        Ako si zaborabio lozinku ili korisničko ime, pošalji nam mejl (<a href="mailto:admin@sportskefantasy.com">admin@sportskefantasy.com</a>)<br/>
+                        i mi ćemo gledati da ti pomognemo... Mi smo dobri momci :-)<br /><br />
                         Ali imaj u vidu da ga u tom slučaju trebaš poslati sa mejla koji si koristio prilikom registracije
                     </h6>
                     <button onClick={this.sendLogIn} type="submit" className="w-100 btn btn-outline-secondary">Nastavi</button>
+                    <div className="criticism-mail">
+                       Za kritike i sugestije pošalji nam mejl na:<br/>
+                        <a href="mailto:admin@sportskefantasy.com">admin@sportskefantasy.com</a>
+                    </div>
                 </section>
             </>
         )

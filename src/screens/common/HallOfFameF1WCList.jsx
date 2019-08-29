@@ -72,7 +72,7 @@ class HallOfFameF1WCList extends React.Component {
 
             }
         })
-        
+
         const outputCalculatedSummedUp = []
         const outputUsernames = []
         outputCalculated.forEach((user) => {
@@ -80,7 +80,7 @@ class HallOfFameF1WCList extends React.Component {
                 outputUsernames.push(user.username)
             }
         })
-        
+
         outputUsernames.forEach((username) => {
             let f1WCgrandTotal = 0
             let summedUpUser = null
@@ -110,7 +110,7 @@ class HallOfFameF1WCList extends React.Component {
             const elementForRender =
                 <div key={fantasyUsers[i].username} className="chosen-one-container">
                     <div className="image-wrapper" >
-                        <img className="img-fluid" src={require("../../images/boysmall.png")} alt="triumph" data-fantasy-user-sorted-index={i} onClick={this.depositUserDataForModal}/>
+                        <img className="img-fluid" src={require("../../images/boysmall.png")} alt="triumph" data-fantasy-user-sorted-index={i} onClick={this.depositUserDataForModal} />
                     </div>
                     <div className="info-wrapper d-flex">
                         <div className="position-no">
@@ -127,7 +127,7 @@ class HallOfFameF1WCList extends React.Component {
                     </div>
                     <div className="title">
                         {/* PITAJ DA LI JE POSLEDNJI */}
-                        <i>{`${i === fantasyUsers.length - 1 ? "Aleee aleeeee me too !" : "Aleee aleeeee . . ."}`}</i>
+                        <i>{`${i === fantasyUsers.length - 1 ? "I made it too !" : "I made it . . ."}`}</i>
                     </div>
                 </div>
 
@@ -189,13 +189,14 @@ class HallOfFameF1WCList extends React.Component {
         return (
             <>
                 {this.state.fantasyF1WCUsersSorted !== null &&
+                    this.state.fantasyF1WCUsersSorted > 0 &&
                     this.props.searchValue === "" &&
                     <div className="hall-of-fame-f1wc-list-container">
                         <div className="hall-of-fame-f1wc-list-wrapper">
                             {/* --------FIRST PLACE-------- */}
                             <div className="first-place-container">
                                 <div className="image-wrapper">
-                                    <img className="img-fluid" src={require("../../images/winner.png")} alt="triumph" data-fantasy-user-sorted-index={0} onClick={this.depositUserDataForModal}/>
+                                    <img className="img-fluid" src={require("../../images/winner.png")} alt="triumph" data-fantasy-user-sorted-index={0} onClick={this.depositUserDataForModal} />
                                 </div>
                                 <div className="info-wrapper d-flex">
                                     <div className="position-no">
@@ -221,7 +222,7 @@ class HallOfFameF1WCList extends React.Component {
                                 {/* --------SECOND PLACE-------- */}
                                 <div className="second-place-container">
                                     <div className="image-wrapper">
-                                        <img className="img-fluid" src={require("../../images/boybig.png")} alt="triumph" data-fantasy-user-sorted-index={1} onClick={this.depositUserDataForModal}/>
+                                        <img className="img-fluid" src={require("../../images/boybig.png")} alt="triumph" data-fantasy-user-sorted-index={1} onClick={this.depositUserDataForModal} />
                                     </div>
                                     <div className="info-wrapper d-flex">
                                         <div className="position-no">
@@ -245,7 +246,7 @@ class HallOfFameF1WCList extends React.Component {
                                 {/* --------THIRD PLACE-------- */}
                                 <div className="third-place-container" >
                                     <div className="image-wrapper">
-                                        <img className="img-fluid" src={require("../../images/boybig.png")} alt="triumph" data-fantasy-user-sorted-index={2} onClick={this.depositUserDataForModal}/>
+                                        <img className="img-fluid" src={require("../../images/boybig.png")} alt="triumph" data-fantasy-user-sorted-index={2} onClick={this.depositUserDataForModal} />
                                     </div>
                                     <div className="info-wrapper d-flex">
                                         <div className="position-no" >
@@ -276,6 +277,7 @@ class HallOfFameF1WCList extends React.Component {
                     </div>
                 }
                 {this.state.fantasyF1WCUsersSorted !== null &&
+                    this.state.fantasyF1WCUsersSorted > 0 &&
                     this.props.searchValue !== "" &&
                     <div className="hall-of-fame-f1wc-points-list-wrapper d-flex flex-column align-items-center">
                         <div className="plebs-container d-flex flex-column align-items-center">
@@ -295,9 +297,36 @@ class HallOfFameF1WCList extends React.Component {
                         </div>
                     </div>
                 }
+                {this.state.fantasyF1WCUsersSorted !== null &&
+                    this.state.fantasyF1WCUsersSorted.length == 0 &&
+                    <div className="hall-of-fame-f1wc-list-container">
+                        <div className="hall-of-fame-f1wc-list-wrapper">
+                            <div className="first-place-container">
+                                <div className="image-wrapper">
+                                    <img className="img-fluid" src={require("../../images/winner.png")} alt="triumph" />
+                                </div>
+                                <div className="info-wrapper d-flex">
+                                    <div className="position-no">
+                                        &#8544;
+                                    </div>
+                                    <div className="titles-wrapper d-flex flex-column justify-content-between">
+                                        <div className="top">
+                                            Reserved for you
+                                        </div>
+                                        <div className="bottom">
+                                            442<sup>pt</sup>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="title">
+                                    Fantasy Grand Master
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        }       
                 <Portal>
                     <HallOfFameUserStatsModal isShowing={this.state.showUserModal} closeModal={this.closeUserModal} userData={this.state.fantasyUserForModalData} />
-
                 </Portal>
             </>
 

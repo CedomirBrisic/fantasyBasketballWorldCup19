@@ -44,7 +44,13 @@ class SRBPlayerCardModal extends React.Component {
         const pickedPlayerId = event.target.getAttribute("data-picked-player-id")
         this.context.pickPlayerForTeam(this.context.choosePlayerPosition, pickedPlayerId)
     }
-
+    checkGameWin = () => {
+        if (this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].teamWin === "no"){
+            return "ne"
+        } else if (this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].teamWin === "yes"){
+            return "da"
+        } else return this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].teamWin
+    }
     componentDidMount() {
         this.depositTdFantasyPoints(this.context.selectedPlayerForPlayerCardModal, this.state.selectedDay)
     }
@@ -87,7 +93,7 @@ class SRBPlayerCardModal extends React.Component {
                                     Pobeda:
                                 </span>
                                 <span className="data" data-stats-element="game-win-wrapper">
-                                    {this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].teamWin}
+                                    {this.checkGameWin()}
                                 </span>
                             </div>
                             <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "assists-wrapper" ? "isHovered" : ""}`} data-stats-element="assists-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>
@@ -170,6 +176,7 @@ class SRBPlayerCardModal extends React.Component {
                                 </span>
                                     <span className="data" data-stats-element="game-win-wrapper">
                                         {this.state.tdFantasyPoints.gameWin}
+                                        
                                     </span>
                                 </div>
                                 <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "assists-wrapper" ? "isHovered" : ""}`} data-stats-element="assists-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>

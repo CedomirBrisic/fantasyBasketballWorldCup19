@@ -127,7 +127,7 @@ class SRBHallOfFameF1WCList extends React.Component {
                     </div>
                     <div className="title">
                         {/* PITAJ DA LI JE POSLEDNJI */}
-                        <i>{`${i === fantasyUsers.length - 1 ? "Aleee Aleeeee i ja !" : "Aleee Aleeeee . . ."}`}</i>
+                        <i>{`${i === fantasyUsers.length - 1 ? "I ja sam uspeo !" : "Uspeo sam . . ."}`}</i>
                     </div>
                 </div>
 
@@ -189,6 +189,7 @@ class SRBHallOfFameF1WCList extends React.Component {
         return (
             <>
                 {this.state.fantasyF1WCUsersSorted !== null &&
+                this.state.fantasyF1WCUsersSorted > 0 &&
                     this.props.searchValue === "" &&
                     <div className="hall-of-fame-f1wc-list-container">
                         <div className="hall-of-fame-f1wc-list-wrapper">
@@ -276,6 +277,7 @@ class SRBHallOfFameF1WCList extends React.Component {
                     </div>
                 }
                 {this.state.fantasyF1WCUsersSorted !== null &&
+                this.state.fantasyF1WCUsersSorted > 0 &&
                     this.props.searchValue !== "" &&
                     <div className="hall-of-fame-f1wc-points-list-wrapper d-flex flex-column align-items-center">
                         <div className="plebs-container d-flex flex-column align-items-center">
@@ -295,6 +297,38 @@ class SRBHallOfFameF1WCList extends React.Component {
                         </div>
                     </div>
                 }
+
+
+
+
+                                {this.state.fantasyF1WCUsersSorted !== null &&
+                    this.state.fantasyF1WCUsersSorted.length == 0 &&
+                    <div className="hall-of-fame-f1wc-list-container">
+                        <div className="hall-of-fame-f1wc-list-wrapper">
+                            <div className="first-place-container">
+                                <div className="image-wrapper">
+                                    <img className="img-fluid" src={require("../../images/winner.png")} alt="triumph" />
+                                </div>
+                                <div className="info-wrapper d-flex">
+                                    <div className="position-no">
+                                        &#8544;
+                                    </div>
+                                    <div className="titles-wrapper d-flex flex-column justify-content-between">
+                                        <div className="top">
+                                            Rezervisano za tebe
+                                        </div>
+                                        <div className="bottom">
+                                            442 <sup>p</sup>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="title">
+                                    Velemajstor ove igre
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        }  
                 <Portal>
                     <HallOfFameUserStatsModal isShowing={this.state.showUserModal} closeModal={this.closeUserModal} userData={this.state.fantasyUserForModalData} />
 
