@@ -189,7 +189,7 @@ class HallOfFameF1WCList extends React.Component {
         return (
             <>
                 {this.state.fantasyF1WCUsersSorted !== null &&
-                    this.state.fantasyF1WCUsersSorted > 0 &&
+                    this.state.fantasyF1WCUsersSorted.length > 0 &&
                     this.props.searchValue === "" &&
                     <div className="hall-of-fame-f1wc-list-container">
                         <div className="hall-of-fame-f1wc-list-wrapper">
@@ -277,7 +277,7 @@ class HallOfFameF1WCList extends React.Component {
                     </div>
                 }
                 {this.state.fantasyF1WCUsersSorted !== null &&
-                    this.state.fantasyF1WCUsersSorted > 0 &&
+                    this.state.fantasyF1WCUsersSorted.length > 0 &&
                     this.props.searchValue !== "" &&
                     <div className="hall-of-fame-f1wc-points-list-wrapper d-flex flex-column align-items-center">
                         <div className="plebs-container d-flex flex-column align-items-center">

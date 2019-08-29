@@ -215,7 +215,7 @@ class SelectPlayer extends React.Component {
                 <div className="d-flex justify-content-between align-items-center w-100 select-player-label-wrapper">
                     {this.context.teamSelected &&
                         this.context.teamSelected === "Serbia" &&
-                        <a href={`https://www.sportske.net/vesti/kosarka/reprezentacija-srbije.html`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Pročitaj više o našima`}</button></a>
+                        <a href={`https://www.sportske.net/vesti/kosarka/reprezentacija-srbije.html?utm_source=sportskeFantasy&utm_medium=game&utm_campaign=worldCup2019`} target="_blank" rel="noopener noreferrer"><button type="button" className="btn btn-outline-light">{`Pročitaj više o našima`}</button></a>
                     }
                     {this.context.teamSelected &&
                         this.context.teamSelected === "Cote d'Ivoire" &&
