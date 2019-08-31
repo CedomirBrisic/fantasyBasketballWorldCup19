@@ -53,7 +53,7 @@ class Rules extends React.Component {
                     <h5><span className="rule-numer-order">#7 -</span> You can choose 7 players for each round, but only 5 of them (best ranked picks) counts for score</h5>
                     <h6><i>#7-a If someone is injured and you picked him, or he didn't play and you picked him... it's not our fault- you need to learn how to live with that...</i></h6>
                     <h5><span className="rule-numer-order">#8 -</span> There are no restrictions in terms of choosing players<br/>(except rule #5)</h5>
-                    <h6><i>#8-a If you want 5 players to be from one national team and all of them to be players who plays on center position - nobody can forbid you!</i></h6>
+                    <h6><i>#8-a If you want 5 players to be from one national team and all of them to be players who plays at center position - nobody can forbid you!</i></h6>
                     <h5><span className="rule-numer-order">#9 -</span>At the end of each day (each round), special TD points are awarded based on points earned at that round</h5>
                     <div className="d-flex justify-content-between buttons-container">
                         <button type="button" className="btn btn-outline-light" onClick={this.openF1WCPointsCalcModal}>TD points explanation</button>

@@ -76,6 +76,12 @@ class SRBLogIn extends React.Component {
     checkIsEnter = (event) => {
         if (event.keyCode === 13) {
             this.sendLogIn()
+            event.target.blur()
+        }
+    }
+    checkBlur = (event) => {
+        if (event.keyCode === 13) {
+            event.target.blur()
         }
     }
     componentDidUpdate(prevProps) {
@@ -101,7 +107,7 @@ class SRBLogIn extends React.Component {
                     <div>{this.successfullyRegisteredMessage()}</div>
                     <div className={`${this.state.badUsernameOrPassword ? "red-letters" : ""}`}>{this.state.badUsernameOrPassword ? "Pogrešio si ili lozinku ili korisničko ime. Probaj da ih se prisetiš." : ""}</div>
                     <div className="form-group">
-                        <input value={this.state.username} onChange={this.depositUsername} type="text" className="form-control" id="usernameLogin" aria-describedby="usernameHelp" placeholder="Tvoje korisničko ime" required />
+                        <input value={this.state.username} onChange={this.depositUsername} onKeyDown={this.checkBlur} type="text" className="form-control" id="usernameLogin" aria-describedby="usernameHelp" placeholder="Tvoje korisničko ime" required />
                     </div>
                     <div className="form-group">
                         <input value={this.state.password} onChange={this.depositPassword} onKeyDown={this.checkIsEnter} type="password" className="form-control" id="passwordLogin" aria-describedby="passwordHelp" placeholder="Tvoja lozinka" required />

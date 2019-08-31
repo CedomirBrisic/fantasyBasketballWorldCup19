@@ -75,7 +75,13 @@ class LogIn extends React.Component {
     }
     checkIsEnter = (event) => {
         if (event.keyCode === 13) {
+            event.target.blur()
             this.sendLogIn()
+        }
+    }
+    checkBlur = (event) => {
+        if (event.keyCode === 13) {
+            event.target.blur()
         }
     }
     componentDidUpdate(prevProps) {
@@ -101,7 +107,7 @@ class LogIn extends React.Component {
                     <div>{this.successfullyRegisteredMessage()}</div>
                     <div className={`${this.state.badUsernameOrPassword ? "red-letters" : ""}`}>{this.state.badUsernameOrPassword ? "It's not your username or it's not your password. Try to remember it." : ""}</div>
                     <div className="form-group">
-                        <input value={this.state.username} onChange={this.depositUsername} type="text" className="form-control" id="usernameLogin" aria-describedby="usernameHelp" placeholder="Your username" required />
+                        <input value={this.state.username} onChange={this.depositUsername} onKeyDown={this.checkBlur} type="text" className="form-control" id="usernameLogin" aria-describedby="usernameHelp" placeholder="Your username" required />
                     </div>
                     <div className="form-group">
                         <input value={this.state.password} onChange={this.depositPassword} onKeyDown={this.checkIsEnter} type="password" className="form-control" id="passwordLogin" aria-describedby="passwordHelp" placeholder="Your password" required />

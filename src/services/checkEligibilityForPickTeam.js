@@ -87,10 +87,10 @@ const checkEligibilityForPickTeam = (fantasyUsers, username, selectedDay, nowDat
             const teamGameStartMinutes = parseInt(teamData[0].gameStart.split(":")[1], 10)
 
 
-            if (selectedDay === nowDateAndTime.humanDate) {
+            if (selectedDay == nowDateAndTime.humanDate) {
                 if (nowHour > teamGameStartHour) {
                     teamPickLockData[playerId] = true
-                } else if (nowHour === teamGameStartHour && nowMinutes >= teamGameStartMinutes) {
+                } else if (nowHour == teamGameStartHour && nowMinutes >= teamGameStartMinutes) {
                     teamPickLockData[playerId] = true
                 } else {
                     teamPickLockData[playerId] = false

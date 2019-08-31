@@ -49,7 +49,13 @@ class SRBRegister extends React.Component {
     }
     checkIsEnter = (event) => {
         if (event.keyCode === 13) {
+            event.target.blur()
             this.sendRegistration()
+        }
+    }
+    checkBlur = (event) => {
+        if (event.keyCode === 13) {
+            event.target.blur()
         }
     }
 
@@ -155,7 +161,7 @@ class SRBRegister extends React.Component {
                     <label htmlFor="username" className={`${this.state.isUsernameOccupied ? "red-letters" : ""} ${this.state.validateUsernameAlert ? "red-letters" : ""}`}>
                         {this.checkUsernameValidationMessage()}
                     </label>
-                    <input value={this.state.username} onChange={this.depositUsername} type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Unesi željeno korisničko ime" required />
+                    <input value={this.state.username} onChange={this.depositUsername} onKeyDown={this.checkBlur} type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Unesi željeno korisničko ime" required />
                     <small id="usernameHelp" className="form-text text-muted">Ovo je tvoje korisničko ime za igru.<br/>Treba da bude jedinstveno i da nema više od 16 karaktera
                         </small>
                 </div>
@@ -163,7 +169,7 @@ class SRBRegister extends React.Component {
                     <label htmlFor="password" className={`${this.state.validatePasswordAlert ? "red-letters" : ""}`}>
                         {this.checkPasswordValidationMessage()}
                     </label>
-                    <input value={this.state.password} onChange={this.depositPassword} type="password" className="form-control" id="password" aria-describedby="passwordHelp" placeholder="Unesi svoju buduću lozinku" required />
+                    <input value={this.state.password} onChange={this.depositPassword} onKeyDown={this.checkBlur} type="password" className="form-control" id="password" aria-describedby="passwordHelp" placeholder="Unesi svoju buduću lozinku" required />
                     <small id="passwordHelp" className="form-text text-muted">Ovo je tvoja lozinka za ovu igru. Predlažemo nešto tipa 12345 :-)
                         </small>
                 </div>
@@ -171,7 +177,7 @@ class SRBRegister extends React.Component {
                     <label htmlFor="passwordConfirm" className={`${this.state.validatePasswordConfirmAlert ? "red-letters" : ""}`}>
                         {this.checkPasswordConfirmValidationMessage()}
                     </label>
-                    <input value={this.state.passwordConfirm} onChange={this.depositPasswordConfirm} type="password" className="form-control" id="passwordConfirm" aria-describedby="passwordComfirmHelp" placeholder="Ponovi lozinku još jednom" required />
+                    <input value={this.state.passwordConfirm} onChange={this.depositPasswordConfirm} onKeyDown={this.checkBlur} type="password" className="form-control" id="passwordConfirm" aria-describedby="passwordComfirmHelp" placeholder="Ponovi lozinku još jednom" required />
                     <small id="passwordHelp" className="form-text text-muted">Ponovi lozinku još jednom kako bi bio siguran da je nisi pogrešno otkucao
                         </small>
                 </div>

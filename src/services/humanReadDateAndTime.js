@@ -9,11 +9,11 @@ const humanReadDateAndTime = () => {
 
 
     const ddth = (function () {
-        if (dd === "1" || dd === "21" || dd === "31") {
+        if (dd == "1" || dd == "21" || dd == "31") {
             return "st"
-        } else if (dd === "2" || dd === "22") {
+        } else if (dd == "2" || dd == "22") {
             return "nd"
-        } else if (dd === "3" || dd === "23") {
+        } else if (dd == "3" || dd == "23") {
             return "rd"
         } else {
             return "th"
@@ -22,7 +22,7 @@ const humanReadDateAndTime = () => {
 
     const sec00 = (function () {
         const secStringify = sec.toString()
-        if (secStringify.length === 1) {
+        if (secStringify.length == 1) {
             return "0"+secStringify
         } else {
             return secStringify
@@ -31,7 +31,7 @@ const humanReadDateAndTime = () => {
 
     const min00 = (function () {
         const minStringify = min.toString()
-        if (minStringify.length === 1) {
+        if (minStringify.length == 1) {
             return "0"+minStringify
         } else {
             return minStringify

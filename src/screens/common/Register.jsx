@@ -49,7 +49,13 @@ class Register extends React.Component {
     }
     checkIsEnter = (event) => {
         if (event.keyCode === 13) {
+            event.target.blur()
             this.sendRegistration()
+        }
+    }
+    checkBlur = (event) => {
+        if (event.keyCode === 13) {
+            event.target.blur()
         }
     }
 
@@ -155,7 +161,7 @@ class Register extends React.Component {
                     <label htmlFor="username" className={`${this.state.isUsernameOccupied ? "red-letters" : ""} ${this.state.validateUsernameAlert ? "red-letters" : ""}`}>
                         {this.checkUsernameValidationMessage()}
                     </label>
-                    <input value={this.state.username} onChange={this.depositUsername} type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username" required />
+                    <input value={this.state.username} onChange={this.depositUsername} onKeyDown={this.checkBlur} type="text" className="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username" required />
                     <small id="usernameHelp" className="form-text text-muted">It's your username for this game<br/>It needs to be unique and it has to be 16 characters max.
                         </small>
                 </div>
@@ -163,7 +169,7 @@ class Register extends React.Component {
                     <label htmlFor="password" className={`${this.state.validatePasswordAlert ? "red-letters" : ""}`}>
                         {this.checkPasswordValidationMessage()}
                     </label>
-                    <input value={this.state.password} onChange={this.depositPassword} type="password" className="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter password" required />
+                    <input value={this.state.password} onChange={this.depositPassword} onKeyDown={this.checkBlur} type="password" className="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter password" required />
                     <small id="passwordHelp" className="form-text text-muted">It's your password for this game. We suggest something like 12345 :-)
                         </small>
                 </div>
@@ -171,7 +177,7 @@ class Register extends React.Component {
                     <label htmlFor="passwordConfirm" className={`${this.state.validatePasswordConfirmAlert ? "red-letters" : ""}`}>
                         {this.checkPasswordConfirmValidationMessage()}
                     </label>
-                    <input value={this.state.passwordConfirm} onChange={this.depositPasswordConfirm} type="password" className="form-control" id="passwordConfirm" aria-describedby="passwordComfirmHelp" placeholder="Confirm password" required />
+                    <input value={this.state.passwordConfirm} onChange={this.depositPasswordConfirm} onKeyDown={this.checkBlur} type="password" className="form-control" id="passwordConfirm" aria-describedby="passwordComfirmHelp" placeholder="Confirm password" required />
                     <small id="passwordHelp" className="form-text text-muted">Retype your password once again so you can be sure that you didn't misspelled it
                         </small>
                 </div>
