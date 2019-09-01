@@ -138,7 +138,7 @@ class HallOfFameTotalPointsList extends React.Component {
                         <div className="hall-of-fame-total-points-list-wrapper d-flex flex-column align-items-center">
                             {this.context.hallOfFameSelectedDay !== "all-days" &&
                             this.state.fantasyUsersSorted[0].summaSummarum != 0&& 
-                                <div className="made-it-trough"><i>Users that made it through in battle<br/>for F1WC points</i></div>
+                                <div className="made-it-trough"><i>Users that made it through in battle<br/>for TD points</i></div>
                             }
                             <div className="first-place-wrapper d-flex align-items-center" data-fantasy-user-sorted-index={0} onClick={this.depositUserDataForModal}>
                                 <div className="user-order-no" data-fantasy-user-sorted-index={0}>
@@ -149,11 +149,11 @@ class HallOfFameTotalPointsList extends React.Component {
                                         <i data-fantasy-user-sorted-index={0}>Username:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "Reserved for you" : this.state.fantasyUsersSorted[0].username}
                                     </div>
                                     <div className="bottom" data-fantasy-user-sorted-index={0}>
-                                        <i data-fantasy-user-sorted-index={0}>TD Fantasy points:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "1,000,000" : parseFloat(this.state.fantasyUsersSorted[0].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={0}>pt</sup>
+                                        <i data-fantasy-user-sorted-index={0}>Sportske Fantasy points:</i> {this.state.fantasyUsersSorted[0].summaSummarum == 0 ? "1,000,000" : parseFloat(this.state.fantasyUsersSorted[0].summaSummarum).toFixed(2)}<sup data-fantasy-user-sorted-index={0}>pt</sup>
                                     </div>
                                     {this.context.hallOfFameSelectedDay !== "all-days" &&
                                         <div className="bottom-bottom" data-fantasy-user-sorted-index={0}>
-                                            <i data-fantasy-user-sorted-index={0}>F1WC Points:</i>25<sup data-fantasy-user-sorted-index={0}>pt</sup>
+                                            <i data-fantasy-user-sorted-index={0}>TD Points:</i>25<sup data-fantasy-user-sorted-index={0}>pt</sup>
                                         </div>
                                     }
                                 </div>

@@ -303,6 +303,7 @@ class SRBHallOfFameUserStatsModal extends React.Component {
             this.calculateFirstFive()
         }
     }
+    
 
     render() {
         return (
@@ -314,12 +315,12 @@ class SRBHallOfFameUserStatsModal extends React.Component {
                                 <div className="username">
                                     <i>username:</i>{this.props.userData.username}
                                 </div>
-                                <div className="username">
+                                {/* <div className="username">
                                     <i>Grand Total F1WC points:</i>{`${this.props.userData.f1WCgrandTotal ? this.props.userData.f1WCgrandTotal : this.calculateF1WCGrandTotal()}`} <sup>pt</sup>
-                                </div>
-                                <div className="username">
+                                </div> */}
+                                {/* <div className="username">
                                     <i>Grand Total TD Fantasy points:</i>{`${this.props.userData.summaSummarum !== null ? this.props.userData.summaSummarum : this.calculateSummaSummarumGrandTotal()}`} <sup>pt</sup>
-                                </div>
+                                </div> */}
                                 <div className="close" onClick={this.props.closeModal}>&times;</div>
                             </div>
 
@@ -486,11 +487,11 @@ class SRBHallOfFameUserStatsModal extends React.Component {
                                                         </div>}
                                                 </div>
                                             </div>
-                                            <div className="total-points-wrapper d-flex justify-content-between">
+                                            {/* <div className="total-points-wrapper d-flex justify-content-between">
                                                 <div>
                                                     <i>Round fantasy points:</i>{this.state.fantasyTotalForSelectedDay === "n/a" ? "n/a" : this.state.fantasyTotalForSelectedDay.toFixed(2)} <sup>pt</sup>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                     <div className="stats-container">

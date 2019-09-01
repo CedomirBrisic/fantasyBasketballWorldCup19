@@ -262,10 +262,10 @@ export default class AppStore extends Component {
 
         this.checkLandscape()
 
-        this.interval = setInterval(
-            () => this.clocify(),
-            1000
-        );
+        // this.interval = setInterval(
+        //     () => this.clocify(),
+        //     1000
+        // );
     }
 
     clocify() {
@@ -312,7 +312,37 @@ export default class AppStore extends Component {
             selectPlayerSearchValue: ""
         })
     }
+
+    checkDoubleUsers = () => {
+        const fantasyUsers = this.state.fantasyUsers
+        const checkedUsers = []
+        if (fantasyUsers !== null) {
+            fantasyUsers.forEach((user) => {
+                const index = checkedUsers.indexOf(user)
+                if (index == -1) {
+                    checkedUsers.push(user)
+                } else {
+                    console.log("DUPLI USER", user)
+                }
+            })
+            console.log(checkedUsers.length, "---", fantasyUsers.length)
+        }
+    }
+    checkSubmitedTeamsForNextDay = () => {
+        if (this.state.fantasyUsers !== null) {
+            eligibleDays.forEach((day) => {
+                let isSubmitted = 0
+                this.state.fantasyUsers.forEach((user) => {
+                    if (user[day].Player1Id !== null)
+                        isSubmitted++
+                })
+                console.log(day, "----", isSubmitted)
+            })
+        }
+    }
     render() {
+        // this.checkDoubleUsers()
+        // this.checkSubmitedTeamsForNextDay()
         return (
             <>
                 {this.state.isLandscape &&
@@ -352,7 +382,7 @@ export default class AppStore extends Component {
                 {!this.state.isLandscape &&
                     this.state.isSerbische &&
                     <div className="landscape-message">
-                        <h3>Sportske Fantazi <br/> te savetuju:</h3>
+                        <h3>Sportske Fantazi <br /> te savetuju:</h3>
                         <h1>Rotiraj svoj telefon<br />
                             da bude u "LANDSCAPE" modu</h1>
                         <button type="button" className="btn btn-outline-danger" data-language="english" onClick={this.changeIsSerbische}>English please</button>

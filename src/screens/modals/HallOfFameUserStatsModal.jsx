@@ -148,6 +148,11 @@ class HallOfFameUserStatsModal extends React.Component {
 
     }
 
+    calculatePlayerRoundPoints = (inputPlayerData) => {
+        const calculatedPlayerData = calculateBasketballPlayerTDFantasyPoints(inputPlayerData, this.state.selectedDay)
+        return calculatedPlayerData.summaSummarum
+    }
+
     calculateFirstFive = () => {
         const userRawDataForSelectedDay = this.context.fantasyUsers.filter((user) => user.username === this.props.userData.username)
         let userDataForSelectedDay = {}
@@ -165,34 +170,34 @@ class HallOfFameUserStatsModal extends React.Component {
                 {
                     name: player1rawData[0].name,
                     team: player1rawData[0].team,
-                    points: calculateBasketballPlayerTDFantasyPoints(player1rawData[0], this.state.selectedDay).summaSummarum
+                    points: this.calculatePlayerRoundPoints(player1rawData[0])
                 },
                 {
                     name: player2rawData[0].name,
                     team: player2rawData[0].team,
-                    points: calculateBasketballPlayerTDFantasyPoints(player2rawData[0], this.state.selectedDay).summaSummarum
+                    points: this.calculatePlayerRoundPoints(player2rawData[0])
                 },
                 {
                     name: player3rawData[0].name,
                     team: player3rawData[0].team,
-                    points: calculateBasketballPlayerTDFantasyPoints(player3rawData[0], this.state.selectedDay).summaSummarum
+                    points: this.calculatePlayerRoundPoints(player3rawData[0])
                 },
                 {
                     name: player4rawData[0].name,
                     team: player4rawData[0].team,
-                    points: calculateBasketballPlayerTDFantasyPoints(player4rawData[0], this.state.selectedDay).summaSummarum
+                    points: this.calculatePlayerRoundPoints(player4rawData[0])
                 }, {
                     name: player5rawData[0].name,
                     team: player5rawData[0].team,
-                    points: calculateBasketballPlayerTDFantasyPoints(player5rawData[0], this.state.selectedDay).summaSummarum
+                    points: this.calculatePlayerRoundPoints(player5rawData[0])
                 }, {
                     name: player6rawData[0].name,
                     team: player6rawData[0].team,
-                    points: calculateBasketballPlayerTDFantasyPoints(player6rawData[0], this.state.selectedDay).summaSummarum
+                    points: this.calculatePlayerRoundPoints(player6rawData[0])
                 }, {
                     name: player7rawData[0].name,
                     team: player7rawData[0].team,
-                    points: calculateBasketballPlayerTDFantasyPoints(player7rawData[0], this.state.selectedDay).summaSummarum
+                    points: this.calculatePlayerRoundPoints(player7rawData[0])
                 }
             ]
 
@@ -314,12 +319,12 @@ class HallOfFameUserStatsModal extends React.Component {
                                 <div className="username">
                                     <i>username:</i>{this.props.userData.username}
                                 </div>
-                                <div className="username">
+                                {/* <div className="username">
                                     <i>Grand Total F1WC points:</i>{`${this.props.userData.f1WCgrandTotal ? this.props.userData.f1WCgrandTotal : this.calculateF1WCGrandTotal()}`} <sup>pt</sup>
-                                </div>
-                                <div className="username">
+                                </div> */}
+                                {/* <div className="username">
                                     <i>Grand Total TD Fantasy points:</i>{`${this.props.userData.summaSummarum !== null ? this.props.userData.summaSummarum : this.calculateSummaSummarumGrandTotal()}`} <sup>pt</sup>
-                                </div>
+                                </div> */}
                                 <div className="close" onClick={this.props.closeModal}>&times;</div>
                             </div>
 
@@ -486,11 +491,11 @@ class HallOfFameUserStatsModal extends React.Component {
                                                         </div>}
                                                 </div>
                                             </div>
-                                            <div className="total-points-wrapper d-flex justify-content-between">
+                                            {/* <div className="total-points-wrapper d-flex justify-content-between">
                                                 <div>
                                                     <i>Round fantasy points:</i>{this.state.fantasyTotalForSelectedDay === "n/a" ? "n/a" : this.state.fantasyTotalForSelectedDay.toFixed(2)} <sup>pt</sup>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                     <div className="stats-container">

@@ -13,7 +13,7 @@ import HallOfFameTotalPointsList from './common/HallOfFameTotalPointsList';
 class HallOfFameScreen extends React.Component {
     static contextType = AppContext;
     state = {
-        listView: "f1wc",
+        listView: "basketball-players-real-life-stats",
         searchPlaceholder: "Search user by name",
         searchValue: "",
         redirect: false
@@ -48,6 +48,11 @@ class HallOfFameScreen extends React.Component {
         this.setState({
             searchValue: ""
         })
+    }
+    checkBlur = (event) => {
+        if (event.keyCode === 13) {
+            event.target.blur()
+        }
     }
 
     componentDidMount() {
@@ -240,11 +245,13 @@ class HallOfFameScreen extends React.Component {
                                         <button type="button" className="btn  btn-danger back-button">Back to User screen</button>
                                     </Link>
                                     <div className="hall-of-fame-links-wrapper d-flex justify-content-around">
-                                        <button type="button" className={`btn btn-outline-dark ${this.state.listView === "f1wc" ? "active" : ""}`} data-view="f1wc" onClick={this.depositSelectedList}>Main room at Hall of Fame</button>
+                                        {/* <button className="btn btn-outline-dark" disabled>(it's calculating now...)</button>
+                                        <button className="btn btn-outline-dark" disabled>(it's calculating now...)</button> */}
+                                          <button type="button" className={`btn btn-outline-dark ${this.state.listView === "f1wc" ? "active" : ""}`} data-view="f1wc" onClick={this.depositSelectedList}>Main room at Hall of Fame</button>
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "round-points" ? "active" : ""}`} data-view="round-points" onClick={this.depositSelectedList}>Users - Fantasy points</button>
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-fantasy-points" ? "active" : ""}`} data-view="basketball-players-fantasy-points" onClick={this.depositSelectedList}>Players - Fantasy points</button>
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-real-life-stats" ? "active" : ""}`} data-view="basketball-players-real-life-stats" onClick={this.depositSelectedList}>Players - Real Life stats</button>
-                                        <input type="search" placeholder={this.state.searchPlaceholder} value={this.state.searchValue} onChange={this.depositSearchValue} />
+                                        <input type="search" placeholder={this.state.searchPlaceholder} value={this.state.searchValue} onChange={this.depositSearchValue} onKeyDown={this.checkBlur}/>
                                     </div>
                                     {this.state.listView === "f1wc" &&
                                         <HallOfFameF1WCList searchValue={this.state.searchValue} clearSearchValue={this.clearSearchValue} />

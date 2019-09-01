@@ -13,7 +13,7 @@ import SRBHallOfFameTotalPointsList from './common/SRBHallOfFameTotalPointsList'
 class SRBHallOfFameScreen extends React.Component {
     static contextType = AppContext;
     state = {
-        listView: "f1wc",
+        listView: "basketball-players-real-life-stats",
         searchPlaceholder: "Potraži po imenu",
         searchValue: "",
         redirect: false
@@ -48,6 +48,12 @@ class SRBHallOfFameScreen extends React.Component {
         this.setState({
             searchValue: ""
         })
+    }
+
+    checkBlur = (event) => {
+        if (event.keyCode === 13) {
+            event.target.blur()
+        }
     }
 
     componentDidMount() {
@@ -240,11 +246,13 @@ class SRBHallOfFameScreen extends React.Component {
                                         <button type="button" className="btn  btn-danger back-button">Povratak nazad</button>
                                     </Link>
                                     <div className="hall-of-fame-links-wrapper d-flex justify-content-around">
+                                        {/* <button className="btn btn-outline-dark" disabled>(računa se, biće...)</button>
+                                        <button className="btn btn-outline-dark" disabled>(računa se, biće...)</button> */}
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "f1wc" ? "active" : ""}`} data-view="f1wc" onClick={this.depositSelectedList}>Glavni hol kuće slavnih</button>
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "round-points" ? "active" : ""}`} data-view="round-points" onClick={this.depositSelectedList}>Korisnici - fantazi poeni</button>
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-fantasy-points" ? "active" : ""}`} data-view="basketball-players-fantasy-points" onClick={this.depositSelectedList}>Košarkaši - fantazi poeni</button>
                                         <button type="button" className={`btn btn-outline-dark ${this.state.listView === "basketball-players-real-life-stats" ? "active" : ""}`} data-view="basketball-players-real-life-stats" onClick={this.depositSelectedList}>Košarkaši - statistika u stvarnosti</button>
-                                        <input type="search" placeholder={this.state.searchPlaceholder} value={this.state.searchValue} onChange={this.depositSearchValue} />
+                                        <input type="search" placeholder={this.state.searchPlaceholder} value={this.state.searchValue} onChange={this.depositSearchValue} onKeyDown={this.checkBlur}/>
                                     </div>
                                     {this.state.listView === "f1wc" &&
                                         <SRBHallOfFameF1WCList searchValue={this.state.searchValue} clearSearchValue={this.clearSearchValue} />

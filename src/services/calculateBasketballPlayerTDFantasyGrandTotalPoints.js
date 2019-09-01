@@ -6,7 +6,7 @@ const calculateBasketballPlayerTDFantasyGrandTotalPoints = (inputPlayerData) => 
 
     eligibleDays.forEach((day) => {
         ////////////////////////////////////////////////////////////////////////
-        if (inputPlayerData[day].teamWin === "yes") {
+        if (inputPlayerData[day].teamWin == "yes") {
             calculatedGrandFantasyTotal += 4
         }
 

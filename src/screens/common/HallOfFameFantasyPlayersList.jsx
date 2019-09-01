@@ -93,6 +93,8 @@ class HallOfFameFantasyPlayersList extends React.Component {
                 let threePoints = 0;
                 let bonuses = 0;
                 let penalties = 0;
+                let playerSummaSummarum = 0;
+
 
                 if (player[this.context.hallOfFameSelectedDay].assists !== "n/a") {
                     gameWin = !isNaN(parseFloat(calculateBasketballPlayerTDFantasyPoints(player, this.context.hallOfFameSelectedDay).gameWin)) ? parseFloat(calculateBasketballPlayerTDFantasyPoints(player, this.context.hallOfFameSelectedDay).gameWin) : gameWin
@@ -106,10 +108,12 @@ class HallOfFameFantasyPlayersList extends React.Component {
                     threePoints = !isNaN(parseFloat(calculateBasketballPlayerTDFantasyPoints(player, this.context.hallOfFameSelectedDay).threePoints)) ? threePoints = parseFloat(calculateBasketballPlayerTDFantasyPoints(player, this.context.hallOfFameSelectedDay).threePoints) : threePoints
                     bonuses = !isNaN(parseFloat(calculateBasketballPlayerTDFantasyPoints(player, this.context.hallOfFameSelectedDay).bonusesSummaSummarum)) ? bonuses = parseFloat(calculateBasketballPlayerTDFantasyPoints(player, this.context.hallOfFameSelectedDay).bonusesSummaSummarum) : bonuses
                     penalties = !isNaN(parseFloat(calculateBasketballPlayerTDFantasyPoints(player, this.context.hallOfFameSelectedDay).penaltiesSummaSummarum)) ? penalties = parseFloat(calculateBasketballPlayerTDFantasyPoints(player, this.context.hallOfFameSelectedDay).penaltiesSummaSummarum) : penalties
+                    playerSummaSummarum = !isNaN(parseFloat(calculateBasketballPlayerTDFantasyPoints(player, this.context.hallOfFameSelectedDay).summaSummarum)) ? parseFloat(calculateBasketballPlayerTDFantasyPoints(player, this.context.hallOfFameSelectedDay).summaSummarum) : playerSummaSummarum
                 }
                 const outputPlayer =
                     <tr key={player.name + index} className="single-player-item" data-player-name={player.name} data-player-team={player.team} onClick={this.context.showSinglePlayerModal}>
-                        <td data-player-name={player.name} data-player-team={player.team}>{` ${(calculateBasketballPlayerTDFantasyGrandTotalPoints(player)).toFixed(2)}`}</td>
+                        <td data-player-name={player.name} data-player-team={player.team}>{` ${playerSummaSummarum.toFixed(2)}`}</td>
+
                         <td className="not-centered" data-player-name={player.name} data-player-team={player.team}>{`${player.name}`}</td>
                         <td data-player-name={player.name} data-player-team={player.team}>{`${(gameWin).toFixed(0) === "NaN" ? "n/a" : (gameWin).toFixed(0)}`}</td>
                         <td data-player-name={player.name} data-player-team={player.team}>{`${(assists).toFixed(0) === "NaN" ? "n/a" : (assists).toFixed(0)}`}</td>

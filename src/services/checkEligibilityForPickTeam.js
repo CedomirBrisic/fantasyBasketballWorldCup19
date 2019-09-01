@@ -75,11 +75,13 @@ const checkEligibilityForPickTeam = (fantasyUsers, username, selectedDay, nowDat
 
             teamPickDataByPoints[index].summaSummarum = parseFloat(calculateBasketballPlayerTDFantasyPoints(playerData[0], selectedDay).summaSummarum)
             const playerTeam = playerData[0].team
-            const teamData = teamsByDay[selectedDay].filter((team) => {
+            const teamData = teamsByDay[selectedDay].filter((team, index) => {
                 if (team.name === playerTeam) {
                     return team
                 }
             })
+            if (teamData[0]){
+                // console.log("dobro je")
 
             const nowHour = parseInt(nowDateAndTime.humanTime.split(":")[0], 10)
             const nowMinutes = parseInt(nowDateAndTime.humanTime.split(":")[1], 10)
@@ -114,6 +116,11 @@ const checkEligibilityForPickTeam = (fantasyUsers, username, selectedDay, nowDat
                         }
                     }
                 }
+            }
+        }
+            else {
+                // console.log("puklo",username)
+                teamPickLockData[playerId] = true
             }
         })
     }
