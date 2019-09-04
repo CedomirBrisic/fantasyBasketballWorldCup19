@@ -11,7 +11,8 @@ class SRBPlayerCardModal extends React.Component {
     state = {
         selectedDay: this.context.selectedDay,
         tdFantasyPoints: null,
-        hoveredElement: ""
+        hoveredElement: "",
+        fibaLink: ""
     }
 
 
@@ -45,14 +46,28 @@ class SRBPlayerCardModal extends React.Component {
         this.context.pickPlayerForTeam(this.context.choosePlayerPosition, pickedPlayerId)
     }
     checkGameWin = () => {
-        if (this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].teamWin === "no"){
+        if (this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].teamWin === "no") {
             return "ne"
-        } else if (this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].teamWin === "yes"){
+        } else if (this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].teamWin === "yes") {
             return "da"
         } else return this.context.selectedPlayerForPlayerCardModal[this.state.selectedDay].teamWin
     }
+
+    fibaLinkFormat = () => {
+        const playerName = this.context.selectedPlayerForPlayerCardModal.name.split(" ")
+        let ime = playerName[0].toLowerCase()
+        let prezime = playerName[1].toLowerCase()
+        ime.charAt(0).toUpperCase()
+        prezime.charAt(0).toUpperCase()
+        let fibaLink = `${ime}-${prezime}`
+
+        this.setState({
+            fibaLink
+        })
+    }
     componentDidMount() {
         this.depositTdFantasyPoints(this.context.selectedPlayerForPlayerCardModal, this.state.selectedDay)
+        this.fibaLinkFormat()
     }
 
     render() {
@@ -61,6 +76,8 @@ class SRBPlayerCardModal extends React.Component {
                 <div className="close" onClick={this.context.closeSinglePlayerModal}>&times;</div>
                 <div className="player-general-info-container d-flex justify-content-between align-items-center">
                     <span><i>Košarkaš:</i> {this.context.selectedPlayerForPlayerCardModal.name}</span>
+                    <a href={`https://www.fiba.basketball/basketballworldcup/2019/player/${this.state.fibaLink}`} target="_blank" className="fiba-player-link">zvanična FIBA statistika</a>
+                   <a href="mailto:admin@sportskefantasy.com" className="achtung"><b>achtung!!!</b> prijavi neslaganje</a>
                     <span><i>Ekipa:</i> {serbischeNazivTima(this.context.selectedPlayerForPlayerCardModal.team)}</span>
                 </div>
                 <div className="selected-day-info">Statistika za {serbischeDatum(this.state.selectedDay)}</div>
@@ -176,7 +193,7 @@ class SRBPlayerCardModal extends React.Component {
                                 </span>
                                     <span className="data" data-stats-element="game-win-wrapper">
                                         {this.state.tdFantasyPoints.gameWin}
-                                        
+
                                     </span>
                                 </div>
                                 <div className={`single-item-wrapper d-flex justify-content-between ${this.state.hoveredElement === "assists-wrapper" ? "isHovered" : ""}`} data-stats-element="assists-wrapper" onMouseEnter={this.depositHoveredElement} onMouseLeave={this.removeHoveredElement}>

@@ -43,8 +43,22 @@ class PlayerCardModal extends React.Component {
         this.context.pickPlayerForTeam(this.context.choosePlayerPosition, pickedPlayerId)
     }
 
+    fibaLinkFormat = () => {
+        const playerName = this.context.selectedPlayerForPlayerCardModal.name.split(" ")
+        let ime = playerName[0].toLowerCase()
+        let prezime = playerName[1].toLowerCase()
+        ime.charAt(0).toUpperCase()
+        prezime.charAt(0).toUpperCase()
+        let fibaLink = `${ime}-${prezime}`
+
+        this.setState({
+            fibaLink
+        })
+    }
+
     componentDidMount() {
         this.depositTdFantasyPoints(this.context.selectedPlayerForPlayerCardModal, this.state.selectedDay)
+        this.fibaLinkFormat()
     }
 
     render() {
@@ -53,6 +67,8 @@ class PlayerCardModal extends React.Component {
                 <div className="close" onClick={this.context.closeSinglePlayerModal}>&times;</div>
                 <div className="player-general-info-container d-flex justify-content-between align-items-center">
                     <span><i>Player name:</i> {this.context.selectedPlayerForPlayerCardModal.name}</span>
+                    <a href={`https://www.fiba.basketball/basketballworldcup/2019/player/${this.state.fibaLink}`} target="_blank" className="fiba-player-link">official FIBA stats</a>
+                    <a href="mailto:admin@sportskefantasy.com" className="achtung"><b>achtung!!!</b> notify us about stats mismatching</a>
                     <span><i>Team:</i> {this.context.selectedPlayerForPlayerCardModal.team}</span>
                 </div>
                 <div className="selected-day-info">Player stats for {this.state.selectedDay}</div>

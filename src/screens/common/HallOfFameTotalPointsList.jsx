@@ -76,7 +76,7 @@ class HallOfFameTotalPointsList extends React.Component {
                 <tr key={fantasyUsers[i].username + i} data-fantasy-user-sorted-index={i} onClick={this.depositUserDataForModal}>
                     <td className="orer-no" data-fantasy-user-sorted-index={i}>{i + 1}</td>
                     <td data-fantasy-user-sorted-index={i}>{fantasyUsers[i].username}</td>
-                    <td data-fantasy-user-sorted-index={i}>{fantasyUsers[i].summaSummarum}</td>
+                    <td data-fantasy-user-sorted-index={i}>{typeof(fantasyUsers[i].summaSummarum) == "string"? parseFloat(fantasyUsers[i].summaSummarum).toFixed(2) : fantasyUsers[i].summaSummarum.toFixed(2)}</td>
                 </tr>
 
             output.push(outputElement)
@@ -94,7 +94,7 @@ class HallOfFameTotalPointsList extends React.Component {
                     <tr key={fantasyUsers[i].username + i} data-fantasy-user-sorted-index={i} onClick={this.depositUserDataForModal}>
                         <td className="orer-no" data-fantasy-user-sorted-index={i}>{i + 1}</td>
                         <td data-fantasy-user-sorted-index={i}>{fantasyUsers[i].username}</td>
-                        <td data-fantasy-user-sorted-index={i}>{fantasyUsers[i].summaSummarum}</td>
+                        <td data-fantasy-user-sorted-index={i}>{typeof(fantasyUsers[i].summaSummarum) == "string"? parseFloat(fantasyUsers[i].summaSummarum).toFixed(2) : fantasyUsers[i].summaSummarum.toFixed(2)}</td>
                     </tr>
                 output.push(outputElement)
             }

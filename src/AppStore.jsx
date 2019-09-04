@@ -162,22 +162,13 @@ export default class AppStore extends Component {
 
     getFantasyDataContext = () => {
         getFantasyData("neKaRendOMSiFRaOdbAsaliBasbAsDostaKARAkterA123").then((response) => {
-
-            let selectedDay = null
-            const nowDate = humanReadDateAndTime().humanDate
-            if (eligibleDays.indexOf(nowDate) !== -1) {
-                selectedDay = nowDate
-            } else {
-                selectedDay = "31st-August"
-            }
-
             this.setState({
                 dropdowns: response.dropdowns,
                 basketballPlayers: response.basketballPlayers,
                 fantasyUsers: response.fantasyUsers,
-                selectedDay,
                 isInitialLoading: false,
             })
+            this.checkPlayersOnField()
         })
     }
 
@@ -254,18 +245,25 @@ export default class AppStore extends Component {
     componentDidMount() {
         let data = sessionStorage.getItem("bitrulez")
         let data2 = sessionStorage.getItem("bitrulez2")
-
+        let selectedDay = null
+        const nowDate = humanReadDateAndTime().humanDate
+        if (eligibleDays.indexOf(nowDate) !== -1) {
+            selectedDay = nowDate
+        } else {
+            selectedDay = "31st-August"
+        }
         this.setState({
             bitrulez: data,
             bitrulez2: data2,
+            selectedDay
         })
 
         this.checkLandscape()
 
-        // this.interval = setInterval(
-        //     () => this.clocify(),
-        //     1000
-        // );
+        this.interval = setInterval(
+            () => this.clocify(),
+            1000
+        );
     }
 
     clocify() {
@@ -274,16 +272,20 @@ export default class AppStore extends Component {
         });
     }
 
+    checkPlayersOnField = () => {
+        const calculatedPickData = checkEligibilityForPickTeam(this.state.fantasyUsers, this.state.bitrulez, this.state.selectedDay, this.state.nowDateAndTime, this.state.dropdowns[0].teamsByDay, this.state.basketballPlayers)
+        this.setState({
+            teamPickData: calculatedPickData.teamPickData,
+            teamPickLockData: calculatedPickData.teamPickLockData,
+            teamPickDayTotal: calculatedPickData.totalSummaSummarum,
+            calculatedFirstFiveRealLifeStatsTotals: calculatedPickData.calculatedFirstFiveRealLifeStatsTotals,
+            calculatedFirstFiveFantasyPointsStatsTotals: calculatedPickData.calculatedFirstFiveFantasyPointsStatsTotals,
+        })
+    }
+
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.selectedDay !== this.state.selectedDay && this.state.showTeam) {
-            const calculatedPickData = checkEligibilityForPickTeam(this.state.fantasyUsers, this.state.bitrulez, this.state.selectedDay, this.state.nowDateAndTime, this.state.dropdowns[0].teamsByDay, this.state.basketballPlayers)
-            this.setState({
-                teamPickData: calculatedPickData.teamPickData,
-                teamPickLockData: calculatedPickData.teamPickLockData,
-                teamPickDayTotal: calculatedPickData.totalSummaSummarum,
-                calculatedFirstFiveRealLifeStatsTotals: calculatedPickData.calculatedFirstFiveRealLifeStatsTotals,
-                calculatedFirstFiveFantasyPointsStatsTotals: calculatedPickData.calculatedFirstFiveFantasyPointsStatsTotals,
-            })
+        if (prevState.selectedDay !== this.state.selectedDay && this.state.showTeam && !this.state.isInitialLoading) {
+            this.checkPlayersOnField()
         }
 
         if (prevState.dropdowns === null && this.state.dropdowns !== null) {
@@ -315,17 +317,23 @@ export default class AppStore extends Component {
 
     checkDoubleUsers = () => {
         const fantasyUsers = this.state.fantasyUsers
+        const usersUsernames = []
         const checkedUsers = []
         if (fantasyUsers !== null) {
             fantasyUsers.forEach((user) => {
-                const index = checkedUsers.indexOf(user)
+                usersUsernames.push(user.username)
+            })
+
+            checkedUsers.forEach((username) => {
+                const index = usersUsernames.indexOf(username)
                 if (index == -1) {
-                    checkedUsers.push(user)
+                    checkedUsers.push(username)
                 } else {
-                    console.log("DUPLI USER", user)
+                    console.log("DUPLI USER", username)
                 }
             })
-            console.log(checkedUsers.length, "---", fantasyUsers.length)
+            console.log(checkedUsers)
+            console.log(usersUsernames.length, "---", fantasyUsers.length)
         }
     }
     checkSubmitedTeamsForNextDay = () => {
@@ -342,7 +350,7 @@ export default class AppStore extends Component {
     }
     render() {
         // this.checkDoubleUsers()
-        // this.checkSubmitedTeamsForNextDay()
+        this.checkSubmitedTeamsForNextDay()
         return (
             <>
                 {this.state.isLandscape &&
@@ -375,7 +383,13 @@ export default class AppStore extends Component {
                     <div className="landscape-message">
                         <h3>Sportske Fantasy advises you:</h3>
                         <h1>Rotate your phone<br />
-                            to LANDSCAPE mode</h1>
+                            to LANDSCAPE mode
+                            <br />
+                            <br />
+                            <i>or even better <br />
+                                play it on normal computer</i>
+
+                        </h1>
                         <button type="button" className="btn btn-outline-danger" data-language="serbische" onClick={this.changeIsSerbische}>Daj na srpskom</button>
                     </div>}
 
@@ -384,7 +398,13 @@ export default class AppStore extends Component {
                     <div className="landscape-message">
                         <h3>Sportske Fantazi <br /> te savetuju:</h3>
                         <h1>Rotiraj svoj telefon<br />
-                            da bude u "LANDSCAPE" modu</h1>
+                            da bude u "LANDSCAPE" modu
+                            <br />
+                            <br />
+                            <i> ili još bolje, <br />
+                                da ugođaj bude potpun<br />
+                                igraj na računaru</i>
+                        </h1>
                         <button type="button" className="btn btn-outline-danger" data-language="english" onClick={this.changeIsSerbische}>English please</button>
                     </div>}
             </>

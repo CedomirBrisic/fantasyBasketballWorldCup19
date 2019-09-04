@@ -13,7 +13,8 @@
 
     .modal-dialog {
         max-width: 80%;
-        @media (max-width:996px){
+
+        @media (max-width:996px) {
             margin-top: 1vh;
         }
 
@@ -22,18 +23,55 @@
             background-color: rgba(255, 255, 255, 0.95);
 
             .player-general-info-container {
-                width: 80%;
+                width: 90%;
                 font-size: 1.2vw;
                 font-weight: 600;
+                color: rgba(0, 0, 0, 0.79);
                 margin: 0.5vw auto;
                 border-bottom: 4px double #010101;
-                color: rgba(0, 0, 0, 0.79);
                 z-index: 2000;
                 // color: rgb(197, 0, 0);
 
                 i {
                     font-size: 1vw;
                     margin-right: 1vw;
+                }
+
+                .fiba-player-link {
+
+                    border: double 0.2vw rgba(0, 0, 0, 0.79);
+                    padding-left: 1.5vw;
+                    padding-right: 1.5vw;
+                    border-radius: 0.5vw;
+                    transition: transform 0.2s;
+                    font-size: 1.2vw;
+                    font-weight: 600;
+                    color: rgba(0, 0, 0, 0.79);
+
+                    &:hover {
+                        cursor: pointer;
+                        transform: scale(1.1);
+                    }
+                }
+
+                .achtung {
+                    border: double 0.2vw rgba(0, 0, 0, 0.79);
+                    padding-left: 1.5vw;
+                    padding-right: 1.5vw;
+                    border-radius: 0.5vw;
+                    transition: transform 0.2s;
+                    font-size: 1.2vw;
+                    font-weight: 600;
+                    color: rgba(0, 0, 0, 0.79);
+
+                    b {
+                        color: rgb(197, 0, 0);
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                        transform: scale(1.1);
+                    }
                 }
             }
 
@@ -71,6 +109,7 @@
                     width: 45vw;
                     height: 35vw;
                     margin: 2vw auto;
+
                     .isHovered {
                         font-weight: 800;
                     }
