@@ -10,16 +10,21 @@ class HallOfFameF1WCList extends React.Component {
     state = {
         fantasyF1WCUsersSorted: null,
         showUserModal: false,
-        fantasyUserForModalData: null
+        fantasyUserForModalData: null,
+        isCalculating: true,
     }
 
 
     sortF1WCUsers = () => {
         let outputCalculated = []
+        const fantasyUsers = this.context.fantasyUsers
+        const nowDateAndTime = this.context.nowDateAndTime
+        const teamsByDay = this.context.dropdowns[0].teamsByDay
+        const basketballPlayers = this.context.basketballPlayers
         eligibleDays.forEach((day) => {
             const fantasyUsersF1WCforOneDay = []
-            this.context.fantasyUsers.forEach((user) => {
-                const calculatedData = checkEligibilityForPickTeam(this.context.fantasyUsers, user.username, day, this.context.nowDateAndTime, this.context.dropdowns[0].teamsByDay, this.context.basketballPlayers)
+            fantasyUsers.forEach((user) => {
+                const calculatedData = checkEligibilityForPickTeam(fantasyUsers, user.username, day, nowDateAndTime, teamsByDay, basketballPlayers)
                 const userData = {
                     username: user.username,
                     summaSummarum: calculatedData.totalSummaSummarum,
@@ -99,7 +104,8 @@ class HallOfFameF1WCList extends React.Component {
             return b.f1WCgrandTotal - a.f1WCgrandTotal
         })
         this.setState({
-            fantasyF1WCUsersSorted: outputCalculatedSummedUp
+            fantasyF1WCUsersSorted: outputCalculatedSummedUp,
+            isCalculating: false
         })
     }
 
@@ -180,16 +186,153 @@ class HallOfFameF1WCList extends React.Component {
 
 
     componentDidMount() {
-        this.sortF1WCUsers()
         this.props.clearSearchValue()
+        setTimeout(() => {
+            this.sortF1WCUsers()
+        }, 100);
     }
 
 
     render() {
         return (
             <>
+             {this.state.isCalculating &&
+                    <div className="loader-container-calculating d-flex justify-content-center align-items-center">
+                        <div className="d-flex flex-column align-items-center">
+                            <h1>Calculating TD points of {this.context.fantasyUsers.length} Users</h1>
+                            <div className="crveno d-flex">
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div className="d-flex">
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div className="made-in"><i>Made in Land of Basketball</i></div>
+                            <div className="credits-container w-100 d-flex flex-column">
+                                <i>We thank to Pixabay for letting us borrow some of theirs images</i>
+                                <i>SPECIAL THANKS TO:</i>
+                                <i className="credits">David Mark from Pixabay</i>
+                                <i className="credits">Dimitris Vetsikas from Pixabay</i>
+                                <i className="credits">Pexels from Pixabay</i>
+                                <i className="credits">Clker-Free-Vector-Images from Pixabay</i>
+                                <i className="credits">mohamed Hassan from Pixabay</i>
+                                <i className="credits">BedexpStock from Pixabay</i>
+                                <i className="credits">OpenClipart-Vectors from Pixabay </i>
+                            </div>
+                        </div>
+                    </div>
+                }
+
                 {this.state.fantasyF1WCUsersSorted !== null &&
                     this.state.fantasyF1WCUsersSorted.length > 0 &&
+                    !this.state.isCalculating &&
                     this.props.searchValue === "" &&
                     <div className="hall-of-fame-f1wc-list-container">
                         <div className="hall-of-fame-f1wc-list-wrapper">
@@ -324,7 +467,7 @@ class HallOfFameF1WCList extends React.Component {
                             </div>
                         </div>
                     </div>
-                        }       
+                }
                 <Portal>
                     <HallOfFameUserStatsModal isShowing={this.state.showUserModal} closeModal={this.closeUserModal} userData={this.state.fantasyUserForModalData} />
                 </Portal>

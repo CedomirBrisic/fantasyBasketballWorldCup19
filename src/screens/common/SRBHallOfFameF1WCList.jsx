@@ -4,22 +4,28 @@ import { Portal } from 'react-portal';
 import checkEligibilityForPickTeam from "../../services/checkEligibilityForPickTeam";
 import eligibleDays from "../../services/eligibleDays";
 import HallOfFameUserStatsModal from "../modals/HallOfFameUserStatsModal";
+import serbischeDatum from "../../services/serbischeDatum";
 
 class SRBHallOfFameF1WCList extends React.Component {
     static contextType = AppContext;
     state = {
         fantasyF1WCUsersSorted: null,
         showUserModal: false,
-        fantasyUserForModalData: null
+        fantasyUserForModalData: null,
+        isCalculating: true
     }
 
 
     sortF1WCUsers = () => {
         let outputCalculated = []
+        const fantasyUsers = this.context.fantasyUsers
+        const nowDateAndTime = this.context.nowDateAndTime
+        const teamsByDay = this.context.dropdowns[0].teamsByDay
+        const basketballPlayers = this.context.basketballPlayers
         eligibleDays.forEach((day) => {
             const fantasyUsersF1WCforOneDay = []
-            this.context.fantasyUsers.forEach((user) => {
-                const calculatedData = checkEligibilityForPickTeam(this.context.fantasyUsers, user.username, day, this.context.nowDateAndTime, this.context.dropdowns[0].teamsByDay, this.context.basketballPlayers)
+            fantasyUsers.forEach((user) => {
+                const calculatedData = checkEligibilityForPickTeam(fantasyUsers, user.username, day, nowDateAndTime, teamsByDay, basketballPlayers)
                 const userData = {
                     username: user.username,
                     summaSummarum: calculatedData.totalSummaSummarum,
@@ -72,7 +78,7 @@ class SRBHallOfFameF1WCList extends React.Component {
 
             }
         })
-        
+
         const outputCalculatedSummedUp = []
         const outputUsernames = []
         outputCalculated.forEach((user) => {
@@ -80,7 +86,7 @@ class SRBHallOfFameF1WCList extends React.Component {
                 outputUsernames.push(user.username)
             }
         })
-        
+
         outputUsernames.forEach((username) => {
             let f1WCgrandTotal = 0
             let summedUpUser = null
@@ -99,7 +105,8 @@ class SRBHallOfFameF1WCList extends React.Component {
             return b.f1WCgrandTotal - a.f1WCgrandTotal
         })
         this.setState({
-            fantasyF1WCUsersSorted: outputCalculatedSummedUp
+            fantasyF1WCUsersSorted: outputCalculatedSummedUp,
+            isCalculating: false
         })
     }
 
@@ -110,7 +117,7 @@ class SRBHallOfFameF1WCList extends React.Component {
             const elementForRender =
                 <div key={fantasyUsers[i].username} className="chosen-one-container">
                     <div className="image-wrapper" >
-                        <img className="img-fluid" src={require("../../images/boysmall.png")} alt="triumph" data-fantasy-user-sorted-index={i} onClick={this.depositUserDataForModal}/>
+                        <img className="img-fluid" src={require("../../images/boysmall.png")} alt="triumph" data-fantasy-user-sorted-index={i} onClick={this.depositUserDataForModal} />
                     </div>
                     <div className="info-wrapper d-flex">
                         <div className="position-no">
@@ -180,23 +187,161 @@ class SRBHallOfFameF1WCList extends React.Component {
 
 
     componentDidMount() {
-        this.sortF1WCUsers()
         this.props.clearSearchValue()
+        setTimeout(() => {
+            this.sortF1WCUsers()
+        }, 100);
     }
 
 
     render() {
         return (
             <>
+
+                {this.state.isCalculating &&
+                    <div className="loader-container-calculating d-flex justify-content-center align-items-center">
+                        <div className="d-flex flex-column align-items-center">
+                            <h1>Računanje TD poena {this.context.fantasyUsers.length} korisnika</h1>
+                            <div className="crveno d-flex">
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div className="d-flex">
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div className="made-in"><i>Iskliktano u zemlji košarke</i></div>
+                            <div className="credits-container w-100 d-flex flex-column">
+                                <i>Zahvaljujemo se PIXABAY-u što nam je omogućio da pozajmimo neke od njihovih slika</i>
+                                <i>POSEBNO SE ZAHVALJUJEMO:</i>
+                                <i className="credits">David Mark iz Pixabay-a</i>
+                                <i className="credits">Dimitris Vetsikas iz Pixabay-a</i>
+                                <i className="credits">Pexels iz Pixabay-a</i>
+                                <i className="credits">Clker-Free-Vector-Images iz Pixabay-a</i>
+                                <i className="credits">mohamed Hassan iz Pixabay-a</i>
+                                <i className="credits">BedexpStock iz Pixabay-a</i>
+                                <i className="credits">OpenClipart-Vectors iz Pixabay-a </i>
+                            </div>
+                        </div>
+                    </div>
+                }
+
                 {this.state.fantasyF1WCUsersSorted !== null &&
-                this.state.fantasyF1WCUsersSorted.length > 0 &&
+                    this.state.fantasyF1WCUsersSorted.length > 0 &&
+                    !this.state.isCalculating &&
                     this.props.searchValue === "" &&
                     <div className="hall-of-fame-f1wc-list-container">
                         <div className="hall-of-fame-f1wc-list-wrapper">
                             {/* --------FIRST PLACE-------- */}
                             <div className="first-place-container">
                                 <div className="image-wrapper">
-                                    <img className="img-fluid" src={require("../../images/winner.png")} alt="triumph" data-fantasy-user-sorted-index={0} onClick={this.depositUserDataForModal}/>
+                                    <img className="img-fluid" src={require("../../images/winner.png")} alt="triumph" data-fantasy-user-sorted-index={0} onClick={this.depositUserDataForModal} />
                                 </div>
                                 <div className="info-wrapper d-flex">
                                     <div className="position-no">
@@ -222,7 +367,7 @@ class SRBHallOfFameF1WCList extends React.Component {
                                 {/* --------SECOND PLACE-------- */}
                                 <div className="second-place-container">
                                     <div className="image-wrapper">
-                                        <img className="img-fluid" src={require("../../images/boybig.png")} alt="triumph" data-fantasy-user-sorted-index={1} onClick={this.depositUserDataForModal}/>
+                                        <img className="img-fluid" src={require("../../images/boybig.png")} alt="triumph" data-fantasy-user-sorted-index={1} onClick={this.depositUserDataForModal} />
                                     </div>
                                     <div className="info-wrapper d-flex">
                                         <div className="position-no">
@@ -246,7 +391,7 @@ class SRBHallOfFameF1WCList extends React.Component {
                                 {/* --------THIRD PLACE-------- */}
                                 <div className="third-place-container" >
                                     <div className="image-wrapper">
-                                        <img className="img-fluid" src={require("../../images/boybig.png")} alt="triumph" data-fantasy-user-sorted-index={2} onClick={this.depositUserDataForModal}/>
+                                        <img className="img-fluid" src={require("../../images/boybig.png")} alt="triumph" data-fantasy-user-sorted-index={2} onClick={this.depositUserDataForModal} />
                                     </div>
                                     <div className="info-wrapper d-flex">
                                         <div className="position-no" >
@@ -277,7 +422,7 @@ class SRBHallOfFameF1WCList extends React.Component {
                     </div>
                 }
                 {this.state.fantasyF1WCUsersSorted !== null &&
-                this.state.fantasyF1WCUsersSorted.length > 0 &&
+                    this.state.fantasyF1WCUsersSorted.length > 0 &&
                     this.props.searchValue !== "" &&
                     <div className="hall-of-fame-f1wc-points-list-wrapper d-flex flex-column align-items-center">
                         <div className="plebs-container d-flex flex-column align-items-center">
@@ -301,7 +446,7 @@ class SRBHallOfFameF1WCList extends React.Component {
 
 
 
-                                {this.state.fantasyF1WCUsersSorted !== null &&
+                {this.state.fantasyF1WCUsersSorted !== null &&
                     this.state.fantasyF1WCUsersSorted.length == 0 &&
                     <div className="hall-of-fame-f1wc-list-container">
                         <div className="hall-of-fame-f1wc-list-wrapper">
@@ -328,7 +473,7 @@ class SRBHallOfFameF1WCList extends React.Component {
                             </div>
                         </div>
                     </div>
-                        }  
+                }
                 <Portal>
                     <HallOfFameUserStatsModal isShowing={this.state.showUserModal} closeModal={this.closeUserModal} userData={this.state.fantasyUserForModalData} />
 

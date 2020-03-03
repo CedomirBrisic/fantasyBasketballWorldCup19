@@ -4,6 +4,7 @@ import { Portal } from 'react-portal';
 import eligibleDays from "../../services/eligibleDays";
 import checkEligibilityForPickTeam from "../../services/checkEligibilityForPickTeam";
 import HallOfFameUserStatsModal from "../modals/HallOfFameUserStatsModal";
+import serbischeDatum from "../../services/serbischeDatum";
 
 
 
@@ -12,15 +13,20 @@ class SRBHallOfFameTotalPointsList extends React.Component {
     state = {
         fantasyUsersSorted: null,
         showUserModal: false,
-        fantasyUserForModalData: null
+        fantasyUserForModalData: null,
+        isCalculating: true
     }
     calculateAllUsers = () => {
         let output = null
-
-        if (this.context.hallOfFameSelectedDay !== "all-days") {
+        const fantasyUsers = this.context.fantasyUsers
+        const hallOfFameSelectedDay = this.context.hallOfFameSelectedDay
+        const nowDateAndTime = this.context.nowDateAndTime
+        const teamsByDay = this.context.dropdowns[0].teamsByDay
+        const basketballPlayers = this.context.basketballPlayers
+        if (hallOfFameSelectedDay !== "all-days") {
             const fantasyUsersCalculatedPointsForOneDay = []
-            this.context.fantasyUsers.forEach((user) => {
-                const calculatedData = checkEligibilityForPickTeam(this.context.fantasyUsers, user.username, this.context.hallOfFameSelectedDay, this.context.nowDateAndTime, this.context.dropdowns[0].teamsByDay, this.context.basketballPlayers)
+            fantasyUsers.forEach((user) => {
+                const calculatedData = checkEligibilityForPickTeam(fantasyUsers, user.username, hallOfFameSelectedDay, nowDateAndTime, teamsByDay, basketballPlayers)
                 const userData = {
                     username: user.username,
                     summaSummarum: calculatedData.totalSummaSummarum,
@@ -36,14 +42,14 @@ class SRBHallOfFameTotalPointsList extends React.Component {
             }
         } else {
             const fantasyUsersCalculatedPointsForAllDays = []
-            this.context.fantasyUsers.forEach((user) => {
+            fantasyUsers.forEach((user) => {
                 const calculatedPointsForOneUser = {
                     username: user.username,
                     summaSummarum: 0,
                     data: []
                 }
                 eligibleDays.forEach((day) => {
-                    const calculatedData = checkEligibilityForPickTeam(this.context.fantasyUsers, user.username, day, this.context.nowDateAndTime, this.context.dropdowns[0].teamsByDay, this.context.basketballPlayers)
+                    const calculatedData = checkEligibilityForPickTeam(fantasyUsers, user.username, day, nowDateAndTime, teamsByDay, basketballPlayers)
                     const userData = {
                         roundDate: day,
                         totalDaySummaSummarum: calculatedData.totalSummaSummarum,
@@ -62,7 +68,8 @@ class SRBHallOfFameTotalPointsList extends React.Component {
             }
         }
         this.setState({
-            fantasyUsersSorted: output
+            fantasyUsersSorted: output,
+            isCalculating: false
         })
     }
 
@@ -122,16 +129,156 @@ class SRBHallOfFameTotalPointsList extends React.Component {
     }
     componentDidMount() {
         this.props.clearSearchValue()
-        this.calculateAllUsers()
+        setTimeout(() => {
+            this.calculateAllUsers()
+        }, 100);
     }
     componentDidUpdate(prevProps) {
         if (prevProps.selectedDay !== this.props.selectedDay) {
-            this.calculateAllUsers()
+            this.setState({
+                isCalculating: true,
+            })
+            setTimeout(() => {
+                this.calculateAllUsers()
+            }, 100);
         }
     }
     render() {
         return (
             <>
+                {this.state.isCalculating &&
+                    <div className="loader-container-calculating d-flex justify-content-center align-items-center">
+                        <div className="d-flex flex-column align-items-center">
+                            <h1>Računanje Sportske Fantazi poena {this.context.fantasyUsers.length} korisnika za {serbischeDatum(this.context.hallOfFameSelectedDay)}</h1>
+                            <div className="crveno d-flex">
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div className="d-flex">
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div className="made-in"><i>Iskliktano u zemlji košarke</i></div>
+                            <div className="credits-container w-100 d-flex flex-column">
+                                <i>Zahvaljujemo se PIXABAY-u što nam je omogućio da pozajmimo neke od njihovih slika</i>
+                                <i>POSEBNO SE ZAHVALJUJEMO:</i>
+                                <i className="credits">David Mark iz Pixabay-a</i>
+                                <i className="credits">Dimitris Vetsikas iz Pixabay-a</i>
+                                <i className="credits">Pexels iz Pixabay-a</i>
+                                <i className="credits">Clker-Free-Vector-Images iz Pixabay-a</i>
+                                <i className="credits">mohamed Hassan iz Pixabay-a</i>
+                                <i className="credits">BedexpStock iz Pixabay-a</i>
+                                <i className="credits">OpenClipart-Vectors iz Pixabay-a </i>
+                            </div>
+                        </div>
+                    </div>
+                }
                 {this.state.fantasyUsersSorted &&
                     this.props.searchValue === "" &&
                     <div className="hall-of-fame-total-points-list-container">
@@ -171,7 +318,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={1}>
                                         <div className="top" data-fantasy-user-sorted-index={1}>
-                                            {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[1].username}
+                                            {this.state.fantasyUsersSorted[1].summaSummarum == 0 ? "Rezervisano za ortake" : this.state.fantasyUsersSorted[1].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={1}>
                                             {parseFloat(this.state.fantasyUsersSorted[1].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={1}>p</sup>
@@ -193,7 +340,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={2}>
                                         <div className="top" data-fantasy-user-sorted-index={2}>
-                                            {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[2].username}
+                                            {this.state.fantasyUsersSorted[2].summaSummarum == 0 ? "Rezervisano za ortake" : this.state.fantasyUsersSorted[2].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={2}>
                                             {parseFloat(this.state.fantasyUsersSorted[2].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={2}>p</sup>
@@ -217,7 +364,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={3}>
                                         <div className="top" data-fantasy-user-sorted-index={3}>
-                                            {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[3].username}
+                                            {this.state.fantasyUsersSorted[3].summaSummarum == 0 ? "Rezervisano za ortake" : this.state.fantasyUsersSorted[3].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={3}>
                                             {parseFloat(this.state.fantasyUsersSorted[3].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={3}>p</sup>
@@ -243,7 +390,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={4}>
                                         <div className="top" data-fantasy-user-sorted-index={4}>
-                                            {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[4].username}
+                                            {this.state.fantasyUsersSorted[4].summaSummarum == 0 ? "Rezervisano za ortake" : this.state.fantasyUsersSorted[4].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={4}>
                                             {parseFloat(this.state.fantasyUsersSorted[4].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={4}>p</sup>
@@ -267,7 +414,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={5}>
                                         <div className="top" data-fantasy-user-sorted-index={5}>
-                                            {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[5].username}
+                                            {this.state.fantasyUsersSorted[5].summaSummarum == 0 ? "Rezervisano za ortake" : this.state.fantasyUsersSorted[5].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={5}>
                                             {parseFloat(this.state.fantasyUsersSorted[5].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={5}>p</sup>
@@ -289,7 +436,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={6}>
                                         <div className="top" data-fantasy-user-sorted-index={6}>
-                                            {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[6].username}
+                                            {this.state.fantasyUsersSorted[6].summaSummarum == 0 ? "Rezervisano za ortake" : this.state.fantasyUsersSorted[6].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={6}>
                                             {parseFloat(this.state.fantasyUsersSorted[6].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={6}>p</sup>
@@ -314,7 +461,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                 </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={7}>
                                         <div className="top" data-fantasy-user-sorted-index={7}>
-                                            {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[7].username}
+                                            {this.state.fantasyUsersSorted[7].summaSummarum == 0 ? "Rezervisano za ortake" : this.state.fantasyUsersSorted[7].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={7}>
                                             {parseFloat(this.state.fantasyUsersSorted[7].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={7}>p</sup>
@@ -336,7 +483,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={8}>
                                         <div className="top" data-fantasy-user-sorted-index={8}>
-                                            {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[8].username}
+                                            {this.state.fantasyUsersSorted[8].summaSummarum == 0 ? "Rezervisano za ortake" : this.state.fantasyUsersSorted[8].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={8}>
                                             {parseFloat(this.state.fantasyUsersSorted[8].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={8}>p</sup>
@@ -359,7 +506,7 @@ class SRBHallOfFameTotalPointsList extends React.Component {
                                     </div>
                                     <div className="d-flex flex-column justify-content-between" data-fantasy-user-sorted-index={9}>
                                         <div className="top" data-fantasy-user-sorted-index={9}>
-                                            {this.state.fantasyUsersSorted[9].summaSummarum == 0 ? "Rezervisano za drugare" : this.state.fantasyUsersSorted[9].username}
+                                            {this.state.fantasyUsersSorted[9].summaSummarum == 0 ? "Rezervisano za ortake" : this.state.fantasyUsersSorted[9].username}
                                         </div>
                                         <div className="bottom" data-fantasy-user-sorted-index={9}>
                                             {parseFloat(this.state.fantasyUsersSorted[9].summaSummarum).toFixed(2)} <sup data-fantasy-user-sorted-index={9}>p</sup>

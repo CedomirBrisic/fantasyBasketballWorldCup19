@@ -21,7 +21,6 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
 
     let calculatedSummaSummarum = null
 
-
     ////////////////////////////////////////////////////////////////////////
     if (inputPlayerData[cardSelectedDay].teamWin === "no") {
         calulatedGameWin = "0"
@@ -31,7 +30,6 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
     } else {
         calulatedGameWin = "n/a"
     }
-
     ////////////////////////////////////////////////////////////////////////
     if (inputPlayerData[cardSelectedDay].assists === "0") {
         calulatedAssists = "0"
@@ -120,6 +118,7 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
         } else {
             calulatedFreeThrows3Miss = "-"
         }
+
         ////  ////  ////  ////  ////  ////  ////  ////--- BONUS  ---////  ////  ////  ////  ////  ////  ////  ////  ////  ////
         if (freeThrowPercentage === 1 && freeThrowsAttempts > 2) {
             calulatedFreePoints3ScoredWithoutMiss = `+${(freeThrowsAttempts*0.25).toFixed(2)}`
@@ -224,10 +223,11 @@ const calculateBasketballPlayerTDFantasyPoints = (inputPlayerData, cardSelectedD
 
 
 
-
     let checkedSummaSummarum = null
     if (calculatedSummaSummarum !== null) {
         checkedSummaSummarum = calculatedSummaSummarum.toFixed(2)
+    } else if (calculatedSummaSummarum === null && calulatedAssists !== "n/a") {
+        checkedSummaSummarum = "0"
     } else {
         checkedSummaSummarum = "N/A"
     }

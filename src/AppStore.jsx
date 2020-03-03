@@ -246,16 +246,20 @@ export default class AppStore extends Component {
         let data = sessionStorage.getItem("bitrulez")
         let data2 = sessionStorage.getItem("bitrulez2")
         let selectedDay = null
+        let hallOfFameSelectedDay = null
         const nowDate = humanReadDateAndTime().humanDate
         if (eligibleDays.indexOf(nowDate) !== -1) {
             selectedDay = nowDate
+            hallOfFameSelectedDay = nowDate
         } else {
             selectedDay = "31st-August"
+            hallOfFameSelectedDay = "31st-August"
         }
         this.setState({
             bitrulez: data,
             bitrulez2: data2,
-            selectedDay
+            selectedDay,
+            hallOfFameSelectedDay
         })
 
         this.checkLandscape()
@@ -315,42 +319,41 @@ export default class AppStore extends Component {
         })
     }
 
-    checkDoubleUsers = () => {
-        const fantasyUsers = this.state.fantasyUsers
-        const usersUsernames = []
-        const checkedUsers = []
-        if (fantasyUsers !== null) {
-            fantasyUsers.forEach((user) => {
-                usersUsernames.push(user.username)
-            })
+    // checkDoubleUsers = () => {
+    //     const fantasyUsers = this.state.fantasyUsers
+    //     const usersUsernames = []
+    //     const checkedUsers = []
+    //     if (fantasyUsers !== null) {
+    //         fantasyUsers.forEach((user) => {
+    //             usersUsernames.push(user.username)
+    //         })
 
-            checkedUsers.forEach((username) => {
-                const index = usersUsernames.indexOf(username)
-                if (index == -1) {
-                    checkedUsers.push(username)
-                } else {
-                    console.log("DUPLI USER", username)
-                }
-            })
-            console.log(checkedUsers)
-            console.log(usersUsernames.length, "---", fantasyUsers.length)
-        }
-    }
-    checkSubmitedTeamsForNextDay = () => {
-        if (this.state.fantasyUsers !== null) {
-            eligibleDays.forEach((day) => {
-                let isSubmitted = 0
-                this.state.fantasyUsers.forEach((user) => {
-                    if (user[day].Player1Id !== null)
-                        isSubmitted++
-                })
-                console.log(day, "----", isSubmitted)
-            })
-        }
-    }
+    //         checkedUsers.forEach((username) => {
+    //             const index = usersUsernames.indexOf(username)
+    //             if (index == -1) {
+    //                 checkedUsers.push(username)
+    //             } else {
+    //                 console.log("DUPLI USER", username)
+    //             }
+    //         })
+    //         console.log(checkedUsers)
+    //         console.log(usersUsernames.length, "---", fantasyUsers.length)
+    //     }
+    // }
+    // checkSubmitedTeamsForNextDay = () => {
+    //     if (this.state.fantasyUsers !== null) {
+    //         eligibleDays.forEach((day) => {
+    //             let isSubmitted = 0
+    //             this.state.fantasyUsers.forEach((user) => {
+    //                 if (user[day].Player1Id !== null)
+    //                 isSubmitted++
+    //             })
+    //         })
+    //     }
+    // }
     render() {
         // this.checkDoubleUsers()
-        this.checkSubmitedTeamsForNextDay()
+        // this.checkSubmitedTeamsForNextDay()
         return (
             <>
                 {this.state.isLandscape &&

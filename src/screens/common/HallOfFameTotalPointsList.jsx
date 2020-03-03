@@ -12,15 +12,20 @@ class HallOfFameTotalPointsList extends React.Component {
     state = {
         fantasyUsersSorted: null,
         showUserModal: false,
-        fantasyUserForModalData: null
+        fantasyUserForModalData: null,
+        isCalculating: true,
     }
     calculateAllUsers = () => {
         let output = null
-
-        if (this.context.hallOfFameSelectedDay !== "all-days") {
+        const fantasyUsers= this.context.fantasyUsers
+        const hallOfFameSelectedDay = this.context.hallOfFameSelectedDay
+        const nowDateAndTime = this.context.nowDateAndTime
+        const teamsByDay = this.context.dropdowns[0].teamsByDay
+        const basketballPlayers = this.context.basketballPlayers
+        if (hallOfFameSelectedDay !== "all-days") {
             const fantasyUsersCalculatedPointsForOneDay = []
-            this.context.fantasyUsers.forEach((user) => {
-                const calculatedData = checkEligibilityForPickTeam(this.context.fantasyUsers, user.username, this.context.hallOfFameSelectedDay, this.context.nowDateAndTime, this.context.dropdowns[0].teamsByDay, this.context.basketballPlayers)
+            fantasyUsers.forEach((user) => {
+                const calculatedData = checkEligibilityForPickTeam(fantasyUsers, user.username, hallOfFameSelectedDay, nowDateAndTime, teamsByDay, basketballPlayers)
                 const userData = {
                     username: user.username,
                     summaSummarum: calculatedData.totalSummaSummarum,
@@ -43,7 +48,7 @@ class HallOfFameTotalPointsList extends React.Component {
                     data: []
                 }
                 eligibleDays.forEach((day) => {
-                    const calculatedData = checkEligibilityForPickTeam(this.context.fantasyUsers, user.username, day, this.context.nowDateAndTime, this.context.dropdowns[0].teamsByDay, this.context.basketballPlayers)
+                    const calculatedData = checkEligibilityForPickTeam(fantasyUsers, user.username, day, nowDateAndTime, teamsByDay, basketballPlayers)
                     const userData = {
                         roundDate: day,
                         totalDaySummaSummarum: calculatedData.totalSummaSummarum,
@@ -62,7 +67,8 @@ class HallOfFameTotalPointsList extends React.Component {
             }
         }
         this.setState({
-            fantasyUsersSorted: output
+            fantasyUsersSorted: output,
+            isCalculating: false
         })
     }
 
@@ -76,9 +82,8 @@ class HallOfFameTotalPointsList extends React.Component {
                 <tr key={fantasyUsers[i].username + i} data-fantasy-user-sorted-index={i} onClick={this.depositUserDataForModal}>
                     <td className="orer-no" data-fantasy-user-sorted-index={i}>{i + 1}</td>
                     <td data-fantasy-user-sorted-index={i}>{fantasyUsers[i].username}</td>
-                    <td data-fantasy-user-sorted-index={i}>{typeof(fantasyUsers[i].summaSummarum) == "string"? parseFloat(fantasyUsers[i].summaSummarum).toFixed(2) : fantasyUsers[i].summaSummarum.toFixed(2)}</td>
+                    <td data-fantasy-user-sorted-index={i}>{typeof (fantasyUsers[i].summaSummarum) == "string" ? parseFloat(fantasyUsers[i].summaSummarum).toFixed(2) : fantasyUsers[i].summaSummarum.toFixed(2)}</td>
                 </tr>
-
             output.push(outputElement)
         }
         return output
@@ -94,7 +99,7 @@ class HallOfFameTotalPointsList extends React.Component {
                     <tr key={fantasyUsers[i].username + i} data-fantasy-user-sorted-index={i} onClick={this.depositUserDataForModal}>
                         <td className="orer-no" data-fantasy-user-sorted-index={i}>{i + 1}</td>
                         <td data-fantasy-user-sorted-index={i}>{fantasyUsers[i].username}</td>
-                        <td data-fantasy-user-sorted-index={i}>{typeof(fantasyUsers[i].summaSummarum) == "string"? parseFloat(fantasyUsers[i].summaSummarum).toFixed(2) : fantasyUsers[i].summaSummarum.toFixed(2)}</td>
+                        <td data-fantasy-user-sorted-index={i}>{typeof (fantasyUsers[i].summaSummarum) == "string" ? parseFloat(fantasyUsers[i].summaSummarum).toFixed(2) : fantasyUsers[i].summaSummarum.toFixed(2)}</td>
                     </tr>
                 output.push(outputElement)
             }
@@ -122,23 +127,164 @@ class HallOfFameTotalPointsList extends React.Component {
     }
     componentDidMount() {
         this.props.clearSearchValue()
-        this.calculateAllUsers()
+        setTimeout(() => {
+            this.calculateAllUsers()
+        }, 100);
     }
+
     componentDidUpdate(prevProps) {
         if (prevProps.selectedDay !== this.props.selectedDay) {
-            this.calculateAllUsers()
+            this.setState({
+                isCalculating: true,
+            })
+            setTimeout(() => {
+                this.calculateAllUsers()
+            }, 100);
         }
     }
     render() {
         return (
             <>
-                {this.state.fantasyUsersSorted &&
+                {this.state.isCalculating &&
+                    <div className="loader-container-calculating d-flex justify-content-center align-items-center">
+                        <div className="d-flex flex-column align-items-center">
+                            <h1>Calculating Sportske Fantasy points of {this.context.fantasyUsers.length} Users for {this.context.hallOfFameSelectedDay}</h1>
+                            <div className="crveno d-flex">
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div className="d-flex">
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <div className="spinner-border text-light" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div className="made-in"><i>Made in Land of Basketball</i></div>
+                            <div className="credits-container w-100 d-flex flex-column">
+                                <i>We thank to Pixabay for letting us borrow some of theirs images</i>
+                                <i>SPECIAL THANKS TO:</i>
+                                <i className="credits">David Mark from Pixabay</i>
+                                <i className="credits">Dimitris Vetsikas from Pixabay</i>
+                                <i className="credits">Pexels from Pixabay</i>
+                                <i className="credits">Clker-Free-Vector-Images from Pixabay</i>
+                                <i className="credits">mohamed Hassan from Pixabay</i>
+                                <i className="credits">BedexpStock from Pixabay</i>
+                                <i className="credits">OpenClipart-Vectors from Pixabay </i>
+                            </div>
+                        </div>
+                    </div>
+                }
+                {this.state.fantasyUsersSorted && !this.state.isCalculating &&
                     this.props.searchValue === "" &&
                     <div className="hall-of-fame-total-points-list-container">
                         <div className="hall-of-fame-total-points-list-wrapper d-flex flex-column align-items-center">
                             {this.context.hallOfFameSelectedDay !== "all-days" &&
-                            this.state.fantasyUsersSorted[0].summaSummarum != 0&& 
-                                <div className="made-it-trough"><i>Users that made it through in battle<br/>for TD points</i></div>
+                                this.state.fantasyUsersSorted[0].summaSummarum != 0 &&
+                                <div className="made-it-trough"><i>Users that made it through in battle<br />for TD points</i></div>
                             }
                             <div className="first-place-wrapper d-flex align-items-center" data-fantasy-user-sorted-index={0} onClick={this.depositUserDataForModal}>
                                 <div className="user-order-no" data-fantasy-user-sorted-index={0}>
@@ -428,9 +574,10 @@ class HallOfFameTotalPointsList extends React.Component {
                         </div>
                     </div>
                 }
+
+
                 <Portal>
                     <HallOfFameUserStatsModal isShowing={this.state.showUserModal} closeModal={this.closeUserModal} userData={this.state.fantasyUserForModalData} />
-
                 </Portal>
             </>
         )

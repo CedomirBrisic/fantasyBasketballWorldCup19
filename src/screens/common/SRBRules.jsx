@@ -56,7 +56,7 @@ class SRBRules extends React.Component {
                     <h6><i>#8-a Ako želiš da 5 igrača bude iz istog tima ili želiš da svi igraju na centarskoj poziciji - niko ti ne može zabraniti!</i></h6>
                     <h5><span className="rule-numer-order">#9 -</span>Na kraju svake runde (svakog dana), specijalni TD poeni se dodeljuju na osnovu osvojenih poena u rundi</h5>
                     <div className="d-flex justify-content-between buttons-container">
-                        <button type="button" className="btn btn-outline-light" onClick={this.openF1WCPointsCalcModal}>TD poeni - obajšnjenje</button>
+                        <button type="button" className="btn btn-outline-light" onClick={this.openF1WCPointsCalcModal}>TD poeni - objašnjenje</button>
                         <button type="button" className="btn btn-outline-light" onClick={this.openRoundPointsCalcModal}>Runda poeni - objašnjenje</button>
                     </div>
                 </section>
